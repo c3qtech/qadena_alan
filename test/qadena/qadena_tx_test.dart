@@ -18,13 +18,13 @@ void main() {
     bool testLocalChain = true;
 
 
-  test('createWallet', () async {
+  test('createWallet anonymous', () async {
     final wallet = await createWallet("pioneer1", null, 0, "secdsvssrvprv");
     final ephWallet = await createWallet("pioneer1", wallet!.seed, 1, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
-    final result = await ephWallet!.registerAuthorizedSignatory();
-    print("registerAuthorizedSignatory result: $result");
+    expect(ephWallet, isNotNull);
+    expect(wallet, isNotNull);
   });
 
   test('registerAuthorizedSignatory', () async {
@@ -36,6 +36,7 @@ void main() {
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.registerAuthorizedSignatory();
     print("registerAuthorizedSignatory result: $result");
+    expect(result, isTrue);
   });
     
   test('signDocument', () async {
@@ -49,8 +50,7 @@ void main() {
   });
 
   test('claimCredentials', () async {
-    final jillmnemonic="catalog sword rack income garment shoot south crouch capital slush essence escape fit bike country firm fly faculty theory fragile nominee shoot erode cherry";
-    final wallet = await createWallet("pioneer1", jillmnemonic.split(' '), 0, "secdsvssrvprv");
+    final wallet = await createWallet("pioneer1", null, 0, "secdsvssrvprv");
     print("wallet: $wallet");
     final result = await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
     print("claimCredentials result: $result");

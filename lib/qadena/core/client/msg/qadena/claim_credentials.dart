@@ -278,7 +278,7 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
     if (credentialTypes[i] == PersonalInfoCredentialType) {
       EncryptablePersonalInfo p = encryptables[i] as EncryptablePersonalInfo;
 
-      final credentialHashS = "${p.details.lastName},${p.details.middleName},${p.details.firstName}";
+      final credentialHashS = "${p.details.lastName},${p.details.middleName},${p.details.firstName}|${p.details.birthdate}|${p.details.gender}";
       final credentialHash = hashStringHex(credentialHashS);
 
       final msg = await createClaimContactInfoMessage(

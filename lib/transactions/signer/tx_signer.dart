@@ -1,3 +1,4 @@
+import 'package:fixnum/src/int64.dart';
 import 'dart:typed_data';
 
 import 'package:qadena_alan/alan.dart';
@@ -44,6 +45,7 @@ class TxSigner {
     TxConfig? config,
     String? memo,
     Fee? fee,
+    Int64? accountSequence,
   }) async {
     // Set the config to the default value if not given
     config ??= DefaultTxConfig.create();
@@ -62,6 +64,8 @@ class TxSigner {
         'Account ${wallet.bech32Address} does not exist on chain',
       );
     }
+
+    accountSequence ??= account.sequence;
 
     // Get the node info data
     final nodeInfo = await _nodeQuerier.getNodeInfo();
@@ -88,7 +92,7 @@ class TxSigner {
     var sig = SignatureV2(
       pubKey: pubKey,
       data: sigData,
-      sequence: account.sequence,
+      sequence: accountSequence,
     );
 
     // Create the transaction builder
@@ -106,7 +110,7 @@ class TxSigner {
     final signerData = SignerData(
       chainId: nodeInfo.network,
       accountNumber: account.accountNumber,
-      sequence: account.sequence,
+      sequence: accountSequence,
     );
     final bytesToSign = handler.getSignBytes(signMode, signerData, tx.getTx());
 
@@ -118,7 +122,7 @@ class TxSigner {
     sig = SignatureV2(
       pubKey: pubKey,
       data: sigData,
-      sequence: account.sequence,
+      sequence: accountSequence,
     );
     tx.setSignatures([sig]);
 

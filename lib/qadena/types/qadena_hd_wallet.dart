@@ -16,6 +16,8 @@ import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:hex/hex.dart';
+import 'package:protobuf/protobuf.dart';
+
 
 
 class WalletResponse {
@@ -108,9 +110,18 @@ class QadenaHDWallet {
     return account.sequence;
   }
 
-  Future<bool> checkTxResponse(alan.TxSender txSender, alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) async{
+  // define constants ErrWrongSequence and ErrTxInMempoolCache
+  // NOTE NOTE:  these constants are defined in Cosmos SDK!!!!
+  static const ErrWrongSequence = 32;
+  static const ErrTxInMempoolCache = 19;
+
+  // return a pair of (success bool, retry bool)
+  Future<Pair<bool, bool>> checkTxResponse(alan.TxSender txSender, alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) async{
     if (!response.isSuccessful) {
-      return false;
+      if (response.codespace == 'sdk' && (response.code == ErrWrongSequence || response.code == ErrTxInMempoolCache)) {
+        return Pair(false, true);
+      }
+      return Pair(false, false);
     }
 
     // Loop 8 times
@@ -119,24 +130,16 @@ class QadenaHDWallet {
         final output = await txSender.checkTx(response);
 
         if (output.isSuccessful) {
-          // wait for the sequence number to increase
-          for (int i = 0; i < 15; i++) {
-            final newSequence = await getSequenceNumber(wallet);
-            if (newSequence > oldSequence) {
-              print("Sequence number increased from $oldSequence to $newSequence");
-              return true;
-            }
-            await Future.delayed(Duration(milliseconds: 500));
-          }
+          return Pair(true, false);
         } else {
           print("Transaction failed: $response.txhash, Code: ${output.code}, Log: ${output.rawLog}");
-          return false;
+          return Pair(false, false);
         }
       } catch (e) {
         print("exception: $e");
         if (tryCount == 1) {
           print("Error querying transaction: $e");
-          return false;
+          return Pair(false, false);
         } else {
           print("sleep start");
           await Future.delayed(Duration(milliseconds: 750));
@@ -145,9 +148,58 @@ class QadenaHDWallet {
         }
       }
     }
-    return false;
+    return Pair(false, false);
   }
 
+  Future<bool> broadcastTxSync(alan.Wallet signingWallet, List<GeneratedMessage> msgs) async {
+    var maxTries = 20;
+    var shouldRetry = true;
+    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
+    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
+    Int64 oldSequence;
+    while (true) {
+      // remember the current sequence number of the signingWallet
+      oldSequence = await getSequenceNumber(signingWallet);
+      // create and sign the message, assign seq
+      final tx = await signer.createAndSign(
+        signingWallet,
+        msgs,
+        accountSequence: oldSequence
+      );
+
+      final broadcstResponse = await txSender.broadcastTx(tx);
+      var response = await checkTxResponse(txSender, broadcstResponse, signingWallet, oldSequence);
+      final success = response.first;
+      shouldRetry = response.second;
+      
+      if (shouldRetry) {
+        //sleep 500ms
+        await Future.delayed(Duration(milliseconds: 500));
+        maxTries--;
+        if (maxTries == 0) {
+          print("max tries exceeded");
+          return false;
+        }
+        continue;
+      } else if (!success) {
+        return false;
+      } else {
+        break;
+      }
+    }
+
+    // wait for the sequence number to increase
+    for (int i = 0; i < 15; i++) {
+      final newSequence = await getSequenceNumber(signingWallet);
+      if (newSequence > oldSequence) {
+        print("Sequence number increased from $oldSequence to $newSequence");
+        break;
+      }
+      await Future.delayed(Duration(milliseconds: 500));
+    }
+    // note: we get here even if the sequence number did not increase, but the chain may just be delayed in updating the sequence number
+    return true;
+  }
 
   Future<bool> feeGrant() async {
     final basicAllowance = BasicAllowance.create();
@@ -169,26 +221,17 @@ class QadenaHDWallet {
       value: allowance.writeToBuffer(),
     );
 
+    final response = await broadcastTxSync(sponsorAcct, [msg]);
 
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final seq = await getSequenceNumber(sponsorAcct);
-    final tx = await signer.createAndSign(
-      sponsorAcct,
-      [msg],
-    );
-
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    if (response.isSuccessful) {
-      print("feegrant msg: $msg");
+    print("feegrant msg: $msg");
+    if (response) {
       print('Tx sent successfully. Response: $response');
 
-      return checkTxResponse(txSender, response, sponsorAcct, seq);
-    } else {
-      print('Tx errored: $response');
-      return false;
+      return true;
     }
+
+    print('Tx errored: $response');
+    return false;
   }
 
   Future<bool> walletExists() async {
@@ -238,23 +281,15 @@ class QadenaHDWallet {
 
     print('msgs: $msgs');
 
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final seq = await getSequenceNumber(txAcct);
-    final tx = await signer.createAndSign(
-      txAcct,
-      msgs,
-    );
+    final response = await broadcastTxSync(txAcct, msgs);
 
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    if (response.isSuccessful) {
+    if (response) {
       print('Tx sent successfully. Response: $response');
-      return checkTxResponse(txSender, response, txAcct, seq);
-    } else {
-      print('Tx errored: $response');
+      return true;
     }
-    return true;
+
+    print('Tx errored: $response');
+    return false;
   }
 
   Future<bool> registerAuthorizedSignatory() async {
@@ -285,24 +320,17 @@ class QadenaHDWallet {
       realWalletCredential: realWalletCredential,
     ));
 
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final seq = await getSequenceNumber(realWalletTransactionAccount);
-    final tx = await signer.createAndSign(
-      realWalletTransactionAccount,
-      msgs,
-    );
+    final response = await broadcastTxSync(realWalletTransactionAccount, msgs);
 
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    if (response.isSuccessful) {
+    if (response) {
       print('Tx sent successfully. Response: $response');
-      return checkTxResponse(txSender, response, realWalletTransactionAccount, seq);
-    } else {
-      print('Tx errored: $response');
+      return true;
     }
+
+    print('Tx errored: $response');
+
   
-    return true;
+    return false;
   }
 
 Future<bool> signDocument(String document, String hashHex, String newHashHex) async {
@@ -339,24 +367,14 @@ Future<bool> signDocument(String document, String hashHex, String newHashHex) as
 
     print("msgs: $msgs");
 
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final seq = await getSequenceNumber(txAcct);
-    final tx = await signer.createAndSign(
-      txAcct,
-      msgs,
-    );
+    final response = await broadcastTxSync(txAcct, msgs);
 
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    if (response.isSuccessful) {
+    if (response) {
       print('Tx sent successfully. Response: $response');
-      return checkTxResponse(txSender, response, txAcct, seq);
-    } else {
-      print('Tx errored: $response');
+      return true;
     }
-  
-    return true;
+    print('Tx errored: $response');
+    return false;
   }
 
 
@@ -379,24 +397,16 @@ Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor, {b
 
     print("msgs: $msgs");
 
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final seq = await getSequenceNumber(txAcct);
-    final tx = await signer.createAndSign(
-      txAcct,
-      msgs,
-    );
+    final response = await broadcastTxSync(txAcct, msgs);
 
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    if (response.isSuccessful) {
+    if (response) {
       print('Tx sent successfully. Response: $response');
-      return checkTxResponse(txSender, response, txAcct, seq);
-    } else {
-      print('Tx errored: $response');
+      return true;
     }
+
+    print('Tx errored: $response');
   
-    return true;
+    return false;
   }
 
   Future<Map<String, Incentive>> getIncentives(Chain chain) async {
