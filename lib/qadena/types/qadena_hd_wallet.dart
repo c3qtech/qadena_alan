@@ -151,8 +151,53 @@ class QadenaHDWallet {
     return Pair(false, false);
   }
 
+  // returns true if the sequence changed by more than 1 (meaning there many simultaneous transactions from this wallet), false otherwise; also returns true if we didn't detect a change
+  Future<bool> waitForSequenceChange(alan.Wallet wallet, Int64 oldSequence) async {
+    print("Waiting for sequence change from $oldSequence");
+    for (int i = 0; i < 15; i++) {
+      final newSequence = await getSequenceNumber(wallet);
+      if (newSequence > oldSequence) {
+        print("Sequence number increased from $oldSequence to $newSequence");
+        if (newSequence > oldSequence + 1) {
+          return true;
+        } else {
+          return false; 
+        }
+      }
+      await Future.delayed(Duration(milliseconds: 500));
+    }
+    return true;
+  }
+
   Future<bool> broadcastTxSync(alan.Wallet signingWallet, List<GeneratedMessage> msgs) async {
-    var maxTries = 20;
+    final List<Duration> normalTimeouts = [
+      Duration(seconds: 1),
+      Duration(seconds: 1),
+      Duration(seconds: 2),
+      Duration(seconds: 2),
+      Duration(seconds: 4),
+      Duration(seconds: 4),
+      Duration(seconds: 4),
+      Duration(seconds: 4),
+      Duration(seconds: 10),
+      Duration(seconds: 10),
+      Duration(seconds: 10),
+    ];
+
+    final List<Duration> backoffTimeouts = [
+      Duration(seconds: 20),
+      Duration(seconds: 20),
+      Duration(seconds: 20),
+      Duration(seconds: 30),
+      Duration(seconds: 30),
+      Duration(seconds: 30),
+      Duration(seconds: 30),
+    ];
+
+    var timeouts = normalTimeouts;
+      
+    var maxTries = 0;
+    var backoff = false;
     var shouldRetry = true;
     final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
     final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
@@ -173,12 +218,20 @@ class QadenaHDWallet {
       shouldRetry = response.second;
       
       if (shouldRetry) {
-        //sleep 500ms
-        await Future.delayed(Duration(milliseconds: 500));
-        maxTries--;
-        if (maxTries == 0) {
-          print("max tries exceeded");
-          return false;
+        await Future.delayed(timeouts[maxTries]);
+        final newBackoff = await waitForSequenceChange(signingWallet, oldSequence);
+        if (newBackoff && !backoff) {
+          maxTries = 0;
+          backoff = true;
+          print("backing off");
+          timeouts = backoffTimeouts;
+        } else {
+          maxTries++;
+          if (maxTries == timeouts.length) {
+            print("max tries exceeded");
+            return false;
+          }
+
         }
         continue;
       } else if (!success) {
@@ -188,15 +241,7 @@ class QadenaHDWallet {
       }
     }
 
-    // wait for the sequence number to increase
-    for (int i = 0; i < 15; i++) {
-      final newSequence = await getSequenceNumber(signingWallet);
-      if (newSequence > oldSequence) {
-        print("Sequence number increased from $oldSequence to $newSequence");
-        break;
-      }
-      await Future.delayed(Duration(milliseconds: 500));
-    }
+    await waitForSequenceChange(signingWallet, oldSequence);
     // note: we get here even if the sequence number did not increase, but the chain may just be delayed in updating the sequence number
     return true;
   }
