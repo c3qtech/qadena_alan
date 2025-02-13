@@ -1,26 +1,24 @@
 import 'package:qadena_alan/alan.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
-import 'package:qadena_alan/proto/cosmos/tx/v1beta1/export.dart' as tx;
-import 'package:fixnum/fixnum.dart' as fixnum;
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:qadena_alan/qadena/core/client.dart';
 import 'package:test/test.dart';
 
-import '../common.dart';
-
-import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadena;
-
-
 void main() {
-  late tx.ServiceClient client;
-  late TxSender sender;
-    bool testLocalChain = true;
+  bool testLocalChain = true;
 
+  final networkInfo = NetworkInfo.fromSingleHost(
+    bech32Hrp: 'qadena',
+    host: 'localhost',
+    isEthSecP256K1Addr: false,
+  );
+
+  QadenaClient client = QadenaClient(networkInfo);
 
   test('createWallet anonymous', () async {
-    final wallet = await createWallet("pioneer1", null, 0, "secdsvssrvprv");
-    final ephWallet = await createWallet("pioneer1", wallet!.seed, 1, null);
+    final wallet =
+        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv");
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     expect(ephWallet, isNotNull);
@@ -28,35 +26,43 @@ void main() {
   });
 
   test('registerAuthorizedSignatory', () async {
-  final annmnemonic =
+    final annmnemonic =
         "inherit rebel absorb diamond leopard lens approve deny balcony toast merry text metal pair diamond lumber gravity song liberty pumpkin goddess nature slush basic";
-      final wallet = await createWallet("pioneer1", annmnemonic.split(' '), 0, "secdsvssrvprv");
-    final ephWallet = await createWallet("pioneer1", wallet!.seed, 1, null);
+    final wallet = await client.createWallet(
+        "pioneer1", annmnemonic.split(' '), 0, "secdsvssrvprv");
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.registerAuthorizedSignatory();
     print("registerAuthorizedSignatory result: $result");
     expect(result, isTrue);
   });
-    
+
   test('signDocument', () async {
-    final almnemonic="palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
-    final wallet = await createWallet("pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
-    final ephWallet = await createWallet("pioneer1", wallet!.seed, 1, null);
+    final almnemonic =
+        "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
+    final wallet = await client.createWallet(
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
-    final result = await ephWallet!.signDocument("document1", "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4", "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900");
+    final result = await ephWallet!.signDocument(
+        "document1",
+        "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4",
+        "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900");
     print("signDocument result: $result");
   });
 
   test('claimCredentials', () async {
-    final wallet = await createWallet("pioneer1", null, 0, "secdsvssrvprv");
+    final wallet =
+        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv");
     print("wallet: $wallet");
-    final result = await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
+    final result =
+        await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
     print("claimCredentials result: $result");
   });
-
-  
 
   test('Signed transaction is broadcast properly', () async {
     if (!testLocalChain) return;
@@ -88,7 +94,6 @@ void main() {
 
     alwallet = sponsorwallet;
 
-
     // Create the transaction and send it
     final message = bank.MsgSend.create();
     message.fromAddress = alwallet.bech32Address;
@@ -97,10 +102,8 @@ void main() {
       ..denom = 'aqdn'
       ..amount = '1234');
 
-
     final signer = TxSigner.fromNetworkInfo(networkInfo);
     final tx = await signer.createAndSign(alwallet, [message]);
-
 
     // 4. Broadcast the transaction
     final txSender = TxSender.fromNetworkInfo(networkInfo);
