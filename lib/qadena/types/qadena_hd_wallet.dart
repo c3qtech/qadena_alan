@@ -18,8 +18,6 @@ import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:hex/hex.dart';
 import 'package:protobuf/protobuf.dart';
 
-
-
 class WalletResponse {
   final String address;
   final Uint8List addressBytes;
@@ -30,16 +28,15 @@ class WalletResponse {
   final String pubkeyHex;
   final String pubkeyB64;
 
-  WalletResponse({
-    required this.address,
-    required this.addressBytes,
-    required this.algo,
-    required this.privkey,
-    required this.privkeyHex,
-    required this.pubkey,
-    required this.pubkeyHex,
-    required this.pubkeyB64
-  });
+  WalletResponse(
+      {required this.address,
+      required this.addressBytes,
+      required this.algo,
+      required this.privkey,
+      required this.privkeyHex,
+      required this.pubkey,
+      required this.pubkeyHex,
+      required this.pubkeyB64});
 }
 
 WalletResponse toWallet(alan.Wallet wallet) {
@@ -55,11 +52,9 @@ WalletResponse toWallet(alan.Wallet wallet) {
   );
 }
 
-final networkInfo = alan.NetworkInfo.fromSingleHost(
-    bech32Hrp: 'qadena', host: 'localhost', isEthSecP256K1Addr: false);
-
 class QadenaHDWallet {
   final Chain chain;
+  final alan.NetworkInfo networkInfo;
   final List<String> seed;
   final int ephIndex;
   late final alan.Wallet txAcct;
@@ -76,20 +71,26 @@ class QadenaHDWallet {
   late final String homePioneerID;
   late final String serviceProviderID;
 
-  QadenaHDWallet(this.chain, this.seed, this.ephIndex, this.homePioneerID, this.serviceProviderID) {
-    final txpath = HDPath(walletType: AccountType.transactionWalletType.value, addressIdx: ephIndex).toString();
+  QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex,
+      this.homePioneerID, this.serviceProviderID) {
+    final txpath = HDPath(
+            walletType: AccountType.transactionWalletType.value,
+            addressIdx: ephIndex)
+        .toString();
     print("txpath: $txpath");
-    final cxpath = HDPath(walletType: AccountType.credentialWalletType.value, addressIdx: ephIndex).toString();
+    final cxpath = HDPath(
+            walletType: AccountType.credentialWalletType.value,
+            addressIdx: ephIndex)
+        .toString();
     txAcct = alan.Wallet.derive(seed, networkInfo, derivationPath: txpath);
     cxAcct = alan.Wallet.derive(seed, networkInfo, derivationPath: cxpath);
 
-    // HARD-CODED FOR NOW!!! THERE SHOULD BE AN APPSVR ENDPONT THAT DOES THE FEEGRANT 
+    // HARD-CODED FOR NOW!!! THERE SHOULD BE AN APPSVR ENDPONT THAT DOES THE FEEGRANT
     sponsorAcct = alan.Wallet.derive(
         "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
             .split(' '),
         networkInfo,
         derivationPath: "m/44'/744'/0'/0/0");
-
 
     sponsorWallet = toWallet(sponsorAcct);
     transactionWallet = toWallet(txAcct);
@@ -101,7 +102,8 @@ class QadenaHDWallet {
   }
 
   Future<Int64> getSequenceNumber(alan.Wallet wallet) async {
-    final account = await chain.authQuery.authQuerier.getAccountData(wallet.bech32Address);
+    final account =
+        await chain.authQuery.authQuerier.getAccountData(wallet.bech32Address);
     if (account == null) {
       throw Exception(
         'Account ${wallet.bech32Address} does not exist on chain',
@@ -116,9 +118,12 @@ class QadenaHDWallet {
   static const ErrTxInMempoolCache = 19;
 
   // return a pair of (success bool, retry bool)
-  Future<Pair<bool, bool>> checkTxResponse(alan.TxSender txSender, alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) async{
+  Future<Pair<bool, bool>> checkTxResponse(alan.TxSender txSender,
+      alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) async {
     if (!response.isSuccessful) {
-      if (response.codespace == 'sdk' && (response.code == ErrWrongSequence || response.code == ErrTxInMempoolCache)) {
+      if (response.codespace == 'sdk' &&
+          (response.code == ErrWrongSequence ||
+              response.code == ErrTxInMempoolCache)) {
         return Pair(false, true);
       }
       return Pair(false, false);
@@ -132,7 +137,8 @@ class QadenaHDWallet {
         if (output.isSuccessful) {
           return Pair(true, false);
         } else {
-          print("Transaction failed: $response.txhash, Code: ${output.code}, Log: ${output.rawLog}");
+          print(
+              "Transaction failed: $response.txhash, Code: ${output.code}, Log: ${output.rawLog}");
           return Pair(false, false);
         }
       } catch (e) {
@@ -144,7 +150,6 @@ class QadenaHDWallet {
           print("sleep start");
           await Future.delayed(Duration(milliseconds: 750));
           print("sleep end");
-
         }
       }
     }
@@ -152,7 +157,8 @@ class QadenaHDWallet {
   }
 
   // returns true if the sequence changed by more than 1 (meaning there many simultaneous transactions from this wallet), false otherwise; also returns true if we didn't detect a change
-  Future<bool> waitForSequenceChange(alan.Wallet wallet, Int64 oldSequence) async {
+  Future<bool> waitForSequenceChange(
+      alan.Wallet wallet, Int64 oldSequence) async {
     print("Waiting for sequence change from $oldSequence");
     for (int i = 0; i < 15; i++) {
       final newSequence = await getSequenceNumber(wallet);
@@ -161,7 +167,7 @@ class QadenaHDWallet {
         if (newSequence > oldSequence + 1) {
           return true;
         } else {
-          return false; 
+          return false;
         }
       }
       await Future.delayed(Duration(milliseconds: 500));
@@ -169,7 +175,8 @@ class QadenaHDWallet {
     return true;
   }
 
-  Future<bool> broadcastTxSync(alan.Wallet signingWallet, List<GeneratedMessage> msgs) async {
+  Future<bool> broadcastTxSync(
+      alan.Wallet signingWallet, List<GeneratedMessage> msgs) async {
     final List<Duration> normalTimeouts = [
       Duration(seconds: 1),
       Duration(seconds: 1),
@@ -195,7 +202,7 @@ class QadenaHDWallet {
     ];
 
     var timeouts = normalTimeouts;
-      
+
     var maxTries = 0;
     var backoff = false;
     var shouldRetry = true;
@@ -206,20 +213,19 @@ class QadenaHDWallet {
       // remember the current sequence number of the signingWallet
       oldSequence = await getSequenceNumber(signingWallet);
       // create and sign the message, assign seq
-      final tx = await signer.createAndSign(
-        signingWallet,
-        msgs,
-        accountSequence: oldSequence
-      );
+      final tx = await signer.createAndSign(signingWallet, msgs,
+          accountSequence: oldSequence);
 
       final broadcstResponse = await txSender.broadcastTx(tx);
-      var response = await checkTxResponse(txSender, broadcstResponse, signingWallet, oldSequence);
+      var response = await checkTxResponse(
+          txSender, broadcstResponse, signingWallet, oldSequence);
       final success = response.first;
       shouldRetry = response.second;
-      
+
       if (shouldRetry) {
         await Future.delayed(timeouts[maxTries]);
-        final newBackoff = await waitForSequenceChange(signingWallet, oldSequence);
+        final newBackoff =
+            await waitForSequenceChange(signingWallet, oldSequence);
         if (newBackoff && !backoff) {
           maxTries = 0;
           backoff = true;
@@ -231,7 +237,6 @@ class QadenaHDWallet {
             print("max tries exceeded");
             return false;
           }
-
         }
         continue;
       } else if (!success) {
@@ -281,9 +286,8 @@ class QadenaHDWallet {
 
   Future<bool> walletExists() async {
     try {
-      final wallet =await chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-        walletID: transactionWallet.address
-      ));
+      final wallet = await chain.qadenaQuery.queryClient
+          .wallet(QueryGetWalletRequest(walletID: transactionWallet.address));
       print("wallet already exists: $wallet");
       return true;
     } catch (e) {
@@ -304,8 +308,12 @@ class QadenaHDWallet {
     WalletResponse? realWalletTransaction;
 
     if (isEphemeral) {
-      final realWalletTransactionPath = HDPath(walletType: AccountType.transactionWalletType.value, addressIdx: 0).toString();
-      final realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo, derivationPath: realWalletTransactionPath);
+      final realWalletTransactionPath = HDPath(
+              walletType: AccountType.transactionWalletType.value,
+              addressIdx: 0)
+          .toString();
+      final realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo,
+          derivationPath: realWalletTransactionPath);
 
       realWalletTransaction = toWallet(realWalletTransactionAccount);
     }
@@ -346,19 +354,26 @@ class QadenaHDWallet {
       print("can only register authorized signatory for ephemeral wallets");
       return false;
     } else {
-      final realWalletTransactionPath = HDPath(walletType: AccountType.transactionWalletType.value, addressIdx: 0).toString();
-      realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo, derivationPath: realWalletTransactionPath);
+      final realWalletTransactionPath = HDPath(
+              walletType: AccountType.transactionWalletType.value,
+              addressIdx: 0)
+          .toString();
+      realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo,
+          derivationPath: realWalletTransactionPath);
 
       realWalletTransaction = toWallet(realWalletTransactionAccount);
 
-      final realWalletCredentialPath = HDPath(walletType: AccountType.credentialWalletType.value, addressIdx: 0).toString();
-      final realWalletCredentialAccount = alan.Wallet.derive(seed, networkInfo, derivationPath: realWalletCredentialPath);
+      final realWalletCredentialPath = HDPath(
+              walletType: AccountType.credentialWalletType.value, addressIdx: 0)
+          .toString();
+      final realWalletCredentialAccount = alan.Wallet.derive(seed, networkInfo,
+          derivationPath: realWalletCredentialPath);
 
       realWalletCredential = toWallet(realWalletCredentialAccount);
-
     }
 
-    final msgs = await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+    final msgs =
+        await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
       chain: chain,
       txwallet: transactionWallet,
       realWalletTransaction: realWalletTransaction,
@@ -374,11 +389,11 @@ class QadenaHDWallet {
 
     print('Tx errored: $response');
 
-  
     return false;
   }
 
-Future<bool> signDocument(String document, String hashHex, String newHashHex) async {
+  Future<bool> signDocument(
+      String document, String hashHex, String newHashHex) async {
     final isEphemeral = ephIndex > 0;
     WalletResponse? realWalletTransaction;
     WalletResponse? realWalletCredential;
@@ -387,28 +402,33 @@ Future<bool> signDocument(String document, String hashHex, String newHashHex) as
       print("can only sign a document from an ephemeral wallets");
       return false;
     } else {
-      final realWalletTransactionPath = HDPath(walletType: AccountType.transactionWalletType.value, addressIdx: 0).toString();
-      realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo, derivationPath: realWalletTransactionPath);
+      final realWalletTransactionPath = HDPath(
+              walletType: AccountType.transactionWalletType.value,
+              addressIdx: 0)
+          .toString();
+      realWalletTransactionAccount = alan.Wallet.derive(seed, networkInfo,
+          derivationPath: realWalletTransactionPath);
 
       realWalletTransaction = toWallet(realWalletTransactionAccount);
 
-      final realWalletCredentialPath = HDPath(walletType: AccountType.credentialWalletType.value, addressIdx: 0).toString();
-      final realWalletCredentialAccount = alan.Wallet.derive(seed, networkInfo, derivationPath: realWalletCredentialPath);
+      final realWalletCredentialPath = HDPath(
+              walletType: AccountType.credentialWalletType.value, addressIdx: 0)
+          .toString();
+      final realWalletCredentialAccount = alan.Wallet.derive(seed, networkInfo,
+          derivationPath: realWalletCredentialPath);
 
       realWalletCredential = toWallet(realWalletCredentialAccount);
-
     }
 
     final msgs = await msgSignDocument(MsgSignDocumentArgs(
-      chain: chain,
-      txwallet: transactionWallet,
-      cxwallet: credentialWallet,
-      realWalletTransaction: realWalletTransaction,
-      realWalletCredential: realWalletCredential,
-      document: document,
-      hashHex: hashHex,
-      newHashHex: newHashHex
-    ));
+        chain: chain,
+        txwallet: transactionWallet,
+        cxwallet: credentialWallet,
+        realWalletTransaction: realWalletTransaction,
+        realWalletCredential: realWalletCredential,
+        document: document,
+        hashHex: hashHex,
+        newHashHex: newHashHex));
 
     print("msgs: $msgs");
 
@@ -422,8 +442,8 @@ Future<bool> signDocument(String document, String hashHex, String newHashHex) as
     return false;
   }
 
-
-Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor, {bool recoverKey = false}) async {
+  Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor,
+      {bool recoverKey = false}) async {
     final isEphemeral = ephIndex > 0;
 
     if (isEphemeral) {
@@ -432,13 +452,12 @@ Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor, {b
     }
 
     final msgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
-      chain: chain,
-      txwallet: transactionWallet,
-      cxwallet: credentialWallet,
-      claimAmount: claimAmount,
-      claimBlindingFactor: claimBlindingFactor,
-      recoverKey: recoverKey
-    ));
+        chain: chain,
+        txwallet: transactionWallet,
+        cxwallet: credentialWallet,
+        claimAmount: claimAmount,
+        claimBlindingFactor: claimBlindingFactor,
+        recoverKey: recoverKey));
 
     print("msgs: $msgs");
 
@@ -450,7 +469,7 @@ Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor, {b
     }
 
     print('Tx errored: $response');
-  
+
     return false;
   }
 

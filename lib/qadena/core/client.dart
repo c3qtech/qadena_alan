@@ -77,8 +77,8 @@ class QadenaClient {
       serviceProviderID = serviceProviderID ?? "";
 
       final chain = Chain(networkInfo);
-      var wallet = QadenaHDWallet(
-          chain, seedPhrase, ephIndex, pioneerID, serviceProviderID);
+      var wallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex,
+          pioneerID, serviceProviderID);
 
       if (await wallet.walletExists()) {
         return wallet;
