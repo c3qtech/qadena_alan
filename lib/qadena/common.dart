@@ -400,6 +400,7 @@ types.VShareBindData protoizeVShareBindData(VShareBindData bindData) {
   return protoBindData;
 }
 
+
 dsvstypes.VShareBindData dsvsProtoizeVShareBindData(VShareBindData bindData) {
   dsvstypes.VShareBindData protoBindData = dsvstypes.VShareBindData.create();
 
@@ -409,6 +410,18 @@ dsvstypes.VShareBindData dsvsProtoizeVShareBindData(VShareBindData bindData) {
 
   return protoBindData;
 }
+
+VShareBindData dsvsUnprotoizeVShareBindData(dsvstypes.VShareBindData protoBindData) {
+  List<VShareBindDataInternal> bd = [];
+  var ret = VShareBindData(bd);
+ 
+  for (int i = 0; i < protoBindData.data.length; i++) {
+    bd.add(dsvsUnprotoizeVShareBindDataInternal(protoBindData.data[i]));
+  }
+
+  return ret;
+}
+
 
 
 VShareBindData unprotoizeVShareBindData(types.VShareBindData protoBindData) {
@@ -456,6 +469,32 @@ dsvstypes.VShareBindDataInternal dsvsProtoizeVShareBindDataInternal(
   return protoBindData;
 }
 
+VShareBindDataInternal dsvsUnprotoizeVShareBindDataInternal(
+    dsvstypes.VShareBindDataInternal protoBindData) {
+  List<VSharedSecret> r_ = [];
+  List<ECPointInfo> cc = [];
+
+  for (int i = 0; i < protoBindData.rr.length; i++) {
+    r_.add(dsvsUnprotoizeBVSharedSecret(protoBindData.rr[i]));
+  }
+
+  for (int i = 0; i < protoBindData.cc.length; i++) {
+    cc.add(dsvsUnprotoizeBECPointInfo(protoBindData.cc[i]));
+  }
+
+  var ret = VShareBindDataInternal(
+      dsvsUnprotoizeBInt(protoBindData.w),
+      dsvsUnprotoizeBInt(protoBindData.z),
+      ecPointFromBytes(Uint8List.fromList(protoBindData.c.compressed)),
+      dsvsUnprotoizeBECPointInfo(protoBindData.y),
+      cc,
+      dsvsUnprotoizeBVSharedSecret(protoBindData.r),
+      r_);
+
+  return ret;
+}
+
+
 
 VShareBindDataInternal unprotoizeVShareBindDataInternal(
     types.VShareBindDataInternal protoBindData) {
@@ -496,11 +535,28 @@ dsvstypes.BVSharedSecret dsvsProtoizeBVSharedSecret(VSharedSecret vss) {
   return protoVSS;
 }
 
+VSharedSecret dsvsUnprotoizeBVSharedSecret(dsvstypes.BVSharedSecret vss) {
+  var ret = VSharedSecret(dsvsUnprotoizeBECPoint(vss.s1),
+      ecPointFromBytes(Uint8List.fromList(vss.s2.compressed)));
+  return ret;
+}
 
 VSharedSecret unprotoizeBVSharedSecret(types.BVSharedSecret vss) {
   var ret = VSharedSecret(unprotoizeBECPoint(vss.s1),
       ecPointFromBytes(Uint8List.fromList(vss.s2.compressed)));
   return ret;
+}
+
+BigInt dsvsUnprotoizeBInt(dsvstypes.BInt bi) {
+  // create hex of bi.i starting at index 1
+  final sub = bi.i.sublist(1);
+  final hex = HEX.encode(sub);
+
+  final b = BigInt.parse(hex, radix: 16);
+  if (bi.i[0] == 1) {
+    return -b;
+  }
+  return b;
 }
 
 BigInt unprotoizeBInt(types.BInt bi) {
@@ -562,6 +618,9 @@ dsvstypes.BECPoint dsvsProtoizeBECPoint(ECPoint point) {
   return ret;
 }
 
+ECPoint dsvsUnprotoizeBECPoint(dsvstypes.BECPoint point) {
+  return ecPointFromBytes(Uint8List.fromList(point.compressed));
+}
 
 ECPoint unprotoizeBECPoint(types.BECPoint point) {
   return ecPointFromBytes(Uint8List.fromList(point.compressed));
@@ -591,6 +650,12 @@ PedersenCommit unprotoizeEncryptablePedersenCommit(
   final ret =
       PedersenCommit(unprotoizeBInt(protoPC.a), unprotoizeBInt(protoPC.x));
   return ret;
+}
+
+ECPointInfo dsvsUnprotoizeBECPointInfo(dsvstypes.BECPointInfo becPointInfo) {
+  var ecPointInfo = ECPointInfo(dsvsUnprotoizeBECPoint(becPointInfo.eCPoint),
+      becPointInfo.nodeType, becPointInfo.nodeID);
+  return ecPointInfo;
 }
 
 ECPointInfo unprotoizeBECPointInfo(types.BECPointInfo becPointInfo) {

@@ -7,6 +7,7 @@ import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/feegrant.pb.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/query.pb.dart';
+import 'package:qadena_alan/proto/qadena/dsvs/query.pb.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
@@ -17,6 +18,8 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:hex/hex.dart';
 import 'package:protobuf/protobuf.dart';
+import 'package:qadena_alan/proto/qadena/qadena/export.dart';
+
 
 
 
@@ -289,6 +292,40 @@ class QadenaHDWallet {
     } catch (e) {
       print("wallet not found");
       return false;
+    }
+  }
+
+  Future<String> getAuthorizedSignatory() async {
+    try {
+      final signatories =await chain.dsvsQuery.queryClient.authorizedSignatory(QueryGetAuthorizedSignatoryRequest(
+        walletID: transactionWallet.address
+      ));
+      print("signatories: $signatories");
+      if (signatories.authorizedSignatory.signatory.isEmpty) {
+        return "";
+      }
+      // decrypt the last one
+
+      final lastSignatory = signatories.authorizedSignatory.signatory.last;
+
+      final authorizedSignatory = EncryptableAuthorizedSignatory();
+
+      var unprotoAuthorizedSignatoryVShareBind = dsvsUnprotoizeVShareBindData(
+          lastSignatory.authorizedSignatoryVShareBind);
+
+      vShareBDecryptAndProtoUnmarshal(
+          credentialWallet.privkeyHex,
+          credentialWallet.pubkeyB64,
+          unprotoAuthorizedSignatoryVShareBind,
+      Uint8List.fromList(lastSignatory.encAuthorizedSignatoryVShare), 
+      authorizedSignatory);
+
+  print('signatory: $authorizedSignatory');
+
+      return authorizedSignatory.walletID;
+    } catch (e) {
+      print("signatories not found");
+      return "";
     }
   }
 

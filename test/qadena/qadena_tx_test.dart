@@ -38,7 +38,19 @@ void main() {
     print("registerAuthorizedSignatory result: $result");
     expect(result, isTrue);
   });
+
+  test('getAuthorizedSignatory', () async {
+  final almnemonic="palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
+    final wallet = await createWallet("pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
+    final ephWallet = await createWallet("pioneer1", wallet!.seed, 1, null);
+    print("wallet: $wallet");
+    print("ephWallet: $ephWallet");
     
+    final result = await wallet!.getAuthorizedSignatory();
+    print("getAuthorizedSignatory result: $result");
+  });
+  
+
   test('signDocument', () async {
     final almnemonic="palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await createWallet("pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
