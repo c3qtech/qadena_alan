@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: asn1lib
-      sha256: bf1a19d6ebea1b3b6151304936955d7d73e1f00b75e544c01a60fb2e832ffe1d
+      sha256: "068190d6c99c436287936ba5855af2e1fa78d8083ae65b4db6a281780da727ae"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.6"
+    version: "1.6.0"
   async:
     dependency: transitive
     description:
