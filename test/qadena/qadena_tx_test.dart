@@ -7,12 +7,19 @@ void main() {
   bool testLocalChain = true;
 
   final networkInfo = NetworkInfo.fromSingleHost(
-    bech32Hrp: 'qadena',
-    host: 'localhost',
-    isEthSecP256K1Addr: false,
-  );
+      bech32Hrp: 'qadena',
+      host: 'localhost',
+      isEthSecP256K1Addr: false,
+      isTesting: true);
 
   QadenaClient client = QadenaClient(networkInfo);
+
+  test('createLocalAccount', () async {
+    final localWallet = client.createLocalAccount();
+    print("localWallet: $localWallet");
+    print("localWallet: ${localWallet.txAddress}");
+    expect(localWallet, isNotNull);
+  });
 
   test('createWallet anonymous', () async {
     final wallet =
@@ -39,18 +46,20 @@ void main() {
     expect(result, isTrue);
   });
 
-
   test('getAuthorizedSignatory', () async {
-  final almnemonic="palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
-    final wallet = await client.createWallet("pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
-    final ephWallet = await client.createWallet("pioneer1", wallet!.seed, 1, null);
+    final almnemonic =
+        "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
+    final wallet = await client.createWallet(
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
-    
+
     final result = await wallet!.getAuthorizedSignatory();
     print("getAuthorizedSignatory result: $result");
   });
-  
+
   test('signDocument', () async {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
@@ -61,10 +70,10 @@ void main() {
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.signDocument(
-        "document1",
-        "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900",
-        "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4",
-        );
+      "document1",
+      "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900",
+      "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4",
+    );
     print("signDocument result: $result");
   });
 

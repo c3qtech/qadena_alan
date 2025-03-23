@@ -84,17 +84,15 @@ class QadenaClient {
         return wallet;
       }
 
-      final feeGrantSuccess = await wallet.feeGrant();
-      print("done with feegrant $feeGrantSuccess");
-
-      if (feeGrantSuccess) {
-        final registerWalletSuccess = await wallet.registerWallet();
-        print("register wallet success: $registerWalletSuccess");
-        if (registerWalletSuccess) {
-          return wallet;
-        }
+      if (networkInfo.isTesting) {
+        final feeGrantSuccess = await wallet.feeGrant();
+        print("Fee grant completed: $feeGrantSuccess");
       }
-      return null;
+
+      final registerWalletSuccess = await wallet.registerWallet();
+      print("Wallet registration successful: $registerWalletSuccess");
+
+      return registerWalletSuccess ? wallet : null;
     } catch (e) {
       print('Failed to create main wallet: $e');
       return null;
