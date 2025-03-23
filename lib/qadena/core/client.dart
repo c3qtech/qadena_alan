@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
+import 'package:qadena_alan/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/ecpedersen.dart';
+import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/utils/bip_39.dart';
 import 'package:qadena_alan/wallet/network_info.dart';
@@ -35,17 +37,17 @@ class QadenaClient {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
 
-      var txWallet = Wallet.derive(
-        seedPhrase,
-        networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0",
-      );
-
-      var cxWallet = Wallet.derive(
-        seedPhrase,
-        networkInfo,
-        derivationPath: "m/44'/744'/1'/0/0",
-      );
+      final txpath = HDPath(
+              walletType: AccountType.transactionWalletType.value,
+              addressIdx: 0)
+          .toString();
+      final cxpath = HDPath(
+              walletType: AccountType.credentialWalletType.value, addressIdx: 1)
+          .toString();
+      var txWallet =
+          Wallet.derive(seedPhrase, networkInfo, derivationPath: txpath);
+      var cxWallet =
+          Wallet.derive(seedPhrase, networkInfo, derivationPath: cxpath);
 
       return LocalAccountResponse(
         mnemonic: seedPhrase,
