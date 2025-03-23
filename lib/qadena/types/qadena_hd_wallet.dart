@@ -342,7 +342,7 @@ class QadenaHDWallet {
     print('txAddress: ${transactionWallet.address}');
     print('cxAddress: ${credentialWallet.address}');
 
-    WalletResponse? realWalletTransaction;
+    WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
 
     if (isEphemeral) {
       final realWalletTransactionPath = HDPath(
@@ -384,7 +384,7 @@ class QadenaHDWallet {
 
   Future<bool> registerAuthorizedSignatory() async {
     final isEphemeral = ephIndex > 0;
-    WalletResponse? realWalletTransaction;
+    WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
@@ -432,7 +432,7 @@ class QadenaHDWallet {
   Future<bool> signDocument(
       String document, String hashHex, String newHashHex) async {
     final isEphemeral = ephIndex > 0;
-    WalletResponse? realWalletTransaction;
+    WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {

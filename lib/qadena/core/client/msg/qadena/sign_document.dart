@@ -118,6 +118,8 @@ Future<List<GeneratedMessage>> msgSignDocument(
     ..encSignatoryVShare = encryptedSignatory
     ..signatoryVShareBind = protoizedVShareBind;
 
+  print("signing address: ${args.txwallet.address}");
+
   // sign document
   final msgSD = dsvs.MsgSignDocument()
     ..creator = args.txwallet.address

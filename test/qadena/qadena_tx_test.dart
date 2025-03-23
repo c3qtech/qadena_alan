@@ -62,8 +62,9 @@ void main() {
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.signDocument(
         "document1",
+        "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900",
         "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4",
-        "87ec08842cc20d52583d15569de024409f9cc8531de47034c9779eb63bbc6900");
+        );
     print("signDocument result: $result");
   });
 
