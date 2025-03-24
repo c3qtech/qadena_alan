@@ -33,13 +33,14 @@ class QadenaClient {
   QadenaClient(this.networkInfo);
 
   LocalAccountResponse createLocalAccount(
-      [List<String>? mnemonic, String? password]) {
+      {List<String>? mnemonic, int? ephIndex, String? password}) {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
+      ephIndex = ephIndex ?? 0;
 
       final txpath = HDPath(
               walletType: AccountType.transactionWalletType.value,
-              addressIdx: 0)
+              addressIdx: ephIndex)
           .toString();
       final cxpath = HDPath(
               walletType: AccountType.credentialWalletType.value, addressIdx: 1)
