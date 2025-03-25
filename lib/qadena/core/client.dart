@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
+import 'package:qadena_alan/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/ecpedersen.dart';
+import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/utils/bip_39.dart';
 import 'package:qadena_alan/wallet/network_info.dart';
@@ -31,21 +33,22 @@ class QadenaClient {
   QadenaClient(this.networkInfo);
 
   LocalAccountResponse createLocalAccount(
-      [List<String>? mnemonic, String? password]) {
+      {List<String>? mnemonic, int? ephIndex, String? password}) {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
+      ephIndex = ephIndex ?? 0;
 
-      var txWallet = Wallet.derive(
-        seedPhrase,
-        networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0",
-      );
-
-      var cxWallet = Wallet.derive(
-        seedPhrase,
-        networkInfo,
-        derivationPath: "m/44'/744'/1'/0/0",
-      );
+      final txpath = HDPath(
+              walletType: AccountType.transactionWalletType.value,
+              addressIdx: ephIndex)
+          .toString();
+      final cxpath = HDPath(
+              walletType: AccountType.credentialWalletType.value, addressIdx: 1)
+          .toString();
+      var txWallet =
+          Wallet.derive(seedPhrase, networkInfo, derivationPath: txpath);
+      var cxWallet =
+          Wallet.derive(seedPhrase, networkInfo, derivationPath: cxpath);
 
       return LocalAccountResponse(
         mnemonic: seedPhrase,
@@ -84,17 +87,15 @@ class QadenaClient {
         return wallet;
       }
 
-      final feeGrantSuccess = await wallet.feeGrant();
-      print("done with feegrant $feeGrantSuccess");
-
-      if (feeGrantSuccess) {
-        final registerWalletSuccess = await wallet.registerWallet();
-        print("register wallet success: $registerWalletSuccess");
-        if (registerWalletSuccess) {
-          return wallet;
-        }
+      if (networkInfo.isTesting) {
+        final feeGrantSuccess = await wallet.feeGrant();
+        print("Fee grant completed: $feeGrantSuccess");
       }
-      return null;
+
+      final registerWalletSuccess = await wallet.registerWallet();
+      print("Wallet registration successful: $registerWalletSuccess");
+
+      return registerWalletSuccess ? wallet : null;
     } catch (e) {
       print('Failed to create main wallet: $e');
       return null;
