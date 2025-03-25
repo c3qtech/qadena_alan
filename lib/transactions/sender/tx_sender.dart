@@ -39,6 +39,19 @@ class TxSender {
     return response.txResponse;
   }
 
+  Future<SimulateResponse> simulate(
+    Tx tx, {
+    TxConfig? config,
+  }) async {
+    config ??= DefaultTxConfig.create();
+    final encoder = config.txEncoder();
+
+    final request = SimulateRequest()..txBytes = encoder(tx);
+
+    final response = await _client.simulate(request);
+    return response;
+  }
+
   Future<TxResponse> checkTx(TxResponse txResponse) async {
     final request = GetTxRequest()..hash = txResponse.txhash;
     final response = await _client.getTx(request);

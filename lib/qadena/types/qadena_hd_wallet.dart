@@ -1,11 +1,15 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:fixnum/src/int64.dart';
 import 'package:qadena_alan/alan.dart' as alan;
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
+import 'package:qadena_alan/proto/cosmos/base/abci/v1beta1/abci.pb.dart';
+import 'package:qadena_alan/proto/cosmos/base/v1beta1/coin.pb.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/feegrant.pb.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/tx.pb.dart';
+import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/dsvs/query.pb.dart';
 import 'package:qadena_alan/qadena.dart';
@@ -19,6 +23,7 @@ import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:hex/hex.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:qadena_alan/proto/qadena/qadena/export.dart';
+import 'package:grpc/grpc.dart';
 
 
 class WalletResponse {
@@ -73,6 +78,8 @@ class QadenaHDWallet {
   late final String credentialPublicKey;
   late final String homePioneerID;
   late final String serviceProviderID;
+  final double gasMultiplier = 1.2;
+  final Int64 gasPrice = Int64(500000000); // in config.yml of chain
 
   QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex,
       this.homePioneerID, this.serviceProviderID) {
@@ -179,7 +186,7 @@ class QadenaHDWallet {
   }
 
   Future<bool> broadcastTxSync(
-      alan.Wallet signingWallet, List<GeneratedMessage> msgs) async {
+      alan.Wallet signingWallet, List<GeneratedMessage> msgs, {String? feeGranter}) async {
     final List<Duration> normalTimeouts = [
       Duration(seconds: 1),
       Duration(seconds: 1),
@@ -215,15 +222,76 @@ class QadenaHDWallet {
     while (true) {
       // remember the current sequence number of the signingWallet
       oldSequence = await getSequenceNumber(signingWallet);
-      // create and sign the message, assign seq
-      final tx = await signer.createAndSign(signingWallet, msgs,
-          accountSequence: oldSequence);
 
-      final broadcstResponse = await txSender.broadcastTx(tx);
-      var response = await checkTxResponse(
-          txSender, broadcstResponse, signingWallet, oldSequence);
-      final success = response.first;
-      shouldRetry = response.second;
+      /* ADD BELOW TO SIMULATE sequence mismatch error
+      // HACK
+      //oldSequence--;
+      */
+
+      // create and sign the message, assign seq
+      Tx? tx;
+
+      //
+      var success = false;
+      Int64 gas = Int64(0);
+
+      try {
+        var fee = Fee();
+        gas = Int64(500000);
+        fee.gasLimit = gas;
+        final feeAmount = gas * gasPrice;
+        fee.amount.add(Coin.create()
+          ..amount = "$feeAmount"
+          ..denom = 'aqdn');
+        if (feeGranter != null) {
+          fee.granter = feeGranter;
+        }
+        tx = await signer.createAndSign(signingWallet, msgs,
+          accountSequence: oldSequence, simulate: true, fee: fee);
+        final simulateResponse = await txSender.simulate(tx);
+        print("simulateResponse: $simulateResponse");
+        if (simulateResponse.hasGasInfo()) {
+          gas = simulateResponse.gasInfo.gasUsed;
+          success = true;
+        }
+      } on GrpcError catch (e) {
+        print("simulate error: $e");
+        // get code and message from e
+        final code = e.code;
+        final message = e.message;
+        if (code == 2 && message!.contains("sequence mismatch")) {
+          // sequence not found, retry
+          success = false;
+          shouldRetry = true;
+        } else {
+          success = false;
+          shouldRetry = false;
+        }
+      }
+
+      if (success) {
+        // calculate gas
+        double gasDouble = gas.toDouble() * gasMultiplier;
+        gas = gasDouble.toInt().toInt64();
+        print("gas $gas");
+
+        var fee = Fee();
+        fee.gasLimit = gas;
+        final feeAmount = gas * gasPrice;
+        fee.amount.add(Coin.create()
+          ..amount = "$feeAmount"
+          ..denom = 'aqdn');
+        if (feeGranter != null) {
+          fee.granter = feeGranter;
+        }
+        tx = await signer.createAndSign(signingWallet, msgs,
+          accountSequence: oldSequence, fee: fee);
+        final broadcastResponse = await txSender.broadcastTx(tx);
+        var response = await checkTxResponse(
+            txSender, broadcastResponse, signingWallet, oldSequence);
+        success = response.first;
+        shouldRetry = response.second;
+      }
 
       if (shouldRetry) {
         await Future.delayed(timeouts[maxTries]);
@@ -264,6 +332,7 @@ class QadenaHDWallet {
     );
     allowance.allowedMessages.addAll([
       '/qadena.qadena.MsgAddPublicKey',
+      '/qadena.qadena.MsgCreateWallet',
     ]);
 
     final msg = MsgGrantAllowance.create();
@@ -371,7 +440,7 @@ class QadenaHDWallet {
 
     print('msgs: $msgs');
 
-    final response = await broadcastTxSync(txAcct, msgs);
+    final response = await broadcastTxSync(txAcct, msgs, feeGranter: sponsorWallet.address);
 
     if (response) {
       print('Tx sent successfully. Response: $response');

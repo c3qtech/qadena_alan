@@ -84,7 +84,7 @@ void main() {
     expect(wallet.networkInfo, networkInfo);
 
     // Sign the transaction
-    final fee = Fee();
+    var fee = Fee();
     fee.gasLimit = 200000.toInt64();
     fee.amount.add(
       Coin.create()

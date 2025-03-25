@@ -46,13 +46,18 @@ class TxSigner {
     String? memo,
     Fee? fee,
     Int64? accountSequence,
+    bool simulate = false
   }) async {
     // Set the config to the default value if not given
     config ??= DefaultTxConfig.create();
-    final signMode = config.defaultSignMode();
+    var signMode = config.defaultSignMode();
+
+    if (simulate) {
+      signMode = SignMode.SIGN_MODE_UNSPECIFIED;
+    }
 
     // Set the default fees
-    fee ??= Fee()..gasLimit = 2000000.toInt64();
+    fee ??= Fee()..gasLimit = 500000.toInt64();
     if (!fee.hasGasLimit()) {
       throw Exception('Invalid fees: invalid gas amount specified');
     }
@@ -96,7 +101,9 @@ class TxSigner {
     );
 
     // Create the transaction builder
-    final tx = config.newTxBuilder()
+    TxBuilder? tx;
+    
+    tx = config.newTxBuilder()
       ..setMsgs(msgs)
       ..setSignatures([sig])
       ..setMemo(memo)
@@ -105,25 +112,35 @@ class TxSigner {
       ..setFeeGranter(fee.granter)
       ..setGasLimit(fee.gasLimit);
 
-    // Generate the bytes to be signed.
-    final handler = config.signModeHandler();
-    final signerData = SignerData(
-      chainId: nodeInfo.network,
-      accountNumber: account.accountNumber,
-      sequence: accountSequence,
-    );
-    final bytesToSign = handler.getSignBytes(signMode, signerData, tx.getTx());
+    if (!simulate) {
+      // Generate the bytes to be signed.
+      final handler = config.signModeHandler();
+      final signerData = SignerData(
+        chainId: nodeInfo.network,
+        accountNumber: account.accountNumber,
+        sequence: accountSequence,
+      );
+      final bytesToSign = handler.getSignBytes(signMode, signerData, tx.getTx());
 
-    // Sign those bytes
-    final sigBytes = wallet.sign(Uint8List.fromList(bytesToSign));
+      // Sign those bytes
+      final sigBytes = wallet.sign(Uint8List.fromList(bytesToSign));
 
-    // Construct the SignatureV2 struct
-    sigData = SingleSignatureData(signMode: signMode, signature: sigBytes);
-    sig = SignatureV2(
-      pubKey: pubKey,
-      data: sigData,
-      sequence: accountSequence,
-    );
+      // Construct the SignatureV2 struct
+      sigData = SingleSignatureData(signMode: signMode, signature: sigBytes);
+      sig = SignatureV2(
+        pubKey: pubKey,
+        data: sigData,
+        sequence: accountSequence,
+      );
+    } else {
+      sigData = SingleSignatureData(signMode: signMode, signature: []);
+      sig = SignatureV2(
+        pubKey: pubKey,
+        data: sigData,
+        sequence: accountSequence,
+      );
+    }
+
     tx.setSignatures([sig]);
 
     // Return the signed transaction
