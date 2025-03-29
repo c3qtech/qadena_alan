@@ -9,6 +9,7 @@ import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
+import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 
 class StringHolder {
   String value;
@@ -24,6 +25,8 @@ class MsgClaimCredentialsArgs {
   final BigInt claimAmount;
   final BigInt claimBlindingFactor;
   final bool recoverKey;
+  final WalletAmountRef? mainWalletQadenaWalletAmount;
+  final List<String>? mainWalletServiceProviderID;
 
   MsgClaimCredentialsArgs({
     required this.chain,
@@ -31,7 +34,9 @@ class MsgClaimCredentialsArgs {
     required this.cxwallet,
     required this.claimAmount,
     required this.claimBlindingFactor,
-    required this.recoverKey
+    required this.recoverKey,
+    this.mainWalletQadenaWalletAmount,
+    this.mainWalletServiceProviderID,
   });
 }
 
@@ -45,7 +50,7 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
   String oldPin,
   String credentialHash,
   String srcWalletID,
-  Wallet srcWallet,
+  List<String> srcServiceProviderID,
   EncryptableWalletAmount ewa,
   bool recoverKey
 ) async {
@@ -64,7 +69,7 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
 
   ccPubK = await clientAppendRequiredChainCCPubK(chain, ccPubK, "", false);
 
-  ccPubK = await clientAppendOptionalServiceProvidersCCPubK(chain, ccPubK, srcWallet.serviceProviderID, [FinanceServiceProvider]);
+  ccPubK = await clientAppendOptionalServiceProvidersCCPubK(chain, ccPubK, srcServiceProviderID, [FinanceServiceProvider]);
 
   for (var i = 0; i < ccPubK.length; i++) {
     print('ccPubK[$i]: ${ccPubK[i]}');
@@ -243,24 +248,34 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
     credentialIDs.add(StringHolder(""));
   }
 
-  final srcWallet =
-      await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-    walletID: srcWalletID
-  ));
+  List<String> srcServiceProviderID = [];
+  var mainWalletQadenaWalletAmount = args.mainWalletQadenaWalletAmount;
+
+  if (args.mainWalletQadenaWalletAmount == null && args.mainWalletServiceProviderID == null) {
+    final srcWallet =
+        await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
+      walletID: srcWalletID
+    ));
+
+    mainWalletQadenaWalletAmount!.value = srcWallet.wallet.walletAmount[QadenaTokenDenom];
+    srcServiceProviderID = args.mainWalletServiceProviderID!;
+  } else {
+    srcServiceProviderID = args.mainWalletServiceProviderID!;
+  }
 
   var ewa = EncryptableWalletAmount.create();
   var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
-      srcWallet.wallet.walletAmount[QadenaTokenDenom]!.walletAmountVShareBind);
+      mainWalletQadenaWalletAmount!.value!.walletAmountVShareBind);
 
   vShareBDecryptAndProtoUnmarshal(
       args.txwallet!.privkeyHex,
       args.txwallet!.pubkeyB64,
       unprotoWalletAmountVShareBind,
       Uint8List.fromList(
-          srcWallet.wallet.walletAmount[QadenaTokenDenom]!
-              .encWalletAmountVShare),
+          mainWalletQadenaWalletAmount!.value!.encWalletAmountVShare),
       ewa);
   print("decrypted wallet amount: $ewa");
+
 
   List<GeneratedMessage> msgs = [];
 
@@ -291,7 +306,7 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
         p.pIN,
         credentialHash,
         srcWalletID,
-        srcWallet.wallet,
+        srcServiceProviderID,
         ewa,
         false
       );
@@ -308,7 +323,7 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
         pSCI.pIN,
         "",
         srcWalletID,
-        srcWallet.wallet,
+        srcServiceProviderID,
         ewa,
         false
       );

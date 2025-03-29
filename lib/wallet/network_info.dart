@@ -170,7 +170,7 @@ class NetworkInfo extends Equatable {
     required this.lcdInfo,
     required this.grpcInfo,
     this.isEthSecP256K1Addr = false,
-    this.isTesting = false,
+    this.isTesting = true,
   });
 
   factory NetworkInfo.fromSingleHost({

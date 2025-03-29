@@ -14,6 +14,17 @@ void main() {
 
   QadenaClient client = QadenaClient(networkInfo);
 
+  test('create account (create wallets, claim credentials, register authorized signatory)', () async {
+    final account = await client.createCompleteAccount("pioneer1", null, "secdsvssrvprv");
+
+    expect(account, isNotNull);
+
+    print("wallet: ${account!.mainWallet.transactionWalletAddress}");
+    print("ephWallet: ${account.ephWallet.transactionWalletAddress}");
+    expect(account.ephWallet, isNotNull);
+    expect(account.mainWallet, isNotNull);
+  });
+
   test('createLocalAccount', () async {
     final localWallet = client.createLocalAccount();
     print("localWallet: $localWallet");
@@ -38,7 +49,7 @@ void main() {
     final wallet = await client.createWallet(
         "pioneer1", annmnemonic.split(' '), 0, "secdsvssrvprv");
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null);
+        await client.createWallet("pioneer1", wallet!.seed, 2, null);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.registerAuthorizedSignatory();

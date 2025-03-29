@@ -11,6 +11,7 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/qadena/common.dart' as c;
+import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 
 class MsgCreateWalletArgs {
   final Chain chain;
@@ -23,7 +24,8 @@ class MsgCreateWalletArgs {
   final List<String>? requireSenderCredentialTypes;
   final Future<Map<String, Incentive>> Function() incentives;
   final String serviceProviderID;
-  final WalletResponse? realWallet;
+  final WalletResponse? mainWallet;
+  final WalletAmountRef? mainWalletQadenaWalletAmount;
 
   MsgCreateWalletArgs({
     required this.chain,
@@ -36,7 +38,8 @@ class MsgCreateWalletArgs {
     this.requireSenderCredentialTypes,
     required this.incentives,
     required this.serviceProviderID,
-    required this.realWallet,
+    required this.mainWallet,
+    this.mainWalletQadenaWalletAmount,
   });
 }
 
@@ -69,9 +72,9 @@ Future<List<GeneratedMessage>> msgCreateWallet(
   // isEphemeral
   final isEphemeral = args.isEphemeral;
 
-  final dstEWalletIDr = EncryptableCreateWalletEWalletID.create();
-  dstEWalletIDr.nonce = nonce;
-  dstEWalletIDr.walletID = fromAddr;
+  final dstEWalletID = EncryptableCreateWalletEWalletID.create();
+  dstEWalletID.nonce = nonce;
+  dstEWalletID.walletID = fromAddr;
 
   PedersenCommit walletAmountPC;
   PedersenCommit transparentWalletAmountPC;
@@ -88,8 +91,9 @@ Future<List<GeneratedMessage>> msgCreateWallet(
     serviceProviderIDs.add(args.serviceProviderID);
   }
 
+  var mainWalletQadenaWalletAmount = args.mainWalletQadenaWalletAmount;
+
   if (isEphemeral) {
-    
     // set up all the wallet amounts
     walletAmountPC = PedersenCommit(
         BigInt.parse(
@@ -101,42 +105,111 @@ Future<List<GeneratedMessage>> msgCreateWallet(
                 '0'),
         randomNumber256());
 
+
     // WE NEED TO PROVE THAT THE ONE WHO CREATED THE EPH WALLET HAS A KEY TO THE REAL WALLET!
-    final linkToWallet =
+
+    if (mainWalletQadenaWalletAmount == null || mainWalletQadenaWalletAmount.value == null) {
+      final linkToWallet =
         await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-      walletID: args.realWallet!.address
-    ));
+          walletID: args.mainWallet!.address
+        ));
 
-    serviceProviderIDs = linkToWallet.wallet.serviceProviderID;
+      if (linkToWallet.wallet.walletAmount.containsKey(QadenaTokenDenom)) {
+        mainWalletQadenaWalletAmount!.value = linkToWallet.wallet.walletAmount[QadenaTokenDenom];
+      } else {
+        throw Exception('Wallet amount not found');
+      }
 
-    dstEWalletIDr.walletID = args.realWallet!.address;
+      // require sender to put in this wallet's credential
+      final acts = args.acceptCredentialTypes ?? [];
+      if (acts.isNotEmpty) {
+        final validatedCredentials = EncryptableValidatedCredential.create();
+        for (var type in acts) {
+          final credential = await args.chain.qadenaQuery.queryClient
+              .credential(QueryGetCredentialRequest(
+            credentialID: linkToWallet.wallet.credentialID,
+            credentialType: type,
+          ));
 
-    if (linkToWallet.wallet.walletAmount.containsKey(QadenaTokenDenom)) {
-      // var wa c.WalletAmount
-      var ewa = EncryptableWalletAmount.create();
-      var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
-          linkToWallet.wallet.walletAmount[QadenaTokenDenom]!.walletAmountVShareBind);
+          if (senderOptions.isNotEmpty) {
+            senderOptions.add(',$AcceptOption-$type');
+          } else {
+            senderOptions.add('$AcceptOption-$type');
+          }
 
-      vShareBDecryptAndProtoUnmarshal(
-          args.realWallet!.privkeyHex,
-          args.realWallet!.pubkeyB64,
-          unprotoWalletAmountVShareBind,
-          Uint8List.fromList(
-              linkToWallet.wallet.walletAmount[QadenaTokenDenom]!
-                  .encWalletAmountVShare),
-          ewa);
-      print("decrypted wallet amount: $ewa");
+          final unprotoVShareBind = unprotoizeVShareBindData(
+              credential.credential.credentialInfoVShareBind);
 
-      final hashPC = PedersenCommit(hashString(fromAddr), BigInt.parse('0'));
+          var p = EncryptableSingleContactInfo.create();
+          vShareBDecryptAndProtoUnmarshal(
+              args.mainWallet!.privkeyHex,
+              args.mainWallet!.pubkeyB64,
+              unprotoVShareBind,
+              Uint8List.fromList(credential.credential.encCredentialInfoVShare),
+              p);
 
-      // final cwExtraParms EncryptableC
-      final cwExtraParms = EncryptableCreateWalletEWalletIDExtraParms.create();
-      cwExtraParms.proofPC = protoizeBPedersenCommit(
-          addPedersenCommitNoMaxCheck(
-              unprotoizeEncryptablePedersenCommit(ewa.pedersenCommit),
-              hashPC)!);
-      dstEWalletIDr.extraParms = cwExtraParms;
+          validatedCredentials.credentialType = type;
+          validatedCredentials.pIN = p.pIN;
+          validatedCredentials.credentialPC =
+              credential.credential.credentialPedersenCommit;
+        }
+
+        List<VSharePubKInfo> validatedCredentialsCCPubK = [
+          VSharePubKInfo(
+              pubK: fromPubk, nodeID: "", nodeType: "")
+        ];
+
+        validatedCredentialsCCPubK = await clientAppendRequiredChainCCPubK(
+            args.chain, validatedCredentialsCCPubK, "", false);
+
+        validatedCredentialsCCPubK = await clientAppendOptionalServiceProvidersCCPubK(
+            args.chain, validatedCredentialsCCPubK, serviceProviderIDs, [FinanceServiceProvider]);
+
+        acceptValidatedCredentialsVShareBind = vshare.VShareBindData.fromEmpty();
+        encAcceptValidatedCredentialsVShare = protoMarshalAndVShareBEncrypt(
+            validatedCredentialsCCPubK,
+            validatedCredentials,
+            acceptValidatedCredentialsVShareBind);
+        final verified = vShareBVerifyAll(acceptValidatedCredentialsVShareBind,
+            encAcceptValidatedCredentialsVShare!);
+        print("verified: $verified");
+      }
+
+
     }
+
+    // var wa c.WalletAmount
+    var ewa = EncryptableWalletAmount.create();
+    var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
+        mainWalletQadenaWalletAmount.value!.walletAmountVShareBind);
+
+    final success = vShareBDecryptAndProtoUnmarshal(
+        args.mainWallet!.privkeyHex,
+        args.mainWallet!.pubkeyB64,
+        unprotoWalletAmountVShareBind,
+        Uint8List.fromList(
+            mainWalletQadenaWalletAmount.value!.encWalletAmountVShare),
+        ewa);
+    if (!success) {
+      throw Exception('Failed to decrypt wallet amount');
+    }
+    print("decrypted wallet amount: $ewa");
+
+    final hashPC = PedersenCommit(hashString(fromAddr), BigInt.parse('0'));
+
+    // final cwExtraParms EncryptableC
+    final cwExtraParms = EncryptableCreateWalletEWalletIDExtraParms.create();
+    cwExtraParms.proofPC = protoizeBPedersenCommit(
+        addPedersenCommitNoMaxCheck(
+            unprotoizeEncryptablePedersenCommit(ewa.pedersenCommit),
+            hashPC)!);
+    dstEWalletID.extraParms = cwExtraParms;
+
+    
+
+    //serviceProviderIDs = linkToWallet.wallet.serviceProviderID;
+
+    dstEWalletID.walletID = args.mainWallet!.address;
 
     if ((args.acceptPassword ?? '').trim().isNotEmpty) {
       senderOptions.add(RequirePasswordSenderOption);
@@ -144,60 +217,6 @@ Future<List<GeneratedMessage>> msgCreateWallet(
       protoAcceptPasswordPC = protoizeBPedersenCommit(acceptPasswordPC);
     }
 
-    // require sender to put in this wallet's credential
-    final acts = args.acceptCredentialTypes ?? [];
-    if (acts.isNotEmpty) {
-      final validatedCredentials = EncryptableValidatedCredential.create();
-      for (var type in acts) {
-        final credential = await args.chain.qadenaQuery.queryClient
-            .credential(QueryGetCredentialRequest(
-          credentialID: linkToWallet.wallet.credentialID,
-          credentialType: type,
-        ));
-
-        if (senderOptions.isNotEmpty) {
-          senderOptions.add(',$AcceptOption-$type');
-        } else {
-          senderOptions.add('$AcceptOption-$type');
-        }
-
-        final unprotoVShareBind = unprotoizeVShareBindData(
-            credential.credential.credentialInfoVShareBind);
-
-        var p = EncryptableSingleContactInfo.create();
-        vShareBDecryptAndProtoUnmarshal(
-            args.realWallet!.privkeyHex,
-            args.realWallet!.pubkeyB64,
-            unprotoVShareBind,
-            Uint8List.fromList(credential.credential.encCredentialInfoVShare),
-            p);
-
-        validatedCredentials.credentialType = type;
-        validatedCredentials.pIN = p.pIN;
-        validatedCredentials.credentialPC =
-            credential.credential.credentialPedersenCommit;
-      }
-
-      List<VSharePubKInfo> validatedCredentialsCCPubK = [
-        VSharePubKInfo(
-            pubK: fromPubk, nodeID: "", nodeType: "")
-      ];
-
-      validatedCredentialsCCPubK = await clientAppendRequiredChainCCPubK(
-          args.chain, validatedCredentialsCCPubK, "", false);
-
-      validatedCredentialsCCPubK = await clientAppendOptionalServiceProvidersCCPubK(
-          args.chain, validatedCredentialsCCPubK, serviceProviderIDs, [FinanceServiceProvider]);
-
-      acceptValidatedCredentialsVShareBind = vshare.VShareBindData.fromEmpty();
-      encAcceptValidatedCredentialsVShare = protoMarshalAndVShareBEncrypt(
-          validatedCredentialsCCPubK,
-          validatedCredentials,
-          acceptValidatedCredentialsVShareBind);
-      final verified = vShareBVerifyAll(acceptValidatedCredentialsVShareBind,
-          encAcceptValidatedCredentialsVShare!);
-      print("verified: $verified");
-    }
 
     // require sender to put in their credential
     final rscts = args.requireSenderCredentialTypes ?? [];
@@ -227,7 +246,7 @@ Future<List<GeneratedMessage>> msgCreateWallet(
   ewa.pedersenCommit = protoizeEncryptablePedersenCommit(walletAmountPC);
 
   var vShareCreateWallet = EncryptableCreateWallet.create();
-  vShareCreateWallet.dstEWalletID = dstEWalletIDr;
+  vShareCreateWallet.dstEWalletID = dstEWalletID;
 
   List<VSharePubKInfo> walletAmountCCPubK = [VSharePubKInfo(pubK: fromPubk, nodeID: "", nodeType:"")];
 
@@ -279,6 +298,14 @@ Future<List<GeneratedMessage>> msgCreateWallet(
   msgCW.transparentWalletAmountPC = protoTransparentWalletAmountPC;
   msgCW.acceptCredentialType = senderOptions.join(',');
   msgCW.serviceProviderID.addAll(serviceProviderIDs);
+
+  if (mainWalletQadenaWalletAmount != null) {
+    WalletAmount walletAmount = WalletAmount.create();
+    walletAmount.walletAmountPedersenCommit = protoizeBPedersenCommit(walletAmountPC);
+    walletAmount.encWalletAmountVShare = encWalletAmountVShare as List<int>;
+    walletAmount.walletAmountVShareBind = protoizeVShareBindData(encWalletAmountVShareBind);
+    mainWalletQadenaWalletAmount.value = walletAmount;
+  }
 
   return [tmsg, cmsg, msgCW];
 }

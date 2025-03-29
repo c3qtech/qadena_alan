@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:fixnum/src/int64.dart';
@@ -72,7 +71,6 @@ class QadenaHDWallet {
   late final WalletResponse sponsorWallet;
   late final WalletResponse transactionWallet;
   late final WalletResponse credentialWallet;
-  late final String transactionWalletAddress;
   late final String transactionPublicKey;
   late final String credentialWalletAddress;
   late final String credentialPublicKey;
@@ -80,6 +78,8 @@ class QadenaHDWallet {
   late final String serviceProviderID;
   final double gasMultiplier = 1.2;
   final Int64 gasPrice = Int64(500000000); // in config.yml of chain
+
+  String get transactionWalletAddress => transactionWallet.address;
 
   QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex,
       this.homePioneerID, this.serviceProviderID) {
@@ -105,7 +105,6 @@ class QadenaHDWallet {
     sponsorWallet = toWallet(sponsorAcct);
     transactionWallet = toWallet(txAcct);
     credentialWallet = toWallet(cxAcct);
-    transactionWalletAddress = transactionWallet.address;
     credentialWalletAddress = credentialWallet.address;
     transactionPublicKey = transactionWallet.pubkeyHex;
     credentialPublicKey = credentialWallet.pubkeyHex;
@@ -435,7 +434,7 @@ class QadenaHDWallet {
       requireSenderCredentialTypes: requireSenderCredentialTypes,
       incentives: () async => await getIncentives(chain),
       serviceProviderID: serviceProviderID,
-      realWallet: realWalletTransaction,
+      mainWallet: realWalletTransaction,
     ));
 
     print('msgs: $msgs');
@@ -450,6 +449,8 @@ class QadenaHDWallet {
     print('Tx errored: $response');
     return false;
   }
+
+  
 
   Future<bool> registerAuthorizedSignatory() async {
     final isEphemeral = ephIndex > 0;

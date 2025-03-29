@@ -59,4 +59,12 @@ class TxSender {
     return response.txResponse;
   }
 
+  Future<TxResponse> checkTxByHash(String txhash) async {
+    final request = GetTxRequest()..hash = txhash;
+    final response = await _client.getTx(request);
+//    print("checkTx: ${response}");
+    return response.txResponse;
+  }
+
+
 }
