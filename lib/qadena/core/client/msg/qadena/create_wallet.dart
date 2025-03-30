@@ -183,6 +183,10 @@ Future<List<GeneratedMessage>> msgCreateWallet(
     var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
         mainWalletQadenaWalletAmount.value!.walletAmountVShareBind);
 
+    print("privkeyHex: ${args.mainWallet!.privkeyHex}");
+    print("pubkeyB64: ${args.mainWallet!.pubkeyB64}");
+    print("unprotoWalletAmountVShareBind: $unprotoWalletAmountVShareBind");
+
     final success = vShareBDecryptAndProtoUnmarshal(
         args.mainWallet!.privkeyHex,
         args.mainWallet!.pubkeyB64,

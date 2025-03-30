@@ -18,6 +18,7 @@ class MsgRegisterAuthorizedSignatoryArgs {
   final WalletResponse txwallet;
   final WalletResponse? realWalletTransaction;
   final WalletResponse? realWalletCredential;
+  final List<String>? mainWalletServiceProviderID;
 
   MsgRegisterAuthorizedSignatoryArgs({
     required this.chain,
@@ -25,6 +26,7 @@ class MsgRegisterAuthorizedSignatoryArgs {
 
     required this.realWalletTransaction,
     required this.realWalletCredential,
+    this.mainWalletServiceProviderID,
   });
 }
 
@@ -43,15 +45,22 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
     ..nonce = c.nonce()
     ..walletID = ephWalletID;
 
-  QueryGetWalletResponse? srcWallet;
-  final realWalletAddress = args.realWalletTransaction!.address;
-  try {
-   srcWallet = await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-      walletID: realWalletAddress
-    ));
-  } catch (e) {
-    print("wallet not found $args");
-    return [];
+  List<String> srcServiceProviderID = [];
+
+  if (args.mainWalletServiceProviderID != null) {
+    srcServiceProviderID = args.mainWalletServiceProviderID!;
+  } else {
+    QueryGetWalletResponse? srcWallet;
+    final realWalletAddress = args.realWalletTransaction!.address;
+    try {
+      srcWallet = await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
+        walletID: realWalletAddress
+      ));
+      srcServiceProviderID = srcWallet.wallet.serviceProviderID;
+    } catch (e) {
+      print("wallet not found $args");
+      return [];
+    }
   }
 
   List<VSharePubKInfo> ccPubK = [
@@ -59,7 +68,7 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
   ];
 
   ccPubK = await clientAppendRequiredChainCCPubK(args.chain, ccPubK, "", false);
-  ccPubK = await clientAppendRequiredServiceProvidersCCPubK(args.chain, ccPubK, srcWallet.wallet.serviceProviderID, [DSVSServiceProvider]);
+  ccPubK = await clientAppendRequiredServiceProvidersCCPubK(args.chain, ccPubK, srcServiceProviderID, [DSVSServiceProvider]);
 
   vshare.VShareBindData bind =
       vshare.VShareBindData.fromEmpty();

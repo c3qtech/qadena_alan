@@ -267,13 +267,19 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
   var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
       mainWalletQadenaWalletAmount!.value!.walletAmountVShareBind);
 
-  vShareBDecryptAndProtoUnmarshal(
+  print("privkeyHex: ${args.txwallet!.privkeyHex}");
+  print("pubkeyB64: ${args.txwallet!.pubkeyB64}");
+  print("unprotoWalletAmountVShareBind: $unprotoWalletAmountVShareBind");
+
+  if (!vShareBDecryptAndProtoUnmarshal(
       args.txwallet!.privkeyHex,
       args.txwallet!.pubkeyB64,
       unprotoWalletAmountVShareBind,
       Uint8List.fromList(
           mainWalletQadenaWalletAmount!.value!.encWalletAmountVShare),
-      ewa);
+      ewa)) {
+    throw Exception('Failed to decrypt wallet amount');
+  }
   print("decrypted wallet amount: $ewa");
 
 

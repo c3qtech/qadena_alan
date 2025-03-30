@@ -390,7 +390,7 @@ class QadenaClient {
       }
   }
 
-  Future<AccountResponse?> createCompleteAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor) async {
+  Future<AccountResponse?> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor) async {
     try {
       initECPedersen();
 
@@ -450,6 +450,8 @@ class QadenaClient {
         mainWalletQadenaWalletAmount: mainWalletAmountRef,
       ));
 
+      final saveMainWalletAmountRef = WalletAmountRef(mainWalletAmountRef.value);
+
       final mainCWTxHashRef = StringRef("");
       final mainCWResponse = await broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: sponsorWallet.address, txHashRef: mainCWTxHashRef);
 
@@ -486,25 +488,7 @@ class QadenaClient {
         return null;
       }
 
-      final rasMsgs =
-            await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
-          chain: chain,
-          txwallet: ephWallet.transactionWallet,
-          realWalletTransaction: mainWallet.transactionWallet,
-          realWalletCredential: mainWallet.credentialWallet,
-        ));
-
-      final rasTxHashRef = StringRef("");
-      final rasResponse = await broadcastTx(mainWallet.txAcct, rasMsgs, feeGranter: sponsorWallet.address, txHashRef: rasTxHashRef);
-
-      if (rasResponse) {
-        print('Accepted:  register authorized signatory - Response: $rasResponse, TxHash: ${rasTxHashRef.value}, msgs: $rasMsgs');
-      } else {
-        print("REJECTED:  register authorized signatory msgs: $rasMsgs");
-        return null;
-      }
-
-      final ephCCTxHashRef = StringRef("");
+      final ccTxHashRef = StringRef("");
 
       final ccMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
         chain: chain,
@@ -513,22 +497,37 @@ class QadenaClient {
         claimAmount: claimAmount,
         claimBlindingFactor: claimBlindingFactor,
         recoverKey: false,
-        mainWalletQadenaWalletAmount: mainWalletAmountRef,
+        mainWalletQadenaWalletAmount: saveMainWalletAmountRef,
         mainWalletServiceProviderID: [serviceProviderID],
         ));
 
-      final ccResponse = await broadcastTx(mainWallet.txAcct, ccMsgs, feeGranter: sponsorWallet.address, txHashRef: ephCCTxHashRef);
+      final ccResponse = await broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
 
       if (ccResponse) {
-        print('Accepted:  claim credentials - Response: $ccResponse, TxHash: ${ephCCTxHashRef.value}, msgs: $ccMsgs');
+        print('Accepted:  claim credentials - Response: $ccResponse, TxHash: ${ccTxHashRef.value}, msgs: $ccMsgs');
       } else {
         print("REJECTED:  claim credentials msgs: $ccMsgs");
         return null;
       }
-      
 
+      final rasMsgs =
+            await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+          chain: chain,
+          txwallet: ephWallet.transactionWallet,
+          realWalletTransaction: mainWallet.transactionWallet,
+          realWalletCredential: mainWallet.credentialWallet,
+          mainWalletServiceProviderID: [serviceProviderID],
+        ));
 
+      final rasTxHashRef = StringRef("");
+      final rasResponse = await broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
 
+      if (rasResponse) {
+        print('Accepted:  register authorized signatory - Response: $rasResponse, TxHash: ${rasTxHashRef.value}, msgs: $rasMsgs');
+      } else {
+        print("REJECTED:  register authorized signatory msgs: $rasMsgs");
+        return null;
+      }
 
       if (await checkTxResult(txSender, mainCWTxHashRef.value)) {
         print("main create wallet success");
@@ -542,6 +541,13 @@ class QadenaClient {
         return null;
       }
 
+      if (await checkTxResult(txSender, ccTxHashRef.value)) {
+        print("claim credential success");
+      } else {
+        return null;
+      }
+
+
       if (await checkTxResult(txSender, rasTxHashRef.value)) {
         print("register authorized signatory success");
       } else {
@@ -553,7 +559,7 @@ class QadenaClient {
         ephWallet: ephWallet,
       );
     } catch (e) {
-      print('Failed to create eph wallet: $e');
+      print('Failed to create account: $e');
       return null;
     }
   }
