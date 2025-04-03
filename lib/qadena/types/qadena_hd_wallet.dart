@@ -121,25 +121,52 @@ class QadenaHDWallet {
       '/qadena.qadena.MsgCreateWallet',
     ]);
 
-    final msg = MsgGrantAllowance.create();
-    msg.grantee = transactionWallet.address;
-    msg.granter = sponsorWallet.address;
-    msg.allowance = alan.Any(
-      typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
-      value: allowance.writeToBuffer(),
-    );
+    try {
+      final msg = MsgGrantAllowance.create();
+      msg.grantee = transactionWallet.address;
+      msg.granter = sponsorWallet.address;
+      msg.allowance = alan.Any(
+        typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
+        value: allowance.writeToBuffer(),
+      );
 
-    final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
+      final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
 
-    print("feegrant msg: $msg");
-    if (response == null) {
-      print('Tx sent successfully');
+      print("feegrant msg: $msg");
+      if (response == null) {
+        print('Tx sent successfully');
 
-      return null;
+        return null;
+      }
+
+      print('Tx errored: $response');
+      return response;
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      print('Failed: $e');
+      return "UNKNOWN";
     }
-
-    print('Tx errored: $response');
-    return response;
   }
 
   Future<bool> walletExists() async {
@@ -210,31 +237,59 @@ class QadenaHDWallet {
       realWalletTransaction = toWallet(realWalletTransactionAccount);
     }
 
-    final msgs = await msgCreateWallet(MsgCreateWalletArgs(
-      chain: chain,
-      cxwallet: credentialWallet,
-      homePioneerID: pioneerID,
-      txwallet: transactionWallet,
-      acceptCredentialTypes: acceptCredentialTypes,
-      acceptPassword: null,
-      isEphemeral: isEphemeral,
-      requireSenderCredentialTypes: requireSenderCredentialTypes,
-      incentives: () async => await getIncentives(chain),
-      serviceProviderID: serviceProviderID,
-      mainWallet: realWalletTransaction,
-    ));
+    try {
+      final msgs = await msgCreateWallet(MsgCreateWalletArgs(
+        chain: chain,
+        cxwallet: credentialWallet,
+        homePioneerID: pioneerID,
+        txwallet: transactionWallet,
+        acceptCredentialTypes: acceptCredentialTypes,
+        acceptPassword: null,
+        isEphemeral: isEphemeral,
+        requireSenderCredentialTypes: requireSenderCredentialTypes,
+        incentives: () async => await getIncentives(chain),
+        serviceProviderID: serviceProviderID,
+        mainWallet: realWalletTransaction,
+      ));
 
-    print('msgs: $msgs');
+      print('msgs: $msgs');
 
-    final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: sponsorWallet.address);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: sponsorWallet.address);
 
-    if (response == null) {
-      print('Tx sent successfully');
-      return null;
+      if (response == null) {
+        print('Tx sent successfully');
+        return null;
+      }
+
+      print('Tx errored: $response');
+      return response;
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      print('Failed: $e');
+      return "UNKNOWN";
     }
 
-    print('Tx errored: $response');
-    return response;
   }
 
   
@@ -266,24 +321,51 @@ class QadenaHDWallet {
       realWalletCredential = toWallet(realWalletCredentialAccount);
     }
 
-    final msgs =
-        await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
-      chain: chain,
-      txwallet: transactionWallet,
-      realWalletTransaction: realWalletTransaction,
-      realWalletCredential: realWalletCredential,
-    ));
+    try {
+      final msgs =
+          await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+        chain: chain,
+        txwallet: transactionWallet,
+        realWalletTransaction: realWalletTransaction,
+        realWalletCredential: realWalletCredential,
+      ));
 
-    final response = await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
+      final response = await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
 
-    if (response == null) {
-      print('Tx sent successfully');
-      return null;
+      if (response == null) {
+        print('Tx sent successfully');
+        return null;
+      }
+
+      print('Tx errored: $response');
+
+      return response;
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      print('Failed: $e');
+      return "UNKNOWN";
     }
-
-    print('Tx errored: $response');
-
-    return response;
   }
 
   Future<String?> signDocument(
@@ -314,26 +396,53 @@ class QadenaHDWallet {
       realWalletCredential = toWallet(realWalletCredentialAccount);
     }
 
-    final msgs = await msgSignDocument(MsgSignDocumentArgs(
-        chain: chain,
-        txwallet: transactionWallet,
-        cxwallet: credentialWallet,
-        realWalletTransaction: realWalletTransaction,
-        realWalletCredential: realWalletCredential,
-        document: document,
-        hashHex: hashHex,
-        newHashHex: newHashHex));
+    try {
+      final msgs = await msgSignDocument(MsgSignDocumentArgs(
+          chain: chain,
+          txwallet: transactionWallet,
+          cxwallet: credentialWallet,
+          realWalletTransaction: realWalletTransaction,
+          realWalletCredential: realWalletCredential,
+          document: document,
+          hashHex: hashHex,
+          newHashHex: newHashHex));
 
-    print("msgs: $msgs");
+      print("msgs: $msgs");
 
-    final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
-    if (response == null) {
-      print('Tx sent successfully');
-      return null;
+      if (response == null) {
+        print('Tx sent successfully');
+        return null;
+      }
+      print('Tx errored: $response');
+      return response;
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      print('Failed: $e');
+      return "UNKNOWN";
     }
-    print('Tx errored: $response');
-    return response;
   }
 
   Future<String?> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor,
@@ -345,26 +454,53 @@ class QadenaHDWallet {
       return "NOT_EPHEMERAL";
     }
 
-    final msgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
-        chain: chain,
-        txwallet: transactionWallet,
-        cxwallet: credentialWallet,
-        claimAmount: claimAmount,
-        claimBlindingFactor: claimBlindingFactor,
-        recoverKey: recoverKey));
+    try {
+      final msgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
+          chain: chain,
+          txwallet: transactionWallet,
+          cxwallet: credentialWallet,
+          claimAmount: claimAmount,
+          claimBlindingFactor: claimBlindingFactor,
+          recoverKey: recoverKey));
 
-    print("msgs: $msgs");
+      print("msgs: $msgs");
 
-    final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
-    if (response == null) {
-      print('Tx sent successfully');
-      return null;
+      if (response == null) {
+        print('Tx sent successfully');
+        return null;
+      }
+
+      print('Tx errored: $response');
+
+      return response;
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      print('Failed: $e');
+      return "UNKNOWN";
     }
-
-    print('Tx errored: $response');
-
-    return response;
   }
 
   Future<Map<String, Incentive>> getIncentives(Chain chain) async {

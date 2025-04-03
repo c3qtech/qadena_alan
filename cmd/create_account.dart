@@ -26,10 +26,15 @@ void main(List<String> args) async {
 
   final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF);
 
-  print("seed phrase: ${account!.mainWallet.seed}");
+  if (account.errorMessage != null) {
+    print("Failed to create account: ${account.errorMessage}");
+    exit(10);
+  }
 
-  print("wallet: ${account!.mainWallet.transactionWalletAddress}");
-  print("ephWallet: ${account.ephWallet.transactionWalletAddress}");
+  print("seed phrase: ${account.mainWallet!.seed}");
+
+  print("wallet: ${account.mainWallet!.transactionWalletAddress}");
+  print("ephWallet: ${account.ephWallet!.transactionWalletAddress}");
 
   exit(0);
 }

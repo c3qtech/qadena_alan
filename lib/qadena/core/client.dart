@@ -18,6 +18,8 @@ import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
+import 'package:grpc/grpc.dart';
+
 
 //import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadenaproto;
 
@@ -41,13 +43,18 @@ class LocalAccountResponse {
 }
 
 class AccountResponse {
-  QadenaHDWallet mainWallet;
-  QadenaHDWallet ephWallet;
+  QadenaHDWallet? mainWallet;
+  QadenaHDWallet? ephWallet;
+  String? errorMessage;
 
   AccountResponse({
     required this.mainWallet,
     required this.ephWallet,
   });
+
+  AccountResponse.fromErrorMessage(String errorMessage) {
+    this.errorMessage = errorMessage;
+  }
 }
 
 class QadenaClient {
@@ -156,7 +163,7 @@ class QadenaClient {
       }
   }
 
-  Future<AccountResponse?> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor) async {
+  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
@@ -167,7 +174,7 @@ class QadenaClient {
       var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0);
 
       if (await mainWallet.walletExists()) {
-        return null;
+        return AccountResponse.fromErrorMessage("Wallet already exists");
       }
 
       // ephemeral wallet index=1
@@ -185,7 +192,7 @@ class QadenaClient {
           print('SUCCESS:  feegrant');
         } else {
           print("FAIL:  feegrant $response");
-          return null;
+          return AccountResponse.fromErrorMessage("Feegrant failed");
         }
       }
 
@@ -215,7 +222,7 @@ class QadenaClient {
         print('Accepted:  create wallet, TxHash: ${mainCWTxHashRef.value}');
       } else { 
         print("REJECTED:  create wallet $mainCWResponse");
-        return null;
+        return AccountResponse.fromErrorMessage(mainCWResponse);
       }
 
 
@@ -241,7 +248,7 @@ class QadenaClient {
         print('Accepted:  eph create wallet, TxHash: ${ephCWTxHashRef.value}');
       } else {
         print("REJECTED:  eph create wallet $ephCWResponse");
-        return null;
+        return AccountResponse.fromErrorMessage(ephCWResponse);
       }
 
       final ccTxHashRef = StringRef("");
@@ -263,7 +270,7 @@ class QadenaClient {
         print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
       } else {
         print("REJECTED:  claim credentials $ccResponse");
-        return null;
+        return AccountResponse.fromErrorMessage(ccResponse);
       }
 
       final rasMsgs =
@@ -282,7 +289,7 @@ class QadenaClient {
         print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
       } else {
         print("REJECTED:  register authorized signatory $rasResponse");
-        return null;
+        return AccountResponse.fromErrorMessage(rasResponse);
       }
 
       String? response = null;
@@ -291,21 +298,21 @@ class QadenaClient {
         print("main create wallet success");
       } else {
         print("REJECTED:  main create wallet $response");
-        return null;
+        return AccountResponse.fromErrorMessage(response!);
       }
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
         print("eph create wallet success");
       } else {
         print("REJECTED:  eph create wallet $response");
-        return null;
+        return AccountResponse.fromErrorMessage(response!);
       }
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
         print("claim credential success");
       } else {
         print("REJECTED:  claim credential $response");
-        return null;
+        return AccountResponse.fromErrorMessage(response!);
       }
 
 
@@ -313,16 +320,38 @@ class QadenaClient {
         print("register authorized signatory success");
       } else {
         print("REJECTED:  register authorized signatory $response");
-        return null;
+        return AccountResponse.fromErrorMessage(response!);
       }
 
       return AccountResponse(
         mainWallet: mainWallet,
         ephWallet: ephWallet,
       );
+    } on GrpcError catch (e) {
+      // get code and message from e
+      final code = e.code;
+      final codeName = e.codeName;
+      final message = e.message;
+
+      print("message: $message");
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final message = match.group(3); // 'Signatory already exists'
+
+        print('parsed message: $message');
+        errorMessage = message!;
+      } else {
+        print('Could not parse.');
+        errorMessage = codeName;
+      }
+      return AccountResponse.fromErrorMessage(errorMessage);
     } catch (e) {
       print('Failed to create account: $e');
-      return null;
+      return AccountResponse.fromErrorMessage("UNKNOWN");
     }
   }
 
@@ -351,6 +380,7 @@ class QadenaClient {
       print("Wallet registration successful: $registerWalletSuccess");
 
       return registerWalletSuccess == null ? wallet : null;
+      
     } catch (e) {
       print('Failed to create main wallet: $e');
       return null;

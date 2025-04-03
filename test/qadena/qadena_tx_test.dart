@@ -18,10 +18,10 @@ void main() {
   test('create account (create wallets, claim credentials, register authorized signatory)', () async {
     final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111));
 
-    expect(account, isNotNull);
+    expect(account.errorMessage, isNull);
 
-    print("wallet: ${account!.mainWallet.transactionWalletAddress}");
-    print("ephWallet: ${account.ephWallet.transactionWalletAddress}");
+    print("wallet: ${account.mainWallet!.transactionWalletAddress}");
+    print("ephWallet: ${account.ephWallet!.transactionWalletAddress}");
     expect(account.ephWallet, isNotNull);
     expect(account.mainWallet, isNotNull);
   });
