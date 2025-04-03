@@ -2,18 +2,15 @@ import 'dart:typed_data';
 
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/types/hdpath.dart';
+import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/utils/bip_39.dart';
 import 'package:qadena_alan/wallet/network_info.dart';
 import 'package:qadena_alan/wallet/wallet.dart';
-import 'package:fixnum/src/int64.dart';
 import 'package:qadena_alan/alan.dart' as alan;
 import 'package:protobuf/protobuf.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/feegrant.pb.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/tx.pb.dart';
-import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
-import 'package:qadena_alan/proto/cosmos/base/v1beta1/coin.pb.dart';
-import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
@@ -23,12 +20,6 @@ import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 
 //import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadenaproto;
-
-
-class StringRef {
-  String value;
-  StringRef(this.value);
-}
 
 
 class LocalAccountResponse {
@@ -69,7 +60,7 @@ class QadenaClient {
 
   QadenaClient(this.networkInfo) {
     chain = Chain(networkInfo);
-    // HARD CODED
+    // HARD CODED FOR NOW
     sponsorAcct = alan.Wallet.derive(
       "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
           .split(' '),
@@ -77,235 +68,10 @@ class QadenaClient {
       derivationPath: "m/44'/744'/0'/0/0");
 
      sponsorWallet = toWallet(sponsorAcct);
+     QadenaClientTx.networkInfo = networkInfo;
+     QadenaClientTx.chain = chain;
+     initECPedersen();
   }
-
-
-  final double gasMultiplier = 1.2;
-  final Int64 gasPrice = Int64(500000000); // in config.yml of chain
-
-  Future<bool> broadcastTx(
-      alan.Wallet signingWallet, List<GeneratedMessage> msgs, {String? feeGranter, StringRef? txHashRef}) async {
-    final List<Duration> normalTimeouts = [
-      Duration(seconds: 1),
-      Duration(seconds: 1),
-      Duration(seconds: 2),
-      Duration(seconds: 2),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 10),
-      Duration(seconds: 10),
-      Duration(seconds: 10),
-    ];
-
-    final List<Duration> backoffTimeouts = [
-      Duration(seconds: 20),
-      Duration(seconds: 20),
-      Duration(seconds: 20),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-    ];
-
-    var timeouts = normalTimeouts;
-
-    var maxTries = 0;
-    var backoff = false;
-    var shouldRetry = true;
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    Int64 oldSequence;
-    while (true) {
-      // remember the current sequence number of the signingWallet
-      oldSequence = await getSequenceNumber(signingWallet);
-
-      /* ADD BELOW TO SIMULATE sequence mismatch error
-      // HACK
-      //oldSequence--;
-      */
-
-      // create and sign the message, assign seq
-      Tx? tx;
-
-      //
-      var success = false;
-      Int64 gas = Int64(0);
-
-      try {
-        var fee = Fee();
-        gas = Int64(500000);
-        fee.gasLimit = gas;
-        final feeAmount = gas * gasPrice;
-        fee.amount.add(Coin.create()
-          ..amount = "$feeAmount"
-          ..denom = 'aqdn');
-        if (feeGranter != null) {
-          fee.granter = feeGranter;
-        }
-        tx = await signer.createAndSign(signingWallet, msgs,
-          accountSequence: oldSequence, simulate: true, fee: fee);
-        final simulateResponse = await txSender.simulate(tx);
-        print("simulateResponse: $simulateResponse");
-        if (simulateResponse.hasGasInfo()) {
-          gas = simulateResponse.gasInfo.gasUsed;
-          success = true;
-        }
-      } on GrpcError catch (e) {
-        print("simulate error: $e");
-        // get code and message from e
-        final code = e.code;
-        final message = e.message;
-        if (code == 2 && message!.contains("sequence mismatch")) {
-          // sequence not found, retry
-          success = false;
-          shouldRetry = true;
-        } else {
-          success = false;
-          shouldRetry = false;
-        }
-      }
-
-      if (success) {
-        // calculate gas
-        double gasDouble = gas.toDouble() * gasMultiplier;
-        gas = gasDouble.toInt().toInt64();
-        print("gas (adjusted) $gas");
-
-        var fee = Fee();
-        fee.gasLimit = gas;
-        final feeAmount = gas * gasPrice;
-        fee.amount.add(Coin.create()
-          ..amount = "$feeAmount"
-          ..denom = 'aqdn');
-        if (feeGranter != null) {
-          fee.granter = feeGranter;
-        }
-        tx = await signer.createAndSign(signingWallet, msgs, accountSequence: oldSequence, fee: fee);
-        final broadcastResponse = await txSender.broadcastTx(tx);
-        var acceptResponse = checkTxAccepted(txSender, broadcastResponse, signingWallet, oldSequence);
-
-        final accepted = acceptResponse.first;
-        if (accepted) {
-          if (txHashRef != null) {
-            txHashRef.value = broadcastResponse.txhash;
-            return true;
-          }
-          final result = await checkTxResult(txSender, broadcastResponse.txhash);
-          return result;
-        }
-        shouldRetry = acceptResponse.second;
-      }
-
-      if (shouldRetry) {
-        await Future.delayed(timeouts[maxTries]);
-        final newBackoff =
-            await waitForSequenceChange(signingWallet, oldSequence);
-        if (newBackoff && !backoff) {
-          maxTries = 0;
-          backoff = true;
-          print("backing off");
-          timeouts = backoffTimeouts;
-        } else {
-          maxTries++;
-          if (maxTries == timeouts.length) {
-            print("max tries exceeded");
-            return false;
-          }
-        }
-        continue;
-      } else if (!success) {
-        return false;
-      } else {
-        break;
-      }
-    }
-
-    await waitForSequenceChange(signingWallet, oldSequence);
-    // note: we get here even if the sequence number did not increase, but the chain may just be delayed in updating the sequence number
-    return true;
-  }
-
-  Future<Int64> getSequenceNumber(alan.Wallet wallet) async {
-    final account =
-        await chain.authQuery.authQuerier.getAccountData(wallet.bech32Address);
-    if (account == null) {
-      throw Exception(
-        'Account ${wallet.bech32Address} does not exist on chain',
-      );
-    }
-    return account.sequence;
-  }
-
-  // define constants ErrWrongSequence and ErrTxInMempoolCache
-  // NOTE NOTE:  these constants are defined in Cosmos SDK!!!!
-  static const ErrWrongSequence = 32;
-  static const ErrTxInMempoolCache = 19;
-
-  Pair<bool, bool> checkTxAccepted(alan.TxSender txSender,
-      alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) {
-    if (!response.isSuccessful) {
-      if (response.codespace == 'sdk' &&
-          (response.code == ErrWrongSequence ||
-              response.code == ErrTxInMempoolCache)) {
-        return Pair(false, true);
-      }
-      return Pair(false, false);
-    }
-    return Pair(true, false);
-  }
-
-  // return a pair of (success bool, retry bool)
-  Future<bool> checkTxResult(alan.TxSender txSender,
-      String txhash) async {
-    // Loop 8 times
-    for (int tryCount = 8; tryCount > 0; tryCount--) {
-      try {
-        final output = await txSender.checkTxByHash(txhash);
-
-        if (output.isSuccessful) {
-          return true;
-        } else {
-          print(
-              "Transaction failed: txhash, Code: ${output.code}, Log: ${output.rawLog}");
-          return false;
-        }
-      } catch (e) {
-        print("exception: $e");
-        if (tryCount == 1) {
-          print("Error querying transaction: $e");
-          return false;
-        } else {
-          print("sleep start");
-          await Future.delayed(Duration(milliseconds: 750));
-          print("sleep end");
-        }
-      }
-    }
-    return false;
-  }
-
-// returns true if the sequence changed by more than 1 (meaning there many simultaneous transactions from this wallet), false otherwise; also returns true if we didn't detect a change
-  Future<bool> waitForSequenceChange(
-      alan.Wallet wallet, Int64 oldSequence) async {
-    print("Waiting for sequence change from $oldSequence");
-    for (int i = 0; i < 15; i++) {
-      final newSequence = await getSequenceNumber(wallet);
-      if (newSequence > oldSequence) {
-        print("Sequence number increased from $oldSequence to $newSequence");
-        if (newSequence > oldSequence + 1) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-      await Future.delayed(Duration(milliseconds: 500));
-    }
-    return true;
-  }
-
-
 
   LocalAccountResponse createLocalAccount(
       {List<String>? mnemonic, int? ephIndex, String? password}) {
@@ -392,44 +158,34 @@ class QadenaClient {
 
   Future<AccountResponse?> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor) async {
     try {
-      initECPedersen();
-
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
 
       final chain = Chain(networkInfo);
 
       // main wallet index=0
-      var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0,
-          pioneerID, serviceProviderID);
+      var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0);
 
       if (await mainWallet.walletExists()) {
         return null;
       }
 
       // ephemeral wallet index=1
-      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 1,
-          pioneerID, serviceProviderID);
+      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 1);
 
       final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
 
 
-      final grantTxHashRef = StringRef("");
       if (networkInfo.isTesting) {
         final msgs = createFeeGrantMessages(mainWallet.transactionWalletAddress, ephWallet.transactionWalletAddress);
 
-        final response = await broadcastTx(sponsorAcct, msgs, txHashRef: grantTxHashRef);
+        final response = await QadenaClientTx.broadcastTx(sponsorAcct, msgs);
 
-        if (response) {
-          print('Accepted:  feegrant - Response: $response, TxHash: ${grantTxHashRef.value}, msgs: $msgs');
+        if (response == null) {
+          print('SUCCESS:  feegrant');
         } else {
-          print("REJECTED:  feegrant msgs: $msgs");
+          print("FAIL:  feegrant $response");
           return null;
-        }
-
-        // wait for result
-        if (await checkTxResult(txSender, grantTxHashRef.value)) {
-          print("feegrant success");
         }
       }
 
@@ -453,12 +209,12 @@ class QadenaClient {
       final saveMainWalletAmountRef = WalletAmountRef(mainWalletAmountRef.value);
 
       final mainCWTxHashRef = StringRef("");
-      final mainCWResponse = await broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: sponsorWallet.address, txHashRef: mainCWTxHashRef);
+      final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: sponsorWallet.address, txHashRef: mainCWTxHashRef);
 
-      if (mainCWResponse) {
-        print('Accepted:  create wallet - Response: $mainCWResponse, TxHash: ${mainCWTxHashRef.value}, msgs: $mainCWMsgs');
-      } else {
-        print("REJECTED:  create wallet msgs: $mainCWMsgs");
+      if (mainCWResponse == null) {
+        print('Accepted:  create wallet, TxHash: ${mainCWTxHashRef.value}');
+      } else { 
+        print("REJECTED:  create wallet $mainCWResponse");
         return null;
       }
 
@@ -479,12 +235,12 @@ class QadenaClient {
       ));
 
       final ephCWTxHashRef = StringRef("");
-      final ephCWResponse = await broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: sponsorWallet.address, txHashRef: ephCWTxHashRef);
+      final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: sponsorWallet.address, txHashRef: ephCWTxHashRef);
 
-      if (ephCWResponse) {
-        print('Accepted:  eph create wallet - Response: $ephCWResponse, TxHash: ${grantTxHashRef.value}, msgs: $ephCWMsgs');
+      if (ephCWResponse == null) {
+        print('Accepted:  eph create wallet, TxHash: ${ephCWTxHashRef.value}');
       } else {
-        print("REJECTED:  eph create wallet msgs: $ephCWMsgs");
+        print("REJECTED:  eph create wallet $ephCWResponse");
         return null;
       }
 
@@ -501,12 +257,12 @@ class QadenaClient {
         mainWalletServiceProviderID: [serviceProviderID],
         ));
 
-      final ccResponse = await broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
+      final ccResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
 
-      if (ccResponse) {
-        print('Accepted:  claim credentials - Response: $ccResponse, TxHash: ${ccTxHashRef.value}, msgs: $ccMsgs');
+      if (ccResponse == null) {
+        print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
       } else {
-        print("REJECTED:  claim credentials msgs: $ccMsgs");
+        print("REJECTED:  claim credentials $ccResponse");
         return null;
       }
 
@@ -520,37 +276,43 @@ class QadenaClient {
         ));
 
       final rasTxHashRef = StringRef("");
-      final rasResponse = await broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
+      final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
 
-      if (rasResponse) {
-        print('Accepted:  register authorized signatory - Response: $rasResponse, TxHash: ${rasTxHashRef.value}, msgs: $rasMsgs');
+      if (rasResponse == null) {
+        print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
       } else {
-        print("REJECTED:  register authorized signatory msgs: $rasMsgs");
+        print("REJECTED:  register authorized signatory $rasResponse");
         return null;
       }
 
-      if (await checkTxResult(txSender, mainCWTxHashRef.value)) {
+      String? response = null;
+
+      if ((response = await QadenaClientTx.checkTxResult(txSender, mainCWTxHashRef.value)) == null) {
         print("main create wallet success");
       } else {
+        print("REJECTED:  main create wallet $response");
         return null;
       }
 
-      if (await checkTxResult(txSender, ephCWTxHashRef.value)) {
+      if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
         print("eph create wallet success");
       } else {
+        print("REJECTED:  eph create wallet $response");
         return null;
       }
 
-      if (await checkTxResult(txSender, ccTxHashRef.value)) {
+      if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
         print("claim credential success");
       } else {
+        print("REJECTED:  claim credential $response");
         return null;
       }
 
 
-      if (await checkTxResult(txSender, rasTxHashRef.value)) {
+      if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
         print("register authorized signatory success");
       } else {
+        print("REJECTED:  register authorized signatory $response");
         return null;
       }
 
@@ -574,8 +336,7 @@ class QadenaClient {
       serviceProviderID = serviceProviderID ?? "";
 
       final chain = Chain(networkInfo);
-      var wallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex,
-          pioneerID, serviceProviderID);
+      var wallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex);
 
       if (await wallet.walletExists()) {
         return wallet;
@@ -586,10 +347,10 @@ class QadenaClient {
         print("Fee grant completed: $feeGrantSuccess");
       }
 
-      final registerWalletSuccess = await wallet.registerWallet();
+      final registerWalletSuccess = await wallet.registerWallet(pioneerID, serviceProviderID);
       print("Wallet registration successful: $registerWalletSuccess");
 
-      return registerWalletSuccess ? wallet : null;
+      return registerWalletSuccess == null ? wallet : null;
     } catch (e) {
       print('Failed to create main wallet: $e');
       return null;

@@ -23,6 +23,7 @@ import 'package:hex/hex.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:qadena_alan/proto/qadena/qadena/export.dart';
 import 'package:grpc/grpc.dart';
+import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 
 
 class WalletResponse {
@@ -74,15 +75,12 @@ class QadenaHDWallet {
   late final String transactionPublicKey;
   late final String credentialWalletAddress;
   late final String credentialPublicKey;
-  late final String homePioneerID;
-  late final String serviceProviderID;
   final double gasMultiplier = 1.2;
   final Int64 gasPrice = Int64(500000000); // in config.yml of chain
 
   String get transactionWalletAddress => transactionWallet.address;
 
-  QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex,
-      this.homePioneerID, this.serviceProviderID) {
+  QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex) {
     final txpath = HDPath(
             walletType: AccountType.transactionWalletType.value,
             addressIdx: ephIndex)
@@ -110,218 +108,7 @@ class QadenaHDWallet {
     credentialPublicKey = credentialWallet.pubkeyHex;
   }
 
-  Future<Int64> getSequenceNumber(alan.Wallet wallet) async {
-    final account =
-        await chain.authQuery.authQuerier.getAccountData(wallet.bech32Address);
-    if (account == null) {
-      throw Exception(
-        'Account ${wallet.bech32Address} does not exist on chain',
-      );
-    }
-    return account.sequence;
-  }
-
-  // define constants ErrWrongSequence and ErrTxInMempoolCache
-  // NOTE NOTE:  these constants are defined in Cosmos SDK!!!!
-  static const ErrWrongSequence = 32;
-  static const ErrTxInMempoolCache = 19;
-
-  // return a pair of (success bool, retry bool)
-  Future<Pair<bool, bool>> checkTxResponse(alan.TxSender txSender,
-      alan.TxResponse response, alan.Wallet wallet, Int64 oldSequence) async {
-    if (!response.isSuccessful) {
-      if (response.codespace == 'sdk' &&
-          (response.code == ErrWrongSequence ||
-              response.code == ErrTxInMempoolCache)) {
-        return Pair(false, true);
-      }
-      return Pair(false, false);
-    }
-
-    // Loop 8 times
-    for (int tryCount = 8; tryCount > 0; tryCount--) {
-      try {
-        final output = await txSender.checkTx(response);
-
-        if (output.isSuccessful) {
-          return Pair(true, false);
-        } else {
-          print(
-              "Transaction failed: $response.txhash, Code: ${output.code}, Log: ${output.rawLog}");
-          return Pair(false, false);
-        }
-      } catch (e) {
-        print("exception: $e");
-        if (tryCount == 1) {
-          print("Error querying transaction: $e");
-          return Pair(false, false);
-        } else {
-          print("sleep start");
-          await Future.delayed(Duration(milliseconds: 750));
-          print("sleep end");
-        }
-      }
-    }
-    return Pair(false, false);
-  }
-
-  // returns true if the sequence changed by more than 1 (meaning there many simultaneous transactions from this wallet), false otherwise; also returns true if we didn't detect a change
-  Future<bool> waitForSequenceChange(
-      alan.Wallet wallet, Int64 oldSequence) async {
-    print("Waiting for sequence change from $oldSequence");
-    for (int i = 0; i < 15; i++) {
-      final newSequence = await getSequenceNumber(wallet);
-      if (newSequence > oldSequence) {
-        print("Sequence number increased from $oldSequence to $newSequence");
-        if (newSequence > oldSequence + 1) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-      await Future.delayed(Duration(milliseconds: 500));
-    }
-    return true;
-  }
-
-  Future<bool> broadcastTxSync(
-      alan.Wallet signingWallet, List<GeneratedMessage> msgs, {String? feeGranter}) async {
-    final List<Duration> normalTimeouts = [
-      Duration(seconds: 1),
-      Duration(seconds: 1),
-      Duration(seconds: 2),
-      Duration(seconds: 2),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 4),
-      Duration(seconds: 10),
-      Duration(seconds: 10),
-      Duration(seconds: 10),
-    ];
-
-    final List<Duration> backoffTimeouts = [
-      Duration(seconds: 20),
-      Duration(seconds: 20),
-      Duration(seconds: 20),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-      Duration(seconds: 30),
-    ];
-
-    var timeouts = normalTimeouts;
-
-    var maxTries = 0;
-    var backoff = false;
-    var shouldRetry = true;
-    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
-    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    Int64 oldSequence;
-    while (true) {
-      // remember the current sequence number of the signingWallet
-      oldSequence = await getSequenceNumber(signingWallet);
-
-      /* ADD BELOW TO SIMULATE sequence mismatch error
-      // HACK
-      //oldSequence--;
-      */
-
-      // create and sign the message, assign seq
-      Tx? tx;
-
-      //
-      var success = false;
-      Int64 gas = Int64(0);
-
-      try {
-        var fee = Fee();
-        gas = Int64(500000);
-        fee.gasLimit = gas;
-        final feeAmount = gas * gasPrice;
-        fee.amount.add(Coin.create()
-          ..amount = "$feeAmount"
-          ..denom = 'aqdn');
-        if (feeGranter != null) {
-          fee.granter = feeGranter;
-        }
-        tx = await signer.createAndSign(signingWallet, msgs,
-          accountSequence: oldSequence, simulate: true, fee: fee);
-        final simulateResponse = await txSender.simulate(tx);
-        print("simulateResponse: $simulateResponse");
-        if (simulateResponse.hasGasInfo()) {
-          gas = simulateResponse.gasInfo.gasUsed;
-          success = true;
-        }
-      } on GrpcError catch (e) {
-        print("simulate error: $e");
-        // get code and message from e
-        final code = e.code;
-        final message = e.message;
-        if (code == 2 && message!.contains("sequence mismatch")) {
-          // sequence not found, retry
-          success = false;
-          shouldRetry = true;
-        } else {
-          success = false;
-          shouldRetry = false;
-        }
-      }
-
-      if (success) {
-        // calculate gas
-        double gasDouble = gas.toDouble() * gasMultiplier;
-        gas = gasDouble.toInt().toInt64();
-        print("gas $gas");
-
-        var fee = Fee();
-        fee.gasLimit = gas;
-        final feeAmount = gas * gasPrice;
-        fee.amount.add(Coin.create()
-          ..amount = "$feeAmount"
-          ..denom = 'aqdn');
-        if (feeGranter != null) {
-          fee.granter = feeGranter;
-        }
-        tx = await signer.createAndSign(signingWallet, msgs,
-          accountSequence: oldSequence, fee: fee);
-        final broadcastResponse = await txSender.broadcastTx(tx);
-        var response = await checkTxResponse(
-            txSender, broadcastResponse, signingWallet, oldSequence);
-        success = response.first;
-        shouldRetry = response.second;
-      }
-
-      if (shouldRetry) {
-        await Future.delayed(timeouts[maxTries]);
-        final newBackoff =
-            await waitForSequenceChange(signingWallet, oldSequence);
-        if (newBackoff && !backoff) {
-          maxTries = 0;
-          backoff = true;
-          print("backing off");
-          timeouts = backoffTimeouts;
-        } else {
-          maxTries++;
-          if (maxTries == timeouts.length) {
-            print("max tries exceeded");
-            return false;
-          }
-        }
-        continue;
-      } else if (!success) {
-        return false;
-      } else {
-        break;
-      }
-    }
-
-    await waitForSequenceChange(signingWallet, oldSequence);
-    // note: we get here even if the sequence number did not increase, but the chain may just be delayed in updating the sequence number
-    return true;
-  }
-
-  Future<bool> feeGrant() async {
+  Future<String?> feeGrant() async {
     final basicAllowance = BasicAllowance.create();
 
     final allowance = AllowedMsgAllowance.create();
@@ -342,17 +129,17 @@ class QadenaHDWallet {
       value: allowance.writeToBuffer(),
     );
 
-    final response = await broadcastTxSync(sponsorAcct, [msg]);
+    final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
 
     print("feegrant msg: $msg");
-    if (response) {
-      print('Tx sent successfully. Response: $response');
+    if (response == null) {
+      print('Tx sent successfully');
 
-      return true;
+      return null;
     }
 
     print('Tx errored: $response');
-    return false;
+    return response;
   }
 
   Future<bool> walletExists() async {
@@ -401,7 +188,7 @@ class QadenaHDWallet {
     }
   }
 
-  Future<bool> registerWallet() async {
+  Future<String?> registerWallet(String pioneerID, String serviceProviderID) async {
     final isEphemeral = ephIndex > 0;
     dynamic acceptCredentialTypes;
     dynamic requireSenderCredentialTypes;
@@ -426,7 +213,7 @@ class QadenaHDWallet {
     final msgs = await msgCreateWallet(MsgCreateWalletArgs(
       chain: chain,
       cxwallet: credentialWallet,
-      homePioneerID: homePioneerID,
+      homePioneerID: pioneerID,
       txwallet: transactionWallet,
       acceptCredentialTypes: acceptCredentialTypes,
       acceptPassword: null,
@@ -439,27 +226,27 @@ class QadenaHDWallet {
 
     print('msgs: $msgs');
 
-    final response = await broadcastTxSync(txAcct, msgs, feeGranter: sponsorWallet.address);
+    final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: sponsorWallet.address);
 
-    if (response) {
-      print('Tx sent successfully. Response: $response');
-      return true;
+    if (response == null) {
+      print('Tx sent successfully');
+      return null;
     }
 
     print('Tx errored: $response');
-    return false;
+    return response;
   }
 
   
 
-  Future<bool> registerAuthorizedSignatory() async {
+  Future<String?> registerAuthorizedSignatory() async {
     final isEphemeral = ephIndex > 0;
     WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
       print("can only register authorized signatory for ephemeral wallets");
-      return false;
+      return "NOT_EPHEMERAL";
     } else {
       final realWalletTransactionPath = HDPath(
               walletType: AccountType.transactionWalletType.value,
@@ -487,19 +274,19 @@ class QadenaHDWallet {
       realWalletCredential: realWalletCredential,
     ));
 
-    final response = await broadcastTxSync(realWalletTransactionAccount, msgs);
+    final response = await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
 
-    if (response) {
-      print('Tx sent successfully. Response: $response');
-      return true;
+    if (response == null) {
+      print('Tx sent successfully');
+      return null;
     }
 
     print('Tx errored: $response');
 
-    return false;
+    return response;
   }
 
-  Future<bool> signDocument(
+  Future<String?> signDocument(
       String document, String hashHex, String newHashHex) async {
     final isEphemeral = ephIndex > 0;
     WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
@@ -507,7 +294,7 @@ class QadenaHDWallet {
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
       print("can only sign a document from an ephemeral wallets");
-      return false;
+      return "NOT_EPHEMERAL";
     } else {
       final realWalletTransactionPath = HDPath(
               walletType: AccountType.transactionWalletType.value,
@@ -539,23 +326,23 @@ class QadenaHDWallet {
 
     print("msgs: $msgs");
 
-    final response = await broadcastTxSync(txAcct, msgs);
+    final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
-    if (response) {
-      print('Tx sent successfully. Response: $response');
-      return true;
+    if (response == null) {
+      print('Tx sent successfully');
+      return null;
     }
     print('Tx errored: $response');
-    return false;
+    return response;
   }
 
-  Future<bool> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor,
+  Future<String?> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor,
       {bool recoverKey = false}) async {
     final isEphemeral = ephIndex > 0;
 
     if (isEphemeral) {
       print("can only claim credentials from a real wallet");
-      return false;
+      return "NOT_EPHEMERAL";
     }
 
     final msgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
@@ -568,16 +355,16 @@ class QadenaHDWallet {
 
     print("msgs: $msgs");
 
-    final response = await broadcastTxSync(txAcct, msgs);
+    final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
-    if (response) {
-      print('Tx sent successfully. Response: $response');
-      return true;
+    if (response == null) {
+      print('Tx sent successfully');
+      return null;
     }
 
     print('Tx errored: $response');
 
-    return false;
+    return response;
   }
 
   Future<Map<String, Incentive>> getIncentives(Chain chain) async {
