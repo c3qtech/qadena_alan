@@ -10,6 +10,7 @@ import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
+import 'package:qadena_alan/qadena/common.dart' as common;
 
 class StringHolder {
   String value;
@@ -71,8 +72,10 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
 
   ccPubK = await clientAppendOptionalServiceProvidersCCPubK(chain, ccPubK, srcServiceProviderID, [FinanceServiceProvider]);
 
-  for (var i = 0; i < ccPubK.length; i++) {
-    print('ccPubK[$i]: ${ccPubK[i]}');
+  if (common.Debug) {
+    for (var i = 0; i < ccPubK.length; i++) {
+      print('ccPubK[$i]: ${ccPubK[i]}');
+    }
   }
 
   var credentialInfoVShareBind = vshare.VShareBindData.fromEmpty();
@@ -99,11 +102,15 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
 
   final encWalletIDVShare = protoMarshalAndVShareBEncrypt(ccPubK, EncryptableString.create()..value = srcWalletID, walletIDVShareBind);
 
-  print('walletIDVShareBind: ${walletIDVShareBind}');
+  if (common.Debug) {
+    print('walletIDVShareBind: ${walletIDVShareBind}');
+  }
 
   final encCredentialHashVShare = protoMarshalAndVShareBEncrypt(ccPubK, EncryptableString.create()..value = credentialHash, credentialHashVShareBind);
 
-  print('credentialHashVShareBind: ${credentialHashVShareBind}');
+  if (common.Debug) {
+    print('credentialHashVShareBind: ${credentialHashVShareBind}');
+  }
 
   final newCredentialPC = PedersenCommit(hashUint8List(all), newPin);
 
@@ -117,7 +124,9 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
   }
 
   if (validateAddPedersenCommit(walletPC, newCredentialPC, claimPC)) {
-    print('validated claimPC');
+    if (common.Debug) {
+      print('validated claimPC');
+    }
   }
 
   final encryptableClaimCredentialExtraParms = EncryptableClaimCredentialExtraParms.create();
@@ -162,9 +171,10 @@ Future<void> queryFindCredential(
   var proofPC = PedersenCommit.fromValue(findCredentialPC.A!);
   var checkPC = subPedersenCommitNoMinCheck(findCredentialPC, proofPC);
 
-  print('proofPC: ${proofPC}');
-  print('checkPC: ${checkPC}');
-
+  if (common.Debug) {
+    print('proofPC: ${proofPC}');
+    print('checkPC: ${checkPC}');
+  }
   if (!validateSubPedersenCommit(findCredentialPC, proofPC, checkPC)) {
     print('Failed to validate checkPC - credentialPC - proofPC = 0');
   }
@@ -186,20 +196,26 @@ Future<void> queryFindCredential(
 
   var res = await chain.qadenaQuery.queryClient.findCredential(request);
 
-  print('res: $res');
+  if (common.Debug) {
+    print('res: $res');
+  }
 
   bDecryptAndProtoUnmarshal(
       cxWallet.privkeyHex,
       Uint8List.fromList(res.encPersonalInfoUserCredentialPubK), 
       p);
 
-  print('p: $p');
+  if (common.Debug) {
+    print('p: $p');
+  }
 
   final credID = bDecryptAndUnmarshal(
       cxWallet.privkeyHex,
       Uint8List.fromList(res.encCredentialIDUserCredentialPubK));
 
-  print('credID: $credID');
+  if (common.Debug) {
+    print('credID: $credID');
+  }
 
   credentialID.value = credID;
 }
@@ -214,7 +230,9 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
 
   final findCredentialPC = PedersenCommit(args.claimAmount, args.claimBlindingFactor);
 
-  print("findCredentialPC: $findCredentialPC");
+  if (common.Debug) {
+    print("findCredentialPC: $findCredentialPC");
+  }
 
   final credentialTypes = [
     PersonalInfoCredentialType,
@@ -267,9 +285,11 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
   var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
       mainWalletQadenaWalletAmount!.value!.walletAmountVShareBind);
 
-  print("privkeyHex: ${args.txwallet!.privkeyHex}");
-  print("pubkeyB64: ${args.txwallet!.pubkeyB64}");
-  print("unprotoWalletAmountVShareBind: $unprotoWalletAmountVShareBind");
+  if (common.Debug) {
+    print("privkeyHex: ${args.txwallet!.privkeyHex}");
+    print("pubkeyB64: ${args.txwallet!.pubkeyB64}");
+    print("unprotoWalletAmountVShareBind: $unprotoWalletAmountVShareBind");
+  }
 
   if (!vShareBDecryptAndProtoUnmarshal(
       args.txwallet!.privkeyHex,
@@ -280,21 +300,26 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
       ewa)) {
     throw Exception('Failed to decrypt wallet amount');
   }
-  print("decrypted wallet amount: $ewa");
-
+  if (common.Debug) {
+    print("decrypted wallet amount: $ewa");
+  }
 
   List<GeneratedMessage> msgs = [];
 
   for (int i = 0; i < credentialTypes.length; i++) {
     await queryFindCredential(args.chain, args.cxwallet, findCredentialPC, credentialTypes[i], encryptables[i], credentialIDs[i]);
-    print("${credentialTypes[i]}: ${credentialIDs[i].value}");
-    print("${encryptables[i]}");
+    if (common.Debug) {
+      print("${credentialTypes[i]}: ${credentialIDs[i].value}");
+      print("${encryptables[i]}");
+    }
     final credential = await args.chain.qadenaQuery.queryClient
         .credential(QueryGetCredentialRequest(
       credentialID: credentialIDs[i].value,
       credentialType: credentialTypes[i],
     ));
-    print("credential: $credential");
+    if (common.Debug) {
+      print("credential: $credential");
+    }
 
     if (credentialTypes[i] == PersonalInfoCredentialType) {
       EncryptablePersonalInfo p = encryptables[i] as EncryptablePersonalInfo;

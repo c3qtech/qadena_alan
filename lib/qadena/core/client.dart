@@ -19,6 +19,7 @@ import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_si
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:grpc/grpc.dart';
+import 'package:qadena_alan/qadena/common.dart' as common;
 
 
 //import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadenaproto;
@@ -189,9 +190,13 @@ class QadenaClient {
         final response = await QadenaClientTx.broadcastTx(sponsorAcct, msgs);
 
         if (response == null) {
-          print('SUCCESS:  feegrant');
+          if (common.Debug) {
+            print('SUCCESS:  feegrant');
+          }
         } else {
-          print("FAIL:  feegrant $response");
+          if (common.Debug) {
+            print("FAIL:  feegrant $response");
+          }
           return AccountResponse.fromErrorMessage("Feegrant failed");
         }
       }
@@ -219,9 +224,13 @@ class QadenaClient {
       final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: sponsorWallet.address, txHashRef: mainCWTxHashRef);
 
       if (mainCWResponse == null) {
-        print('Accepted:  create wallet, TxHash: ${mainCWTxHashRef.value}');
+        if (common.Debug) {
+          print('Accepted:  create wallet, TxHash: ${mainCWTxHashRef.value}');
+        }
       } else { 
-        print("REJECTED:  create wallet $mainCWResponse");
+        if (common.Debug) {
+          print("REJECTED:  create wallet $mainCWResponse");
+        }
         return AccountResponse.fromErrorMessage(mainCWResponse);
       }
 
@@ -245,9 +254,13 @@ class QadenaClient {
       final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: sponsorWallet.address, txHashRef: ephCWTxHashRef);
 
       if (ephCWResponse == null) {
-        print('Accepted:  eph create wallet, TxHash: ${ephCWTxHashRef.value}');
+        if (common.Debug) {
+          print('Accepted:  eph create wallet, TxHash: ${ephCWTxHashRef.value}');
+        }
       } else {
-        print("REJECTED:  eph create wallet $ephCWResponse");
+        if (common.Debug) {
+          print("REJECTED:  eph create wallet $ephCWResponse");
+        }
         return AccountResponse.fromErrorMessage(ephCWResponse);
       }
 
@@ -267,9 +280,13 @@ class QadenaClient {
       final ccResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
 
       if (ccResponse == null) {
-        print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
+        if (common.Debug) {
+          print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
+        }
       } else {
-        print("REJECTED:  claim credentials $ccResponse");
+        if (common.Debug) {
+          print("REJECTED:  claim credentials $ccResponse");
+        }
         return AccountResponse.fromErrorMessage(ccResponse);
       }
 
@@ -286,40 +303,60 @@ class QadenaClient {
       final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
 
       if (rasResponse == null) {
-        print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
+        if (common.Debug) {
+          print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
+        }
       } else {
-        print("REJECTED:  register authorized signatory $rasResponse");
+        if (common.Debug) {
+          print("REJECTED:  register authorized signatory $rasResponse");
+        }
         return AccountResponse.fromErrorMessage(rasResponse);
       }
 
       String? response = null;
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, mainCWTxHashRef.value)) == null) {
-        print("main create wallet success");
+        if (common.Debug) {
+          print("main create wallet success");
+        }
       } else {
-        print("REJECTED:  main create wallet $response");
+        if (common.Debug) {
+          print("REJECTED:  main create wallet $response");
+        }
         return AccountResponse.fromErrorMessage(response!);
       }
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
-        print("eph create wallet success");
+        if (common.Debug) {
+          print("eph create wallet success");
+        }
       } else {
-        print("REJECTED:  eph create wallet $response");
+        if (common.Debug) {
+          print("REJECTED:  eph create wallet $response");
+        }
         return AccountResponse.fromErrorMessage(response!);
       }
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
-        print("claim credential success");
+        if (common.Debug) {
+          print("claim credential success");
+        }
       } else {
-        print("REJECTED:  claim credential $response");
+        if (common.Debug) {
+          print("REJECTED:  claim credential $response");
+        }
         return AccountResponse.fromErrorMessage(response!);
       }
 
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
-        print("register authorized signatory success");
+        if (common.Debug) {
+          print("register authorized signatory success");
+        }
       } else {
-        print("REJECTED:  register authorized signatory $response");
+        if (common.Debug) {
+          print("REJECTED:  register authorized signatory $response");
+        }
         return AccountResponse.fromErrorMessage(response!);
       }
 
@@ -333,7 +370,9 @@ class QadenaClient {
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -342,15 +381,21 @@ class QadenaClient {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
       }
       return AccountResponse.fromErrorMessage(errorMessage);
     } catch (e) {
-      print('Failed to create account: $e');
+      if (common.Debug) {
+        print('Failed to create account: $e');
+      }
       return AccountResponse.fromErrorMessage("UNKNOWN");
     }
   }
@@ -373,16 +418,22 @@ class QadenaClient {
 
       if (networkInfo.isTesting) {
         final feeGrantSuccess = await wallet.feeGrant();
-        print("Fee grant completed: $feeGrantSuccess");
+        if (common.Debug) {
+          print("Fee grant completed: $feeGrantSuccess");
+        }
       }
 
       final registerWalletSuccess = await wallet.registerWallet(pioneerID, serviceProviderID);
-      print("Wallet registration successful: $registerWalletSuccess");
+      if (common.Debug) {
+        print("Wallet registration successful: $registerWalletSuccess");
+      }
 
       return registerWalletSuccess == null ? wallet : null;
       
     } catch (e) {
-      print('Failed to create main wallet: $e');
+      if (common.Debug) {
+        print('Failed to create main wallet: $e');
+      }
       return null;
     }
   }

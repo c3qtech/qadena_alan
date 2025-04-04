@@ -10,7 +10,7 @@ import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
-import 'package:qadena_alan/qadena/common.dart' as c;
+import 'package:qadena_alan/qadena/common.dart' as common;
 
 class MsgCreateWalletArgs {
   final Chain chain;
@@ -64,11 +64,13 @@ Future<List<GeneratedMessage>> msgCreateAccount(
   cmsg.pubKType = 'credential';
   cmsg.pubK = fromPubKCredential;
 
-  print("tmsg: $tmsg");
-  print("cmsg: $cmsg");
+  if (common.Debug) {
+    print("tmsg: $tmsg");
+    print("cmsg: $cmsg");
+  }
 
-  final txID = c.txid();
-  final nonce = c.nonce();
+  final txID = common.txid();
+  final nonce = common.nonce();
 
   // isEphemeral
   final isEphemeral = args.isEphemeral;
@@ -129,7 +131,9 @@ Future<List<GeneratedMessage>> msgCreateAccount(
               linkToWallet.wallet.walletAmount[QadenaTokenDenom]!
                   .encWalletAmountVShare),
           ewa);
-      print("decrypted wallet amount: $ewa");
+      if (common.Debug) {
+        print("decrypted wallet amount: $ewa");
+      }
 
       final hashPC = PedersenCommit(hash(fromAddr), BigInt.parse('0'));
 
@@ -200,7 +204,9 @@ Future<List<GeneratedMessage>> msgCreateAccount(
           acceptValidatedCredentialsVShareBind);
       final verified = vShareBVerifyAll(acceptValidatedCredentialsVShareBind,
           encAcceptValidatedCredentialsVShare!);
-      print("verified: $verified");
+      if (common.Debug) {
+        print("verified: $verified");
+      }
     }
 
     // require sender to put in their credential

@@ -24,6 +24,7 @@ import 'package:protobuf/protobuf.dart';
 import 'package:qadena_alan/proto/qadena/qadena/export.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
+import 'package:qadena_alan/qadena/common.dart' as common;
 
 
 class WalletResponse {
@@ -85,7 +86,9 @@ class QadenaHDWallet {
             walletType: AccountType.transactionWalletType.value,
             addressIdx: ephIndex)
         .toString();
-    print("txpath: $txpath");
+    if (common.Debug) {
+      print("txpath: $txpath");
+    }
     final cxpath = HDPath(
             walletType: AccountType.credentialWalletType.value,
             addressIdx: ephIndex)
@@ -132,21 +135,27 @@ class QadenaHDWallet {
 
       final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
 
-      print("feegrant msg: $msg");
+      if (common.Debug) {
+        print("feegrant msg: $msg");
+      }
       if (response == null) {
         print('Tx sent successfully');
 
         return null;
       }
 
-      print('Tx errored: $response');
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
       return response;
     } on GrpcError catch (e) {
       // get code and message from e
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -155,10 +164,14 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
       }
 
@@ -173,10 +186,14 @@ class QadenaHDWallet {
     try {
       final wallet = await chain.qadenaQuery.queryClient
           .wallet(QueryGetWalletRequest(walletID: transactionWallet.address));
-      print("wallet already exists: $wallet");
+      if (common.Debug) {
+        print("wallet already exists: $wallet");
+      }
       return true;
     } catch (e) {
-      print("wallet not found");
+      if (common.Debug) {
+        print("wallet not found");
+      }
       return false;
     }
   }
@@ -186,7 +203,9 @@ class QadenaHDWallet {
       final signatories =await chain.dsvsQuery.queryClient.authorizedSignatory(QueryGetAuthorizedSignatoryRequest(
         walletID: transactionWallet.address
       ));
-      print("signatories: $signatories");
+      if (common.Debug) {
+        print("signatories: $signatories");
+      }
       if (signatories.authorizedSignatory.signatory.isEmpty) {
         return "";
       }
@@ -206,11 +225,15 @@ class QadenaHDWallet {
       Uint8List.fromList(lastSignatory.encAuthorizedSignatoryVShare), 
       authorizedSignatory);
 
-  print('signatory: $authorizedSignatory');
+      if (common.Debug) {
+        print('signatory: $authorizedSignatory');
+      }
 
       return authorizedSignatory.walletID;
     } catch (e) {
-      print("signatories not found");
+      if (common.Debug) {
+        print("signatories not found");
+      }
       return "";
     }
   }
@@ -220,9 +243,11 @@ class QadenaHDWallet {
     dynamic acceptCredentialTypes;
     dynamic requireSenderCredentialTypes;
 
-    print('seed: ${seed.join(' ')}');
-    print('txAddress: ${transactionWallet.address}');
-    print('cxAddress: ${credentialWallet.address}');
+    if (common.Debug) {
+      print('seed: ${seed.join(' ')}');
+      print('txAddress: ${transactionWallet.address}');
+      print('cxAddress: ${credentialWallet.address}');
+    }
 
     WalletResponse? realWalletTransaction; // this is the main wallet (index 0)
 
@@ -252,23 +277,31 @@ class QadenaHDWallet {
         mainWallet: realWalletTransaction,
       ));
 
-      print('msgs: $msgs');
+      if (common.Debug) {
+        print('msgs: $msgs');
+      }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: sponsorWallet.address);
 
       if (response == null) {
-        print('Tx sent successfully');
+        if (common.Debug) {
+          print('Tx sent successfully');
+        }
         return null;
       }
 
-      print('Tx errored: $response');
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
       return response;
     } on GrpcError catch (e) {
       // get code and message from e
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -277,16 +310,26 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
+      }
+
+      if (common.Debug) {
+        print('parsed message: $errorMessage');
       }
 
       return errorMessage;
     } catch (e) {
-      print('Failed: $e');
+      if (common.Debug) {
+        print('Failed: $e');
+      }
       return "UNKNOWN";
     }
 
@@ -300,7 +343,9 @@ class QadenaHDWallet {
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
-      print("can only register authorized signatory for ephemeral wallets");
+      if (common.Debug) {
+        print("can only register authorized signatory for ephemeral wallets");
+      }
       return "NOT_EPHEMERAL";
     } else {
       final realWalletTransactionPath = HDPath(
@@ -333,11 +378,15 @@ class QadenaHDWallet {
       final response = await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
 
       if (response == null) {
-        print('Tx sent successfully');
+        if (common.Debug) {
+          print('Tx sent successfully');
+        }
         return null;
       }
 
-      print('Tx errored: $response');
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
 
       return response;
     } on GrpcError catch (e) {
@@ -345,7 +394,9 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -354,16 +405,22 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
       }
 
       return errorMessage;
     } catch (e) {
-      print('Failed: $e');
+      if (common.Debug) {
+        print('Failed: $e');
+      }
       return "UNKNOWN";
     }
   }
@@ -375,7 +432,9 @@ class QadenaHDWallet {
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
-      print("can only sign a document from an ephemeral wallets");
+      if (common.Debug) {
+        print("can only sign a document from an ephemeral wallets");
+      }
       return "NOT_EPHEMERAL";
     } else {
       final realWalletTransactionPath = HDPath(
@@ -407,22 +466,30 @@ class QadenaHDWallet {
           hashHex: hashHex,
           newHashHex: newHashHex));
 
-      print("msgs: $msgs");
+      if (common.Debug) {
+        print("msgs: $msgs");
+      }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
       if (response == null) {
-        print('Tx sent successfully');
+        if (common.Debug) {
+          print('Tx sent successfully');
+        }
         return null;
       }
-      print('Tx errored: $response');
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
       return response;
     } on GrpcError catch (e) {
       // get code and message from e
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -431,10 +498,14 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
       }
 
@@ -463,16 +534,22 @@ class QadenaHDWallet {
           claimBlindingFactor: claimBlindingFactor,
           recoverKey: recoverKey));
 
-      print("msgs: $msgs");
+      if (common.Debug) {
+        print("msgs: $msgs");
+      }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
       if (response == null) {
-        print('Tx sent successfully');
+        if (common.Debug) {
+          print('Tx sent successfully');
+        }
         return null;
       }
 
-      print('Tx errored: $response');
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
 
       return response;
     } on GrpcError catch (e) {
@@ -480,7 +557,9 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      print("message: $message");
+      if (common.Debug) {
+        print("message: $message");
+      }
 
       final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
       final match = regExp.firstMatch(message!);
@@ -489,16 +568,22 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        print('parsed message: $message');
+        if (common.Debug) {
+          print('parsed message: $message');
+        }
         errorMessage = message!;
       } else {
-        print('Could not parse.');
+        if (common.Debug) {
+          print('Could not parse.');
+        }
         errorMessage = codeName;
       }
 
       return errorMessage;
     } catch (e) {
-      print('Failed: $e');
+      if (common.Debug) {
+        print('Failed: $e');
+      }
       return "UNKNOWN";
     }
   }
@@ -511,7 +596,9 @@ class QadenaHDWallet {
       final incentivesRes = await chain.qadenaQuery.incentives(metadatas);
       return incentivesRes;
     } catch (e) {
-      print('Failed to get incentives: $e');
+      if (common.Debug) {
+        print('Failed to get incentives: $e');
+      }
       return {};
     }
   }

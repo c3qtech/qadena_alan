@@ -73,6 +73,8 @@ const String CredentialPubKType = "credential";
 const String TransactionPubKType = "transaction";
 const String EnclavePubKType = "enclave";
 
+const bool Debug = false;
+
 String nonce() {
   final random = Random();
   final nonceValue = random.nextInt(1000);
@@ -102,7 +104,9 @@ Future<Tuple3<String, String, String>> clientGetIntervalPublicKey(
   // Create a new query client
   final queryClient = chain.qadenaQuery.queryClient;
 
-  print("getIntervalPublicKey: $intervalNodeID, $intervalNodeType");
+  if (Debug) {
+    print("getIntervalPublicKey: $intervalNodeID, $intervalNodeType");
+  }
 
   // Prepare the request parameters
   final params = types.QueryGetIntervalPublicKeyIDRequest(
@@ -115,7 +119,9 @@ Future<Tuple3<String, String, String>> clientGetIntervalPublicKey(
 
   final publicKeyId = res.intervalPublicKeyID;
 
-  print("publicKeyId: $publicKeyId");
+  if (Debug) {
+    print("publicKeyId: $publicKeyId");
+  }
   
   // Prepare the second request parameters
   final params2 = types.QueryGetPublicKeyRequest(
@@ -133,7 +139,9 @@ Future<Tuple3<String, String, String>> clientGetIntervalPublicKey(
 Future<String> clientGetJarForPioneer(qadena.Chain chain, String pioneerID) async {
   final queryClient = chain.qadenaQuery.queryClient;
 
-  print("getJarForPioneer: $pioneerID");
+  if (Debug) {
+    print("getJarForPioneer: $pioneerID");
+  }
 
   final params = types.QueryGetPioneerJarRequest(
     pioneerID: pioneerID,
@@ -160,17 +168,23 @@ Future<List<VSharePubKInfo>> clientAppendRequiredChainCCPubK(
       nodeType: SSNodeType,
     ));
 
-    print("ss_pubKID_pubK_serviceProviderType: $ss_pubKID_pubK_serviceProviderType");
+    if (Debug) {
+      print("ss_pubKID_pubK_serviceProviderType: $ss_pubKID_pubK_serviceProviderType");
+    }
   }
 
   if (pioneerID.isNotEmpty) {
     final jarID = await clientGetJarForPioneer(chain, pioneerID);
 
-    print("jarID: $jarID");
+    if (Debug) {
+      print("jarID: $jarID");
+    }
 
     final jar_pubKID_pubK_serviceProviderType = await clientGetIntervalPublicKey(chain, jarID, JarNodeType);
 
-    print("jar_pubKID_pubK_serviceProviderType: $jar_pubKID_pubK_serviceProviderType");
+    if (Debug) {
+      print("jar_pubKID_pubK_serviceProviderType: $jar_pubKID_pubK_serviceProviderType");
+    }
 
     ccPubK.add(VSharePubKInfo(
       pubK: jar_pubKID_pubK_serviceProviderType.item2,
@@ -255,9 +269,10 @@ Uint8List? protoMarshalAndVShareBEncrypt(
   List<VSharedSecret> sharedSecrets = List.generate(2, (i) {
     VSharedSecret secret = generateVSharedSecret();
     // Print shared secret
-    print("S1: $i, ${secret.s1}");
-    print("S2: $i, ${secret.s2}");
-
+    if (Debug) {
+      print("S1: $i, ${secret.s1}");
+      print("S2: $i, ${secret.s2}");
+    }
     return secret;
   });
 
@@ -272,16 +287,22 @@ Uint8List? protoMarshalAndVShareBEncrypt(
     return null;
   }
 
-  print("sharedSecretBytes: ${hex.encode(sharedSecretBytes)}");
+  if (Debug) {
+    print("sharedSecretBytes: ${hex.encode(sharedSecretBytes)}");
+  }
 
   final sharedSecretHash = SHA256Digest().process(sharedSecretBytes);
 
-  print("sharedSecretHash: ${hex.encode(sharedSecretHash)}");
+  if (Debug) {
+    print("sharedSecretHash: ${hex.encode(sharedSecretHash)}");
+  }
 
   // Encrypt the serialized protobuf message
   Uint8List cipherText = sharedSecretEncrypt(sharedSecretHash, vBytes);
 
-  print("ciphertext encrypted hex: ${hex.encode(cipherText)}");
+  if (Debug) {
+    print("ciphertext encrypted hex: ${hex.encode(cipherText)}");
+  }
 
   // Populate bindData
   for (int i = 0; i < 2; i++) {

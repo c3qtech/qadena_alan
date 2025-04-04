@@ -5,6 +5,7 @@ import 'package:pointycastle/export.dart';
 import 'package:convert/convert.dart';
 import 'ecpedersen.dart';
 import 'encrypt.dart';
+import 'common.dart' as common;
 
 var testVShareEncryption = false;
 
@@ -123,7 +124,9 @@ VSharedSecret generateVSharedSecret() {
 
     ECPublicKey publicKey = ephKeyPair.publicKey as ECPublicKey;
 
-    print('$i publicKey: ${publicKey.Q}');
+    if (common.Debug) {
+      print('$i publicKey: ${publicKey.Q}');
+    }
 
     // create ECPoint
     ecPoints[i] = publicKey.Q!;
@@ -211,21 +214,29 @@ VShareBindDataInternal newVShareBindData(
   final pubkbytes = base64.decode(dstPubK.pubK);
   final tmpy = ecPointFromBytes(pubkbytes);
 
-  print('tmpy is $tmpy');
+  if (common.Debug) {
+    print('tmpy is $tmpy');
+  }
 
-  print('BaseG is ${ecPedersen!.BaseG()}');
+  if (common.Debug) {
+    print('BaseG is ${ecPedersen!.BaseG()}');
+  }
 
   var y = ECPointInfo(tmpy, dstPubK.nodeID, dstPubK.nodeType);
 
   final c = safeMultECPointBigInt(
       ecPedersen!.BaseG(), BigInt.parse(hex.encode(k), radix: 16));
 
-  print('c is $c');
+  if (common.Debug) {
+    print('c is $c');
+  }
 
   final d = safeMultECPointBigInt(
       ecPedersen!.BaseG(), BigInt.parse(hex.encode(j), radix: 16));
 
-  print('d is $d');
+  if (common.Debug) {
+    print('d is $d');
+  }
 
   final r_ = List<VSharedSecret>.filled(
       ccPubK.length,
@@ -241,8 +252,10 @@ VShareBindDataInternal newVShareBindData(
       safeMultECPointBigInt(y.ecPoint, BigInt.parse(hex.encode(k), radix: 16));
   VSharedSecret r = VSharedSecret((yToTheK! + s.s1)!, (yToTheK! + s.s2)!);
 
-  print('r.s1: ${r.s1}');
-  print('r.s2: ${r.s2}');
+  if (common.Debug) {
+    print('r.s1: ${r.s1}');
+    print('r.s2: ${r.s2}');
+  }
 
   // Create R_ entries for the cc'd
   for (var i = 0; i < ccPubK.length; i++) {
@@ -263,17 +276,19 @@ VShareBindDataInternal newVShareBindData(
     f_[i] = yOverYToTheJ_!;
   }
 
-  for (var i = 0; i < ccPubK.length; i++) {
-    print('r_[i].s1: ${r_[i].s1}');
-    print('r_[i].s2: ${r_[i].s2}');
-  }
+  if (common.Debug) {
+    for (var i = 0; i < ccPubK.length; i++) {
+      print('r_[i].s1: ${r_[i].s1}');
+      print('r_[i].s2: ${r_[i].s2}');
+    }
 
-  for (var i = 0; i < ccPubK.length; i++) {
-    print('f_[i]: ${f_[i]}');
-  }
+    for (var i = 0; i < ccPubK.length; i++) {
+      print('f_[i]: ${f_[i]}');
+    }
 
-  for (var i = 0; i < ccPubK.length; i++) {
-    print('cc_[i]: ${cc_[i]}');
+    for (var i = 0; i < ccPubK.length; i++) {
+      print('cc_[i]: ${cc_[i]}');
+    }
   }
 
   // Create the concatenated byte array
@@ -296,17 +311,22 @@ VShareBindDataInternal newVShareBindData(
   // Create w by hashing the concatenated byte array
   final hasher = SHA256Digest();
   final wBytes = hasher.process(sBytes);
-  print('wBytes: ${hex.encode(wBytes)}');
+  if (common.Debug) {
+    print('wBytes: ${hex.encode(wBytes)}');
+  }
   final w = BigInt.parse(hex.encode(wBytes), radix: 16);
-  print('w: $w');
+  if (common.Debug) {
+    print('w: $w');
+  }
 
   // Create z = w * k + j (mod q)
   final z = (w * BigInt.parse(hex.encode(k), radix: 16) +
           BigInt.parse(hex.encode(j), radix: 16)) %
       ecPedersen!.n;
 
-  print('z: $z');
-
+  if (common.Debug) {
+    print('z: $z');
+  }
   // Create the VShareBindDataInternal object
   final ret = VShareBindDataInternal(w, z, c, y, cc_, r, r_);
 
@@ -337,17 +357,23 @@ bool vShareBVerify(VShareBindDataInternal data, Uint8List encrypted) {
     f_[i] = (yOverYToTheZ - rOverRMToTheW)!;
 
     // print F
-    print("S1 F_[$i] ${f_[i]}");
+    if (common.Debug) {
+      print("S1 F_[$i] ${f_[i]}");
+    }
 
     // double-check the other F
     rOverR = (data.r_[i].s2 - data.r.s2)!;
     rOverRMToTheW = safeMultECPointBigInt(rOverR, data.w)!;
     ECPoint otherF = (yOverYToTheZ - rOverRMToTheW)!;
 
-    print("S2 F_[$i] $otherF");
+    if (common.Debug) {
+      print("S2 F_[$i] $otherF");
+    }
 
     if (f_[i] != otherF) {
-      print("F_[$i] != OtherF");
+      if (common.Debug) {
+        print("F_[$i] != OtherF");
+      }
       return false;
     }
   }
@@ -375,8 +401,10 @@ bool vShareBVerify(VShareBindDataInternal data, Uint8List encrypted) {
   BigInt wPrime = BigInt.parse(hex.encode(wBytes), radix: 16);
   wPrime = wPrime % ecPedersen!.n;
 
-  print('wPrime: $wPrime');
-  print('data.w: ${data.w}');
+  if (common.Debug) {
+    print('wPrime: $wPrime');
+    print('data.w: ${data.w}');
+  }
 
   return wPrime == data.w;
 }

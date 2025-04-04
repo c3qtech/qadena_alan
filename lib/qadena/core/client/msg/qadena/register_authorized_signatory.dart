@@ -11,7 +11,7 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/proto/qadena/dsvs/export.dart' as dsvs;
-import 'package:qadena_alan/qadena/common.dart' as c;
+import 'package:qadena_alan/qadena/common.dart' as common;
 
 class MsgRegisterAuthorizedSignatoryArgs {
   final Chain chain;
@@ -42,7 +42,7 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
 
   // EncryptableAuthorizedSignatory
   final authorizedSignatory = EncryptableAuthorizedSignatory()
-    ..nonce = c.nonce()
+    ..nonce = common.nonce()
     ..walletID = ephWalletID;
 
   List<String> srcServiceProviderID = [];
@@ -58,7 +58,9 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
       ));
       srcServiceProviderID = srcWallet.wallet.serviceProviderID;
     } catch (e) {
-      print("wallet not found $args");
+      if (common.Debug) {
+        print("wallet not found $args");
+      }
       return [];
     }
   }
@@ -73,9 +75,11 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
   vshare.VShareBindData bind =
       vshare.VShareBindData.fromEmpty();
   final encryptedDocument = protoMarshalAndVShareBEncrypt(ccPubK, authorizedSignatory, bind);
-  print("encryptedDocument: $encryptedDocument");
+  if (common.Debug) {
+    print("encryptedDocument: $encryptedDocument");
+  }
 
-    if (!vShareBVerifyAll(bind, encryptedDocument!)) {
+  if (!vShareBVerifyAll(bind, encryptedDocument!)) {
     throw Exception("Failed to verify bind");
   }
 

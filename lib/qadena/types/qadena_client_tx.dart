@@ -8,6 +8,7 @@ import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/cosmos/base/v1beta1/coin.pb.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena.dart';
+import 'package:qadena_alan/qadena/common.dart' as c;
 
 // HELPER CLASSES FOR TALKING TO THE BROADCASTING TO QADENA
 
@@ -107,18 +108,24 @@ class QadenaClientTx {
         tx = await signer.createAndSign(signingWallet, msgs,
           accountSequence: oldSequence, simulate: true, fee: fee);
         final simulateResponse = await txSender.simulate(tx);
-        print("simulateResponse: $simulateResponse");
+        if (c.Debug) {
+          print("simulateResponse: $simulateResponse");
+        }
         if (simulateResponse.hasGasInfo()) {
           gas = simulateResponse.gasInfo.gasUsed;
           success = true;
         }
       } on GrpcError catch (e) {
-        print("simulate error: $e");
+        if (c.Debug) {
+          print("simulate error: $e");
+        }
         // get code and message from e
         final code = e.code;
         final codeName = e.codeName;
         final message = e.message;
-        print("simulate error: $e, code: $code, codeName: $codeName, MESSAGE: $message");
+        if (c.Debug) {
+          print("simulate error: $e, code: $code, codeName: $codeName, MESSAGE: $message");
+        }
         if (code == 2 && message!.contains("sequence mismatch")) {
           // sequence not found, retry
           success = false;
@@ -133,10 +140,14 @@ class QadenaClientTx {
           if (match != null) {
             final message = match.group(1); // 'Signatory already exists'
 
-            print('Message: $message');
+            if (c.Debug) {
+              print('Message: $message');
+            }
             simulateErrorMessage = message;
           } else {
-            print('Could not parse raw_log.');
+            if (c.Debug) {
+              print('Could not parse raw_log.');
+            }
             simulateErrorMessage = codeName;
           }
         }
@@ -146,7 +157,9 @@ class QadenaClientTx {
         // calculate gas
         double gasDouble = gas.toDouble() * gasMultiplier;
         gas = gasDouble.toInt().toInt64();
-        print("gas (adjusted) $gas");
+        if (c.Debug) {
+          print("gas (adjusted) $gas");
+        }
 
         var fee = Fee();
         fee.gasLimit = gas;
@@ -180,7 +193,9 @@ class QadenaClientTx {
         if (newBackoff && !backoff) {
           maxTries = 0;
           backoff = true;
-          print("backing off");
+          if (c.Debug) {
+            print("backing off");
+          }
           timeouts = backoffTimeouts;
         } else {
           maxTries++;
@@ -201,7 +216,9 @@ class QadenaClientTx {
     // note: we get here even if the sequence number did not increase, but the chain may just be delayed in updating the sequence number
     return null;
     } on GrpcError catch (e) {
-      print("broadcastTx grpc error: $e");
+      if (c.Debug) {
+        print("broadcastTx grpc error: $e");
+      }
       return e.codeName;
     } catch (e) {
       print("broadcastTx error: $e");
@@ -249,8 +266,10 @@ class QadenaClientTx {
         if (output.isSuccessful) {
           return null;
         } else {
-          print(
-              "Transaction failed: txhash, Code: ${output.code}, Log: ${output.rawLog}");
+          if (c.Debug) {
+            print(
+                "Transaction failed: txhash, Code: ${output.code}, Log: ${output.rawLog}");
+          }
 
           final rawLog = output.rawLog;
           final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
@@ -261,24 +280,36 @@ class QadenaClientTx {
             final code = int.parse(match.group(2)!); // 1145
             final message = match.group(3); // 'Signatory already exists'
 
-            print('Codespace: $codespace');
-            print('Code: $code');
-            print('Message: $message');
+            if (c.Debug) {
+              print('Codespace: $codespace');
+              print('Code: $code');
+              print('Message: $message');
+            }
             return message;
           } else {
-            print('Could not parse raw_log.');
+            if (c.Debug) {
+              print('Could not parse raw_log.');
+            }
             return output.rawLog;
           }
         }
       } catch (e) {
-        print("exception: $e");
+        if (c.Debug) {
+          print("exception: $e");
+        }
         if (tryCount == 1) {
-          print("Error querying transaction: $e");
+          if (c.Debug) {
+            print("Error querying transaction: $e");
+          }
           return e.toString();
         } else {
-          print("sleep start");
+          if (c.Debug) {
+            print("sleep start");
+          }
           await Future.delayed(Duration(milliseconds: 750));
-          print("sleep end");
+          if (c.Debug) {
+            print("sleep end");
+          }
         }
       }
     }
@@ -287,12 +318,16 @@ class QadenaClientTx {
 
 // returns true if the sequence changed by more than 1 (meaning there many simultaneous transactions from this wallet), false otherwise; also returns true if we didn't detect a change
 static Future<bool> waitForSequenceChange(
-      alan.Wallet wallet, Int64 oldSequence) async {
-    print("Waiting for sequence change from $oldSequence");
+    alan.Wallet wallet, Int64 oldSequence) async {
+    if (c.Debug) {
+      print("Waiting for sequence change from $oldSequence");
+    }
     for (int i = 0; i < 15; i++) {
       final newSequence = await getSequenceNumber(wallet);
       if (newSequence > oldSequence) {
-        print("Sequence number increased from $oldSequence to $newSequence");
+        if (c.Debug) {
+          print("Sequence number increased from $oldSequence to $newSequence");
+        }
         if (newSequence > oldSequence + 1) {
           return true;
         } else {
