@@ -12,6 +12,7 @@ import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/dsvs/query.pb.dart';
 import 'package:qadena_alan/qadena.dart';
+import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/sign_document.dart';
@@ -25,7 +26,6 @@ import 'package:qadena_alan/proto/qadena/qadena/export.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
-
 
 class WalletResponse {
   final String address;
@@ -200,9 +200,9 @@ class QadenaHDWallet {
 
   Future<String> getAuthorizedSignatory() async {
     try {
-      final signatories =await chain.dsvsQuery.queryClient.authorizedSignatory(QueryGetAuthorizedSignatoryRequest(
-        walletID: transactionWallet.address
-      ));
+      final signatories = await chain.dsvsQuery.queryClient.authorizedSignatory(
+          QueryGetAuthorizedSignatoryRequest(
+              walletID: transactionWallet.address));
       if (common.Debug) {
         print("signatories: $signatories");
       }
@@ -222,8 +222,8 @@ class QadenaHDWallet {
           credentialWallet.privkeyHex,
           credentialWallet.pubkeyB64,
           unprotoAuthorizedSignatoryVShareBind,
-      Uint8List.fromList(lastSignatory.encAuthorizedSignatoryVShare), 
-      authorizedSignatory);
+          Uint8List.fromList(lastSignatory.encAuthorizedSignatoryVShare),
+          authorizedSignatory);
 
       if (common.Debug) {
         print('signatory: $authorizedSignatory');
@@ -238,7 +238,8 @@ class QadenaHDWallet {
     }
   }
 
-  Future<String?> registerWallet(String pioneerID, String serviceProviderID) async {
+  Future<String?> registerWallet(
+      String pioneerID, String serviceProviderID) async {
     final isEphemeral = ephIndex > 0;
     dynamic acceptCredentialTypes;
     dynamic requireSenderCredentialTypes;
@@ -264,24 +265,25 @@ class QadenaHDWallet {
 
     try {
       final msgs = await msgCreateWallet(MsgCreateWalletArgs(
-        chain: chain,
-        cxwallet: credentialWallet,
-        homePioneerID: pioneerID,
-        txwallet: transactionWallet,
-        acceptCredentialTypes: acceptCredentialTypes,
-        acceptPassword: null,
-        isEphemeral: isEphemeral,
-        requireSenderCredentialTypes: requireSenderCredentialTypes,
-        incentives: () async => await getIncentives(chain),
-        serviceProviderID: serviceProviderID,
-        mainWallet: realWalletTransaction,
-      ));
+          chain: chain,
+          cxwallet: credentialWallet,
+          homePioneerID: pioneerID,
+          txwallet: transactionWallet,
+          acceptCredentialTypes: acceptCredentialTypes,
+          acceptPassword: null,
+          isEphemeral: isEphemeral,
+          requireSenderCredentialTypes: requireSenderCredentialTypes,
+          incentives: () async => await getIncentives(chain),
+          serviceProviderID: serviceProviderID,
+          mainWallet: realWalletTransaction,
+          mainWalletQadenaWalletAmount: WalletAmountRef(null)));
 
       if (common.Debug) {
         print('msgs: $msgs');
       }
 
-      final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: sponsorWallet.address);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs,
+          feeGranter: sponsorWallet.address);
 
       if (response == null) {
         if (common.Debug) {
@@ -332,10 +334,7 @@ class QadenaHDWallet {
       }
       return "UNKNOWN";
     }
-
   }
-
-  
 
   Future<String?> registerAuthorizedSignatory() async {
     final isEphemeral = ephIndex > 0;
@@ -367,15 +366,16 @@ class QadenaHDWallet {
     }
 
     try {
-      final msgs =
-          await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+      final msgs = await msgRegisterAuthorizedSignatory(
+          MsgRegisterAuthorizedSignatoryArgs(
         chain: chain,
         txwallet: transactionWallet,
         realWalletTransaction: realWalletTransaction,
         realWalletCredential: realWalletCredential,
       ));
 
-      final response = await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
+      final response =
+          await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
 
       if (response == null) {
         if (common.Debug) {
@@ -516,7 +516,8 @@ class QadenaHDWallet {
     }
   }
 
-  Future<String?> claimCredentials(BigInt claimAmount, BigInt claimBlindingFactor,
+  Future<String?> claimCredentials(
+      BigInt claimAmount, BigInt claimBlindingFactor,
       {bool recoverKey = false}) async {
     final isEphemeral = ephIndex > 0;
 
