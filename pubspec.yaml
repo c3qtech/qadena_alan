@@ -6,7 +6,7 @@ environment:
   sdk: ^3.4.3
 
 dependencies:
-  analyzer: ^5.13.0
+  analyzer: ">=5.13.0 <8.0.0"
   asn1lib: ^1.5.6
   bech32: ^0.2.2
   bip39: ^1.0.6
