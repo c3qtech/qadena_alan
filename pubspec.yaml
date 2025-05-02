@@ -13,7 +13,10 @@ dependencies:
     git:
       url: https://github.com/c3qtech/bip39.git
       ref: master
-  bip32: ^2.0.0
+  bip32:
+    git:
+      url: https://github.com/c3qtech/bip32-dart.git
+      ref: master
   convert: ^3.1.2
   equatable: ^2.0.5
   fixnum: ^1.1.1
