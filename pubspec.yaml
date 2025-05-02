@@ -12,7 +12,7 @@ dependencies:
   bip39:
     git:
       url: https://github.com/c3qtech/bip39.git
-      ref: main
+      ref: master
   bip32: ^2.0.0
   convert: ^3.1.2
   equatable: ^2.0.5
