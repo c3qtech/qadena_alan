@@ -30,7 +30,7 @@ dependencies:
   tuple: ^2.0.0  # Check for the latest version on pub.dev
   eciesdart:
     git:
-      url: https://github.com/ecies/dart.git
+      url: https://github.com/c3qtech/eciesdart.git
       ref: main
 
 dev_dependencies:
