@@ -9,7 +9,10 @@ dependencies:
   analyzer: ^5.13.0
   asn1lib: ^1.5.6
   bech32: ^0.2.2
-  bip39: ^1.0.6
+  bip39:
+    git:
+      url: https://github.com/c3qtech/bip39.git
+      ref: main
   bip32: ^2.0.0
   convert: ^3.1.2
   equatable: ^2.0.5
