@@ -1,6 +1,6 @@
 name: qadena_alan
 description: Dart library to easily integrate with Qadena.
-version: 0.99.1
+version: 0.99.2
 homepage: https://github.com/alan-sdk/alan.dart
 environment:
   sdk: ^3.4.3
