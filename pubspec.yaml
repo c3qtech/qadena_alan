@@ -24,7 +24,7 @@ dependencies:
   protobuf: ^3.1.0
   blockchain_utils: ^3.4.0
   dart_pdf_reader: ^2.1.0
-  web3dart: ^2.7.3
+  web3dart: ^3.0.0
   elliptic: ^0.3.11
   decimal: ^3.1.0
   tuple: ^2.0.0  # Check for the latest version on pub.dev
