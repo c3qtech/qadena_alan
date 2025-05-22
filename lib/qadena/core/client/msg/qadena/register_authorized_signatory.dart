@@ -12,6 +12,7 @@ import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/proto/qadena/dsvs/export.dart' as dsvs;
 import 'package:qadena_alan/qadena/common.dart' as common;
+import 'package:grpc/grpc.dart';
 
 class MsgRegisterAuthorizedSignatoryArgs {
   final Chain chain;
@@ -53,9 +54,10 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
     QueryGetWalletResponse? srcWallet;
     final realWalletAddress = args.realWalletTransaction!.address;
     try {
-      srcWallet = await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-        walletID: realWalletAddress
-      ));
+      srcWallet = await args.chain.qadenaQuery.queryClient.wallet(
+        QueryGetWalletRequest(walletID: realWalletAddress),
+        options: CallOptions(timeout: Duration(seconds: 4)),
+      );
       srcServiceProviderID = srcWallet.wallet.serviceProviderID;
     } catch (e) {
       if (common.Debug) {

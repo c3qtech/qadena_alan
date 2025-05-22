@@ -185,14 +185,24 @@ class QadenaHDWallet {
   Future<bool> walletExists() async {
     try {
       final wallet = await chain.qadenaQuery.queryClient
-          .wallet(QueryGetWalletRequest(walletID: transactionWallet.address));
+          .wallet(
+            QueryGetWalletRequest(walletID: transactionWallet.address),
+            options: CallOptions(timeout: Duration(seconds: 4)),
+          );
       if (common.Debug) {
         print("wallet already exists: $wallet");
       }
       return true;
     } catch (e) {
-      if (common.Debug) {
-        print("wallet not found");
+      // if wallet not found, return false
+      if (e is GrpcError) {
+        if (e.code == StatusCode.notFound) {
+          if (common.Debug) {
+            print("wallet not found");
+          }
+          return false;
+        }
+        rethrow;
       }
       return false;
     }

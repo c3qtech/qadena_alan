@@ -11,6 +11,7 @@ import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
+import 'package:grpc/grpc.dart';
 
 class StringHolder {
   String value;
@@ -271,9 +272,10 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
 
   if (args.mainWalletQadenaWalletAmount == null && args.mainWalletServiceProviderID == null) {
     final srcWallet =
-        await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-      walletID: srcWalletID
-    ));
+        await args.chain.qadenaQuery.queryClient.wallet(
+      QueryGetWalletRequest(walletID: srcWalletID),
+      options: CallOptions(timeout: Duration(seconds: 4)),
+    );
 
     mainWalletQadenaWalletAmount!.value = srcWallet.wallet.walletAmount[QadenaTokenDenom];
     srcServiceProviderID = args.mainWalletServiceProviderID!;

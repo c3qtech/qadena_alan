@@ -12,6 +12,7 @@ import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/qadena/common.dart' as common;
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
+import 'package:grpc/grpc.dart';
 
 
 class MsgCreateWalletArgs {
@@ -113,9 +114,10 @@ Future<List<GeneratedMessage>> msgCreateWallet(
 
     if (mainWalletQadenaWalletAmount == null || mainWalletQadenaWalletAmount.value == null) {
       final linkToWallet =
-        await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-          walletID: args.mainWallet!.address
-        ));
+        await args.chain.qadenaQuery.queryClient.wallet(
+          QueryGetWalletRequest(walletID: args.mainWallet!.address),
+          options: CallOptions(timeout: Duration(seconds: 4)),
+        );
 
       if (linkToWallet.wallet.walletAmount.containsKey(QadenaTokenDenom)) {
         mainWalletQadenaWalletAmount!.value = linkToWallet.wallet.walletAmount[QadenaTokenDenom];

@@ -11,6 +11,7 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/qadena/vshare.dart' as vshare;
 import 'package:qadena_alan/qadena/common.dart' as common;
+import 'package:grpc/grpc.dart';
 
 class MsgCreateWalletArgs {
   final Chain chain;
@@ -109,9 +110,10 @@ Future<List<GeneratedMessage>> msgCreateAccount(
 
     // WE NEED TO PROVE THAT THE ONE WHO CREATED THE EPH WALLET HAS A KEY TO THE REAL WALLET!
     final linkToWallet =
-        await args.chain.qadenaQuery.queryClient.wallet(QueryGetWalletRequest(
-      walletID: args.realWallet!.address
-    ));
+        await args.chain.qadenaQuery.queryClient.wallet(
+      QueryGetWalletRequest(walletID: args.realWallet!.address),
+      options: CallOptions(timeout: Duration(seconds: 4)),
+    );
 
     serviceProviderIDs = linkToWallet.wallet.serviceProviderID;
 
