@@ -271,6 +271,8 @@ class QadenaClientTx {
                 "Transaction failed: txhash, Code: ${output.code}, Log: ${output.rawLog}");
           }
 
+          // trying first format of error messages
+
           final rawLog = output.rawLog;
           final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
           final match = regExp.firstMatch(rawLog);
@@ -287,10 +289,23 @@ class QadenaClientTx {
             }
             return message;
           } else {
-            if (c.Debug) {
-              print('Could not parse raw_log.');
+            // trying second format of error messages
+            final regExp = RegExp(r'message index: \d+: (.+?) \[');
+            final match = regExp.firstMatch(rawLog);
+
+            if (match != null) {
+              final message = match.group(1); // 'Signatory already exists'
+
+              if (c.Debug) {
+                print('Message: $message');
+              }
+              return message;            
+            } else {
+              if (c.Debug) {
+                print('Could not parse raw_log.');
+              }
+              return output.rawLog;
             }
-            return output.rawLog;
           }
         }
       } catch (e) {
