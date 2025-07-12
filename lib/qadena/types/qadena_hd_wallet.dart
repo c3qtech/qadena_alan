@@ -208,7 +208,7 @@ class QadenaHDWallet {
     }
   }
 
-  Future<String> getAuthorizedSignatory() async {
+  Future<List<String>> getAuthorizedSignatory() async {
     try {
       final signatories = await chain.dsvsQuery.queryClient.authorizedSignatory(
           QueryGetAuthorizedSignatoryRequest(
@@ -217,7 +217,7 @@ class QadenaHDWallet {
         print("signatories: $signatories");
       }
       if (signatories.authorizedSignatory.signatory.isEmpty) {
-        return "";
+        return [];
       }
       // decrypt the last one
 
@@ -244,7 +244,7 @@ class QadenaHDWallet {
       if (common.Debug) {
         print("signatories not found");
       }
-      return "";
+      return [];
     }
   }
 

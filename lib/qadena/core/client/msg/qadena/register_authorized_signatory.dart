@@ -44,7 +44,7 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
   // EncryptableAuthorizedSignatory
   final authorizedSignatory = EncryptableAuthorizedSignatory()
     ..nonce = common.nonce()
-    ..walletID = ephWalletID;
+    ..walletID.add(ephWalletID);
 
   List<String> srcServiceProviderID = [];
 
