@@ -37,6 +37,10 @@ class MsgClient extends $grpc.Client {
       '/qadena.dsvs.Msg/RegisterAuthorizedSignatory',
       ($0.MsgRegisterAuthorizedSignatory value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgRegisterAuthorizedSignatoryResponse.fromBuffer(value));
+  static final _$removeDocument = $grpc.ClientMethod<$0.MsgRemoveDocument, $0.MsgRemoveDocumentResponse>(
+      '/qadena.dsvs.Msg/RemoveDocument',
+      ($0.MsgRemoveDocument value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgRemoveDocumentResponse.fromBuffer(value));
 
   MsgClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -58,6 +62,10 @@ class MsgClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.MsgRegisterAuthorizedSignatoryResponse> registerAuthorizedSignatory($0.MsgRegisterAuthorizedSignatory request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$registerAuthorizedSignatory, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgRemoveDocumentResponse> removeDocument($0.MsgRemoveDocument request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$removeDocument, request, options: options);
   }
 }
 
@@ -94,6 +102,13 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgRegisterAuthorizedSignatory.fromBuffer(value),
         ($0.MsgRegisterAuthorizedSignatoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgRemoveDocument, $0.MsgRemoveDocumentResponse>(
+        'RemoveDocument',
+        removeDocument_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgRemoveDocument.fromBuffer(value),
+        ($0.MsgRemoveDocumentResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.MsgUpdateParamsResponse> updateParams_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateParams> request) async {
@@ -112,8 +127,13 @@ abstract class MsgServiceBase extends $grpc.Service {
     return registerAuthorizedSignatory(call, await request);
   }
 
+  $async.Future<$0.MsgRemoveDocumentResponse> removeDocument_Pre($grpc.ServiceCall call, $async.Future<$0.MsgRemoveDocument> request) async {
+    return removeDocument(call, await request);
+  }
+
   $async.Future<$0.MsgUpdateParamsResponse> updateParams($grpc.ServiceCall call, $0.MsgUpdateParams request);
   $async.Future<$0.MsgCreateDocumentResponse> createDocument($grpc.ServiceCall call, $0.MsgCreateDocument request);
   $async.Future<$0.MsgSignDocumentResponse> signDocument($grpc.ServiceCall call, $0.MsgSignDocument request);
   $async.Future<$0.MsgRegisterAuthorizedSignatoryResponse> registerAuthorizedSignatory($grpc.ServiceCall call, $0.MsgRegisterAuthorizedSignatory request);
+  $async.Future<$0.MsgRemoveDocumentResponse> removeDocument($grpc.ServiceCall call, $0.MsgRemoveDocument request);
 }

@@ -13,15 +13,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../cosmos/base/v1beta1/coin.pb.dart' as $14;
+import '../../cosmos/base/v1beta1/coin.pb.dart' as $15;
 
 /// Params defines the parameters for the module.
 class Params extends $pb.GeneratedMessage {
   factory Params({
-    $14.Coin? createWalletIncentive,
-    $14.Coin? createEphemeralWalletIncentive,
-    $14.Coin? createWalletTransparentIncentive,
-    $14.Coin? createEphemeralWalletTransparentIncentive,
+    $15.Coin? createWalletIncentive,
+    $15.Coin? createEphemeralWalletIncentive,
+    $15.Coin? createWalletTransparentIncentive,
+    $15.Coin? createEphemeralWalletTransparentIncentive,
     $core.String? createCredentialFee,
     $core.String? ekycSubmitNewAppRoyaltyPercentage,
     $core.String? ekycSubmitReuseAppRoyaltyPercentage,
@@ -59,10 +59,10 @@ class Params extends $pb.GeneratedMessage {
   factory Params.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Params', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$14.Coin>(1, _omitFieldNames ? '' : 'createWalletIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(2, _omitFieldNames ? '' : 'createEphemeralWalletIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(3, _omitFieldNames ? '' : 'createWalletTransparentIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(4, _omitFieldNames ? '' : 'createEphemeralWalletTransparentIncentive', subBuilder: $14.Coin.create)
+    ..aOM<$15.Coin>(1, _omitFieldNames ? '' : 'createWalletIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(2, _omitFieldNames ? '' : 'createEphemeralWalletIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(3, _omitFieldNames ? '' : 'createWalletTransparentIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(4, _omitFieldNames ? '' : 'createEphemeralWalletTransparentIncentive', subBuilder: $15.Coin.create)
     ..aOS(5, _omitFieldNames ? '' : 'createCredentialFee')
     ..aOS(6, _omitFieldNames ? '' : 'ekycSubmitNewAppRoyaltyPercentage')
     ..aOS(7, _omitFieldNames ? '' : 'ekycSubmitReuseAppRoyaltyPercentage')
@@ -92,48 +92,48 @@ class Params extends $pb.GeneratedMessage {
   static Params? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $14.Coin get createWalletIncentive => $_getN(0);
+  $15.Coin get createWalletIncentive => $_getN(0);
   @$pb.TagNumber(1)
-  set createWalletIncentive($14.Coin v) { setField(1, v); }
+  set createWalletIncentive($15.Coin v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreateWalletIncentive() => $_has(0);
   @$pb.TagNumber(1)
   void clearCreateWalletIncentive() => clearField(1);
   @$pb.TagNumber(1)
-  $14.Coin ensureCreateWalletIncentive() => $_ensure(0);
+  $15.Coin ensureCreateWalletIncentive() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $14.Coin get createEphemeralWalletIncentive => $_getN(1);
+  $15.Coin get createEphemeralWalletIncentive => $_getN(1);
   @$pb.TagNumber(2)
-  set createEphemeralWalletIncentive($14.Coin v) { setField(2, v); }
+  set createEphemeralWalletIncentive($15.Coin v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreateEphemeralWalletIncentive() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreateEphemeralWalletIncentive() => clearField(2);
   @$pb.TagNumber(2)
-  $14.Coin ensureCreateEphemeralWalletIncentive() => $_ensure(1);
+  $15.Coin ensureCreateEphemeralWalletIncentive() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $14.Coin get createWalletTransparentIncentive => $_getN(2);
+  $15.Coin get createWalletTransparentIncentive => $_getN(2);
   @$pb.TagNumber(3)
-  set createWalletTransparentIncentive($14.Coin v) { setField(3, v); }
+  set createWalletTransparentIncentive($15.Coin v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCreateWalletTransparentIncentive() => $_has(2);
   @$pb.TagNumber(3)
   void clearCreateWalletTransparentIncentive() => clearField(3);
   @$pb.TagNumber(3)
-  $14.Coin ensureCreateWalletTransparentIncentive() => $_ensure(2);
+  $15.Coin ensureCreateWalletTransparentIncentive() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $14.Coin get createEphemeralWalletTransparentIncentive => $_getN(3);
+  $15.Coin get createEphemeralWalletTransparentIncentive => $_getN(3);
   @$pb.TagNumber(4)
-  set createEphemeralWalletTransparentIncentive($14.Coin v) { setField(4, v); }
+  set createEphemeralWalletTransparentIncentive($15.Coin v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreateEphemeralWalletTransparentIncentive() => $_has(3);
   @$pb.TagNumber(4)
   void clearCreateEphemeralWalletTransparentIncentive() => clearField(4);
   @$pb.TagNumber(4)
-  $14.Coin ensureCreateEphemeralWalletTransparentIncentive() => $_ensure(3);
+  $15.Coin ensureCreateEphemeralWalletTransparentIncentive() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get createCredentialFee => $_getSZ(4);

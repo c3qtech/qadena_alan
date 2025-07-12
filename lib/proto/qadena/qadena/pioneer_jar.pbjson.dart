@@ -19,11 +19,12 @@ const PioneerJar$json = {
   '2': [
     {'1': 'pioneerID', '3': 1, '4': 1, '5': 9, '10': 'pioneerID'},
     {'1': 'jarID', '3': 2, '4': 1, '5': 9, '10': 'jarID'},
+    {'1': 'remoteReport', '3': 3, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
 };
 
 /// Descriptor for `PioneerJar`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pioneerJarDescriptor = $convert.base64Decode(
     'CgpQaW9uZWVySmFyEhwKCXBpb25lZXJJRBgBIAEoCVIJcGlvbmVlcklEEhQKBWphcklEGAIgAS'
-    'gJUgVqYXJJRA==');
+    'gJUgVqYXJJRBIiCgxyZW1vdGVSZXBvcnQYAyABKAxSDHJlbW90ZVJlcG9ydA==');
 

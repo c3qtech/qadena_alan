@@ -14,7 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $15;
+import '../../google/protobuf/timestamp.pb.dart' as $16;
 
 class SuspiciousTransaction extends $pb.GeneratedMessage {
   factory SuspiciousTransaction({
@@ -22,7 +22,7 @@ class SuspiciousTransaction extends $pb.GeneratedMessage {
     $core.String? jarID,
     $core.String? regulatorPubKID,
     $core.String? reason,
-    $15.Timestamp? time,
+    $16.Timestamp? time,
     $core.List<$core.int>? encSourcePersonalInfoRegulatorPubK,
     $core.List<$core.int>? encDestinationPersonalInfoRegulatorPubK,
     $core.List<$core.int>? encEAmountRegulatorPubK,
@@ -71,7 +71,7 @@ class SuspiciousTransaction extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
     ..aOS(3, _omitFieldNames ? '' : 'regulatorPubKID', protoName: 'regulatorPubKID')
     ..aOS(4, _omitFieldNames ? '' : 'reason')
-    ..aOM<$15.Timestamp>(5, _omitFieldNames ? '' : 'time', subBuilder: $15.Timestamp.create)
+    ..aOM<$16.Timestamp>(5, _omitFieldNames ? '' : 'time', subBuilder: $16.Timestamp.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encSourcePersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encSourcePersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encDestinationPersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encDestinationPersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'encEAmountRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encEAmountRegulatorPubK')
@@ -138,15 +138,15 @@ class SuspiciousTransaction extends $pb.GeneratedMessage {
   void clearReason() => clearField(4);
 
   @$pb.TagNumber(5)
-  $15.Timestamp get time => $_getN(4);
+  $16.Timestamp get time => $_getN(4);
   @$pb.TagNumber(5)
-  set time($15.Timestamp v) { setField(5, v); }
+  set time($16.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasTime() => $_has(4);
   @$pb.TagNumber(5)
   void clearTime() => clearField(5);
   @$pb.TagNumber(5)
-  $15.Timestamp ensureTime() => $_ensure(4);
+  $16.Timestamp ensureTime() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.int> get encSourcePersonalInfoRegulatorPubK => $_getN(5);

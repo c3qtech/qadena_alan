@@ -490,6 +490,102 @@ class MsgRegisterAuthorizedSignatoryResponse extends $pb.GeneratedMessage {
   static MsgRegisterAuthorizedSignatoryResponse? _defaultInstance;
 }
 
+class MsgRemoveDocument extends $pb.GeneratedMessage {
+  factory MsgRemoveDocument({
+    $core.String? creator,
+    $core.String? documentID,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (documentID != null) {
+      $result.documentID = documentID;
+    }
+    return $result;
+  }
+  MsgRemoveDocument._() : super();
+  factory MsgRemoveDocument.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveDocument.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveDocument', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.dsvs'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..aOS(2, _omitFieldNames ? '' : 'documentID', protoName: 'documentID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveDocument clone() => MsgRemoveDocument()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveDocument copyWith(void Function(MsgRemoveDocument) updates) => super.copyWith((message) => updates(message as MsgRemoveDocument)) as MsgRemoveDocument;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveDocument create() => MsgRemoveDocument._();
+  MsgRemoveDocument createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveDocument> createRepeated() => $pb.PbList<MsgRemoveDocument>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveDocument getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveDocument>(create);
+  static MsgRemoveDocument? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get documentID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set documentID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDocumentID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDocumentID() => clearField(2);
+}
+
+class MsgRemoveDocumentResponse extends $pb.GeneratedMessage {
+  factory MsgRemoveDocumentResponse() => create();
+  MsgRemoveDocumentResponse._() : super();
+  factory MsgRemoveDocumentResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveDocumentResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveDocumentResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.dsvs'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveDocumentResponse clone() => MsgRemoveDocumentResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveDocumentResponse copyWith(void Function(MsgRemoveDocumentResponse) updates) => super.copyWith((message) => updates(message as MsgRemoveDocumentResponse)) as MsgRemoveDocumentResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveDocumentResponse create() => MsgRemoveDocumentResponse._();
+  MsgRemoveDocumentResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveDocumentResponse> createRepeated() => $pb.PbList<MsgRemoveDocumentResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveDocumentResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveDocumentResponse>(create);
+  static MsgRemoveDocumentResponse? _defaultInstance;
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -28,8 +28,9 @@ import "qadena/qadena/protect_key.proto";
 import "qadena/qadena/recover_key.proto";
 import "qadena/qadena/v_share_bind_data.proto";
 import "qadena/qadena/pioneer_jar.proto";
+import "qadena/qadena/enclave_identity.proto";
 
-option go_package = "qadena/x/qadena/types";
+option go_package = "github.com/c3qtech/qadena_v3/x/qadena/types";
 
 import "google/protobuf/timestamp.proto";
 import "gogoproto/gogo.proto";
@@ -53,9 +54,10 @@ message HelloReply {
 
 service QadenaEnclave {
   // these are called from init_enclave
-  rpc InitEnclave (Enclave) returns (InitEnclaveReply) {}
+  rpc InitEnclave (MsgInitEnclave) returns (InitEnclaveReply) {}
   rpc SyncEnclave (MsgSyncEnclave) returns (SyncEnclaveReply) {}
-  rpc AddAsValidator (MsgAddAsValidator) returns (AddAsValidatorReply) {}
+  //rpc AddAsValidator (MsgAddAsValidator) returns (AddAsValidatorReply) {}
+  rpc UpgradeEnclave (MsgUpgradeEnclave) returns (UpgradeEnclaveReply) {}
 
   // for debug only, called from init_enclave
   rpc ExportPrivateKey (MsgExportPrivateKey) returns (ExportPrivateKeyReply) {}
@@ -63,21 +65,30 @@ service QadenaEnclave {
   rpc RemovePrivateKey (MsgRemovePrivateKey) returns (RemovePrivateKeyReply) {}
   rpc UpdateSSIntervalKey (MsgUpdateSSIntervalKey) returns (UpdateSSIntervalKeyReply) {}
 
-  // these are called from the chain
-  rpc QuerySyncEnclave (QuerySyncEnclaveRequest) returns (QuerySyncEnclaveResponse) {}
-  rpc QuerySecretShare (QueryEnclaveSecretShareRequest) returns (QueryEnclaveSecretShareResponse) {}
-  rpc QueryRecoverKeyShare (QueryEnclaveRecoverKeyShareRequest) returns (QueryEnclaveRecoverKeyShareResponse) {}
-  
+  // these are called from the chain by an enclave
+  rpc QueryEnclaveSyncEnclave (QueryEnclaveSyncEnclaveRequest) returns (QueryEnclaveSyncEnclaveResponse) {}
+  rpc QueryEnclaveSecretShare (QueryEnclaveSecretShareRequest) returns (QueryEnclaveSecretShareResponse) {}
+  rpc QueryEnclaveRecoverKeyShare (QueryEnclaveRecoverKeyShareRequest) returns (QueryEnclaveRecoverKeyShareResponse) {}
+  rpc QueryEnclaveValidateEnclaveIdentity (QueryEnclaveValidateEnclaveIdentityRequest) returns (QueryEnclaveValidateEnclaveIdentityResponse) {}
+
+  rpc SetEnclaveIdentity (EnclaveIdentity) returns (SetEnclaveIdentityReply) {}
+
+  rpc UpdateEnclaveIdentity (PioneerUpdateEnclaveIdentity) returns (UpdateEnclaveIdentityReply) {}
+
+
   rpc SetWallet (Wallet) returns (SetWalletReply) {}
   rpc SetProtectKey (ProtectKey) returns (SetProtectKeyReply) {}
   rpc SetRecoverKey (RecoverKey) returns (SetRecoverKeyReply) {}
   rpc SetCredential (Credential) returns (SetCredentialReply) {}
+  rpc RemoveCredential (Credential) returns (RemoveCredentialReply) {}
   rpc RecoverKeyByCredential (Credential) returns (RecoverKeyReply) {}
   rpc ClaimCredential(MsgClaimCredential) returns (MsgClaimCredentialResponse) {}
   rpc SignRecoverKey(MsgSignRecoverPrivateKey) returns (SignRecoverKeyReply) {}
   rpc QueryGetRecoverKey(QueryGetRecoverKeyRequest) returns (QueryGetRecoverKeyResponse) {}
   rpc QueryFindCredential(QueryFindCredentialRequest) returns (QueryFindCredentialResponse) {}
   rpc QueryGetSubWalletIDByOriginalWalletID(Credential) returns (QueryGetSubWalletIDByOriginalWalletIDResponse) {}
+
+  rpc ValidateAuthenticateServiceProvider(ValidateAuthenticateServiceProviderRequest) returns (ValidateAuthenticateServiceProviderReply) {}
 
   // used to validate the "authorized signatory" (this allows a user to specify which eph wallet ID is allowed to sign documents)
   rpc ValidateAuthorizedSignatory (ValidateAuthorizedSignatoryRequest) returns (ValidateAuthorizedSignatoryReply) {}
@@ -148,6 +159,17 @@ message MsgSyncEnclave {
   string seedNode = 5;
 }
 
+message MsgUpgradeEnclave {
+  bytes remoteReport = 1;
+  string enclavePubK      = 2;
+}
+
+message UpgradeEnclaveReply {
+  bytes remoteReport = 1;
+  bytes encEnclavePrivateStateEnclavePubK      = 2;
+}
+
+
 message MsgExportPrivateKey {
   string pubKID = 1;
 }
@@ -176,7 +198,16 @@ message ExportPrivateStateReply {
   string state = 1;
 }
 
-message Enclave {
+message ValidateAuthenticateServiceProviderRequest {
+  string pubKID = 1;
+  string serviceProviderType = 2;
+}
+
+message ValidateAuthenticateServiceProviderReply {
+  bool status = 1;
+}
+
+message MsgInitEnclave {
   string pioneerID = 1;
   string externalAddress = 2;
   string pioneerArmorPrivK = 3;
@@ -206,6 +237,7 @@ message ValidateAuthorizedSignerReply {
 message ValidateAuthorizedSignatoryRequest {
   string creator = 1;
   VShareSignatory signatory = 2;
+  repeated VShareSignatory currentSignatory = 3; 
 }
 
 message ValidateAuthorizedSignatoryReply {
@@ -293,6 +325,20 @@ message SetWalletReply {
   bool status = 1;
 }
 
+message SetEnclaveIdentityReply {
+  bool status = 1;
+}
+
+message PioneerUpdateEnclaveIdentity {
+  EnclaveIdentity enclaveIdentity = 1;
+  bytes remoteReport = 2;
+}
+
+message UpdateEnclaveIdentityReply {
+  bool status = 1;
+}
+
+
 message SetProtectKeyReply {
   bool status = 1;
 }
@@ -302,6 +348,10 @@ message SetRecoverKeyReply {
 }
 
 message SetCredentialReply {
+  bool status = 1;
+}
+
+message RemoveCredentialReply {
   bool status = 1;
 }
 
@@ -356,4 +406,8 @@ message EnclaveStoreStringArray {
 
 message EnclaveStoreString {
   string s = 1;
+}
+
+message EnclaveEnclaveIdentityArray {
+  repeated EnclaveIdentity identity = 1;
 }

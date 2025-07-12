@@ -19,8 +19,9 @@ import "qadena/qadena/recover_share.proto";
 import "qadena/qadena/recover_key.proto";
 import "cosmos/base/v1beta1/coin.proto";
 import "qadena/qadena/b_pedersen_commit.proto";
+import "qadena/qadena/enclave_identity.proto";
 
-option go_package = "qadena/x/qadena/types";
+option go_package = "github.com/c3qtech/qadena_v3/x/qadena/types";
 
 // Query defines the gRPC querier service.
 service Query {
@@ -118,6 +119,7 @@ service Query {
   }
   rpc RecoverKeyAll (QueryAllRecoverKeyRequest) returns (QueryAllRecoverKeyResponse) {
     option (google.api.http).get = "/qadena/qadena/recover_key";
+  
   }
   
   // Queries a list of Treasury items.
@@ -138,9 +140,9 @@ service Query {
   
   }
   
-  // Queries a list of SyncEnclave items.
-  rpc SyncEnclave (QuerySyncEnclaveRequest) returns (QuerySyncEnclaveResponse) {
-    option (google.api.http).get = "/qadena/qadena/sync_enclave/{remoteReport}/{enclavePubK}";
+  // Queries a list of EnclaveSyncEnclave items.
+  rpc EnclaveSyncEnclave (QueryEnclaveSyncEnclaveRequest) returns (QueryEnclaveSyncEnclaveResponse) {
+    option (google.api.http).get = "/qadena/qadena/enclave_sync_enclave/{remoteReport}/{enclavePubK}";
   
   }
   
@@ -154,11 +156,26 @@ service Query {
   rpc EnclaveRecoverKeyShare (QueryEnclaveRecoverKeyShareRequest) returns (QueryEnclaveRecoverKeyShareResponse) {
     option (google.api.http).get = "/qadena/qadena/enclave_recover_key_share/{remoteReport}/{newWalletID}/{shareWalletID}/{encShareWalletPubK}";
   
-  } 
+  }
+
+  rpc EnclaveValidateEnclaveIdentity (QueryEnclaveValidateEnclaveIdentityRequest) returns (QueryEnclaveValidateEnclaveIdentityResponse) {
+    option (google.api.http).get = "/qadena/qadena/enclave_validate_enclave_identity/{remoteReport}/{uniqueID}/{signerID}/{productID}";
+  
+  }
   
   // Queries a list of FindCredential items.
   rpc FindCredential (QueryFindCredentialRequest) returns (QueryFindCredentialResponse) {
     option (google.api.http).get = "/qadena/qadena/find_credential/{credentialPC}/{credentialType}/{sSIntervalPubKID}/{encUserCredentialPubKSSIntervalPubK}/{encProofPCSSIntervalPubK}/{encCheckPCSSIntervalPubK}";
+  
+  }
+  
+  // Queries a list of EnclaveIdentity items.
+  rpc EnclaveIdentity    (QueryGetEnclaveIdentityRequest) returns (QueryGetEnclaveIdentityResponse) {
+    option (google.api.http).get = "/qadena/qadena/enclave_identity/{uniqueID}";
+  
+  }
+  rpc EnclaveIdentityAll (QueryAllEnclaveIdentityRequest) returns (QueryAllEnclaveIdentityResponse) {
+    option (google.api.http).get = "/qadena/qadena/enclave_identity";
   
   }
 }
@@ -303,8 +320,8 @@ message QueryGetProtectKeyResponse {
 }
 
 message QueryAllProtectKeyRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1;
-	string credentialID = 2;
+  cosmos.base.query.v1beta1.PageRequest pagination   = 1;
+  string                                credentialID = 2;
 }
 
 message QueryAllProtectKeyResponse {
@@ -321,8 +338,8 @@ message QueryGetRecoverKeyResponse {
 }
 
 message QueryAllRecoverKeyRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1;
-	string credentialID = 2;
+  cosmos.base.query.v1beta1.PageRequest pagination   = 1;
+  string                                credentialID = 2;
 }
 
 message QueryAllRecoverKeyResponse {
@@ -355,50 +372,79 @@ message QueryIncentivesResponse {
   cosmos.base.v1beta1.Coin createEphemeralWalletTransparentIncentive = 4 [(gogoproto.nullable) = false];
 }
 
-message QuerySyncEnclaveRequest {
-  string remoteReport = 1;
+message QueryEnclaveValidateEnclaveIdentityRequest {
+  bytes remoteReport = 1;
+  string uniqueID = 2; 
+  string signerID = 3; 
+  string productID = 4; 
+}
+
+message QueryEnclaveValidateEnclaveIdentityResponse {
+  bytes remoteReport = 1;
+  string status        = 2;
+}
+
+message QueryEnclaveSyncEnclaveRequest {
+  bytes remoteReport = 1;
   string enclavePubK  = 2;
 }
 
-message QuerySyncEnclaveResponse {
-  string remoteReport                = 1;
-  bytes encEnclaveParamsEnclavePubK = 2;
+message QueryEnclaveSyncEnclaveResponse {
+  bytes remoteReport                = 1;
+  bytes  encEnclaveParamsEnclavePubK = 2;
 }
 
 message QueryEnclaveSecretShareRequest {
-  string remoteReport = 1;
+  bytes remoteReport = 1;
   string enclavePubK  = 2;
   string pubKID       = 3;
 }
 
 message QueryEnclaveSecretShareResponse {
-  string remoteReport              = 1;
-  bytes encSecretShareEnclavePubK = 2;
+  bytes remoteReport              = 1;
+  bytes  encSecretShareEnclavePubK = 2;
 }
 
 message QueryEnclaveRecoverKeyShareRequest {
-  string remoteReport       = 1;
+  bytes remoteReport       = 1;
   string newWalletID        = 2;
   string shareWalletID      = 3;
-  bytes encShareWalletPubK = 4;
+  bytes  encShareWalletPubK = 4;
 }
 
 message QueryEnclaveRecoverKeyShareResponse {
-  string remoteReport       = 1;
-  bytes encShareWalletPubK = 2;
+  bytes remoteReport       = 1;
+  bytes  encShareWalletPubK = 2;
 }
 
 message QueryFindCredentialRequest {
-  bytes credentialPC                        = 1;
+  bytes  credentialPC                        = 1;
   string credentialType                      = 2;
   string sSIntervalPubKID                    = 3;
-  bytes encUserCredentialPubKSSIntervalPubK = 4;
-  bytes encProofPCSSIntervalPubK            = 5;
-  bytes encCheckPCSSIntervalPubK            = 6;
+  bytes  encUserCredentialPubKSSIntervalPubK = 4;
+  bytes  encProofPCSSIntervalPubK            = 5;
+  bytes  encCheckPCSSIntervalPubK            = 6;
 }
 
 message QueryFindCredentialResponse {
   bytes encPersonalInfoUserCredentialPubK = 1;
   bytes encCredentialIDUserCredentialPubK = 2;
+}
+
+message QueryGetEnclaveIdentityRequest {
+  string uniqueID = 1;
+}
+
+message QueryGetEnclaveIdentityResponse {
+  EnclaveIdentity enclaveIdentity = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllEnclaveIdentityRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEnclaveIdentityResponse {
+  repeated EnclaveIdentity                        enclaveIdentity = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination      = 2;
 }
 

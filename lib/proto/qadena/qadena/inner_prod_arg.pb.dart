@@ -13,15 +13,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'bigint.pb.dart' as $13;
-import 'ec_point.pb.dart' as $12;
+import 'bigint.pb.dart' as $14;
+import 'ec_point.pb.dart' as $13;
 
 class BInnerProductProof extends $pb.GeneratedMessage {
   factory BInnerProductProof({
-    $core.Iterable<$12.BECPoint>? l,
-    $core.Iterable<$12.BECPoint>? r,
-    $13.BInt? a,
-    $13.BInt? b,
+    $core.Iterable<$13.BECPoint>? l,
+    $core.Iterable<$13.BECPoint>? r,
+    $14.BInt? a,
+    $14.BInt? b,
   }) {
     final $result = create();
     if (l != null) {
@@ -43,10 +43,10 @@ class BInnerProductProof extends $pb.GeneratedMessage {
   factory BInnerProductProof.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BInnerProductProof', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$12.BECPoint>(1, _omitFieldNames ? '' : 'l', $pb.PbFieldType.PM, subBuilder: $12.BECPoint.create)
-    ..pc<$12.BECPoint>(2, _omitFieldNames ? '' : 'r', $pb.PbFieldType.PM, subBuilder: $12.BECPoint.create)
-    ..aOM<$13.BInt>(3, _omitFieldNames ? '' : 'a', subBuilder: $13.BInt.create)
-    ..aOM<$13.BInt>(4, _omitFieldNames ? '' : 'b', subBuilder: $13.BInt.create)
+    ..pc<$13.BECPoint>(1, _omitFieldNames ? '' : 'l', $pb.PbFieldType.PM, subBuilder: $13.BECPoint.create)
+    ..pc<$13.BECPoint>(2, _omitFieldNames ? '' : 'r', $pb.PbFieldType.PM, subBuilder: $13.BECPoint.create)
+    ..aOM<$14.BInt>(3, _omitFieldNames ? '' : 'a', subBuilder: $14.BInt.create)
+    ..aOM<$14.BInt>(4, _omitFieldNames ? '' : 'b', subBuilder: $14.BInt.create)
     ..hasRequiredFields = false
   ;
 
@@ -72,32 +72,32 @@ class BInnerProductProof extends $pb.GeneratedMessage {
   static BInnerProductProof? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$12.BECPoint> get l => $_getList(0);
+  $core.List<$13.BECPoint> get l => $_getList(0);
 
   @$pb.TagNumber(2)
-  $core.List<$12.BECPoint> get r => $_getList(1);
+  $core.List<$13.BECPoint> get r => $_getList(1);
 
   @$pb.TagNumber(3)
-  $13.BInt get a => $_getN(2);
+  $14.BInt get a => $_getN(2);
   @$pb.TagNumber(3)
-  set a($13.BInt v) { setField(3, v); }
+  set a($14.BInt v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasA() => $_has(2);
   @$pb.TagNumber(3)
   void clearA() => clearField(3);
   @$pb.TagNumber(3)
-  $13.BInt ensureA() => $_ensure(2);
+  $14.BInt ensureA() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $13.BInt get b => $_getN(3);
+  $14.BInt get b => $_getN(3);
   @$pb.TagNumber(4)
-  set b($13.BInt v) { setField(4, v); }
+  set b($14.BInt v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasB() => $_has(3);
   @$pb.TagNumber(4)
   void clearB() => clearField(4);
   @$pb.TagNumber(4)
-  $13.BInt ensureB() => $_ensure(3);
+  $14.BInt ensureB() => $_ensure(3);
 }
 
 

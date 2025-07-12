@@ -131,6 +131,35 @@ final $typed_data.Uint8List msgSyncEnclaveDescriptor = $convert.base64Decode(
     'IAEoCVIRcGlvbmVlckFybW9yUHJpdksSNgoWcGlvbmVlckFybW9yUGFzc1BocmFzZRgEIAEoCV'
     'IWcGlvbmVlckFybW9yUGFzc1BocmFzZRIaCghzZWVkTm9kZRgFIAEoCVIIc2VlZE5vZGU=');
 
+@$core.Deprecated('Use msgUpgradeEnclaveDescriptor instead')
+const MsgUpgradeEnclave$json = {
+  '1': 'MsgUpgradeEnclave',
+  '2': [
+    {'1': 'remoteReport', '3': 1, '4': 1, '5': 12, '10': 'remoteReport'},
+    {'1': 'enclavePubK', '3': 2, '4': 1, '5': 9, '10': 'enclavePubK'},
+  ],
+};
+
+/// Descriptor for `MsgUpgradeEnclave`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUpgradeEnclaveDescriptor = $convert.base64Decode(
+    'ChFNc2dVcGdyYWRlRW5jbGF2ZRIiCgxyZW1vdGVSZXBvcnQYASABKAxSDHJlbW90ZVJlcG9ydB'
+    'IgCgtlbmNsYXZlUHViSxgCIAEoCVILZW5jbGF2ZVB1Yks=');
+
+@$core.Deprecated('Use upgradeEnclaveReplyDescriptor instead')
+const UpgradeEnclaveReply$json = {
+  '1': 'UpgradeEnclaveReply',
+  '2': [
+    {'1': 'remoteReport', '3': 1, '4': 1, '5': 12, '10': 'remoteReport'},
+    {'1': 'encEnclavePrivateStateEnclavePubK', '3': 2, '4': 1, '5': 12, '10': 'encEnclavePrivateStateEnclavePubK'},
+  ],
+};
+
+/// Descriptor for `UpgradeEnclaveReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List upgradeEnclaveReplyDescriptor = $convert.base64Decode(
+    'ChNVcGdyYWRlRW5jbGF2ZVJlcGx5EiIKDHJlbW90ZVJlcG9ydBgBIAEoDFIMcmVtb3RlUmVwb3'
+    'J0EkwKIWVuY0VuY2xhdmVQcml2YXRlU3RhdGVFbmNsYXZlUHViSxgCIAEoDFIhZW5jRW5jbGF2'
+    'ZVByaXZhdGVTdGF0ZUVuY2xhdmVQdWJL');
+
 @$core.Deprecated('Use msgExportPrivateKeyDescriptor instead')
 const MsgExportPrivateKey$json = {
   '1': 'MsgExportPrivateKey',
@@ -215,9 +244,37 @@ const ExportPrivateStateReply$json = {
 final $typed_data.Uint8List exportPrivateStateReplyDescriptor = $convert.base64Decode(
     'ChdFeHBvcnRQcml2YXRlU3RhdGVSZXBseRIUCgVzdGF0ZRgBIAEoCVIFc3RhdGU=');
 
-@$core.Deprecated('Use enclaveDescriptor instead')
-const Enclave$json = {
-  '1': 'Enclave',
+@$core.Deprecated('Use validateAuthenticateServiceProviderRequestDescriptor instead')
+const ValidateAuthenticateServiceProviderRequest$json = {
+  '1': 'ValidateAuthenticateServiceProviderRequest',
+  '2': [
+    {'1': 'pubKID', '3': 1, '4': 1, '5': 9, '10': 'pubKID'},
+    {'1': 'serviceProviderType', '3': 2, '4': 1, '5': 9, '10': 'serviceProviderType'},
+  ],
+};
+
+/// Descriptor for `ValidateAuthenticateServiceProviderRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateAuthenticateServiceProviderRequestDescriptor = $convert.base64Decode(
+    'CipWYWxpZGF0ZUF1dGhlbnRpY2F0ZVNlcnZpY2VQcm92aWRlclJlcXVlc3QSFgoGcHViS0lEGA'
+    'EgASgJUgZwdWJLSUQSMAoTc2VydmljZVByb3ZpZGVyVHlwZRgCIAEoCVITc2VydmljZVByb3Zp'
+    'ZGVyVHlwZQ==');
+
+@$core.Deprecated('Use validateAuthenticateServiceProviderReplyDescriptor instead')
+const ValidateAuthenticateServiceProviderReply$json = {
+  '1': 'ValidateAuthenticateServiceProviderReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `ValidateAuthenticateServiceProviderReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateAuthenticateServiceProviderReplyDescriptor = $convert.base64Decode(
+    'CihWYWxpZGF0ZUF1dGhlbnRpY2F0ZVNlcnZpY2VQcm92aWRlclJlcGx5EhYKBnN0YXR1cxgBIA'
+    'EoCFIGc3RhdHVz');
+
+@$core.Deprecated('Use msgInitEnclaveDescriptor instead')
+const MsgInitEnclave$json = {
+  '1': 'MsgInitEnclave',
   '2': [
     {'1': 'pioneerID', '3': 1, '4': 1, '5': 9, '10': 'pioneerID'},
     {'1': 'externalAddress', '3': 2, '4': 1, '5': 9, '10': 'externalAddress'},
@@ -230,14 +287,14 @@ const Enclave$json = {
   ],
 };
 
-/// Descriptor for `Enclave`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List enclaveDescriptor = $convert.base64Decode(
-    'CgdFbmNsYXZlEhwKCXBpb25lZXJJRBgBIAEoCVIJcGlvbmVlcklEEigKD2V4dGVybmFsQWRkcm'
-    'VzcxgCIAEoCVIPZXh0ZXJuYWxBZGRyZXNzEiwKEXBpb25lZXJBcm1vclByaXZLGAMgASgJUhFw'
-    'aW9uZWVyQXJtb3JQcml2SxI2ChZwaW9uZWVyQXJtb3JQYXNzUGhyYXNlGAQgASgJUhZwaW9uZW'
-    'VyQXJtb3JQYXNzUGhyYXNlEhQKBWphcklEGAUgASgJUgVqYXJJRBIgCgtyZWd1bGF0b3JJRBgG'
-    'IAEoCVILcmVndWxhdG9ySUQSGgoIc2lnbmVySUQYByABKAlSCHNpZ25lcklEEhoKCHVuaXF1ZU'
-    'lEGAggASgJUgh1bmlxdWVJRA==');
+/// Descriptor for `MsgInitEnclave`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgInitEnclaveDescriptor = $convert.base64Decode(
+    'Cg5Nc2dJbml0RW5jbGF2ZRIcCglwaW9uZWVySUQYASABKAlSCXBpb25lZXJJRBIoCg9leHRlcm'
+    '5hbEFkZHJlc3MYAiABKAlSD2V4dGVybmFsQWRkcmVzcxIsChFwaW9uZWVyQXJtb3JQcml2SxgD'
+    'IAEoCVIRcGlvbmVlckFybW9yUHJpdksSNgoWcGlvbmVlckFybW9yUGFzc1BocmFzZRgEIAEoCV'
+    'IWcGlvbmVlckFybW9yUGFzc1BocmFzZRIUCgVqYXJJRBgFIAEoCVIFamFySUQSIAoLcmVndWxh'
+    'dG9ySUQYBiABKAlSC3JlZ3VsYXRvcklEEhoKCHNpZ25lcklEGAcgASgJUghzaWduZXJJRBIaCg'
+    'h1bmlxdWVJRBgIIAEoCVIIdW5pcXVlSUQ=');
 
 @$core.Deprecated('Use vShareSignatoryDescriptor instead')
 const VShareSignatory$json = {
@@ -293,6 +350,7 @@ const ValidateAuthorizedSignatoryRequest$json = {
   '2': [
     {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
     {'1': 'signatory', '3': 2, '4': 1, '5': 11, '6': '.qadena.qadena.VShareSignatory', '10': 'signatory'},
+    {'1': 'currentSignatory', '3': 3, '4': 3, '5': 11, '6': '.qadena.qadena.VShareSignatory', '10': 'currentSignatory'},
   ],
 };
 
@@ -300,7 +358,8 @@ const ValidateAuthorizedSignatoryRequest$json = {
 final $typed_data.Uint8List validateAuthorizedSignatoryRequestDescriptor = $convert.base64Decode(
     'CiJWYWxpZGF0ZUF1dGhvcml6ZWRTaWduYXRvcnlSZXF1ZXN0EhgKB2NyZWF0b3IYASABKAlSB2'
     'NyZWF0b3ISPAoJc2lnbmF0b3J5GAIgASgLMh4ucWFkZW5hLnFhZGVuYS5WU2hhcmVTaWduYXRv'
-    'cnlSCXNpZ25hdG9yeQ==');
+    'cnlSCXNpZ25hdG9yeRJKChBjdXJyZW50U2lnbmF0b3J5GAMgAygLMh4ucWFkZW5hLnFhZGVuYS'
+    '5WU2hhcmVTaWduYXRvcnlSEGN1cnJlbnRTaWduYXRvcnk=');
 
 @$core.Deprecated('Use validateAuthorizedSignatoryReplyDescriptor instead')
 const ValidateAuthorizedSignatoryReply$json = {
@@ -545,6 +604,45 @@ const SetWalletReply$json = {
 final $typed_data.Uint8List setWalletReplyDescriptor = $convert.base64Decode(
     'Cg5TZXRXYWxsZXRSZXBseRIWCgZzdGF0dXMYASABKAhSBnN0YXR1cw==');
 
+@$core.Deprecated('Use setEnclaveIdentityReplyDescriptor instead')
+const SetEnclaveIdentityReply$json = {
+  '1': 'SetEnclaveIdentityReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `SetEnclaveIdentityReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setEnclaveIdentityReplyDescriptor = $convert.base64Decode(
+    'ChdTZXRFbmNsYXZlSWRlbnRpdHlSZXBseRIWCgZzdGF0dXMYASABKAhSBnN0YXR1cw==');
+
+@$core.Deprecated('Use pioneerUpdateEnclaveIdentityDescriptor instead')
+const PioneerUpdateEnclaveIdentity$json = {
+  '1': 'PioneerUpdateEnclaveIdentity',
+  '2': [
+    {'1': 'enclaveIdentity', '3': 1, '4': 1, '5': 11, '6': '.qadena.qadena.EnclaveIdentity', '10': 'enclaveIdentity'},
+    {'1': 'remoteReport', '3': 2, '4': 1, '5': 12, '10': 'remoteReport'},
+  ],
+};
+
+/// Descriptor for `PioneerUpdateEnclaveIdentity`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pioneerUpdateEnclaveIdentityDescriptor = $convert.base64Decode(
+    'ChxQaW9uZWVyVXBkYXRlRW5jbGF2ZUlkZW50aXR5EkgKD2VuY2xhdmVJZGVudGl0eRgBIAEoCz'
+    'IeLnFhZGVuYS5xYWRlbmEuRW5jbGF2ZUlkZW50aXR5Ug9lbmNsYXZlSWRlbnRpdHkSIgoMcmVt'
+    'b3RlUmVwb3J0GAIgASgMUgxyZW1vdGVSZXBvcnQ=');
+
+@$core.Deprecated('Use updateEnclaveIdentityReplyDescriptor instead')
+const UpdateEnclaveIdentityReply$json = {
+  '1': 'UpdateEnclaveIdentityReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `UpdateEnclaveIdentityReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateEnclaveIdentityReplyDescriptor = $convert.base64Decode(
+    'ChpVcGRhdGVFbmNsYXZlSWRlbnRpdHlSZXBseRIWCgZzdGF0dXMYASABKAhSBnN0YXR1cw==');
+
 @$core.Deprecated('Use setProtectKeyReplyDescriptor instead')
 const SetProtectKeyReply$json = {
   '1': 'SetProtectKeyReply',
@@ -580,6 +678,18 @@ const SetCredentialReply$json = {
 /// Descriptor for `SetCredentialReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List setCredentialReplyDescriptor = $convert.base64Decode(
     'ChJTZXRDcmVkZW50aWFsUmVwbHkSFgoGc3RhdHVzGAEgASgIUgZzdGF0dXM=');
+
+@$core.Deprecated('Use removeCredentialReplyDescriptor instead')
+const RemoveCredentialReply$json = {
+  '1': 'RemoveCredentialReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `RemoveCredentialReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List removeCredentialReplyDescriptor = $convert.base64Decode(
+    'ChVSZW1vdmVDcmVkZW50aWFsUmVwbHkSFgoGc3RhdHVzGAEgASgIUgZzdGF0dXM=');
 
 @$core.Deprecated('Use recoverKeyReplyDescriptor instead')
 const RecoverKeyReply$json = {
@@ -739,4 +849,17 @@ const EnclaveStoreString$json = {
 /// Descriptor for `EnclaveStoreString`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List enclaveStoreStringDescriptor = $convert.base64Decode(
     'ChJFbmNsYXZlU3RvcmVTdHJpbmcSDAoBcxgBIAEoCVIBcw==');
+
+@$core.Deprecated('Use enclaveEnclaveIdentityArrayDescriptor instead')
+const EnclaveEnclaveIdentityArray$json = {
+  '1': 'EnclaveEnclaveIdentityArray',
+  '2': [
+    {'1': 'identity', '3': 1, '4': 3, '5': 11, '6': '.qadena.qadena.EnclaveIdentity', '10': 'identity'},
+  ],
+};
+
+/// Descriptor for `EnclaveEnclaveIdentityArray`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List enclaveEnclaveIdentityArrayDescriptor = $convert.base64Decode(
+    'ChtFbmNsYXZlRW5jbGF2ZUlkZW50aXR5QXJyYXkSOgoIaWRlbnRpdHkYASADKAsyHi5xYWRlbm'
+    'EucWFkZW5hLkVuY2xhdmVJZGVudGl0eVIIaWRlbnRpdHk=');
 

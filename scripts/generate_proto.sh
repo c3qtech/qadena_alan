@@ -11,36 +11,36 @@ GOOGLEAPI_VERSION=1.4.1
 GOGOPROTO_VERSION=1.4.12
 COSMOSPROTO_VERSION=1.0.0-beta.5
 
-QADENA_SRC=../../proto/qadena
+QADENA_SRC=../qadena_v3/proto/qadena
 
 QADENA=qadena
 
 # get commandline parameters, if "--help" is one of them, print help, update the qadena proto files
 
 # if no parameters, display help
-if [ $# -eq 0 ] || [ $1 == "-h" ] || [ $1 == "--help" ]; then
-  echo "Usage: $0 [--help] [-h] [-qadena-only] [-all]"
-  echo "  --help, -h: print this help"
-  echo "  -qadena-only: only update the qadena proto files"
-  echo "  -all: update all the proto files"
+if [ $# -eq 0 ] || [ $1 == "--help" ]; then
+  echo "Usage: $0 [--help] [--qadena-only] [-all]"
+  echo "  --help: print this help"
+  echo "  --qadena-only: only update the qadena proto files"
+  echo "  --all: update all the proto files"
   exit 0
 fi
 
 # if it is "-qadena-only" then only update the qadena proto files
-if [ "$1" == "-qadena-only" ]; then
-  QADENA_SRC=../../proto/qadena
+if [ "$1" == "--qadena-only" ]; then
+#  QADENA_SRC=../qadena_v3/proto/qadena
   COSMOS_VERSION="skip"
   GOOGLEAPI_VERSION="skip"
   GOGOPROTO_VERSION="skip"
   COSMOSPROTO_VERSION="skip"
   shift
-elif [ "$1" == "-all" ]; then
+elif [ "$1" == "--all" ]; then
   echo "Will update all the files"
 else 
-  echo "Usage: $0 [--help] [-h] [-qadena-only] [-all]"
-  echo "  --help, -h: print this help"
-  echo "  -qadena-only: only update the qadena proto files"
-  echo "  -all: update all the proto files"
+  echo "Usage: $0 [--help] [--qadena-only] [--all]"
+  echo "  --help: print this help"
+  echo "  --qadena-only: only update the qadena proto files"
+  echo "  --all: update all the proto files"
   exit 1
 fi
 

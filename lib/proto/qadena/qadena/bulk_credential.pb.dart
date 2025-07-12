@@ -13,15 +13,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'b_pedersen_commit.pb.dart' as $18;
+import 'b_pedersen_commit.pb.dart' as $19;
 
 class BulkCredential extends $pb.GeneratedMessage {
   factory BulkCredential({
     $core.String? credentialID,
-    $18.BPedersenCommit? credentialPedersenCommit,
+    $19.BPedersenCommit? credentialPedersenCommit,
     $core.List<$core.int>? encCredentialInfoVShare,
     $core.List<$core.int>? encCredentialHashVShare,
-    $18.BPedersenCommit? findCredentialPedersenCommit,
+    $19.BPedersenCommit? findCredentialPedersenCommit,
   }) {
     final $result = create();
     if (credentialID != null) {
@@ -47,10 +47,10 @@ class BulkCredential extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BulkCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
-    ..aOM<$18.BPedersenCommit>(2, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(2, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'encCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'encCredentialInfoVShare')
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'encCredentialHashVShare', $pb.PbFieldType.OY, protoName: 'encCredentialHashVShare')
-    ..aOM<$18.BPedersenCommit>(5, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -85,15 +85,15 @@ class BulkCredential extends $pb.GeneratedMessage {
   void clearCredentialID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $18.BPedersenCommit get credentialPedersenCommit => $_getN(1);
+  $19.BPedersenCommit get credentialPedersenCommit => $_getN(1);
   @$pb.TagNumber(2)
-  set credentialPedersenCommit($18.BPedersenCommit v) { setField(2, v); }
+  set credentialPedersenCommit($19.BPedersenCommit v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCredentialPedersenCommit() => $_has(1);
   @$pb.TagNumber(2)
   void clearCredentialPedersenCommit() => clearField(2);
   @$pb.TagNumber(2)
-  $18.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(1);
+  $19.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.List<$core.int> get encCredentialInfoVShare => $_getN(2);
@@ -114,15 +114,15 @@ class BulkCredential extends $pb.GeneratedMessage {
   void clearEncCredentialHashVShare() => clearField(4);
 
   @$pb.TagNumber(5)
-  $18.BPedersenCommit get findCredentialPedersenCommit => $_getN(4);
+  $19.BPedersenCommit get findCredentialPedersenCommit => $_getN(4);
   @$pb.TagNumber(5)
-  set findCredentialPedersenCommit($18.BPedersenCommit v) { setField(5, v); }
+  set findCredentialPedersenCommit($19.BPedersenCommit v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasFindCredentialPedersenCommit() => $_has(4);
   @$pb.TagNumber(5)
   void clearFindCredentialPedersenCommit() => clearField(5);
   @$pb.TagNumber(5)
-  $18.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(4);
+  $19.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(4);
 }
 
 

@@ -17,6 +17,7 @@ class JarRegulator extends $pb.GeneratedMessage {
   factory JarRegulator({
     $core.String? jarID,
     $core.String? regulatorID,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (jarID != null) {
@@ -24,6 +25,9 @@ class JarRegulator extends $pb.GeneratedMessage {
     }
     if (regulatorID != null) {
       $result.regulatorID = regulatorID;
+    }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
     }
     return $result;
   }
@@ -34,6 +38,7 @@ class JarRegulator extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'JarRegulator', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
     ..aOS(2, _omitFieldNames ? '' : 'regulatorID', protoName: 'regulatorID')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -75,6 +80,15 @@ class JarRegulator extends $pb.GeneratedMessage {
   $core.bool hasRegulatorID() => $_has(1);
   @$pb.TagNumber(2)
   void clearRegulatorID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get remoteReport => $_getN(2);
+  @$pb.TagNumber(3)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRemoteReport() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRemoteReport() => clearField(3);
 }
 
 

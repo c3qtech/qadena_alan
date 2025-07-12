@@ -14,23 +14,23 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $15;
-import 'b_pedersen_commit.pb.dart' as $18;
-import 'bigint.pb.dart' as $13;
-import 'bulk_credential.pb.dart' as $25;
-import 'params.pb.dart' as $19;
-import 'pedersen_commit.pb.dart' as $21;
-import 'range_proof.pb.dart' as $22;
-import 'recover_share.pb.dart' as $24;
-import 'secret_share_priv_k.pb.dart' as $11;
-import 'share.pb.dart' as $23;
-import 'v_share_bind_data.pb.dart' as $20;
+import '../../google/protobuf/timestamp.pb.dart' as $16;
+import 'b_pedersen_commit.pb.dart' as $19;
+import 'bigint.pb.dart' as $14;
+import 'bulk_credential.pb.dart' as $26;
+import 'params.pb.dart' as $20;
+import 'pedersen_commit.pb.dart' as $22;
+import 'range_proof.pb.dart' as $23;
+import 'recover_share.pb.dart' as $25;
+import 'secret_share_priv_k.pb.dart' as $12;
+import 'share.pb.dart' as $24;
+import 'v_share_bind_data.pb.dart' as $21;
 
 /// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
-    $19.Params? params,
+    $20.Params? params,
   }) {
     final $result = create();
     if (authority != null) {
@@ -47,7 +47,7 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateParams', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'authority')
-    ..aOM<$19.Params>(2, _omitFieldNames ? '' : 'params', subBuilder: $19.Params.create)
+    ..aOM<$20.Params>(2, _omitFieldNames ? '' : 'params', subBuilder: $20.Params.create)
     ..hasRequiredFields = false
   ;
 
@@ -84,15 +84,15 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
 
   /// NOTE: All parameters must be supplied.
   @$pb.TagNumber(2)
-  $19.Params get params => $_getN(1);
+  $20.Params get params => $_getN(1);
   @$pb.TagNumber(2)
-  set params($19.Params v) { setField(2, v); }
+  set params($20.Params v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasParams() => $_has(1);
   @$pb.TagNumber(2)
   void clearParams() => clearField(2);
   @$pb.TagNumber(2)
-  $19.Params ensureParams() => $_ensure(1);
+  $20.Params ensureParams() => $_ensure(1);
 }
 
 /// MsgUpdateParamsResponse defines the response structure for executing a
@@ -135,7 +135,7 @@ class MsgCreateSuspiciousTransaction extends $pb.GeneratedMessage {
     $core.String? jarID,
     $core.String? regulatorPubKID,
     $core.String? reason,
-    $15.Timestamp? time,
+    $16.Timestamp? time,
     $core.List<$core.int>? encSourcePersonalInfoRegulatorPubK,
     $core.List<$core.int>? encDestinationPersonalInfoRegulatorPubK,
     $core.List<$core.int>? encEAmountRegulatorPubK,
@@ -180,7 +180,7 @@ class MsgCreateSuspiciousTransaction extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
     ..aOS(3, _omitFieldNames ? '' : 'regulatorPubKID', protoName: 'regulatorPubKID')
     ..aOS(4, _omitFieldNames ? '' : 'reason')
-    ..aOM<$15.Timestamp>(5, _omitFieldNames ? '' : 'time', subBuilder: $15.Timestamp.create)
+    ..aOM<$16.Timestamp>(5, _omitFieldNames ? '' : 'time', subBuilder: $16.Timestamp.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encSourcePersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encSourcePersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encDestinationPersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encDestinationPersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'encEAmountRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encEAmountRegulatorPubK')
@@ -246,15 +246,15 @@ class MsgCreateSuspiciousTransaction extends $pb.GeneratedMessage {
   void clearReason() => clearField(4);
 
   @$pb.TagNumber(5)
-  $15.Timestamp get time => $_getN(4);
+  $16.Timestamp get time => $_getN(4);
   @$pb.TagNumber(5)
-  set time($15.Timestamp v) { setField(5, v); }
+  set time($16.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasTime() => $_has(4);
   @$pb.TagNumber(5)
   void clearTime() => clearField(5);
   @$pb.TagNumber(5)
-  $15.Timestamp ensureTime() => $_ensure(4);
+  $16.Timestamp ensureTime() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.int> get encSourcePersonalInfoRegulatorPubK => $_getN(5);
@@ -350,7 +350,7 @@ class MsgUpdateSuspiciousTransaction extends $pb.GeneratedMessage {
     $core.String? jarID,
     $core.String? regulatorPubKID,
     $core.String? reason,
-    $15.Timestamp? time,
+    $16.Timestamp? time,
     $core.List<$core.int>? encSourcePersonalInfoRegulatorPubK,
     $core.List<$core.int>? encDestinationPersonalInfoRegulatorPubK,
     $core.List<$core.int>? encEAmountRegulatorPubK,
@@ -399,7 +399,7 @@ class MsgUpdateSuspiciousTransaction extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
     ..aOS(4, _omitFieldNames ? '' : 'regulatorPubKID', protoName: 'regulatorPubKID')
     ..aOS(5, _omitFieldNames ? '' : 'reason')
-    ..aOM<$15.Timestamp>(6, _omitFieldNames ? '' : 'time', subBuilder: $15.Timestamp.create)
+    ..aOM<$16.Timestamp>(6, _omitFieldNames ? '' : 'time', subBuilder: $16.Timestamp.create)
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encSourcePersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encSourcePersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'encDestinationPersonalInfoRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encDestinationPersonalInfoRegulatorPubK')
     ..a<$core.List<$core.int>>(9, _omitFieldNames ? '' : 'encEAmountRegulatorPubK', $pb.PbFieldType.OY, protoName: 'encEAmountRegulatorPubK')
@@ -474,15 +474,15 @@ class MsgUpdateSuspiciousTransaction extends $pb.GeneratedMessage {
   void clearReason() => clearField(5);
 
   @$pb.TagNumber(6)
-  $15.Timestamp get time => $_getN(5);
+  $16.Timestamp get time => $_getN(5);
   @$pb.TagNumber(6)
-  set time($15.Timestamp v) { setField(6, v); }
+  set time($16.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasTime() => $_has(5);
   @$pb.TagNumber(6)
   void clearTime() => clearField(6);
   @$pb.TagNumber(6)
-  $15.Timestamp ensureTime() => $_ensure(5);
+  $16.Timestamp ensureTime() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.List<$core.int> get encSourcePersonalInfoRegulatorPubK => $_getN(6);
@@ -759,36 +759,36 @@ class MsgAddPublicKeyResponse extends $pb.GeneratedMessage {
   static MsgAddPublicKeyResponse? _defaultInstance;
 }
 
-class MsgUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
-  factory MsgUpdateIntervalPublicKeyID({
-    $core.String? creator,
+class MsgAddServiceProvider extends $pb.GeneratedMessage {
+  factory MsgAddServiceProvider({
+    $core.String? authority,
+    $core.String? pubKID,
     $core.String? nodeID,
-    $core.String? nodeType,
     $core.String? serviceProviderType,
   }) {
     final $result = create();
-    if (creator != null) {
-      $result.creator = creator;
+    if (authority != null) {
+      $result.authority = authority;
+    }
+    if (pubKID != null) {
+      $result.pubKID = pubKID;
     }
     if (nodeID != null) {
       $result.nodeID = nodeID;
-    }
-    if (nodeType != null) {
-      $result.nodeType = nodeType;
     }
     if (serviceProviderType != null) {
       $result.serviceProviderType = serviceProviderType;
     }
     return $result;
   }
-  MsgUpdateIntervalPublicKeyID._() : super();
-  factory MsgUpdateIntervalPublicKeyID.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdateIntervalPublicKeyID.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  MsgAddServiceProvider._() : super();
+  factory MsgAddServiceProvider.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgAddServiceProvider.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateIntervalPublicKeyID', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'creator')
-    ..aOS(2, _omitFieldNames ? '' : 'nodeID', protoName: 'nodeID')
-    ..aOS(3, _omitFieldNames ? '' : 'nodeType', protoName: 'nodeType')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgAddServiceProvider', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'authority')
+    ..aOS(2, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
+    ..aOS(3, _omitFieldNames ? '' : 'nodeID', protoName: 'nodeID')
     ..aOS(4, _omitFieldNames ? '' : 'serviceProviderType', protoName: 'serviceProviderType')
     ..hasRequiredFields = false
   ;
@@ -797,49 +797,50 @@ class MsgUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdateIntervalPublicKeyID clone() => MsgUpdateIntervalPublicKeyID()..mergeFromMessage(this);
+  MsgAddServiceProvider clone() => MsgAddServiceProvider()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdateIntervalPublicKeyID copyWith(void Function(MsgUpdateIntervalPublicKeyID) updates) => super.copyWith((message) => updates(message as MsgUpdateIntervalPublicKeyID)) as MsgUpdateIntervalPublicKeyID;
+  MsgAddServiceProvider copyWith(void Function(MsgAddServiceProvider) updates) => super.copyWith((message) => updates(message as MsgAddServiceProvider)) as MsgAddServiceProvider;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateIntervalPublicKeyID create() => MsgUpdateIntervalPublicKeyID._();
-  MsgUpdateIntervalPublicKeyID createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdateIntervalPublicKeyID> createRepeated() => $pb.PbList<MsgUpdateIntervalPublicKeyID>();
+  static MsgAddServiceProvider create() => MsgAddServiceProvider._();
+  MsgAddServiceProvider createEmptyInstance() => create();
+  static $pb.PbList<MsgAddServiceProvider> createRepeated() => $pb.PbList<MsgAddServiceProvider>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateIntervalPublicKeyID getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateIntervalPublicKeyID>(create);
-  static MsgUpdateIntervalPublicKeyID? _defaultInstance;
+  static MsgAddServiceProvider getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgAddServiceProvider>(create);
+  static MsgAddServiceProvider? _defaultInstance;
 
+  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
   @$pb.TagNumber(1)
-  $core.String get creator => $_getSZ(0);
+  $core.String get authority => $_getSZ(0);
   @$pb.TagNumber(1)
-  set creator($core.String v) { $_setString(0, v); }
+  set authority($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCreator() => $_has(0);
+  $core.bool hasAuthority() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCreator() => clearField(1);
+  void clearAuthority() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get nodeID => $_getSZ(1);
+  $core.String get pubKID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set nodeID($core.String v) { $_setString(1, v); }
+  set pubKID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasNodeID() => $_has(1);
+  $core.bool hasPubKID() => $_has(1);
   @$pb.TagNumber(2)
-  void clearNodeID() => clearField(2);
+  void clearPubKID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get nodeType => $_getSZ(2);
+  $core.String get nodeID => $_getSZ(2);
   @$pb.TagNumber(3)
-  set nodeType($core.String v) { $_setString(2, v); }
+  set nodeID($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasNodeType() => $_has(2);
+  $core.bool hasNodeID() => $_has(2);
   @$pb.TagNumber(3)
-  void clearNodeType() => clearField(3);
+  void clearNodeID() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.String get serviceProviderType => $_getSZ(3);
@@ -851,13 +852,13 @@ class MsgUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
   void clearServiceProviderType() => clearField(4);
 }
 
-class MsgUpdateIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
-  factory MsgUpdateIntervalPublicKeyIDResponse() => create();
-  MsgUpdateIntervalPublicKeyIDResponse._() : super();
-  factory MsgUpdateIntervalPublicKeyIDResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdateIntervalPublicKeyIDResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class MsgAddServiceProviderResponse extends $pb.GeneratedMessage {
+  factory MsgAddServiceProviderResponse() => create();
+  MsgAddServiceProviderResponse._() : super();
+  factory MsgAddServiceProviderResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgAddServiceProviderResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateIntervalPublicKeyIDResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgAddServiceProviderResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -865,29 +866,266 @@ class MsgUpdateIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdateIntervalPublicKeyIDResponse clone() => MsgUpdateIntervalPublicKeyIDResponse()..mergeFromMessage(this);
+  MsgAddServiceProviderResponse clone() => MsgAddServiceProviderResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdateIntervalPublicKeyIDResponse copyWith(void Function(MsgUpdateIntervalPublicKeyIDResponse) updates) => super.copyWith((message) => updates(message as MsgUpdateIntervalPublicKeyIDResponse)) as MsgUpdateIntervalPublicKeyIDResponse;
+  MsgAddServiceProviderResponse copyWith(void Function(MsgAddServiceProviderResponse) updates) => super.copyWith((message) => updates(message as MsgAddServiceProviderResponse)) as MsgAddServiceProviderResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateIntervalPublicKeyIDResponse create() => MsgUpdateIntervalPublicKeyIDResponse._();
-  MsgUpdateIntervalPublicKeyIDResponse createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdateIntervalPublicKeyIDResponse> createRepeated() => $pb.PbList<MsgUpdateIntervalPublicKeyIDResponse>();
+  static MsgAddServiceProviderResponse create() => MsgAddServiceProviderResponse._();
+  MsgAddServiceProviderResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgAddServiceProviderResponse> createRepeated() => $pb.PbList<MsgAddServiceProviderResponse>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateIntervalPublicKeyIDResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateIntervalPublicKeyIDResponse>(create);
-  static MsgUpdateIntervalPublicKeyIDResponse? _defaultInstance;
+  static MsgAddServiceProviderResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgAddServiceProviderResponse>(create);
+  static MsgAddServiceProviderResponse? _defaultInstance;
 }
 
-class MsgUpdatePioneerJar extends $pb.GeneratedMessage {
-  factory MsgUpdatePioneerJar({
+class MsgDeactivateServiceProvider extends $pb.GeneratedMessage {
+  factory MsgDeactivateServiceProvider({
+    $core.String? authority,
+    $core.String? nodeID,
+  }) {
+    final $result = create();
+    if (authority != null) {
+      $result.authority = authority;
+    }
+    if (nodeID != null) {
+      $result.nodeID = nodeID;
+    }
+    return $result;
+  }
+  MsgDeactivateServiceProvider._() : super();
+  factory MsgDeactivateServiceProvider.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgDeactivateServiceProvider.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgDeactivateServiceProvider', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'authority')
+    ..aOS(2, _omitFieldNames ? '' : 'nodeID', protoName: 'nodeID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgDeactivateServiceProvider clone() => MsgDeactivateServiceProvider()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgDeactivateServiceProvider copyWith(void Function(MsgDeactivateServiceProvider) updates) => super.copyWith((message) => updates(message as MsgDeactivateServiceProvider)) as MsgDeactivateServiceProvider;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgDeactivateServiceProvider create() => MsgDeactivateServiceProvider._();
+  MsgDeactivateServiceProvider createEmptyInstance() => create();
+  static $pb.PbList<MsgDeactivateServiceProvider> createRepeated() => $pb.PbList<MsgDeactivateServiceProvider>();
+  @$core.pragma('dart2js:noInline')
+  static MsgDeactivateServiceProvider getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgDeactivateServiceProvider>(create);
+  static MsgDeactivateServiceProvider? _defaultInstance;
+
+  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
+  @$pb.TagNumber(1)
+  $core.String get authority => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set authority($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthority() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthority() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get nodeID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nodeID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNodeID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNodeID() => clearField(2);
+}
+
+class MsgDeactivateServiceProviderResponse extends $pb.GeneratedMessage {
+  factory MsgDeactivateServiceProviderResponse() => create();
+  MsgDeactivateServiceProviderResponse._() : super();
+  factory MsgDeactivateServiceProviderResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgDeactivateServiceProviderResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgDeactivateServiceProviderResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgDeactivateServiceProviderResponse clone() => MsgDeactivateServiceProviderResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgDeactivateServiceProviderResponse copyWith(void Function(MsgDeactivateServiceProviderResponse) updates) => super.copyWith((message) => updates(message as MsgDeactivateServiceProviderResponse)) as MsgDeactivateServiceProviderResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgDeactivateServiceProviderResponse create() => MsgDeactivateServiceProviderResponse._();
+  MsgDeactivateServiceProviderResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgDeactivateServiceProviderResponse> createRepeated() => $pb.PbList<MsgDeactivateServiceProviderResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgDeactivateServiceProviderResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgDeactivateServiceProviderResponse>(create);
+  static MsgDeactivateServiceProviderResponse? _defaultInstance;
+}
+
+class MsgUpdateEnclaveIdentity extends $pb.GeneratedMessage {
+  factory MsgUpdateEnclaveIdentity({
+    $core.String? authority,
+    $core.String? uniqueID,
+    $core.String? signerID,
+    $core.String? productID,
+    $core.String? status,
+  }) {
+    final $result = create();
+    if (authority != null) {
+      $result.authority = authority;
+    }
+    if (uniqueID != null) {
+      $result.uniqueID = uniqueID;
+    }
+    if (signerID != null) {
+      $result.signerID = signerID;
+    }
+    if (productID != null) {
+      $result.productID = productID;
+    }
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  MsgUpdateEnclaveIdentity._() : super();
+  factory MsgUpdateEnclaveIdentity.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUpdateEnclaveIdentity.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateEnclaveIdentity', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'authority')
+    ..aOS(2, _omitFieldNames ? '' : 'uniqueID', protoName: 'uniqueID')
+    ..aOS(3, _omitFieldNames ? '' : 'signerID', protoName: 'signerID')
+    ..aOS(4, _omitFieldNames ? '' : 'productID', protoName: 'productID')
+    ..aOS(5, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUpdateEnclaveIdentity clone() => MsgUpdateEnclaveIdentity()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUpdateEnclaveIdentity copyWith(void Function(MsgUpdateEnclaveIdentity) updates) => super.copyWith((message) => updates(message as MsgUpdateEnclaveIdentity)) as MsgUpdateEnclaveIdentity;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateEnclaveIdentity create() => MsgUpdateEnclaveIdentity._();
+  MsgUpdateEnclaveIdentity createEmptyInstance() => create();
+  static $pb.PbList<MsgUpdateEnclaveIdentity> createRepeated() => $pb.PbList<MsgUpdateEnclaveIdentity>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateEnclaveIdentity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateEnclaveIdentity>(create);
+  static MsgUpdateEnclaveIdentity? _defaultInstance;
+
+  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
+  @$pb.TagNumber(1)
+  $core.String get authority => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set authority($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthority() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthority() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get uniqueID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set uniqueID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUniqueID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUniqueID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get signerID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set signerID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSignerID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSignerID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get productID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set productID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProductID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProductID() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get status => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set status($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasStatus() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStatus() => clearField(5);
+}
+
+class MsgUpdateEnclaveIdentityResponse extends $pb.GeneratedMessage {
+  factory MsgUpdateEnclaveIdentityResponse() => create();
+  MsgUpdateEnclaveIdentityResponse._() : super();
+  factory MsgUpdateEnclaveIdentityResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUpdateEnclaveIdentityResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateEnclaveIdentityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUpdateEnclaveIdentityResponse clone() => MsgUpdateEnclaveIdentityResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUpdateEnclaveIdentityResponse copyWith(void Function(MsgUpdateEnclaveIdentityResponse) updates) => super.copyWith((message) => updates(message as MsgUpdateEnclaveIdentityResponse)) as MsgUpdateEnclaveIdentityResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateEnclaveIdentityResponse create() => MsgUpdateEnclaveIdentityResponse._();
+  MsgUpdateEnclaveIdentityResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgUpdateEnclaveIdentityResponse> createRepeated() => $pb.PbList<MsgUpdateEnclaveIdentityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateEnclaveIdentityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateEnclaveIdentityResponse>(create);
+  static MsgUpdateEnclaveIdentityResponse? _defaultInstance;
+}
+
+class MsgPioneerUpdatePioneerJar extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdatePioneerJar({
     $core.String? creator,
     $core.String? pioneerID,
     $core.String? jarID,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (creator != null) {
@@ -899,16 +1137,20 @@ class MsgUpdatePioneerJar extends $pb.GeneratedMessage {
     if (jarID != null) {
       $result.jarID = jarID;
     }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
     return $result;
   }
-  MsgUpdatePioneerJar._() : super();
-  factory MsgUpdatePioneerJar.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdatePioneerJar.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  MsgPioneerUpdatePioneerJar._() : super();
+  factory MsgPioneerUpdatePioneerJar.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdatePioneerJar.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdatePioneerJar', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdatePioneerJar', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'pioneerID', protoName: 'pioneerID')
     ..aOS(3, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -916,22 +1158,22 @@ class MsgUpdatePioneerJar extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdatePioneerJar clone() => MsgUpdatePioneerJar()..mergeFromMessage(this);
+  MsgPioneerUpdatePioneerJar clone() => MsgPioneerUpdatePioneerJar()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdatePioneerJar copyWith(void Function(MsgUpdatePioneerJar) updates) => super.copyWith((message) => updates(message as MsgUpdatePioneerJar)) as MsgUpdatePioneerJar;
+  MsgPioneerUpdatePioneerJar copyWith(void Function(MsgPioneerUpdatePioneerJar) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdatePioneerJar)) as MsgPioneerUpdatePioneerJar;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdatePioneerJar create() => MsgUpdatePioneerJar._();
-  MsgUpdatePioneerJar createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdatePioneerJar> createRepeated() => $pb.PbList<MsgUpdatePioneerJar>();
+  static MsgPioneerUpdatePioneerJar create() => MsgPioneerUpdatePioneerJar._();
+  MsgPioneerUpdatePioneerJar createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdatePioneerJar> createRepeated() => $pb.PbList<MsgPioneerUpdatePioneerJar>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdatePioneerJar getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdatePioneerJar>(create);
-  static MsgUpdatePioneerJar? _defaultInstance;
+  static MsgPioneerUpdatePioneerJar getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdatePioneerJar>(create);
+  static MsgPioneerUpdatePioneerJar? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get creator => $_getSZ(0);
@@ -959,15 +1201,24 @@ class MsgUpdatePioneerJar extends $pb.GeneratedMessage {
   $core.bool hasJarID() => $_has(2);
   @$pb.TagNumber(3)
   void clearJarID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get remoteReport => $_getN(3);
+  @$pb.TagNumber(4)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRemoteReport() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRemoteReport() => clearField(4);
 }
 
-class MsgUpdatePioneerJarResponse extends $pb.GeneratedMessage {
-  factory MsgUpdatePioneerJarResponse() => create();
-  MsgUpdatePioneerJarResponse._() : super();
-  factory MsgUpdatePioneerJarResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdatePioneerJarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class MsgPioneerUpdatePioneerJarResponse extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdatePioneerJarResponse() => create();
+  MsgPioneerUpdatePioneerJarResponse._() : super();
+  factory MsgPioneerUpdatePioneerJarResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdatePioneerJarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdatePioneerJarResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdatePioneerJarResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -975,29 +1226,30 @@ class MsgUpdatePioneerJarResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdatePioneerJarResponse clone() => MsgUpdatePioneerJarResponse()..mergeFromMessage(this);
+  MsgPioneerUpdatePioneerJarResponse clone() => MsgPioneerUpdatePioneerJarResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdatePioneerJarResponse copyWith(void Function(MsgUpdatePioneerJarResponse) updates) => super.copyWith((message) => updates(message as MsgUpdatePioneerJarResponse)) as MsgUpdatePioneerJarResponse;
+  MsgPioneerUpdatePioneerJarResponse copyWith(void Function(MsgPioneerUpdatePioneerJarResponse) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdatePioneerJarResponse)) as MsgPioneerUpdatePioneerJarResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdatePioneerJarResponse create() => MsgUpdatePioneerJarResponse._();
-  MsgUpdatePioneerJarResponse createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdatePioneerJarResponse> createRepeated() => $pb.PbList<MsgUpdatePioneerJarResponse>();
+  static MsgPioneerUpdatePioneerJarResponse create() => MsgPioneerUpdatePioneerJarResponse._();
+  MsgPioneerUpdatePioneerJarResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdatePioneerJarResponse> createRepeated() => $pb.PbList<MsgPioneerUpdatePioneerJarResponse>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdatePioneerJarResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdatePioneerJarResponse>(create);
-  static MsgUpdatePioneerJarResponse? _defaultInstance;
+  static MsgPioneerUpdatePioneerJarResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdatePioneerJarResponse>(create);
+  static MsgPioneerUpdatePioneerJarResponse? _defaultInstance;
 }
 
-class MsgUpdateJarRegulator extends $pb.GeneratedMessage {
-  factory MsgUpdateJarRegulator({
+class MsgPioneerUpdateJarRegulator extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdateJarRegulator({
     $core.String? creator,
     $core.String? jarID,
     $core.String? regulatorID,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (creator != null) {
@@ -1009,16 +1261,20 @@ class MsgUpdateJarRegulator extends $pb.GeneratedMessage {
     if (regulatorID != null) {
       $result.regulatorID = regulatorID;
     }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
     return $result;
   }
-  MsgUpdateJarRegulator._() : super();
-  factory MsgUpdateJarRegulator.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdateJarRegulator.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  MsgPioneerUpdateJarRegulator._() : super();
+  factory MsgPioneerUpdateJarRegulator.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdateJarRegulator.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateJarRegulator', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdateJarRegulator', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
     ..aOS(3, _omitFieldNames ? '' : 'regulatorID', protoName: 'regulatorID')
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -1026,22 +1282,22 @@ class MsgUpdateJarRegulator extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdateJarRegulator clone() => MsgUpdateJarRegulator()..mergeFromMessage(this);
+  MsgPioneerUpdateJarRegulator clone() => MsgPioneerUpdateJarRegulator()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdateJarRegulator copyWith(void Function(MsgUpdateJarRegulator) updates) => super.copyWith((message) => updates(message as MsgUpdateJarRegulator)) as MsgUpdateJarRegulator;
+  MsgPioneerUpdateJarRegulator copyWith(void Function(MsgPioneerUpdateJarRegulator) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdateJarRegulator)) as MsgPioneerUpdateJarRegulator;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateJarRegulator create() => MsgUpdateJarRegulator._();
-  MsgUpdateJarRegulator createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdateJarRegulator> createRepeated() => $pb.PbList<MsgUpdateJarRegulator>();
+  static MsgPioneerUpdateJarRegulator create() => MsgPioneerUpdateJarRegulator._();
+  MsgPioneerUpdateJarRegulator createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdateJarRegulator> createRepeated() => $pb.PbList<MsgPioneerUpdateJarRegulator>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateJarRegulator getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateJarRegulator>(create);
-  static MsgUpdateJarRegulator? _defaultInstance;
+  static MsgPioneerUpdateJarRegulator getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdateJarRegulator>(create);
+  static MsgPioneerUpdateJarRegulator? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get creator => $_getSZ(0);
@@ -1069,15 +1325,24 @@ class MsgUpdateJarRegulator extends $pb.GeneratedMessage {
   $core.bool hasRegulatorID() => $_has(2);
   @$pb.TagNumber(3)
   void clearRegulatorID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get remoteReport => $_getN(3);
+  @$pb.TagNumber(4)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRemoteReport() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRemoteReport() => clearField(4);
 }
 
-class MsgUpdateJarRegulatorResponse extends $pb.GeneratedMessage {
-  factory MsgUpdateJarRegulatorResponse() => create();
-  MsgUpdateJarRegulatorResponse._() : super();
-  factory MsgUpdateJarRegulatorResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MsgUpdateJarRegulatorResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class MsgPioneerUpdateJarRegulatorResponse extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdateJarRegulatorResponse() => create();
+  MsgPioneerUpdateJarRegulatorResponse._() : super();
+  factory MsgPioneerUpdateJarRegulatorResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdateJarRegulatorResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateJarRegulatorResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdateJarRegulatorResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -1085,22 +1350,174 @@ class MsgUpdateJarRegulatorResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MsgUpdateJarRegulatorResponse clone() => MsgUpdateJarRegulatorResponse()..mergeFromMessage(this);
+  MsgPioneerUpdateJarRegulatorResponse clone() => MsgPioneerUpdateJarRegulatorResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MsgUpdateJarRegulatorResponse copyWith(void Function(MsgUpdateJarRegulatorResponse) updates) => super.copyWith((message) => updates(message as MsgUpdateJarRegulatorResponse)) as MsgUpdateJarRegulatorResponse;
+  MsgPioneerUpdateJarRegulatorResponse copyWith(void Function(MsgPioneerUpdateJarRegulatorResponse) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdateJarRegulatorResponse)) as MsgPioneerUpdateJarRegulatorResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateJarRegulatorResponse create() => MsgUpdateJarRegulatorResponse._();
-  MsgUpdateJarRegulatorResponse createEmptyInstance() => create();
-  static $pb.PbList<MsgUpdateJarRegulatorResponse> createRepeated() => $pb.PbList<MsgUpdateJarRegulatorResponse>();
+  static MsgPioneerUpdateJarRegulatorResponse create() => MsgPioneerUpdateJarRegulatorResponse._();
+  MsgPioneerUpdateJarRegulatorResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdateJarRegulatorResponse> createRepeated() => $pb.PbList<MsgPioneerUpdateJarRegulatorResponse>();
   @$core.pragma('dart2js:noInline')
-  static MsgUpdateJarRegulatorResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateJarRegulatorResponse>(create);
-  static MsgUpdateJarRegulatorResponse? _defaultInstance;
+  static MsgPioneerUpdateJarRegulatorResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdateJarRegulatorResponse>(create);
+  static MsgPioneerUpdateJarRegulatorResponse? _defaultInstance;
+}
+
+class MsgPioneerUpdateEnclaveIdentity extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdateEnclaveIdentity({
+    $core.String? creator,
+    $core.String? uniqueID,
+    $core.String? signerID,
+    $core.String? productID,
+    $core.String? status,
+    $core.List<$core.int>? remoteReport,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (uniqueID != null) {
+      $result.uniqueID = uniqueID;
+    }
+    if (signerID != null) {
+      $result.signerID = signerID;
+    }
+    if (productID != null) {
+      $result.productID = productID;
+    }
+    if (status != null) {
+      $result.status = status;
+    }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    return $result;
+  }
+  MsgPioneerUpdateEnclaveIdentity._() : super();
+  factory MsgPioneerUpdateEnclaveIdentity.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdateEnclaveIdentity.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdateEnclaveIdentity', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..aOS(2, _omitFieldNames ? '' : 'uniqueID', protoName: 'uniqueID')
+    ..aOS(3, _omitFieldNames ? '' : 'signerID', protoName: 'signerID')
+    ..aOS(4, _omitFieldNames ? '' : 'productID', protoName: 'productID')
+    ..aOS(5, _omitFieldNames ? '' : 'status')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgPioneerUpdateEnclaveIdentity clone() => MsgPioneerUpdateEnclaveIdentity()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgPioneerUpdateEnclaveIdentity copyWith(void Function(MsgPioneerUpdateEnclaveIdentity) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdateEnclaveIdentity)) as MsgPioneerUpdateEnclaveIdentity;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgPioneerUpdateEnclaveIdentity create() => MsgPioneerUpdateEnclaveIdentity._();
+  MsgPioneerUpdateEnclaveIdentity createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdateEnclaveIdentity> createRepeated() => $pb.PbList<MsgPioneerUpdateEnclaveIdentity>();
+  @$core.pragma('dart2js:noInline')
+  static MsgPioneerUpdateEnclaveIdentity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdateEnclaveIdentity>(create);
+  static MsgPioneerUpdateEnclaveIdentity? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get uniqueID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set uniqueID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUniqueID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUniqueID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get signerID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set signerID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSignerID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSignerID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get productID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set productID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProductID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProductID() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get status => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set status($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasStatus() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStatus() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.int> get remoteReport => $_getN(5);
+  @$pb.TagNumber(6)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasRemoteReport() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRemoteReport() => clearField(6);
+}
+
+class MsgPioneerUpdateEnclaveIdentityResponse extends $pb.GeneratedMessage {
+  factory MsgPioneerUpdateEnclaveIdentityResponse() => create();
+  MsgPioneerUpdateEnclaveIdentityResponse._() : super();
+  factory MsgPioneerUpdateEnclaveIdentityResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgPioneerUpdateEnclaveIdentityResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerUpdateEnclaveIdentityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgPioneerUpdateEnclaveIdentityResponse clone() => MsgPioneerUpdateEnclaveIdentityResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgPioneerUpdateEnclaveIdentityResponse copyWith(void Function(MsgPioneerUpdateEnclaveIdentityResponse) updates) => super.copyWith((message) => updates(message as MsgPioneerUpdateEnclaveIdentityResponse)) as MsgPioneerUpdateEnclaveIdentityResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgPioneerUpdateEnclaveIdentityResponse create() => MsgPioneerUpdateEnclaveIdentityResponse._();
+  MsgPioneerUpdateEnclaveIdentityResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgPioneerUpdateEnclaveIdentityResponse> createRepeated() => $pb.PbList<MsgPioneerUpdateEnclaveIdentityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgPioneerUpdateEnclaveIdentityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgPioneerUpdateEnclaveIdentityResponse>(create);
+  static MsgPioneerUpdateEnclaveIdentityResponse? _defaultInstance;
 }
 
 class MsgCreateWallet extends $pb.GeneratedMessage {
@@ -1109,14 +1526,14 @@ class MsgCreateWallet extends $pb.GeneratedMessage {
     $core.String? homePioneerID,
     $core.Iterable<$core.String>? serviceProviderID,
     $core.List<$core.int>? encCreateWalletVShare,
-    $20.VShareBindData? createWalletVShareBind,
-    $18.BPedersenCommit? acceptPasswordPC,
+    $21.VShareBindData? createWalletVShareBind,
+    $19.BPedersenCommit? acceptPasswordPC,
     $core.List<$core.int>? encAcceptValidatedCredentialsVShare,
-    $20.VShareBindData? acceptValidatedCredentialsVShareBind,
-    $21.EncryptablePedersenCommit? walletAmountPedersenCommit,
+    $21.VShareBindData? acceptValidatedCredentialsVShareBind,
+    $22.EncryptablePedersenCommit? walletAmountPedersenCommit,
     $core.List<$core.int>? encWalletAmountVShare,
-    $20.VShareBindData? walletAmountVShareBind,
-    $21.EncryptablePedersenCommit? transparentWalletAmountPC,
+    $21.VShareBindData? walletAmountVShareBind,
+    $22.EncryptablePedersenCommit? transparentWalletAmountPC,
     $core.String? acceptCredentialType,
   }) {
     final $result = create();
@@ -1170,14 +1587,14 @@ class MsgCreateWallet extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'homePioneerID', protoName: 'homePioneerID')
     ..pPS(3, _omitFieldNames ? '' : 'serviceProviderID', protoName: 'serviceProviderID')
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'encCreateWalletVShare', $pb.PbFieldType.OY, protoName: 'encCreateWalletVShare')
-    ..aOM<$20.VShareBindData>(5, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$18.BPedersenCommit>(6, _omitFieldNames ? '' : 'acceptPasswordPC', protoName: 'acceptPasswordPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$21.VShareBindData>(5, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$19.BPedersenCommit>(6, _omitFieldNames ? '' : 'acceptPasswordPC', protoName: 'acceptPasswordPC', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encAcceptValidatedCredentialsVShare', $pb.PbFieldType.OY, protoName: 'encAcceptValidatedCredentialsVShare')
-    ..aOM<$20.VShareBindData>(8, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$21.EncryptablePedersenCommit>(9, _omitFieldNames ? '' : 'walletAmountPedersenCommit', protoName: 'walletAmountPedersenCommit', subBuilder: $21.EncryptablePedersenCommit.create)
+    ..aOM<$21.VShareBindData>(8, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$22.EncryptablePedersenCommit>(9, _omitFieldNames ? '' : 'walletAmountPedersenCommit', protoName: 'walletAmountPedersenCommit', subBuilder: $22.EncryptablePedersenCommit.create)
     ..a<$core.List<$core.int>>(10, _omitFieldNames ? '' : 'encWalletAmountVShare', $pb.PbFieldType.OY, protoName: 'encWalletAmountVShare')
-    ..aOM<$20.VShareBindData>(11, _omitFieldNames ? '' : 'walletAmountVShareBind', protoName: 'walletAmountVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$21.EncryptablePedersenCommit>(12, _omitFieldNames ? '' : 'transparentWalletAmountPC', protoName: 'transparentWalletAmountPC', subBuilder: $21.EncryptablePedersenCommit.create)
+    ..aOM<$21.VShareBindData>(11, _omitFieldNames ? '' : 'walletAmountVShareBind', protoName: 'walletAmountVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$22.EncryptablePedersenCommit>(12, _omitFieldNames ? '' : 'transparentWalletAmountPC', protoName: 'transparentWalletAmountPC', subBuilder: $22.EncryptablePedersenCommit.create)
     ..aOS(13, _omitFieldNames ? '' : 'acceptCredentialType', protoName: 'acceptCredentialType')
     ..hasRequiredFields = false
   ;
@@ -1234,26 +1651,26 @@ class MsgCreateWallet extends $pb.GeneratedMessage {
   void clearEncCreateWalletVShare() => clearField(4);
 
   @$pb.TagNumber(5)
-  $20.VShareBindData get createWalletVShareBind => $_getN(4);
+  $21.VShareBindData get createWalletVShareBind => $_getN(4);
   @$pb.TagNumber(5)
-  set createWalletVShareBind($20.VShareBindData v) { setField(5, v); }
+  set createWalletVShareBind($21.VShareBindData v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreateWalletVShareBind() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreateWalletVShareBind() => clearField(5);
   @$pb.TagNumber(5)
-  $20.VShareBindData ensureCreateWalletVShareBind() => $_ensure(4);
+  $21.VShareBindData ensureCreateWalletVShareBind() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $18.BPedersenCommit get acceptPasswordPC => $_getN(5);
+  $19.BPedersenCommit get acceptPasswordPC => $_getN(5);
   @$pb.TagNumber(6)
-  set acceptPasswordPC($18.BPedersenCommit v) { setField(6, v); }
+  set acceptPasswordPC($19.BPedersenCommit v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAcceptPasswordPC() => $_has(5);
   @$pb.TagNumber(6)
   void clearAcceptPasswordPC() => clearField(6);
   @$pb.TagNumber(6)
-  $18.BPedersenCommit ensureAcceptPasswordPC() => $_ensure(5);
+  $19.BPedersenCommit ensureAcceptPasswordPC() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.List<$core.int> get encAcceptValidatedCredentialsVShare => $_getN(6);
@@ -1265,26 +1682,26 @@ class MsgCreateWallet extends $pb.GeneratedMessage {
   void clearEncAcceptValidatedCredentialsVShare() => clearField(7);
 
   @$pb.TagNumber(8)
-  $20.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(7);
+  $21.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(7);
   @$pb.TagNumber(8)
-  set acceptValidatedCredentialsVShareBind($20.VShareBindData v) { setField(8, v); }
+  set acceptValidatedCredentialsVShareBind($21.VShareBindData v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasAcceptValidatedCredentialsVShareBind() => $_has(7);
   @$pb.TagNumber(8)
   void clearAcceptValidatedCredentialsVShareBind() => clearField(8);
   @$pb.TagNumber(8)
-  $20.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(7);
+  $21.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $21.EncryptablePedersenCommit get walletAmountPedersenCommit => $_getN(8);
+  $22.EncryptablePedersenCommit get walletAmountPedersenCommit => $_getN(8);
   @$pb.TagNumber(9)
-  set walletAmountPedersenCommit($21.EncryptablePedersenCommit v) { setField(9, v); }
+  set walletAmountPedersenCommit($22.EncryptablePedersenCommit v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasWalletAmountPedersenCommit() => $_has(8);
   @$pb.TagNumber(9)
   void clearWalletAmountPedersenCommit() => clearField(9);
   @$pb.TagNumber(9)
-  $21.EncryptablePedersenCommit ensureWalletAmountPedersenCommit() => $_ensure(8);
+  $22.EncryptablePedersenCommit ensureWalletAmountPedersenCommit() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.List<$core.int> get encWalletAmountVShare => $_getN(9);
@@ -1296,26 +1713,26 @@ class MsgCreateWallet extends $pb.GeneratedMessage {
   void clearEncWalletAmountVShare() => clearField(10);
 
   @$pb.TagNumber(11)
-  $20.VShareBindData get walletAmountVShareBind => $_getN(10);
+  $21.VShareBindData get walletAmountVShareBind => $_getN(10);
   @$pb.TagNumber(11)
-  set walletAmountVShareBind($20.VShareBindData v) { setField(11, v); }
+  set walletAmountVShareBind($21.VShareBindData v) { setField(11, v); }
   @$pb.TagNumber(11)
   $core.bool hasWalletAmountVShareBind() => $_has(10);
   @$pb.TagNumber(11)
   void clearWalletAmountVShareBind() => clearField(11);
   @$pb.TagNumber(11)
-  $20.VShareBindData ensureWalletAmountVShareBind() => $_ensure(10);
+  $21.VShareBindData ensureWalletAmountVShareBind() => $_ensure(10);
 
   @$pb.TagNumber(12)
-  $21.EncryptablePedersenCommit get transparentWalletAmountPC => $_getN(11);
+  $22.EncryptablePedersenCommit get transparentWalletAmountPC => $_getN(11);
   @$pb.TagNumber(12)
-  set transparentWalletAmountPC($21.EncryptablePedersenCommit v) { setField(12, v); }
+  set transparentWalletAmountPC($22.EncryptablePedersenCommit v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasTransparentWalletAmountPC() => $_has(11);
   @$pb.TagNumber(12)
   void clearTransparentWalletAmountPC() => clearField(12);
   @$pb.TagNumber(12)
-  $21.EncryptablePedersenCommit ensureTransparentWalletAmountPC() => $_ensure(11);
+  $22.EncryptablePedersenCommit ensureTransparentWalletAmountPC() => $_ensure(11);
 
   @$pb.TagNumber(13)
   $core.String get acceptCredentialType => $_getSZ(12);
@@ -1363,21 +1780,21 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   factory MsgTransferFunds({
     $core.String? creator,
     $core.String? transactionID,
-    $18.BPedersenCommit? sourcePC,
-    $18.BPedersenCommit? hiddenTransferPC,
-    $18.BPedersenCommit? newSourcePC,
+    $19.BPedersenCommit? sourcePC,
+    $19.BPedersenCommit? hiddenTransferPC,
+    $19.BPedersenCommit? newSourcePC,
     $core.List<$core.int>? encNewSourceWalletAmountVShare,
-    $20.VShareBindData? newSourceWalletAmountVShareBind,
+    $21.VShareBindData? newSourceWalletAmountVShareBind,
     $core.List<$core.int>? encNewDestinationWalletAmountVShare,
-    $20.VShareBindData? newDestinationWalletAmountVShareBind,
+    $21.VShareBindData? newDestinationWalletAmountVShareBind,
     $core.List<$core.int>? encAnonTransferFundsVShare,
-    $20.VShareBindData? anonTransferFundsVShareBind,
-    $13.BInt? transparentAmount,
+    $21.VShareBindData? anonTransferFundsVShareBind,
+    $14.BInt? transparentAmount,
     $core.String? tokenDenom,
-    $22.BRangeProof? hiddenTransferPCProof,
-    $22.BRangeProof? newSourcePCProof,
+    $23.BRangeProof? hiddenTransferPCProof,
+    $23.BRangeProof? newSourcePCProof,
     $core.List<$core.int>? encTransferFundsVShare,
-    $20.VShareBindData? transferFundsVShareBind,
+    $21.VShareBindData? transferFundsVShareBind,
   }) {
     final $result = create();
     if (creator != null) {
@@ -1440,21 +1857,21 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgTransferFunds', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'transactionID', protoName: 'transactionID')
-    ..aOM<$18.BPedersenCommit>(3, _omitFieldNames ? '' : 'sourcePC', protoName: 'sourcePC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'hiddenTransferPC', protoName: 'hiddenTransferPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(5, _omitFieldNames ? '' : 'newSourcePC', protoName: 'newSourcePC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(3, _omitFieldNames ? '' : 'sourcePC', protoName: 'sourcePC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'hiddenTransferPC', protoName: 'hiddenTransferPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'newSourcePC', protoName: 'newSourcePC', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encNewSourceWalletAmountVShare', $pb.PbFieldType.OY, protoName: 'encNewSourceWalletAmountVShare')
-    ..aOM<$20.VShareBindData>(7, _omitFieldNames ? '' : 'newSourceWalletAmountVShareBind', protoName: 'newSourceWalletAmountVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(7, _omitFieldNames ? '' : 'newSourceWalletAmountVShareBind', protoName: 'newSourceWalletAmountVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'encNewDestinationWalletAmountVShare', $pb.PbFieldType.OY, protoName: 'encNewDestinationWalletAmountVShare')
-    ..aOM<$20.VShareBindData>(9, _omitFieldNames ? '' : 'newDestinationWalletAmountVShareBind', protoName: 'newDestinationWalletAmountVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(9, _omitFieldNames ? '' : 'newDestinationWalletAmountVShareBind', protoName: 'newDestinationWalletAmountVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(10, _omitFieldNames ? '' : 'encAnonTransferFundsVShare', $pb.PbFieldType.OY, protoName: 'encAnonTransferFundsVShare')
-    ..aOM<$20.VShareBindData>(11, _omitFieldNames ? '' : 'anonTransferFundsVShareBind', protoName: 'anonTransferFundsVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$13.BInt>(12, _omitFieldNames ? '' : 'transparentAmount', protoName: 'transparentAmount', subBuilder: $13.BInt.create)
+    ..aOM<$21.VShareBindData>(11, _omitFieldNames ? '' : 'anonTransferFundsVShareBind', protoName: 'anonTransferFundsVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$14.BInt>(12, _omitFieldNames ? '' : 'transparentAmount', protoName: 'transparentAmount', subBuilder: $14.BInt.create)
     ..aOS(13, _omitFieldNames ? '' : 'tokenDenom', protoName: 'tokenDenom')
-    ..aOM<$22.BRangeProof>(14, _omitFieldNames ? '' : 'hiddenTransferPCProof', protoName: 'hiddenTransferPCProof', subBuilder: $22.BRangeProof.create)
-    ..aOM<$22.BRangeProof>(15, _omitFieldNames ? '' : 'newSourcePCProof', protoName: 'newSourcePCProof', subBuilder: $22.BRangeProof.create)
+    ..aOM<$23.BRangeProof>(14, _omitFieldNames ? '' : 'hiddenTransferPCProof', protoName: 'hiddenTransferPCProof', subBuilder: $23.BRangeProof.create)
+    ..aOM<$23.BRangeProof>(15, _omitFieldNames ? '' : 'newSourcePCProof', protoName: 'newSourcePCProof', subBuilder: $23.BRangeProof.create)
     ..a<$core.List<$core.int>>(16, _omitFieldNames ? '' : 'encTransferFundsVShare', $pb.PbFieldType.OY, protoName: 'encTransferFundsVShare')
-    ..aOM<$20.VShareBindData>(17, _omitFieldNames ? '' : 'transferFundsVShareBind', protoName: 'transferFundsVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(17, _omitFieldNames ? '' : 'transferFundsVShareBind', protoName: 'transferFundsVShareBind', subBuilder: $21.VShareBindData.create)
     ..hasRequiredFields = false
   ;
 
@@ -1498,37 +1915,37 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearTransactionID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $18.BPedersenCommit get sourcePC => $_getN(2);
+  $19.BPedersenCommit get sourcePC => $_getN(2);
   @$pb.TagNumber(3)
-  set sourcePC($18.BPedersenCommit v) { setField(3, v); }
+  set sourcePC($19.BPedersenCommit v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSourcePC() => $_has(2);
   @$pb.TagNumber(3)
   void clearSourcePC() => clearField(3);
   @$pb.TagNumber(3)
-  $18.BPedersenCommit ensureSourcePC() => $_ensure(2);
+  $19.BPedersenCommit ensureSourcePC() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get hiddenTransferPC => $_getN(3);
+  $19.BPedersenCommit get hiddenTransferPC => $_getN(3);
   @$pb.TagNumber(4)
-  set hiddenTransferPC($18.BPedersenCommit v) { setField(4, v); }
+  set hiddenTransferPC($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasHiddenTransferPC() => $_has(3);
   @$pb.TagNumber(4)
   void clearHiddenTransferPC() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureHiddenTransferPC() => $_ensure(3);
+  $19.BPedersenCommit ensureHiddenTransferPC() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $18.BPedersenCommit get newSourcePC => $_getN(4);
+  $19.BPedersenCommit get newSourcePC => $_getN(4);
   @$pb.TagNumber(5)
-  set newSourcePC($18.BPedersenCommit v) { setField(5, v); }
+  set newSourcePC($19.BPedersenCommit v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasNewSourcePC() => $_has(4);
   @$pb.TagNumber(5)
   void clearNewSourcePC() => clearField(5);
   @$pb.TagNumber(5)
-  $18.BPedersenCommit ensureNewSourcePC() => $_ensure(4);
+  $19.BPedersenCommit ensureNewSourcePC() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.int> get encNewSourceWalletAmountVShare => $_getN(5);
@@ -1540,15 +1957,15 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearEncNewSourceWalletAmountVShare() => clearField(6);
 
   @$pb.TagNumber(7)
-  $20.VShareBindData get newSourceWalletAmountVShareBind => $_getN(6);
+  $21.VShareBindData get newSourceWalletAmountVShareBind => $_getN(6);
   @$pb.TagNumber(7)
-  set newSourceWalletAmountVShareBind($20.VShareBindData v) { setField(7, v); }
+  set newSourceWalletAmountVShareBind($21.VShareBindData v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasNewSourceWalletAmountVShareBind() => $_has(6);
   @$pb.TagNumber(7)
   void clearNewSourceWalletAmountVShareBind() => clearField(7);
   @$pb.TagNumber(7)
-  $20.VShareBindData ensureNewSourceWalletAmountVShareBind() => $_ensure(6);
+  $21.VShareBindData ensureNewSourceWalletAmountVShareBind() => $_ensure(6);
 
   @$pb.TagNumber(8)
   $core.List<$core.int> get encNewDestinationWalletAmountVShare => $_getN(7);
@@ -1560,15 +1977,15 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearEncNewDestinationWalletAmountVShare() => clearField(8);
 
   @$pb.TagNumber(9)
-  $20.VShareBindData get newDestinationWalletAmountVShareBind => $_getN(8);
+  $21.VShareBindData get newDestinationWalletAmountVShareBind => $_getN(8);
   @$pb.TagNumber(9)
-  set newDestinationWalletAmountVShareBind($20.VShareBindData v) { setField(9, v); }
+  set newDestinationWalletAmountVShareBind($21.VShareBindData v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasNewDestinationWalletAmountVShareBind() => $_has(8);
   @$pb.TagNumber(9)
   void clearNewDestinationWalletAmountVShareBind() => clearField(9);
   @$pb.TagNumber(9)
-  $20.VShareBindData ensureNewDestinationWalletAmountVShareBind() => $_ensure(8);
+  $21.VShareBindData ensureNewDestinationWalletAmountVShareBind() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.List<$core.int> get encAnonTransferFundsVShare => $_getN(9);
@@ -1580,26 +1997,26 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearEncAnonTransferFundsVShare() => clearField(10);
 
   @$pb.TagNumber(11)
-  $20.VShareBindData get anonTransferFundsVShareBind => $_getN(10);
+  $21.VShareBindData get anonTransferFundsVShareBind => $_getN(10);
   @$pb.TagNumber(11)
-  set anonTransferFundsVShareBind($20.VShareBindData v) { setField(11, v); }
+  set anonTransferFundsVShareBind($21.VShareBindData v) { setField(11, v); }
   @$pb.TagNumber(11)
   $core.bool hasAnonTransferFundsVShareBind() => $_has(10);
   @$pb.TagNumber(11)
   void clearAnonTransferFundsVShareBind() => clearField(11);
   @$pb.TagNumber(11)
-  $20.VShareBindData ensureAnonTransferFundsVShareBind() => $_ensure(10);
+  $21.VShareBindData ensureAnonTransferFundsVShareBind() => $_ensure(10);
 
   @$pb.TagNumber(12)
-  $13.BInt get transparentAmount => $_getN(11);
+  $14.BInt get transparentAmount => $_getN(11);
   @$pb.TagNumber(12)
-  set transparentAmount($13.BInt v) { setField(12, v); }
+  set transparentAmount($14.BInt v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasTransparentAmount() => $_has(11);
   @$pb.TagNumber(12)
   void clearTransparentAmount() => clearField(12);
   @$pb.TagNumber(12)
-  $13.BInt ensureTransparentAmount() => $_ensure(11);
+  $14.BInt ensureTransparentAmount() => $_ensure(11);
 
   @$pb.TagNumber(13)
   $core.String get tokenDenom => $_getSZ(12);
@@ -1611,26 +2028,26 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearTokenDenom() => clearField(13);
 
   @$pb.TagNumber(14)
-  $22.BRangeProof get hiddenTransferPCProof => $_getN(13);
+  $23.BRangeProof get hiddenTransferPCProof => $_getN(13);
   @$pb.TagNumber(14)
-  set hiddenTransferPCProof($22.BRangeProof v) { setField(14, v); }
+  set hiddenTransferPCProof($23.BRangeProof v) { setField(14, v); }
   @$pb.TagNumber(14)
   $core.bool hasHiddenTransferPCProof() => $_has(13);
   @$pb.TagNumber(14)
   void clearHiddenTransferPCProof() => clearField(14);
   @$pb.TagNumber(14)
-  $22.BRangeProof ensureHiddenTransferPCProof() => $_ensure(13);
+  $23.BRangeProof ensureHiddenTransferPCProof() => $_ensure(13);
 
   @$pb.TagNumber(15)
-  $22.BRangeProof get newSourcePCProof => $_getN(14);
+  $23.BRangeProof get newSourcePCProof => $_getN(14);
   @$pb.TagNumber(15)
-  set newSourcePCProof($22.BRangeProof v) { setField(15, v); }
+  set newSourcePCProof($23.BRangeProof v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasNewSourcePCProof() => $_has(14);
   @$pb.TagNumber(15)
   void clearNewSourcePCProof() => clearField(15);
   @$pb.TagNumber(15)
-  $22.BRangeProof ensureNewSourcePCProof() => $_ensure(14);
+  $23.BRangeProof ensureNewSourcePCProof() => $_ensure(14);
 
   @$pb.TagNumber(16)
   $core.List<$core.int> get encTransferFundsVShare => $_getN(15);
@@ -1642,15 +2059,15 @@ class MsgTransferFunds extends $pb.GeneratedMessage {
   void clearEncTransferFundsVShare() => clearField(16);
 
   @$pb.TagNumber(17)
-  $20.VShareBindData get transferFundsVShareBind => $_getN(16);
+  $21.VShareBindData get transferFundsVShareBind => $_getN(16);
   @$pb.TagNumber(17)
-  set transferFundsVShareBind($20.VShareBindData v) { setField(17, v); }
+  set transferFundsVShareBind($21.VShareBindData v) { setField(17, v); }
   @$pb.TagNumber(17)
   $core.bool hasTransferFundsVShareBind() => $_has(16);
   @$pb.TagNumber(17)
   void clearTransferFundsVShareBind() => clearField(17);
   @$pb.TagNumber(17)
-  $20.VShareBindData ensureTransferFundsVShareBind() => $_ensure(16);
+  $21.VShareBindData ensureTransferFundsVShareBind() => $_ensure(16);
 }
 
 class MsgTransferFundsResponse extends $pb.GeneratedMessage {
@@ -1689,19 +2106,19 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   factory MsgReceiveFunds({
     $core.String? creator,
     $core.String? transactionID,
-    $18.BPedersenCommit? destinationPC,
-    $18.BPedersenCommit? hiddenTransferPC,
-    $18.BPedersenCommit? newDestinationPC,
+    $19.BPedersenCommit? destinationPC,
+    $19.BPedersenCommit? hiddenTransferPC,
+    $19.BPedersenCommit? newDestinationPC,
     $core.List<$core.int>? encNewDestinationWalletAmountVShare,
-    $20.VShareBindData? newDestinationWalletAmountVShareBind,
+    $21.VShareBindData? newDestinationWalletAmountVShareBind,
     $core.List<$core.int>? encAnonReceiveFundsVShare,
-    $20.VShareBindData? anonReceiveFundsVShareBind,
-    $13.BInt? transparentAmount,
+    $21.VShareBindData? anonReceiveFundsVShareBind,
+    $14.BInt? transparentAmount,
     $core.String? tokenDenom,
-    $22.BRangeProof? hiddenTransferPCProof,
-    $22.BRangeProof? newDestinationPCProof,
+    $23.BRangeProof? hiddenTransferPCProof,
+    $23.BRangeProof? newDestinationPCProof,
     $core.List<$core.int>? encReceiveFundsVShare,
-    $20.VShareBindData? receiveFundsVShareBind,
+    $21.VShareBindData? receiveFundsVShareBind,
   }) {
     final $result = create();
     if (creator != null) {
@@ -1758,19 +2175,19 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgReceiveFunds', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'transactionID', protoName: 'transactionID')
-    ..aOM<$18.BPedersenCommit>(3, _omitFieldNames ? '' : 'destinationPC', protoName: 'destinationPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'hiddenTransferPC', protoName: 'hiddenTransferPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(5, _omitFieldNames ? '' : 'newDestinationPC', protoName: 'newDestinationPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(3, _omitFieldNames ? '' : 'destinationPC', protoName: 'destinationPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'hiddenTransferPC', protoName: 'hiddenTransferPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'newDestinationPC', protoName: 'newDestinationPC', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encNewDestinationWalletAmountVShare', $pb.PbFieldType.OY, protoName: 'encNewDestinationWalletAmountVShare')
-    ..aOM<$20.VShareBindData>(7, _omitFieldNames ? '' : 'newDestinationWalletAmountVShareBind', protoName: 'newDestinationWalletAmountVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(7, _omitFieldNames ? '' : 'newDestinationWalletAmountVShareBind', protoName: 'newDestinationWalletAmountVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'encAnonReceiveFundsVShare', $pb.PbFieldType.OY, protoName: 'encAnonReceiveFundsVShare')
-    ..aOM<$20.VShareBindData>(9, _omitFieldNames ? '' : 'anonReceiveFundsVShareBind', protoName: 'anonReceiveFundsVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$13.BInt>(10, _omitFieldNames ? '' : 'transparentAmount', protoName: 'transparentAmount', subBuilder: $13.BInt.create)
+    ..aOM<$21.VShareBindData>(9, _omitFieldNames ? '' : 'anonReceiveFundsVShareBind', protoName: 'anonReceiveFundsVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$14.BInt>(10, _omitFieldNames ? '' : 'transparentAmount', protoName: 'transparentAmount', subBuilder: $14.BInt.create)
     ..aOS(11, _omitFieldNames ? '' : 'tokenDenom', protoName: 'tokenDenom')
-    ..aOM<$22.BRangeProof>(12, _omitFieldNames ? '' : 'hiddenTransferPCProof', protoName: 'hiddenTransferPCProof', subBuilder: $22.BRangeProof.create)
-    ..aOM<$22.BRangeProof>(13, _omitFieldNames ? '' : 'newDestinationPCProof', protoName: 'newDestinationPCProof', subBuilder: $22.BRangeProof.create)
+    ..aOM<$23.BRangeProof>(12, _omitFieldNames ? '' : 'hiddenTransferPCProof', protoName: 'hiddenTransferPCProof', subBuilder: $23.BRangeProof.create)
+    ..aOM<$23.BRangeProof>(13, _omitFieldNames ? '' : 'newDestinationPCProof', protoName: 'newDestinationPCProof', subBuilder: $23.BRangeProof.create)
     ..a<$core.List<$core.int>>(14, _omitFieldNames ? '' : 'encReceiveFundsVShare', $pb.PbFieldType.OY, protoName: 'encReceiveFundsVShare')
-    ..aOM<$20.VShareBindData>(15, _omitFieldNames ? '' : 'receiveFundsVShareBind', protoName: 'receiveFundsVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(15, _omitFieldNames ? '' : 'receiveFundsVShareBind', protoName: 'receiveFundsVShareBind', subBuilder: $21.VShareBindData.create)
     ..hasRequiredFields = false
   ;
 
@@ -1814,37 +2231,37 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   void clearTransactionID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $18.BPedersenCommit get destinationPC => $_getN(2);
+  $19.BPedersenCommit get destinationPC => $_getN(2);
   @$pb.TagNumber(3)
-  set destinationPC($18.BPedersenCommit v) { setField(3, v); }
+  set destinationPC($19.BPedersenCommit v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasDestinationPC() => $_has(2);
   @$pb.TagNumber(3)
   void clearDestinationPC() => clearField(3);
   @$pb.TagNumber(3)
-  $18.BPedersenCommit ensureDestinationPC() => $_ensure(2);
+  $19.BPedersenCommit ensureDestinationPC() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get hiddenTransferPC => $_getN(3);
+  $19.BPedersenCommit get hiddenTransferPC => $_getN(3);
   @$pb.TagNumber(4)
-  set hiddenTransferPC($18.BPedersenCommit v) { setField(4, v); }
+  set hiddenTransferPC($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasHiddenTransferPC() => $_has(3);
   @$pb.TagNumber(4)
   void clearHiddenTransferPC() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureHiddenTransferPC() => $_ensure(3);
+  $19.BPedersenCommit ensureHiddenTransferPC() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $18.BPedersenCommit get newDestinationPC => $_getN(4);
+  $19.BPedersenCommit get newDestinationPC => $_getN(4);
   @$pb.TagNumber(5)
-  set newDestinationPC($18.BPedersenCommit v) { setField(5, v); }
+  set newDestinationPC($19.BPedersenCommit v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasNewDestinationPC() => $_has(4);
   @$pb.TagNumber(5)
   void clearNewDestinationPC() => clearField(5);
   @$pb.TagNumber(5)
-  $18.BPedersenCommit ensureNewDestinationPC() => $_ensure(4);
+  $19.BPedersenCommit ensureNewDestinationPC() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.int> get encNewDestinationWalletAmountVShare => $_getN(5);
@@ -1856,15 +2273,15 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   void clearEncNewDestinationWalletAmountVShare() => clearField(6);
 
   @$pb.TagNumber(7)
-  $20.VShareBindData get newDestinationWalletAmountVShareBind => $_getN(6);
+  $21.VShareBindData get newDestinationWalletAmountVShareBind => $_getN(6);
   @$pb.TagNumber(7)
-  set newDestinationWalletAmountVShareBind($20.VShareBindData v) { setField(7, v); }
+  set newDestinationWalletAmountVShareBind($21.VShareBindData v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasNewDestinationWalletAmountVShareBind() => $_has(6);
   @$pb.TagNumber(7)
   void clearNewDestinationWalletAmountVShareBind() => clearField(7);
   @$pb.TagNumber(7)
-  $20.VShareBindData ensureNewDestinationWalletAmountVShareBind() => $_ensure(6);
+  $21.VShareBindData ensureNewDestinationWalletAmountVShareBind() => $_ensure(6);
 
   @$pb.TagNumber(8)
   $core.List<$core.int> get encAnonReceiveFundsVShare => $_getN(7);
@@ -1876,26 +2293,26 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   void clearEncAnonReceiveFundsVShare() => clearField(8);
 
   @$pb.TagNumber(9)
-  $20.VShareBindData get anonReceiveFundsVShareBind => $_getN(8);
+  $21.VShareBindData get anonReceiveFundsVShareBind => $_getN(8);
   @$pb.TagNumber(9)
-  set anonReceiveFundsVShareBind($20.VShareBindData v) { setField(9, v); }
+  set anonReceiveFundsVShareBind($21.VShareBindData v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasAnonReceiveFundsVShareBind() => $_has(8);
   @$pb.TagNumber(9)
   void clearAnonReceiveFundsVShareBind() => clearField(9);
   @$pb.TagNumber(9)
-  $20.VShareBindData ensureAnonReceiveFundsVShareBind() => $_ensure(8);
+  $21.VShareBindData ensureAnonReceiveFundsVShareBind() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  $13.BInt get transparentAmount => $_getN(9);
+  $14.BInt get transparentAmount => $_getN(9);
   @$pb.TagNumber(10)
-  set transparentAmount($13.BInt v) { setField(10, v); }
+  set transparentAmount($14.BInt v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasTransparentAmount() => $_has(9);
   @$pb.TagNumber(10)
   void clearTransparentAmount() => clearField(10);
   @$pb.TagNumber(10)
-  $13.BInt ensureTransparentAmount() => $_ensure(9);
+  $14.BInt ensureTransparentAmount() => $_ensure(9);
 
   @$pb.TagNumber(11)
   $core.String get tokenDenom => $_getSZ(10);
@@ -1907,26 +2324,26 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   void clearTokenDenom() => clearField(11);
 
   @$pb.TagNumber(12)
-  $22.BRangeProof get hiddenTransferPCProof => $_getN(11);
+  $23.BRangeProof get hiddenTransferPCProof => $_getN(11);
   @$pb.TagNumber(12)
-  set hiddenTransferPCProof($22.BRangeProof v) { setField(12, v); }
+  set hiddenTransferPCProof($23.BRangeProof v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasHiddenTransferPCProof() => $_has(11);
   @$pb.TagNumber(12)
   void clearHiddenTransferPCProof() => clearField(12);
   @$pb.TagNumber(12)
-  $22.BRangeProof ensureHiddenTransferPCProof() => $_ensure(11);
+  $23.BRangeProof ensureHiddenTransferPCProof() => $_ensure(11);
 
   @$pb.TagNumber(13)
-  $22.BRangeProof get newDestinationPCProof => $_getN(12);
+  $23.BRangeProof get newDestinationPCProof => $_getN(12);
   @$pb.TagNumber(13)
-  set newDestinationPCProof($22.BRangeProof v) { setField(13, v); }
+  set newDestinationPCProof($23.BRangeProof v) { setField(13, v); }
   @$pb.TagNumber(13)
   $core.bool hasNewDestinationPCProof() => $_has(12);
   @$pb.TagNumber(13)
   void clearNewDestinationPCProof() => clearField(13);
   @$pb.TagNumber(13)
-  $22.BRangeProof ensureNewDestinationPCProof() => $_ensure(12);
+  $23.BRangeProof ensureNewDestinationPCProof() => $_ensure(12);
 
   @$pb.TagNumber(14)
   $core.List<$core.int> get encReceiveFundsVShare => $_getN(13);
@@ -1938,15 +2355,15 @@ class MsgReceiveFunds extends $pb.GeneratedMessage {
   void clearEncReceiveFundsVShare() => clearField(14);
 
   @$pb.TagNumber(15)
-  $20.VShareBindData get receiveFundsVShareBind => $_getN(14);
+  $21.VShareBindData get receiveFundsVShareBind => $_getN(14);
   @$pb.TagNumber(15)
-  set receiveFundsVShareBind($20.VShareBindData v) { setField(15, v); }
+  set receiveFundsVShareBind($21.VShareBindData v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasReceiveFundsVShareBind() => $_has(14);
   @$pb.TagNumber(15)
   void clearReceiveFundsVShareBind() => clearField(15);
   @$pb.TagNumber(15)
-  $20.VShareBindData ensureReceiveFundsVShareBind() => $_ensure(14);
+  $21.VShareBindData ensureReceiveFundsVShareBind() => $_ensure(14);
 }
 
 class MsgReceiveFundsResponse extends $pb.GeneratedMessage {
@@ -2206,12 +2623,12 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
     $core.String? creator,
     $core.String? credentialID,
     $core.String? credentialType,
-    $18.BPedersenCommit? credentialPedersenCommit,
+    $19.BPedersenCommit? credentialPedersenCommit,
     $core.List<$core.int>? encCredentialInfoVShare,
-    $20.VShareBindData? credentialInfoVShareBind,
+    $21.VShareBindData? credentialInfoVShareBind,
     $core.List<$core.int>? encCredentialHashVShare,
-    $20.VShareBindData? credentialHashVShareBind,
-    $18.BPedersenCommit? findCredentialPedersenCommit,
+    $21.VShareBindData? credentialHashVShareBind,
+    $19.BPedersenCommit? findCredentialPedersenCommit,
     $core.String? eKYCAppWalletID,
     $core.String? referenceCredentialID,
   }) {
@@ -2259,12 +2676,12 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..aOS(3, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'encCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'encCredentialInfoVShare')
-    ..aOM<$20.VShareBindData>(6, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(6, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encCredentialHashVShare', $pb.PbFieldType.OY, protoName: 'encCredentialHashVShare')
-    ..aOM<$20.VShareBindData>(8, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$18.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$21.VShareBindData>(8, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$19.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..aOS(10, _omitFieldNames ? '' : 'eKYCAppWalletID', protoName: 'eKYCAppWalletID')
     ..aOS(11, _omitFieldNames ? '' : 'referenceCredentialID', protoName: 'referenceCredentialID')
     ..hasRequiredFields = false
@@ -2319,15 +2736,15 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
   void clearCredentialType() => clearField(3);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get credentialPedersenCommit => $_getN(3);
+  $19.BPedersenCommit get credentialPedersenCommit => $_getN(3);
   @$pb.TagNumber(4)
-  set credentialPedersenCommit($18.BPedersenCommit v) { setField(4, v); }
+  set credentialPedersenCommit($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCredentialPedersenCommit() => $_has(3);
   @$pb.TagNumber(4)
   void clearCredentialPedersenCommit() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(3);
+  $19.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.List<$core.int> get encCredentialInfoVShare => $_getN(4);
@@ -2339,15 +2756,15 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
   void clearEncCredentialInfoVShare() => clearField(5);
 
   @$pb.TagNumber(6)
-  $20.VShareBindData get credentialInfoVShareBind => $_getN(5);
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(5);
   @$pb.TagNumber(6)
-  set credentialInfoVShareBind($20.VShareBindData v) { setField(6, v); }
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasCredentialInfoVShareBind() => $_has(5);
   @$pb.TagNumber(6)
   void clearCredentialInfoVShareBind() => clearField(6);
   @$pb.TagNumber(6)
-  $20.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(5);
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.List<$core.int> get encCredentialHashVShare => $_getN(6);
@@ -2359,26 +2776,26 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
   void clearEncCredentialHashVShare() => clearField(7);
 
   @$pb.TagNumber(8)
-  $20.VShareBindData get credentialHashVShareBind => $_getN(7);
+  $21.VShareBindData get credentialHashVShareBind => $_getN(7);
   @$pb.TagNumber(8)
-  set credentialHashVShareBind($20.VShareBindData v) { setField(8, v); }
+  set credentialHashVShareBind($21.VShareBindData v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCredentialHashVShareBind() => $_has(7);
   @$pb.TagNumber(8)
   void clearCredentialHashVShareBind() => clearField(8);
   @$pb.TagNumber(8)
-  $20.VShareBindData ensureCredentialHashVShareBind() => $_ensure(7);
+  $21.VShareBindData ensureCredentialHashVShareBind() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $18.BPedersenCommit get findCredentialPedersenCommit => $_getN(8);
+  $19.BPedersenCommit get findCredentialPedersenCommit => $_getN(8);
   @$pb.TagNumber(9)
-  set findCredentialPedersenCommit($18.BPedersenCommit v) { setField(9, v); }
+  set findCredentialPedersenCommit($19.BPedersenCommit v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasFindCredentialPedersenCommit() => $_has(8);
   @$pb.TagNumber(9)
   void clearFindCredentialPedersenCommit() => clearField(9);
   @$pb.TagNumber(9)
-  $18.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(8);
+  $19.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.String get eKYCAppWalletID => $_getSZ(9);
@@ -2431,14 +2848,124 @@ class MsgCreateCredentialResponse extends $pb.GeneratedMessage {
   static MsgCreateCredentialResponse? _defaultInstance;
 }
 
+class MsgRemoveCredential extends $pb.GeneratedMessage {
+  factory MsgRemoveCredential({
+    $core.String? creator,
+    $core.String? credentialID,
+    $core.String? credentialType,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (credentialID != null) {
+      $result.credentialID = credentialID;
+    }
+    if (credentialType != null) {
+      $result.credentialType = credentialType;
+    }
+    return $result;
+  }
+  MsgRemoveCredential._() : super();
+  factory MsgRemoveCredential.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveCredential.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..aOS(2, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
+    ..aOS(3, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveCredential clone() => MsgRemoveCredential()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveCredential copyWith(void Function(MsgRemoveCredential) updates) => super.copyWith((message) => updates(message as MsgRemoveCredential)) as MsgRemoveCredential;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveCredential create() => MsgRemoveCredential._();
+  MsgRemoveCredential createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveCredential> createRepeated() => $pb.PbList<MsgRemoveCredential>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveCredential getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveCredential>(create);
+  static MsgRemoveCredential? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get credentialID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set credentialID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCredentialID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCredentialID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get credentialType => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set credentialType($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCredentialType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCredentialType() => clearField(3);
+}
+
+class MsgRemoveCredentialResponse extends $pb.GeneratedMessage {
+  factory MsgRemoveCredentialResponse() => create();
+  MsgRemoveCredentialResponse._() : super();
+  factory MsgRemoveCredentialResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveCredentialResponse clone() => MsgRemoveCredentialResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveCredentialResponse copyWith(void Function(MsgRemoveCredentialResponse) updates) => super.copyWith((message) => updates(message as MsgRemoveCredentialResponse)) as MsgRemoveCredentialResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveCredentialResponse create() => MsgRemoveCredentialResponse._();
+  MsgRemoveCredentialResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveCredentialResponse> createRepeated() => $pb.PbList<MsgRemoveCredentialResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveCredentialResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveCredentialResponse>(create);
+  static MsgRemoveCredentialResponse? _defaultInstance;
+}
+
 class MsgPioneerAddPublicKey extends $pb.GeneratedMessage {
   factory MsgPioneerAddPublicKey({
     $core.String? creator,
     $core.String? pubKID,
     $core.String? pubK,
     $core.String? pubKType,
-    $core.Iterable<$23.Share>? shares,
-    $core.String? remoteReport,
+    $core.Iterable<$24.Share>? shares,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (creator != null) {
@@ -2470,8 +2997,8 @@ class MsgPioneerAddPublicKey extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
     ..aOS(3, _omitFieldNames ? '' : 'pubK', protoName: 'pubK')
     ..aOS(4, _omitFieldNames ? '' : 'pubKType', protoName: 'pubKType')
-    ..pc<$23.Share>(5, _omitFieldNames ? '' : 'shares', $pb.PbFieldType.PM, subBuilder: $23.Share.create)
-    ..aOS(6, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..pc<$24.Share>(5, _omitFieldNames ? '' : 'shares', $pb.PbFieldType.PM, subBuilder: $24.Share.create)
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -2533,12 +3060,12 @@ class MsgPioneerAddPublicKey extends $pb.GeneratedMessage {
   void clearPubKType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.List<$23.Share> get shares => $_getList(4);
+  $core.List<$24.Share> get shares => $_getList(4);
 
   @$pb.TagNumber(6)
-  $core.String get remoteReport => $_getSZ(5);
+  $core.List<$core.int> get remoteReport => $_getN(5);
   @$pb.TagNumber(6)
-  set remoteReport($core.String v) { $_setString(5, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasRemoteReport() => $_has(5);
   @$pb.TagNumber(6)
@@ -2584,6 +3111,7 @@ class MsgPioneerUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
     $core.String? nodeID,
     $core.String? nodeType,
     $core.String? externalIPAddress,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (creator != null) {
@@ -2601,6 +3129,9 @@ class MsgPioneerUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
     if (externalIPAddress != null) {
       $result.externalIPAddress = externalIPAddress;
     }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
     return $result;
   }
   MsgPioneerUpdateIntervalPublicKeyID._() : super();
@@ -2613,6 +3144,7 @@ class MsgPioneerUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'nodeID', protoName: 'nodeID')
     ..aOS(4, _omitFieldNames ? '' : 'nodeType', protoName: 'nodeType')
     ..aOS(5, _omitFieldNames ? '' : 'externalIPAddress', protoName: 'externalIPAddress')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -2681,6 +3213,15 @@ class MsgPioneerUpdateIntervalPublicKeyID extends $pb.GeneratedMessage {
   $core.bool hasExternalIPAddress() => $_has(4);
   @$pb.TagNumber(5)
   void clearExternalIPAddress() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.int> get remoteReport => $_getN(5);
+  @$pb.TagNumber(6)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasRemoteReport() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRemoteReport() => clearField(6);
 }
 
 class MsgPioneerUpdateIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
@@ -2828,8 +3369,8 @@ class MsgPioneerEnclaveExchangeResponse extends $pb.GeneratedMessage {
 class MsgPioneerBroadcastSecretSharePrivateKey extends $pb.GeneratedMessage {
   factory MsgPioneerBroadcastSecretSharePrivateKey({
     $core.String? creator,
-    $core.Iterable<$11.SecretSharePrivK>? privateKeys,
-    $core.String? remoteReport,
+    $core.Iterable<$12.SecretSharePrivK>? privateKeys,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (creator != null) {
@@ -2849,8 +3390,8 @@ class MsgPioneerBroadcastSecretSharePrivateKey extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgPioneerBroadcastSecretSharePrivateKey', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
-    ..pc<$11.SecretSharePrivK>(2, _omitFieldNames ? '' : 'privateKeys', $pb.PbFieldType.PM, protoName: 'privateKeys', subBuilder: $11.SecretSharePrivK.create)
-    ..aOS(3, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..pc<$12.SecretSharePrivK>(2, _omitFieldNames ? '' : 'privateKeys', $pb.PbFieldType.PM, protoName: 'privateKeys', subBuilder: $12.SecretSharePrivK.create)
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -2885,12 +3426,12 @@ class MsgPioneerBroadcastSecretSharePrivateKey extends $pb.GeneratedMessage {
   void clearCreator() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<$11.SecretSharePrivK> get privateKeys => $_getList(1);
+  $core.List<$12.SecretSharePrivK> get privateKeys => $_getList(1);
 
   @$pb.TagNumber(3)
-  $core.String get remoteReport => $_getSZ(2);
+  $core.List<$core.int> get remoteReport => $_getN(2);
   @$pb.TagNumber(3)
-  set remoteReport($core.String v) { $_setString(2, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasRemoteReport() => $_has(2);
   @$pb.TagNumber(3)
@@ -2933,7 +3474,7 @@ class MsgProtectPrivateKey extends $pb.GeneratedMessage {
   factory MsgProtectPrivateKey({
     $core.String? creator,
     $core.int? threshold,
-    $core.Iterable<$24.RecoverShare>? recoverShare,
+    $core.Iterable<$25.RecoverShare>? recoverShare,
   }) {
     final $result = create();
     if (creator != null) {
@@ -2954,7 +3495,7 @@ class MsgProtectPrivateKey extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgProtectPrivateKey', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'threshold', $pb.PbFieldType.O3)
-    ..pc<$24.RecoverShare>(3, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $24.RecoverShare.create)
+    ..pc<$25.RecoverShare>(3, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -2998,7 +3539,7 @@ class MsgProtectPrivateKey extends $pb.GeneratedMessage {
   void clearThreshold() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$24.RecoverShare> get recoverShare => $_getList(2);
+  $core.List<$25.RecoverShare> get recoverShare => $_getList(2);
 }
 
 class MsgProtectPrivateKeyResponse extends $pb.GeneratedMessage {
@@ -3037,8 +3578,8 @@ class MsgSignRecoverPrivateKey extends $pb.GeneratedMessage {
   factory MsgSignRecoverPrivateKey({
     $core.String? creator,
     $core.List<$core.int>? encDestinationEWalletIDVShare,
-    $20.VShareBindData? destinationEWalletIDVShareBind,
-    $24.RecoverShare? recoverShare,
+    $21.VShareBindData? destinationEWalletIDVShareBind,
+    $25.RecoverShare? recoverShare,
   }) {
     final $result = create();
     if (creator != null) {
@@ -3062,8 +3603,8 @@ class MsgSignRecoverPrivateKey extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgSignRecoverPrivateKey', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encDestinationEWalletIDVShare', $pb.PbFieldType.OY, protoName: 'encDestinationEWalletIDVShare')
-    ..aOM<$20.VShareBindData>(3, _omitFieldNames ? '' : 'destinationEWalletIDVShareBind', protoName: 'destinationEWalletIDVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$24.RecoverShare>(4, _omitFieldNames ? '' : 'recoverShare', protoName: 'recoverShare', subBuilder: $24.RecoverShare.create)
+    ..aOM<$21.VShareBindData>(3, _omitFieldNames ? '' : 'destinationEWalletIDVShareBind', protoName: 'destinationEWalletIDVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$25.RecoverShare>(4, _omitFieldNames ? '' : 'recoverShare', protoName: 'recoverShare', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -3107,26 +3648,26 @@ class MsgSignRecoverPrivateKey extends $pb.GeneratedMessage {
   void clearEncDestinationEWalletIDVShare() => clearField(2);
 
   @$pb.TagNumber(3)
-  $20.VShareBindData get destinationEWalletIDVShareBind => $_getN(2);
+  $21.VShareBindData get destinationEWalletIDVShareBind => $_getN(2);
   @$pb.TagNumber(3)
-  set destinationEWalletIDVShareBind($20.VShareBindData v) { setField(3, v); }
+  set destinationEWalletIDVShareBind($21.VShareBindData v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasDestinationEWalletIDVShareBind() => $_has(2);
   @$pb.TagNumber(3)
   void clearDestinationEWalletIDVShareBind() => clearField(3);
   @$pb.TagNumber(3)
-  $20.VShareBindData ensureDestinationEWalletIDVShareBind() => $_ensure(2);
+  $21.VShareBindData ensureDestinationEWalletIDVShareBind() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $24.RecoverShare get recoverShare => $_getN(3);
+  $25.RecoverShare get recoverShare => $_getN(3);
   @$pb.TagNumber(4)
-  set recoverShare($24.RecoverShare v) { setField(4, v); }
+  set recoverShare($25.RecoverShare v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasRecoverShare() => $_has(3);
   @$pb.TagNumber(4)
   void clearRecoverShare() => clearField(4);
   @$pb.TagNumber(4)
-  $24.RecoverShare ensureRecoverShare() => $_ensure(3);
+  $25.RecoverShare ensureRecoverShare() => $_ensure(3);
 }
 
 class MsgSignRecoverPrivateKeyResponse extends $pb.GeneratedMessage {
@@ -3168,7 +3709,7 @@ class MsgClaimCredential extends $pb.GeneratedMessage {
     $core.String? credentialType,
     $core.bool? recoverKey,
     $core.List<$core.int>? encClaimCredentialExtraParmsVShare,
-    $20.VShareBindData? claimCredentialExtraParmsVShareBind,
+    $21.VShareBindData? claimCredentialExtraParmsVShareBind,
   }) {
     final $result = create();
     if (creator != null) {
@@ -3201,7 +3742,7 @@ class MsgClaimCredential extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
     ..aOB(4, _omitFieldNames ? '' : 'recoverKey', protoName: 'recoverKey')
     ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'encClaimCredentialExtraParmsVShare', $pb.PbFieldType.OY, protoName: 'encClaimCredentialExtraParmsVShare')
-    ..aOM<$20.VShareBindData>(6, _omitFieldNames ? '' : 'claimCredentialExtraParmsVShareBind', protoName: 'claimCredentialExtraParmsVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(6, _omitFieldNames ? '' : 'claimCredentialExtraParmsVShareBind', protoName: 'claimCredentialExtraParmsVShareBind', subBuilder: $21.VShareBindData.create)
     ..hasRequiredFields = false
   ;
 
@@ -3272,15 +3813,15 @@ class MsgClaimCredential extends $pb.GeneratedMessage {
   void clearEncClaimCredentialExtraParmsVShare() => clearField(5);
 
   @$pb.TagNumber(6)
-  $20.VShareBindData get claimCredentialExtraParmsVShareBind => $_getN(5);
+  $21.VShareBindData get claimCredentialExtraParmsVShareBind => $_getN(5);
   @$pb.TagNumber(6)
-  set claimCredentialExtraParmsVShareBind($20.VShareBindData v) { setField(6, v); }
+  set claimCredentialExtraParmsVShareBind($21.VShareBindData v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasClaimCredentialExtraParmsVShareBind() => $_has(5);
   @$pb.TagNumber(6)
   void clearClaimCredentialExtraParmsVShareBind() => clearField(6);
   @$pb.TagNumber(6)
-  $20.VShareBindData ensureClaimCredentialExtraParmsVShareBind() => $_ensure(5);
+  $21.VShareBindData ensureClaimCredentialExtraParmsVShareBind() => $_ensure(5);
 }
 
 class MsgClaimCredentialResponse extends $pb.GeneratedMessage {
@@ -3319,10 +3860,10 @@ class MsgCreateBulkCredentials extends $pb.GeneratedMessage {
   factory MsgCreateBulkCredentials({
     $core.String? creator,
     $core.String? credentialType,
-    $20.VShareBindData? credentialInfoVShareBind,
-    $20.VShareBindData? credentialHashVShareBind,
+    $21.VShareBindData? credentialInfoVShareBind,
+    $21.VShareBindData? credentialHashVShareBind,
     $core.String? eKYCAppWalletID,
-    $core.Iterable<$25.BulkCredential>? bulkCredentials,
+    $core.Iterable<$26.BulkCredential>? bulkCredentials,
   }) {
     final $result = create();
     if (creator != null) {
@@ -3352,10 +3893,10 @@ class MsgCreateBulkCredentials extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgCreateBulkCredentials', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
-    ..aOM<$20.VShareBindData>(3, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$20.VShareBindData>(4, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(3, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(4, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $21.VShareBindData.create)
     ..aOS(5, _omitFieldNames ? '' : 'eKYCAppWalletID', protoName: 'eKYCAppWalletID')
-    ..pc<$25.BulkCredential>(6, _omitFieldNames ? '' : 'bulkCredentials', $pb.PbFieldType.PM, protoName: 'bulkCredentials', subBuilder: $25.BulkCredential.create)
+    ..pc<$26.BulkCredential>(6, _omitFieldNames ? '' : 'bulkCredentials', $pb.PbFieldType.PM, protoName: 'bulkCredentials', subBuilder: $26.BulkCredential.create)
     ..hasRequiredFields = false
   ;
 
@@ -3399,26 +3940,26 @@ class MsgCreateBulkCredentials extends $pb.GeneratedMessage {
   void clearCredentialType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $20.VShareBindData get credentialInfoVShareBind => $_getN(2);
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(2);
   @$pb.TagNumber(3)
-  set credentialInfoVShareBind($20.VShareBindData v) { setField(3, v); }
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCredentialInfoVShareBind() => $_has(2);
   @$pb.TagNumber(3)
   void clearCredentialInfoVShareBind() => clearField(3);
   @$pb.TagNumber(3)
-  $20.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(2);
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $20.VShareBindData get credentialHashVShareBind => $_getN(3);
+  $21.VShareBindData get credentialHashVShareBind => $_getN(3);
   @$pb.TagNumber(4)
-  set credentialHashVShareBind($20.VShareBindData v) { setField(4, v); }
+  set credentialHashVShareBind($21.VShareBindData v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCredentialHashVShareBind() => $_has(3);
   @$pb.TagNumber(4)
   void clearCredentialHashVShareBind() => clearField(4);
   @$pb.TagNumber(4)
-  $20.VShareBindData ensureCredentialHashVShareBind() => $_ensure(3);
+  $21.VShareBindData ensureCredentialHashVShareBind() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.String get eKYCAppWalletID => $_getSZ(4);
@@ -3430,7 +3971,7 @@ class MsgCreateBulkCredentials extends $pb.GeneratedMessage {
   void clearEKYCAppWalletID() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.List<$25.BulkCredential> get bulkCredentials => $_getList(5);
+  $core.List<$26.BulkCredential> get bulkCredentials => $_getList(5);
 }
 
 class MsgCreateBulkCredentialsResponse extends $pb.GeneratedMessage {

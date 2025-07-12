@@ -14,8 +14,9 @@ import "qadena/qadena/jar_regulator.proto";
 import "qadena/qadena/suspicious_transaction.proto";
 import "qadena/qadena/protect_key.proto";
 import "qadena/qadena/recover_key.proto";
+import "qadena/qadena/enclave_identity.proto";
 
-option go_package = "qadena/x/qadena/types";
+option go_package = "github.com/c3qtech/qadena_v3/x/qadena/types";
 
 // GenesisState defines the qadena module's genesis state.
 message GenesisState {
@@ -32,5 +33,6 @@ message GenesisState {
            uint64                suspiciousTransactionCount =  9;
   repeated ProtectKey            protectKeyList             = 10 [(gogoproto.nullable) = false] ;
   repeated RecoverKey            recoverKeyList             = 11 [(gogoproto.nullable) = false] ;
+  repeated EnclaveIdentity       enclaveIdentityList        = 12 [(gogoproto.nullable) = false] ;
 }
 

@@ -65,14 +65,14 @@ const EncryptableAuthorizedSignatory$json = {
   '1': 'EncryptableAuthorizedSignatory',
   '2': [
     {'1': 'Nonce', '3': 1, '4': 1, '5': 9, '10': 'Nonce'},
-    {'1': 'WalletID', '3': 2, '4': 1, '5': 9, '10': 'WalletID'},
+    {'1': 'WalletID', '3': 2, '4': 3, '5': 9, '10': 'WalletID'},
   ],
 };
 
 /// Descriptor for `EncryptableAuthorizedSignatory`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List encryptableAuthorizedSignatoryDescriptor = $convert.base64Decode(
     'Ch5FbmNyeXB0YWJsZUF1dGhvcml6ZWRTaWduYXRvcnkSFAoFTm9uY2UYASABKAlSBU5vbmNlEh'
-    'oKCFdhbGxldElEGAIgASgJUghXYWxsZXRJRA==');
+    'oKCFdhbGxldElEGAIgAygJUghXYWxsZXRJRA==');
 
 @$core.Deprecated('Use encryptableSignatoryDescriptor instead')
 const EncryptableSignatory$json = {
@@ -510,7 +510,7 @@ const EncryptableSharedEnclaveParams$json = {
     {'1': 'RegulatorPrivK', '3': 7, '4': 1, '5': 9, '10': 'RegulatorPrivK'},
     {'1': 'RegulatorPubK', '3': 8, '4': 1, '5': 9, '10': 'RegulatorPubK'},
     {'1': 'SSIntervalOwners', '3': 9, '4': 1, '5': 11, '6': '.qadena.qadena.EncryptableEnclaveSSOwnerMap', '10': 'SSIntervalOwners'},
-    {'1': 'SSInervalPubKCache', '3': 10, '4': 1, '5': 11, '6': '.qadena.qadena.EncryptableEnclavePubKCacheMap', '10': 'SSInervalPubKCache'},
+    {'1': 'SSIntervalPubKCache', '3': 10, '4': 1, '5': 11, '6': '.qadena.qadena.EncryptableEnclavePubKCacheMap', '10': 'SSIntervalPubKCache'},
   ],
 };
 
@@ -523,6 +523,6 @@ final $typed_data.Uint8List encryptableSharedEnclaveParamsDescriptor = $convert.
     'bW9yUHJpdksSJgoOUmVndWxhdG9yUHJpdksYByABKAlSDlJlZ3VsYXRvclByaXZLEiQKDVJlZ3'
     'VsYXRvclB1YksYCCABKAlSDVJlZ3VsYXRvclB1YksSVwoQU1NJbnRlcnZhbE93bmVycxgJIAEo'
     'CzIrLnFhZGVuYS5xYWRlbmEuRW5jcnlwdGFibGVFbmNsYXZlU1NPd25lck1hcFIQU1NJbnRlcn'
-    'ZhbE93bmVycxJdChJTU0luZXJ2YWxQdWJLQ2FjaGUYCiABKAsyLS5xYWRlbmEucWFkZW5hLkVu'
-    'Y3J5cHRhYmxlRW5jbGF2ZVB1YktDYWNoZU1hcFISU1NJbmVydmFsUHViS0NhY2hl');
+    'ZhbE93bmVycxJfChNTU0ludGVydmFsUHViS0NhY2hlGAogASgLMi0ucWFkZW5hLnFhZGVuYS5F'
+    'bmNyeXB0YWJsZUVuY2xhdmVQdWJLQ2FjaGVNYXBSE1NTSW50ZXJ2YWxQdWJLQ2FjaGU=');
 

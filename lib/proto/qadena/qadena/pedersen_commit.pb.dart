@@ -13,12 +13,12 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'bigint.pb.dart' as $13;
+import 'bigint.pb.dart' as $14;
 
 class EncryptablePedersenCommit extends $pb.GeneratedMessage {
   factory EncryptablePedersenCommit({
-    $13.BInt? a,
-    $13.BInt? x,
+    $14.BInt? a,
+    $14.BInt? x,
   }) {
     final $result = create();
     if (a != null) {
@@ -34,8 +34,8 @@ class EncryptablePedersenCommit extends $pb.GeneratedMessage {
   factory EncryptablePedersenCommit.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptablePedersenCommit', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$13.BInt>(1, _omitFieldNames ? '' : 'a', subBuilder: $13.BInt.create)
-    ..aOM<$13.BInt>(2, _omitFieldNames ? '' : 'x', subBuilder: $13.BInt.create)
+    ..aOM<$14.BInt>(1, _omitFieldNames ? '' : 'a', subBuilder: $14.BInt.create)
+    ..aOM<$14.BInt>(2, _omitFieldNames ? '' : 'x', subBuilder: $14.BInt.create)
     ..hasRequiredFields = false
   ;
 
@@ -61,26 +61,26 @@ class EncryptablePedersenCommit extends $pb.GeneratedMessage {
   static EncryptablePedersenCommit? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.BInt get a => $_getN(0);
+  $14.BInt get a => $_getN(0);
   @$pb.TagNumber(1)
-  set a($13.BInt v) { setField(1, v); }
+  set a($14.BInt v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => clearField(1);
   @$pb.TagNumber(1)
-  $13.BInt ensureA() => $_ensure(0);
+  $14.BInt ensureA() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $13.BInt get x => $_getN(1);
+  $14.BInt get x => $_getN(1);
   @$pb.TagNumber(2)
-  set x($13.BInt v) { setField(2, v); }
+  set x($14.BInt v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasX() => $_has(1);
   @$pb.TagNumber(2)
   void clearX() => clearField(2);
   @$pb.TagNumber(2)
-  $13.BInt ensureX() => $_ensure(1);
+  $14.BInt ensureX() => $_ensure(1);
 }
 
 

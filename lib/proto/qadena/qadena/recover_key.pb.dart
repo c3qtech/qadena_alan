@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'recover_share.pb.dart' as $24;
-import 'v_share_bind_data.pb.dart' as $20;
+import 'recover_share.pb.dart' as $25;
+import 'v_share_bind_data.pb.dart' as $21;
 
 class RecoverKey extends $pb.GeneratedMessage {
   factory RecoverKey({
     $core.String? walletID,
     $core.List<$core.int>? encNewWalletIDVShare,
-    $20.VShareBindData? newWalletIDVShareBind,
+    $21.VShareBindData? newWalletIDVShareBind,
     $core.Iterable<$core.String>? signatory,
-    $core.Iterable<$24.RecoverShare>? recoverShare,
+    $core.Iterable<$25.RecoverShare>? recoverShare,
   }) {
     final $result = create();
     if (walletID != null) {
@@ -49,9 +49,9 @@ class RecoverKey extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RecoverKey', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'walletID', protoName: 'walletID')
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'encNewWalletIDVShare', $pb.PbFieldType.OY, protoName: 'encNewWalletIDVShare')
-    ..aOM<$20.VShareBindData>(4, _omitFieldNames ? '' : 'NewWalletIDVShareBind', protoName: 'NewWalletIDVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(4, _omitFieldNames ? '' : 'NewWalletIDVShareBind', protoName: 'NewWalletIDVShareBind', subBuilder: $21.VShareBindData.create)
     ..pPS(5, _omitFieldNames ? '' : 'signatory')
-    ..pc<$24.RecoverShare>(6, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $24.RecoverShare.create)
+    ..pc<$25.RecoverShare>(6, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -95,21 +95,21 @@ class RecoverKey extends $pb.GeneratedMessage {
   void clearEncNewWalletIDVShare() => clearField(3);
 
   @$pb.TagNumber(4)
-  $20.VShareBindData get newWalletIDVShareBind => $_getN(2);
+  $21.VShareBindData get newWalletIDVShareBind => $_getN(2);
   @$pb.TagNumber(4)
-  set newWalletIDVShareBind($20.VShareBindData v) { setField(4, v); }
+  set newWalletIDVShareBind($21.VShareBindData v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasNewWalletIDVShareBind() => $_has(2);
   @$pb.TagNumber(4)
   void clearNewWalletIDVShareBind() => clearField(4);
   @$pb.TagNumber(4)
-  $20.VShareBindData ensureNewWalletIDVShareBind() => $_ensure(2);
+  $21.VShareBindData ensureNewWalletIDVShareBind() => $_ensure(2);
 
   @$pb.TagNumber(5)
   $core.List<$core.String> get signatory => $_getList(3);
 
   @$pb.TagNumber(6)
-  $core.List<$24.RecoverShare> get recoverShare => $_getList(4);
+  $core.List<$25.RecoverShare> get recoverShare => $_getList(4);
 }
 
 

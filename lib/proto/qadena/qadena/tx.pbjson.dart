@@ -27,8 +27,8 @@ const MsgUpdateParams$json = {
 final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'Cg9Nc2dVcGRhdGVQYXJhbXMSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
     'NTdHJpbmdSCWF1dGhvcml0eRI4CgZwYXJhbXMYAiABKAsyFS5xYWRlbmEucWFkZW5hLlBhcmFt'
-    'c0IJyN4fAKjnsCoBUgZwYXJhbXM6MoLnsCoJYXV0aG9yaXR5iuewKh9xYWRlbmEveC9xYWRlbm'
-    'EvTXNnVXBkYXRlUGFyYW1z');
+    'c0IJyN4fAKjnsCoBUgZwYXJhbXM6SILnsCoJYXV0aG9yaXR5iuewKjVnaXRodWIuY29tL2MzcX'
+    'RlY2gvcWFkZW5hX3YzL3gvcWFkZW5hL01zZ1VwZGF0ZVBhcmFtcw==');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {
@@ -171,85 +171,171 @@ const MsgAddPublicKeyResponse$json = {
 final $typed_data.Uint8List msgAddPublicKeyResponseDescriptor = $convert.base64Decode(
     'ChdNc2dBZGRQdWJsaWNLZXlSZXNwb25zZQ==');
 
-@$core.Deprecated('Use msgUpdateIntervalPublicKeyIDDescriptor instead')
-const MsgUpdateIntervalPublicKeyID$json = {
-  '1': 'MsgUpdateIntervalPublicKeyID',
+@$core.Deprecated('Use msgAddServiceProviderDescriptor instead')
+const MsgAddServiceProvider$json = {
+  '1': 'MsgAddServiceProvider',
   '2': [
-    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
-    {'1': 'nodeID', '3': 2, '4': 1, '5': 9, '10': 'nodeID'},
-    {'1': 'nodeType', '3': 3, '4': 1, '5': 9, '10': 'nodeType'},
+    {'1': 'authority', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'authority'},
+    {'1': 'pubKID', '3': 2, '4': 1, '5': 9, '10': 'pubKID'},
+    {'1': 'nodeID', '3': 3, '4': 1, '5': 9, '10': 'nodeID'},
     {'1': 'serviceProviderType', '3': 4, '4': 1, '5': 9, '10': 'serviceProviderType'},
   ],
   '7': {},
 };
 
-/// Descriptor for `MsgUpdateIntervalPublicKeyID`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdateIntervalPublicKeyIDDescriptor = $convert.base64Decode(
-    'ChxNc2dVcGRhdGVJbnRlcnZhbFB1YmxpY0tleUlEEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3'
-    'ISFgoGbm9kZUlEGAIgASgJUgZub2RlSUQSGgoIbm9kZVR5cGUYAyABKAlSCG5vZGVUeXBlEjAK'
-    'E3NlcnZpY2VQcm92aWRlclR5cGUYBCABKAlSE3NlcnZpY2VQcm92aWRlclR5cGU6DILnsCoHY3'
-    'JlYXRvcg==');
+/// Descriptor for `MsgAddServiceProvider`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgAddServiceProviderDescriptor = $convert.base64Decode(
+    'ChVNc2dBZGRTZXJ2aWNlUHJvdmlkZXISNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLk'
+    'FkZHJlc3NTdHJpbmdSCWF1dGhvcml0eRIWCgZwdWJLSUQYAiABKAlSBnB1YktJRBIWCgZub2Rl'
+    'SUQYAyABKAlSBm5vZGVJRBIwChNzZXJ2aWNlUHJvdmlkZXJUeXBlGAQgASgJUhNzZXJ2aWNlUH'
+    'JvdmlkZXJUeXBlOg6C57AqCWF1dGhvcml0eQ==');
 
-@$core.Deprecated('Use msgUpdateIntervalPublicKeyIDResponseDescriptor instead')
-const MsgUpdateIntervalPublicKeyIDResponse$json = {
-  '1': 'MsgUpdateIntervalPublicKeyIDResponse',
+@$core.Deprecated('Use msgAddServiceProviderResponseDescriptor instead')
+const MsgAddServiceProviderResponse$json = {
+  '1': 'MsgAddServiceProviderResponse',
 };
 
-/// Descriptor for `MsgUpdateIntervalPublicKeyIDResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdateIntervalPublicKeyIDResponseDescriptor = $convert.base64Decode(
-    'CiRNc2dVcGRhdGVJbnRlcnZhbFB1YmxpY0tleUlEUmVzcG9uc2U=');
+/// Descriptor for `MsgAddServiceProviderResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgAddServiceProviderResponseDescriptor = $convert.base64Decode(
+    'Ch1Nc2dBZGRTZXJ2aWNlUHJvdmlkZXJSZXNwb25zZQ==');
 
-@$core.Deprecated('Use msgUpdatePioneerJarDescriptor instead')
-const MsgUpdatePioneerJar$json = {
-  '1': 'MsgUpdatePioneerJar',
+@$core.Deprecated('Use msgDeactivateServiceProviderDescriptor instead')
+const MsgDeactivateServiceProvider$json = {
+  '1': 'MsgDeactivateServiceProvider',
+  '2': [
+    {'1': 'authority', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'authority'},
+    {'1': 'nodeID', '3': 2, '4': 1, '5': 9, '10': 'nodeID'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgDeactivateServiceProvider`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgDeactivateServiceProviderDescriptor = $convert.base64Decode(
+    'ChxNc2dEZWFjdGl2YXRlU2VydmljZVByb3ZpZGVyEjYKCWF1dGhvcml0eRgBIAEoCUIY0rQtFG'
+    'Nvc21vcy5BZGRyZXNzU3RyaW5nUglhdXRob3JpdHkSFgoGbm9kZUlEGAIgASgJUgZub2RlSUQ6'
+    'DoLnsCoJYXV0aG9yaXR5');
+
+@$core.Deprecated('Use msgDeactivateServiceProviderResponseDescriptor instead')
+const MsgDeactivateServiceProviderResponse$json = {
+  '1': 'MsgDeactivateServiceProviderResponse',
+};
+
+/// Descriptor for `MsgDeactivateServiceProviderResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgDeactivateServiceProviderResponseDescriptor = $convert.base64Decode(
+    'CiRNc2dEZWFjdGl2YXRlU2VydmljZVByb3ZpZGVyUmVzcG9uc2U=');
+
+@$core.Deprecated('Use msgUpdateEnclaveIdentityDescriptor instead')
+const MsgUpdateEnclaveIdentity$json = {
+  '1': 'MsgUpdateEnclaveIdentity',
+  '2': [
+    {'1': 'authority', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'authority'},
+    {'1': 'uniqueID', '3': 2, '4': 1, '5': 9, '10': 'uniqueID'},
+    {'1': 'signerID', '3': 3, '4': 1, '5': 9, '10': 'signerID'},
+    {'1': 'productID', '3': 4, '4': 1, '5': 9, '10': 'productID'},
+    {'1': 'status', '3': 5, '4': 1, '5': 9, '10': 'status'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgUpdateEnclaveIdentity`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUpdateEnclaveIdentityDescriptor = $convert.base64Decode(
+    'ChhNc2dVcGRhdGVFbmNsYXZlSWRlbnRpdHkSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW'
+    '9zLkFkZHJlc3NTdHJpbmdSCWF1dGhvcml0eRIaCgh1bmlxdWVJRBgCIAEoCVIIdW5pcXVlSUQS'
+    'GgoIc2lnbmVySUQYAyABKAlSCHNpZ25lcklEEhwKCXByb2R1Y3RJRBgEIAEoCVIJcHJvZHVjdE'
+    'lEEhYKBnN0YXR1cxgFIAEoCVIGc3RhdHVzOg6C57AqCWF1dGhvcml0eQ==');
+
+@$core.Deprecated('Use msgUpdateEnclaveIdentityResponseDescriptor instead')
+const MsgUpdateEnclaveIdentityResponse$json = {
+  '1': 'MsgUpdateEnclaveIdentityResponse',
+};
+
+/// Descriptor for `MsgUpdateEnclaveIdentityResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUpdateEnclaveIdentityResponseDescriptor = $convert.base64Decode(
+    'CiBNc2dVcGRhdGVFbmNsYXZlSWRlbnRpdHlSZXNwb25zZQ==');
+
+@$core.Deprecated('Use msgPioneerUpdatePioneerJarDescriptor instead')
+const MsgPioneerUpdatePioneerJar$json = {
+  '1': 'MsgPioneerUpdatePioneerJar',
   '2': [
     {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
     {'1': 'pioneerID', '3': 2, '4': 1, '5': 9, '10': 'pioneerID'},
     {'1': 'jarID', '3': 3, '4': 1, '5': 9, '10': 'jarID'},
+    {'1': 'remoteReport', '3': 4, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
   '7': {},
 };
 
-/// Descriptor for `MsgUpdatePioneerJar`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdatePioneerJarDescriptor = $convert.base64Decode(
-    'ChNNc2dVcGRhdGVQaW9uZWVySmFyEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISHAoJcGlvbm'
-    'VlcklEGAIgASgJUglwaW9uZWVySUQSFAoFamFySUQYAyABKAlSBWphcklEOgyC57AqB2NyZWF0'
-    'b3I=');
+/// Descriptor for `MsgPioneerUpdatePioneerJar`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdatePioneerJarDescriptor = $convert.base64Decode(
+    'ChpNc2dQaW9uZWVyVXBkYXRlUGlvbmVlckphchIYCgdjcmVhdG9yGAEgASgJUgdjcmVhdG9yEh'
+    'wKCXBpb25lZXJJRBgCIAEoCVIJcGlvbmVlcklEEhQKBWphcklEGAMgASgJUgVqYXJJRBIiCgxy'
+    'ZW1vdGVSZXBvcnQYBCABKAxSDHJlbW90ZVJlcG9ydDoMguewKgdjcmVhdG9y');
 
-@$core.Deprecated('Use msgUpdatePioneerJarResponseDescriptor instead')
-const MsgUpdatePioneerJarResponse$json = {
-  '1': 'MsgUpdatePioneerJarResponse',
+@$core.Deprecated('Use msgPioneerUpdatePioneerJarResponseDescriptor instead')
+const MsgPioneerUpdatePioneerJarResponse$json = {
+  '1': 'MsgPioneerUpdatePioneerJarResponse',
 };
 
-/// Descriptor for `MsgUpdatePioneerJarResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdatePioneerJarResponseDescriptor = $convert.base64Decode(
-    'ChtNc2dVcGRhdGVQaW9uZWVySmFyUmVzcG9uc2U=');
+/// Descriptor for `MsgPioneerUpdatePioneerJarResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdatePioneerJarResponseDescriptor = $convert.base64Decode(
+    'CiJNc2dQaW9uZWVyVXBkYXRlUGlvbmVlckphclJlc3BvbnNl');
 
-@$core.Deprecated('Use msgUpdateJarRegulatorDescriptor instead')
-const MsgUpdateJarRegulator$json = {
-  '1': 'MsgUpdateJarRegulator',
+@$core.Deprecated('Use msgPioneerUpdateJarRegulatorDescriptor instead')
+const MsgPioneerUpdateJarRegulator$json = {
+  '1': 'MsgPioneerUpdateJarRegulator',
   '2': [
     {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
     {'1': 'jarID', '3': 2, '4': 1, '5': 9, '10': 'jarID'},
     {'1': 'regulatorID', '3': 3, '4': 1, '5': 9, '10': 'regulatorID'},
+    {'1': 'remoteReport', '3': 4, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
   '7': {},
 };
 
-/// Descriptor for `MsgUpdateJarRegulator`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdateJarRegulatorDescriptor = $convert.base64Decode(
-    'ChVNc2dVcGRhdGVKYXJSZWd1bGF0b3ISGAoHY3JlYXRvchgBIAEoCVIHY3JlYXRvchIUCgVqYX'
-    'JJRBgCIAEoCVIFamFySUQSIAoLcmVndWxhdG9ySUQYAyABKAlSC3JlZ3VsYXRvcklEOgyC57Aq'
-    'B2NyZWF0b3I=');
+/// Descriptor for `MsgPioneerUpdateJarRegulator`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdateJarRegulatorDescriptor = $convert.base64Decode(
+    'ChxNc2dQaW9uZWVyVXBkYXRlSmFyUmVndWxhdG9yEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3'
+    'ISFAoFamFySUQYAiABKAlSBWphcklEEiAKC3JlZ3VsYXRvcklEGAMgASgJUgtyZWd1bGF0b3JJ'
+    'RBIiCgxyZW1vdGVSZXBvcnQYBCABKAxSDHJlbW90ZVJlcG9ydDoMguewKgdjcmVhdG9y');
 
-@$core.Deprecated('Use msgUpdateJarRegulatorResponseDescriptor instead')
-const MsgUpdateJarRegulatorResponse$json = {
-  '1': 'MsgUpdateJarRegulatorResponse',
+@$core.Deprecated('Use msgPioneerUpdateJarRegulatorResponseDescriptor instead')
+const MsgPioneerUpdateJarRegulatorResponse$json = {
+  '1': 'MsgPioneerUpdateJarRegulatorResponse',
 };
 
-/// Descriptor for `MsgUpdateJarRegulatorResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List msgUpdateJarRegulatorResponseDescriptor = $convert.base64Decode(
-    'Ch1Nc2dVcGRhdGVKYXJSZWd1bGF0b3JSZXNwb25zZQ==');
+/// Descriptor for `MsgPioneerUpdateJarRegulatorResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdateJarRegulatorResponseDescriptor = $convert.base64Decode(
+    'CiRNc2dQaW9uZWVyVXBkYXRlSmFyUmVndWxhdG9yUmVzcG9uc2U=');
+
+@$core.Deprecated('Use msgPioneerUpdateEnclaveIdentityDescriptor instead')
+const MsgPioneerUpdateEnclaveIdentity$json = {
+  '1': 'MsgPioneerUpdateEnclaveIdentity',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'uniqueID', '3': 2, '4': 1, '5': 9, '10': 'uniqueID'},
+    {'1': 'signerID', '3': 3, '4': 1, '5': 9, '10': 'signerID'},
+    {'1': 'productID', '3': 4, '4': 1, '5': 9, '10': 'productID'},
+    {'1': 'status', '3': 5, '4': 1, '5': 9, '10': 'status'},
+    {'1': 'remoteReport', '3': 6, '4': 1, '5': 12, '10': 'remoteReport'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgPioneerUpdateEnclaveIdentity`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdateEnclaveIdentityDescriptor = $convert.base64Decode(
+    'Ch9Nc2dQaW9uZWVyVXBkYXRlRW5jbGF2ZUlkZW50aXR5EhgKB2NyZWF0b3IYASABKAlSB2NyZW'
+    'F0b3ISGgoIdW5pcXVlSUQYAiABKAlSCHVuaXF1ZUlEEhoKCHNpZ25lcklEGAMgASgJUghzaWdu'
+    'ZXJJRBIcCglwcm9kdWN0SUQYBCABKAlSCXByb2R1Y3RJRBIWCgZzdGF0dXMYBSABKAlSBnN0YX'
+    'R1cxIiCgxyZW1vdGVSZXBvcnQYBiABKAxSDHJlbW90ZVJlcG9ydDoMguewKgdjcmVhdG9y');
+
+@$core.Deprecated('Use msgPioneerUpdateEnclaveIdentityResponseDescriptor instead')
+const MsgPioneerUpdateEnclaveIdentityResponse$json = {
+  '1': 'MsgPioneerUpdateEnclaveIdentityResponse',
+};
+
+/// Descriptor for `MsgPioneerUpdateEnclaveIdentityResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgPioneerUpdateEnclaveIdentityResponseDescriptor = $convert.base64Decode(
+    'CidNc2dQaW9uZWVyVXBkYXRlRW5jbGF2ZUlkZW50aXR5UmVzcG9uc2U=');
 
 @$core.Deprecated('Use msgCreateWalletDescriptor instead')
 const MsgCreateWallet$json = {
@@ -514,6 +600,32 @@ const MsgCreateCredentialResponse$json = {
 final $typed_data.Uint8List msgCreateCredentialResponseDescriptor = $convert.base64Decode(
     'ChtNc2dDcmVhdGVDcmVkZW50aWFsUmVzcG9uc2U=');
 
+@$core.Deprecated('Use msgRemoveCredentialDescriptor instead')
+const MsgRemoveCredential$json = {
+  '1': 'MsgRemoveCredential',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'credentialID', '3': 2, '4': 1, '5': 9, '10': 'credentialID'},
+    {'1': 'credentialType', '3': 3, '4': 1, '5': 9, '10': 'credentialType'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgRemoveCredential`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveCredentialDescriptor = $convert.base64Decode(
+    'ChNNc2dSZW1vdmVDcmVkZW50aWFsEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISIgoMY3JlZG'
+    'VudGlhbElEGAIgASgJUgxjcmVkZW50aWFsSUQSJgoOY3JlZGVudGlhbFR5cGUYAyABKAlSDmNy'
+    'ZWRlbnRpYWxUeXBlOgyC57AqB2NyZWF0b3I=');
+
+@$core.Deprecated('Use msgRemoveCredentialResponseDescriptor instead')
+const MsgRemoveCredentialResponse$json = {
+  '1': 'MsgRemoveCredentialResponse',
+};
+
+/// Descriptor for `MsgRemoveCredentialResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveCredentialResponseDescriptor = $convert.base64Decode(
+    'ChtNc2dSZW1vdmVDcmVkZW50aWFsUmVzcG9uc2U=');
+
 @$core.Deprecated('Use msgPioneerAddPublicKeyDescriptor instead')
 const MsgPioneerAddPublicKey$json = {
   '1': 'MsgPioneerAddPublicKey',
@@ -523,7 +635,7 @@ const MsgPioneerAddPublicKey$json = {
     {'1': 'pubK', '3': 3, '4': 1, '5': 9, '10': 'pubK'},
     {'1': 'pubKType', '3': 4, '4': 1, '5': 9, '10': 'pubKType'},
     {'1': 'shares', '3': 5, '4': 3, '5': 11, '6': '.qadena.qadena.Share', '10': 'shares'},
-    {'1': 'remoteReport', '3': 6, '4': 1, '5': 9, '10': 'remoteReport'},
+    {'1': 'remoteReport', '3': 6, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
   '7': {},
 };
@@ -533,7 +645,7 @@ final $typed_data.Uint8List msgPioneerAddPublicKeyDescriptor = $convert.base64De
     'ChZNc2dQaW9uZWVyQWRkUHVibGljS2V5EhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISFgoGcH'
     'ViS0lEGAIgASgJUgZwdWJLSUQSEgoEcHViSxgDIAEoCVIEcHViSxIaCghwdWJLVHlwZRgEIAEo'
     'CVIIcHViS1R5cGUSLAoGc2hhcmVzGAUgAygLMhQucWFkZW5hLnFhZGVuYS5TaGFyZVIGc2hhcm'
-    'VzEiIKDHJlbW90ZVJlcG9ydBgGIAEoCVIMcmVtb3RlUmVwb3J0OgyC57AqB2NyZWF0b3I=');
+    'VzEiIKDHJlbW90ZVJlcG9ydBgGIAEoDFIMcmVtb3RlUmVwb3J0OgyC57AqB2NyZWF0b3I=');
 
 @$core.Deprecated('Use msgPioneerAddPublicKeyResponseDescriptor instead')
 const MsgPioneerAddPublicKeyResponse$json = {
@@ -553,6 +665,7 @@ const MsgPioneerUpdateIntervalPublicKeyID$json = {
     {'1': 'nodeID', '3': 3, '4': 1, '5': 9, '10': 'nodeID'},
     {'1': 'nodeType', '3': 4, '4': 1, '5': 9, '10': 'nodeType'},
     {'1': 'externalIPAddress', '3': 5, '4': 1, '5': 9, '10': 'externalIPAddress'},
+    {'1': 'remoteReport', '3': 6, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
   '7': {},
 };
@@ -562,7 +675,8 @@ final $typed_data.Uint8List msgPioneerUpdateIntervalPublicKeyIDDescriptor = $con
     'CiNNc2dQaW9uZWVyVXBkYXRlSW50ZXJ2YWxQdWJsaWNLZXlJRBIYCgdjcmVhdG9yGAEgASgJUg'
     'djcmVhdG9yEhYKBnB1YktJRBgCIAEoCVIGcHViS0lEEhYKBm5vZGVJRBgDIAEoCVIGbm9kZUlE'
     'EhoKCG5vZGVUeXBlGAQgASgJUghub2RlVHlwZRIsChFleHRlcm5hbElQQWRkcmVzcxgFIAEoCV'
-    'IRZXh0ZXJuYWxJUEFkZHJlc3M6DILnsCoHY3JlYXRvcg==');
+    'IRZXh0ZXJuYWxJUEFkZHJlc3MSIgoMcmVtb3RlUmVwb3J0GAYgASgMUgxyZW1vdGVSZXBvcnQ6'
+    'DILnsCoHY3JlYXRvcg==');
 
 @$core.Deprecated('Use msgPioneerUpdateIntervalPublicKeyIDResponseDescriptor instead')
 const MsgPioneerUpdateIntervalPublicKeyIDResponse$json = {
@@ -604,7 +718,7 @@ const MsgPioneerBroadcastSecretSharePrivateKey$json = {
   '2': [
     {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
     {'1': 'privateKeys', '3': 2, '4': 3, '5': 11, '6': '.qadena.qadena.SecretSharePrivK', '10': 'privateKeys'},
-    {'1': 'remoteReport', '3': 3, '4': 1, '5': 9, '10': 'remoteReport'},
+    {'1': 'remoteReport', '3': 3, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
   '7': {},
 };
@@ -613,7 +727,7 @@ const MsgPioneerBroadcastSecretSharePrivateKey$json = {
 final $typed_data.Uint8List msgPioneerBroadcastSecretSharePrivateKeyDescriptor = $convert.base64Decode(
     'CihNc2dQaW9uZWVyQnJvYWRjYXN0U2VjcmV0U2hhcmVQcml2YXRlS2V5EhgKB2NyZWF0b3IYAS'
     'ABKAlSB2NyZWF0b3ISQQoLcHJpdmF0ZUtleXMYAiADKAsyHy5xYWRlbmEucWFkZW5hLlNlY3Jl'
-    'dFNoYXJlUHJpdktSC3ByaXZhdGVLZXlzEiIKDHJlbW90ZVJlcG9ydBgDIAEoCVIMcmVtb3RlUm'
+    'dFNoYXJlUHJpdktSC3ByaXZhdGVLZXlzEiIKDHJlbW90ZVJlcG9ydBgDIAEoDFIMcmVtb3RlUm'
     'Vwb3J0OgyC57AqB2NyZWF0b3I=');
 
 @$core.Deprecated('Use msgPioneerBroadcastSecretSharePrivateKeyResponseDescriptor instead')

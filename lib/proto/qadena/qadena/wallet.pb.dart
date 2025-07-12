@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'b_pedersen_commit.pb.dart' as $18;
-import 'recover_share.pb.dart' as $24;
-import 'v_share_bind_data.pb.dart' as $20;
+import 'b_pedersen_commit.pb.dart' as $19;
+import 'recover_share.pb.dart' as $25;
+import 'v_share_bind_data.pb.dart' as $21;
 
 class WalletAmount extends $pb.GeneratedMessage {
   factory WalletAmount({
-    $18.BPedersenCommit? walletAmountPedersenCommit,
+    $19.BPedersenCommit? walletAmountPedersenCommit,
     $core.List<$core.int>? encWalletAmountVShare,
-    $20.VShareBindData? walletAmountVShareBind,
-    $core.Iterable<$18.BPedersenCommit>? requiredSenderCheckPC,
+    $21.VShareBindData? walletAmountVShareBind,
+    $core.Iterable<$19.BPedersenCommit>? requiredSenderCheckPC,
   }) {
     final $result = create();
     if (walletAmountPedersenCommit != null) {
@@ -44,10 +44,10 @@ class WalletAmount extends $pb.GeneratedMessage {
   factory WalletAmount.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'WalletAmount', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$18.BPedersenCommit>(1, _omitFieldNames ? '' : 'walletAmountPedersenCommit', protoName: 'walletAmountPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(1, _omitFieldNames ? '' : 'walletAmountPedersenCommit', protoName: 'walletAmountPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encWalletAmountVShare', $pb.PbFieldType.OY, protoName: 'encWalletAmountVShare')
-    ..aOM<$20.VShareBindData>(3, _omitFieldNames ? '' : 'walletAmountVShareBind', protoName: 'walletAmountVShareBind', subBuilder: $20.VShareBindData.create)
-    ..pc<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'RequiredSenderCheckPC', $pb.PbFieldType.PM, protoName: 'RequiredSenderCheckPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$21.VShareBindData>(3, _omitFieldNames ? '' : 'walletAmountVShareBind', protoName: 'walletAmountVShareBind', subBuilder: $21.VShareBindData.create)
+    ..pc<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'RequiredSenderCheckPC', $pb.PbFieldType.PM, protoName: 'RequiredSenderCheckPC', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -73,15 +73,15 @@ class WalletAmount extends $pb.GeneratedMessage {
   static WalletAmount? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.BPedersenCommit get walletAmountPedersenCommit => $_getN(0);
+  $19.BPedersenCommit get walletAmountPedersenCommit => $_getN(0);
   @$pb.TagNumber(1)
-  set walletAmountPedersenCommit($18.BPedersenCommit v) { setField(1, v); }
+  set walletAmountPedersenCommit($19.BPedersenCommit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasWalletAmountPedersenCommit() => $_has(0);
   @$pb.TagNumber(1)
   void clearWalletAmountPedersenCommit() => clearField(1);
   @$pb.TagNumber(1)
-  $18.BPedersenCommit ensureWalletAmountPedersenCommit() => $_ensure(0);
+  $19.BPedersenCommit ensureWalletAmountPedersenCommit() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.List<$core.int> get encWalletAmountVShare => $_getN(1);
@@ -93,18 +93,18 @@ class WalletAmount extends $pb.GeneratedMessage {
   void clearEncWalletAmountVShare() => clearField(2);
 
   @$pb.TagNumber(3)
-  $20.VShareBindData get walletAmountVShareBind => $_getN(2);
+  $21.VShareBindData get walletAmountVShareBind => $_getN(2);
   @$pb.TagNumber(3)
-  set walletAmountVShareBind($20.VShareBindData v) { setField(3, v); }
+  set walletAmountVShareBind($21.VShareBindData v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasWalletAmountVShareBind() => $_has(2);
   @$pb.TagNumber(3)
   void clearWalletAmountVShareBind() => clearField(3);
   @$pb.TagNumber(3)
-  $20.VShareBindData ensureWalletAmountVShareBind() => $_ensure(2);
+  $21.VShareBindData ensureWalletAmountVShareBind() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.List<$18.BPedersenCommit> get requiredSenderCheckPC => $_getList(3);
+  $core.List<$19.BPedersenCommit> get requiredSenderCheckPC => $_getList(3);
 }
 
 class ListWalletAmount extends $pb.GeneratedMessage {
@@ -162,14 +162,14 @@ class Wallet extends $pb.GeneratedMessage {
     $core.Map<$core.String, WalletAmount>? walletAmount,
     $core.String? credentialID,
     $core.List<$core.int>? encCreateWalletVShare,
-    $20.VShareBindData? createWalletVShareBind,
+    $21.VShareBindData? createWalletVShareBind,
     $core.Map<$core.String, $core.int>? ephemeralWalletAmountCount,
     $core.Map<$core.String, ListWalletAmount>? queuedWalletAmount,
-    $18.BPedersenCommit? acceptPasswordPedersenCommit,
+    $19.BPedersenCommit? acceptPasswordPedersenCommit,
     $core.List<$core.int>? encAcceptValidatedCredentialsVShare,
-    $20.VShareBindData? acceptValidatedCredentialsVShareBind,
+    $21.VShareBindData? acceptValidatedCredentialsVShareBind,
     $core.String? senderOptions,
-    $core.Iterable<$24.RecoverShare>? recoverShares,
+    $core.Iterable<$25.RecoverShare>? recoverShares,
   }) {
     final $result = create();
     if (walletID != null) {
@@ -227,14 +227,14 @@ class Wallet extends $pb.GeneratedMessage {
     ..m<$core.String, WalletAmount>(4, _omitFieldNames ? '' : 'walletAmount', protoName: 'walletAmount', entryClassName: 'Wallet.WalletAmountEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: WalletAmount.create, valueDefaultOrMaker: WalletAmount.getDefault, packageName: const $pb.PackageName('qadena.qadena'))
     ..aOS(5, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encCreateWalletVShare', $pb.PbFieldType.OY, protoName: 'encCreateWalletVShare')
-    ..aOM<$20.VShareBindData>(7, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(7, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $21.VShareBindData.create)
     ..m<$core.String, $core.int>(8, _omitFieldNames ? '' : 'ephemeralWalletAmountCount', protoName: 'ephemeralWalletAmountCount', entryClassName: 'Wallet.EphemeralWalletAmountCountEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O3, packageName: const $pb.PackageName('qadena.qadena'))
     ..m<$core.String, ListWalletAmount>(9, _omitFieldNames ? '' : 'queuedWalletAmount', protoName: 'queuedWalletAmount', entryClassName: 'Wallet.QueuedWalletAmountEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: ListWalletAmount.create, valueDefaultOrMaker: ListWalletAmount.getDefault, packageName: const $pb.PackageName('qadena.qadena'))
-    ..aOM<$18.BPedersenCommit>(10, _omitFieldNames ? '' : 'acceptPasswordPedersenCommit', protoName: 'acceptPasswordPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(10, _omitFieldNames ? '' : 'acceptPasswordPedersenCommit', protoName: 'acceptPasswordPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(11, _omitFieldNames ? '' : 'encAcceptValidatedCredentialsVShare', $pb.PbFieldType.OY, protoName: 'encAcceptValidatedCredentialsVShare')
-    ..aOM<$20.VShareBindData>(12, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(12, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $21.VShareBindData.create)
     ..aOS(13, _omitFieldNames ? '' : 'senderOptions', protoName: 'senderOptions')
-    ..pc<$24.RecoverShare>(14, _omitFieldNames ? '' : 'recoverShares', $pb.PbFieldType.PM, protoName: 'recoverShares', subBuilder: $24.RecoverShare.create)
+    ..pc<$25.RecoverShare>(14, _omitFieldNames ? '' : 'recoverShares', $pb.PbFieldType.PM, protoName: 'recoverShares', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -302,15 +302,15 @@ class Wallet extends $pb.GeneratedMessage {
   void clearEncCreateWalletVShare() => clearField(6);
 
   @$pb.TagNumber(7)
-  $20.VShareBindData get createWalletVShareBind => $_getN(6);
+  $21.VShareBindData get createWalletVShareBind => $_getN(6);
   @$pb.TagNumber(7)
-  set createWalletVShareBind($20.VShareBindData v) { setField(7, v); }
+  set createWalletVShareBind($21.VShareBindData v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreateWalletVShareBind() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreateWalletVShareBind() => clearField(7);
   @$pb.TagNumber(7)
-  $20.VShareBindData ensureCreateWalletVShareBind() => $_ensure(6);
+  $21.VShareBindData ensureCreateWalletVShareBind() => $_ensure(6);
 
   @$pb.TagNumber(8)
   $core.Map<$core.String, $core.int> get ephemeralWalletAmountCount => $_getMap(7);
@@ -319,15 +319,15 @@ class Wallet extends $pb.GeneratedMessage {
   $core.Map<$core.String, ListWalletAmount> get queuedWalletAmount => $_getMap(8);
 
   @$pb.TagNumber(10)
-  $18.BPedersenCommit get acceptPasswordPedersenCommit => $_getN(9);
+  $19.BPedersenCommit get acceptPasswordPedersenCommit => $_getN(9);
   @$pb.TagNumber(10)
-  set acceptPasswordPedersenCommit($18.BPedersenCommit v) { setField(10, v); }
+  set acceptPasswordPedersenCommit($19.BPedersenCommit v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasAcceptPasswordPedersenCommit() => $_has(9);
   @$pb.TagNumber(10)
   void clearAcceptPasswordPedersenCommit() => clearField(10);
   @$pb.TagNumber(10)
-  $18.BPedersenCommit ensureAcceptPasswordPedersenCommit() => $_ensure(9);
+  $19.BPedersenCommit ensureAcceptPasswordPedersenCommit() => $_ensure(9);
 
   @$pb.TagNumber(11)
   $core.List<$core.int> get encAcceptValidatedCredentialsVShare => $_getN(10);
@@ -339,15 +339,15 @@ class Wallet extends $pb.GeneratedMessage {
   void clearEncAcceptValidatedCredentialsVShare() => clearField(11);
 
   @$pb.TagNumber(12)
-  $20.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(11);
+  $21.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(11);
   @$pb.TagNumber(12)
-  set acceptValidatedCredentialsVShareBind($20.VShareBindData v) { setField(12, v); }
+  set acceptValidatedCredentialsVShareBind($21.VShareBindData v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasAcceptValidatedCredentialsVShareBind() => $_has(11);
   @$pb.TagNumber(12)
   void clearAcceptValidatedCredentialsVShareBind() => clearField(12);
   @$pb.TagNumber(12)
-  $20.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(11);
+  $21.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(11);
 
   @$pb.TagNumber(13)
   $core.String get senderOptions => $_getSZ(12);
@@ -359,7 +359,7 @@ class Wallet extends $pb.GeneratedMessage {
   void clearSenderOptions() => clearField(13);
 
   @$pb.TagNumber(14)
-  $core.List<$24.RecoverShare> get recoverShares => $_getList(13);
+  $core.List<$25.RecoverShare> get recoverShares => $_getList(13);
 }
 
 class StringWalletAmount extends $pb.GeneratedMessage {
@@ -566,14 +566,14 @@ class StableWallet extends $pb.GeneratedMessage {
     $core.Iterable<StringWalletAmount>? walletAmount,
     $core.String? credentialID,
     $core.List<$core.int>? encCreateWalletVShare,
-    $20.VShareBindData? createWalletVShareBind,
+    $21.VShareBindData? createWalletVShareBind,
     $core.Iterable<StringInt32>? ephemeralWalletAmountCount,
     $core.Iterable<StringListWalletAmount>? queuedWalletAmount,
-    $18.BPedersenCommit? acceptPasswordPedersenCommit,
+    $19.BPedersenCommit? acceptPasswordPedersenCommit,
     $core.List<$core.int>? encAcceptValidatedCredentialsVShare,
-    $20.VShareBindData? acceptValidatedCredentialsVShareBind,
+    $21.VShareBindData? acceptValidatedCredentialsVShareBind,
     $core.String? senderOptions,
-    $core.Iterable<$24.RecoverShare>? recoverShares,
+    $core.Iterable<$25.RecoverShare>? recoverShares,
   }) {
     final $result = create();
     if (walletID != null) {
@@ -631,14 +631,14 @@ class StableWallet extends $pb.GeneratedMessage {
     ..pc<StringWalletAmount>(4, _omitFieldNames ? '' : 'walletAmount', $pb.PbFieldType.PM, protoName: 'walletAmount', subBuilder: StringWalletAmount.create)
     ..aOS(5, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'encCreateWalletVShare', $pb.PbFieldType.OY, protoName: 'encCreateWalletVShare')
-    ..aOM<$20.VShareBindData>(7, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(7, _omitFieldNames ? '' : 'createWalletVShareBind', protoName: 'createWalletVShareBind', subBuilder: $21.VShareBindData.create)
     ..pc<StringInt32>(8, _omitFieldNames ? '' : 'ephemeralWalletAmountCount', $pb.PbFieldType.PM, protoName: 'ephemeralWalletAmountCount', subBuilder: StringInt32.create)
     ..pc<StringListWalletAmount>(9, _omitFieldNames ? '' : 'queuedWalletAmount', $pb.PbFieldType.PM, protoName: 'queuedWalletAmount', subBuilder: StringListWalletAmount.create)
-    ..aOM<$18.BPedersenCommit>(10, _omitFieldNames ? '' : 'acceptPasswordPedersenCommit', protoName: 'acceptPasswordPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(10, _omitFieldNames ? '' : 'acceptPasswordPedersenCommit', protoName: 'acceptPasswordPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(11, _omitFieldNames ? '' : 'encAcceptValidatedCredentialsVShare', $pb.PbFieldType.OY, protoName: 'encAcceptValidatedCredentialsVShare')
-    ..aOM<$20.VShareBindData>(12, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(12, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $21.VShareBindData.create)
     ..aOS(13, _omitFieldNames ? '' : 'senderOptions', protoName: 'senderOptions')
-    ..pc<$24.RecoverShare>(14, _omitFieldNames ? '' : 'recoverShares', $pb.PbFieldType.PM, protoName: 'recoverShares', subBuilder: $24.RecoverShare.create)
+    ..pc<$25.RecoverShare>(14, _omitFieldNames ? '' : 'recoverShares', $pb.PbFieldType.PM, protoName: 'recoverShares', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -706,15 +706,15 @@ class StableWallet extends $pb.GeneratedMessage {
   void clearEncCreateWalletVShare() => clearField(6);
 
   @$pb.TagNumber(7)
-  $20.VShareBindData get createWalletVShareBind => $_getN(6);
+  $21.VShareBindData get createWalletVShareBind => $_getN(6);
   @$pb.TagNumber(7)
-  set createWalletVShareBind($20.VShareBindData v) { setField(7, v); }
+  set createWalletVShareBind($21.VShareBindData v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreateWalletVShareBind() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreateWalletVShareBind() => clearField(7);
   @$pb.TagNumber(7)
-  $20.VShareBindData ensureCreateWalletVShareBind() => $_ensure(6);
+  $21.VShareBindData ensureCreateWalletVShareBind() => $_ensure(6);
 
   @$pb.TagNumber(8)
   $core.List<StringInt32> get ephemeralWalletAmountCount => $_getList(7);
@@ -723,15 +723,15 @@ class StableWallet extends $pb.GeneratedMessage {
   $core.List<StringListWalletAmount> get queuedWalletAmount => $_getList(8);
 
   @$pb.TagNumber(10)
-  $18.BPedersenCommit get acceptPasswordPedersenCommit => $_getN(9);
+  $19.BPedersenCommit get acceptPasswordPedersenCommit => $_getN(9);
   @$pb.TagNumber(10)
-  set acceptPasswordPedersenCommit($18.BPedersenCommit v) { setField(10, v); }
+  set acceptPasswordPedersenCommit($19.BPedersenCommit v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasAcceptPasswordPedersenCommit() => $_has(9);
   @$pb.TagNumber(10)
   void clearAcceptPasswordPedersenCommit() => clearField(10);
   @$pb.TagNumber(10)
-  $18.BPedersenCommit ensureAcceptPasswordPedersenCommit() => $_ensure(9);
+  $19.BPedersenCommit ensureAcceptPasswordPedersenCommit() => $_ensure(9);
 
   @$pb.TagNumber(11)
   $core.List<$core.int> get encAcceptValidatedCredentialsVShare => $_getN(10);
@@ -743,15 +743,15 @@ class StableWallet extends $pb.GeneratedMessage {
   void clearEncAcceptValidatedCredentialsVShare() => clearField(11);
 
   @$pb.TagNumber(12)
-  $20.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(11);
+  $21.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(11);
   @$pb.TagNumber(12)
-  set acceptValidatedCredentialsVShareBind($20.VShareBindData v) { setField(12, v); }
+  set acceptValidatedCredentialsVShareBind($21.VShareBindData v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasAcceptValidatedCredentialsVShareBind() => $_has(11);
   @$pb.TagNumber(12)
   void clearAcceptValidatedCredentialsVShareBind() => clearField(12);
   @$pb.TagNumber(12)
-  $20.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(11);
+  $21.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(11);
 
   @$pb.TagNumber(13)
   $core.String get senderOptions => $_getSZ(12);
@@ -763,7 +763,7 @@ class StableWallet extends $pb.GeneratedMessage {
   void clearSenderOptions() => clearField(13);
 
   @$pb.TagNumber(14)
-  $core.List<$24.RecoverShare> get recoverShares => $_getList(13);
+  $core.List<$25.RecoverShare> get recoverShares => $_getList(13);
 }
 
 

@@ -14,13 +14,14 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../google/protobuf/timestamp.pb.dart' as $15;
-import 'credential.pb.dart' as $6;
-import 'recover_key.pb.dart' as $5;
-import 'suspicious_transaction.pb.dart' as $27;
+import '../../google/protobuf/timestamp.pb.dart' as $16;
+import 'credential.pb.dart' as $7;
+import 'enclave_identity.pb.dart' as $3;
+import 'recover_key.pb.dart' as $6;
+import 'suspicious_transaction.pb.dart' as $28;
 import 'tx.pb.dart' as $0;
-import 'v_share_bind_data.pb.dart' as $20;
-import 'wallet.pb.dart' as $3;
+import 'v_share_bind_data.pb.dart' as $21;
+import 'wallet.pb.dart' as $4;
 
 /// The request message containing the user's name.
 class HelloRequest extends $pb.GeneratedMessage {
@@ -516,6 +517,134 @@ class MsgSyncEnclave extends $pb.GeneratedMessage {
   void clearSeedNode() => clearField(5);
 }
 
+class MsgUpgradeEnclave extends $pb.GeneratedMessage {
+  factory MsgUpgradeEnclave({
+    $core.List<$core.int>? remoteReport,
+    $core.String? enclavePubK,
+  }) {
+    final $result = create();
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    if (enclavePubK != null) {
+      $result.enclavePubK = enclavePubK;
+    }
+    return $result;
+  }
+  MsgUpgradeEnclave._() : super();
+  factory MsgUpgradeEnclave.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUpgradeEnclave.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpgradeEnclave', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..aOS(2, _omitFieldNames ? '' : 'enclavePubK', protoName: 'enclavePubK')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUpgradeEnclave clone() => MsgUpgradeEnclave()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUpgradeEnclave copyWith(void Function(MsgUpgradeEnclave) updates) => super.copyWith((message) => updates(message as MsgUpgradeEnclave)) as MsgUpgradeEnclave;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUpgradeEnclave create() => MsgUpgradeEnclave._();
+  MsgUpgradeEnclave createEmptyInstance() => create();
+  static $pb.PbList<MsgUpgradeEnclave> createRepeated() => $pb.PbList<MsgUpgradeEnclave>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUpgradeEnclave getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpgradeEnclave>(create);
+  static MsgUpgradeEnclave? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get remoteReport => $_getN(0);
+  @$pb.TagNumber(1)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRemoteReport() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRemoteReport() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get enclavePubK => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set enclavePubK($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEnclavePubK() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEnclavePubK() => clearField(2);
+}
+
+class UpgradeEnclaveReply extends $pb.GeneratedMessage {
+  factory UpgradeEnclaveReply({
+    $core.List<$core.int>? remoteReport,
+    $core.List<$core.int>? encEnclavePrivateStateEnclavePubK,
+  }) {
+    final $result = create();
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    if (encEnclavePrivateStateEnclavePubK != null) {
+      $result.encEnclavePrivateStateEnclavePubK = encEnclavePrivateStateEnclavePubK;
+    }
+    return $result;
+  }
+  UpgradeEnclaveReply._() : super();
+  factory UpgradeEnclaveReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpgradeEnclaveReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpgradeEnclaveReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encEnclavePrivateStateEnclavePubK', $pb.PbFieldType.OY, protoName: 'encEnclavePrivateStateEnclavePubK')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpgradeEnclaveReply clone() => UpgradeEnclaveReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpgradeEnclaveReply copyWith(void Function(UpgradeEnclaveReply) updates) => super.copyWith((message) => updates(message as UpgradeEnclaveReply)) as UpgradeEnclaveReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpgradeEnclaveReply create() => UpgradeEnclaveReply._();
+  UpgradeEnclaveReply createEmptyInstance() => create();
+  static $pb.PbList<UpgradeEnclaveReply> createRepeated() => $pb.PbList<UpgradeEnclaveReply>();
+  @$core.pragma('dart2js:noInline')
+  static UpgradeEnclaveReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpgradeEnclaveReply>(create);
+  static UpgradeEnclaveReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get remoteReport => $_getN(0);
+  @$pb.TagNumber(1)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRemoteReport() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRemoteReport() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get encEnclavePrivateStateEnclavePubK => $_getN(1);
+  @$pb.TagNumber(2)
+  set encEnclavePrivateStateEnclavePubK($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEncEnclavePrivateStateEnclavePubK() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEncEnclavePrivateStateEnclavePubK() => clearField(2);
+}
+
 class MsgExportPrivateKey extends $pb.GeneratedMessage {
   factory MsgExportPrivateKey({
     $core.String? pubKID,
@@ -844,8 +973,122 @@ class ExportPrivateStateReply extends $pb.GeneratedMessage {
   void clearState() => clearField(1);
 }
 
-class Enclave extends $pb.GeneratedMessage {
-  factory Enclave({
+class ValidateAuthenticateServiceProviderRequest extends $pb.GeneratedMessage {
+  factory ValidateAuthenticateServiceProviderRequest({
+    $core.String? pubKID,
+    $core.String? serviceProviderType,
+  }) {
+    final $result = create();
+    if (pubKID != null) {
+      $result.pubKID = pubKID;
+    }
+    if (serviceProviderType != null) {
+      $result.serviceProviderType = serviceProviderType;
+    }
+    return $result;
+  }
+  ValidateAuthenticateServiceProviderRequest._() : super();
+  factory ValidateAuthenticateServiceProviderRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ValidateAuthenticateServiceProviderRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateAuthenticateServiceProviderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
+    ..aOS(2, _omitFieldNames ? '' : 'serviceProviderType', protoName: 'serviceProviderType')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ValidateAuthenticateServiceProviderRequest clone() => ValidateAuthenticateServiceProviderRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidateAuthenticateServiceProviderRequest copyWith(void Function(ValidateAuthenticateServiceProviderRequest) updates) => super.copyWith((message) => updates(message as ValidateAuthenticateServiceProviderRequest)) as ValidateAuthenticateServiceProviderRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ValidateAuthenticateServiceProviderRequest create() => ValidateAuthenticateServiceProviderRequest._();
+  ValidateAuthenticateServiceProviderRequest createEmptyInstance() => create();
+  static $pb.PbList<ValidateAuthenticateServiceProviderRequest> createRepeated() => $pb.PbList<ValidateAuthenticateServiceProviderRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ValidateAuthenticateServiceProviderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateAuthenticateServiceProviderRequest>(create);
+  static ValidateAuthenticateServiceProviderRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get pubKID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pubKID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPubKID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPubKID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get serviceProviderType => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set serviceProviderType($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasServiceProviderType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearServiceProviderType() => clearField(2);
+}
+
+class ValidateAuthenticateServiceProviderReply extends $pb.GeneratedMessage {
+  factory ValidateAuthenticateServiceProviderReply({
+    $core.bool? status,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  ValidateAuthenticateServiceProviderReply._() : super();
+  factory ValidateAuthenticateServiceProviderReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ValidateAuthenticateServiceProviderReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateAuthenticateServiceProviderReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ValidateAuthenticateServiceProviderReply clone() => ValidateAuthenticateServiceProviderReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidateAuthenticateServiceProviderReply copyWith(void Function(ValidateAuthenticateServiceProviderReply) updates) => super.copyWith((message) => updates(message as ValidateAuthenticateServiceProviderReply)) as ValidateAuthenticateServiceProviderReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ValidateAuthenticateServiceProviderReply create() => ValidateAuthenticateServiceProviderReply._();
+  ValidateAuthenticateServiceProviderReply createEmptyInstance() => create();
+  static $pb.PbList<ValidateAuthenticateServiceProviderReply> createRepeated() => $pb.PbList<ValidateAuthenticateServiceProviderReply>();
+  @$core.pragma('dart2js:noInline')
+  static ValidateAuthenticateServiceProviderReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateAuthenticateServiceProviderReply>(create);
+  static ValidateAuthenticateServiceProviderReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
+class MsgInitEnclave extends $pb.GeneratedMessage {
+  factory MsgInitEnclave({
     $core.String? pioneerID,
     $core.String? externalAddress,
     $core.String? pioneerArmorPrivK,
@@ -882,11 +1125,11 @@ class Enclave extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  Enclave._() : super();
-  factory Enclave.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Enclave.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  MsgInitEnclave._() : super();
+  factory MsgInitEnclave.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgInitEnclave.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Enclave', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgInitEnclave', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'pioneerID', protoName: 'pioneerID')
     ..aOS(2, _omitFieldNames ? '' : 'externalAddress', protoName: 'externalAddress')
     ..aOS(3, _omitFieldNames ? '' : 'pioneerArmorPrivK', protoName: 'pioneerArmorPrivK')
@@ -902,22 +1145,22 @@ class Enclave extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Enclave clone() => Enclave()..mergeFromMessage(this);
+  MsgInitEnclave clone() => MsgInitEnclave()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Enclave copyWith(void Function(Enclave) updates) => super.copyWith((message) => updates(message as Enclave)) as Enclave;
+  MsgInitEnclave copyWith(void Function(MsgInitEnclave) updates) => super.copyWith((message) => updates(message as MsgInitEnclave)) as MsgInitEnclave;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Enclave create() => Enclave._();
-  Enclave createEmptyInstance() => create();
-  static $pb.PbList<Enclave> createRepeated() => $pb.PbList<Enclave>();
+  static MsgInitEnclave create() => MsgInitEnclave._();
+  MsgInitEnclave createEmptyInstance() => create();
+  static $pb.PbList<MsgInitEnclave> createRepeated() => $pb.PbList<MsgInitEnclave>();
   @$core.pragma('dart2js:noInline')
-  static Enclave getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Enclave>(create);
-  static Enclave? _defaultInstance;
+  static MsgInitEnclave getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgInitEnclave>(create);
+  static MsgInitEnclave? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get pioneerID => $_getSZ(0);
@@ -995,7 +1238,7 @@ class Enclave extends $pb.GeneratedMessage {
 class VShareSignatory extends $pb.GeneratedMessage {
   factory VShareSignatory({
     $core.List<$core.int>? encSignatoryVShare,
-    $20.VShareBindData? vShareBind,
+    $21.VShareBindData? vShareBind,
   }) {
     final $result = create();
     if (encSignatoryVShare != null) {
@@ -1012,7 +1255,7 @@ class VShareSignatory extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VShareSignatory', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'encSignatoryVShare', $pb.PbFieldType.OY, protoName: 'encSignatoryVShare')
-    ..aOM<$20.VShareBindData>(2, _omitFieldNames ? '' : 'vShareBind', protoName: 'vShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(2, _omitFieldNames ? '' : 'vShareBind', protoName: 'vShareBind', subBuilder: $21.VShareBindData.create)
     ..hasRequiredFields = false
   ;
 
@@ -1047,15 +1290,15 @@ class VShareSignatory extends $pb.GeneratedMessage {
   void clearEncSignatoryVShare() => clearField(1);
 
   @$pb.TagNumber(2)
-  $20.VShareBindData get vShareBind => $_getN(1);
+  $21.VShareBindData get vShareBind => $_getN(1);
   @$pb.TagNumber(2)
-  set vShareBind($20.VShareBindData v) { setField(2, v); }
+  set vShareBind($21.VShareBindData v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasVShareBind() => $_has(1);
   @$pb.TagNumber(2)
   void clearVShareBind() => clearField(2);
   @$pb.TagNumber(2)
-  $20.VShareBindData ensureVShareBind() => $_ensure(1);
+  $21.VShareBindData ensureVShareBind() => $_ensure(1);
 }
 
 class ValidateAuthorizedSignerRequest extends $pb.GeneratedMessage {
@@ -1194,6 +1437,7 @@ class ValidateAuthorizedSignatoryRequest extends $pb.GeneratedMessage {
   factory ValidateAuthorizedSignatoryRequest({
     $core.String? creator,
     VShareSignatory? signatory,
+    $core.Iterable<VShareSignatory>? currentSignatory,
   }) {
     final $result = create();
     if (creator != null) {
@@ -1201,6 +1445,9 @@ class ValidateAuthorizedSignatoryRequest extends $pb.GeneratedMessage {
     }
     if (signatory != null) {
       $result.signatory = signatory;
+    }
+    if (currentSignatory != null) {
+      $result.currentSignatory.addAll(currentSignatory);
     }
     return $result;
   }
@@ -1211,6 +1458,7 @@ class ValidateAuthorizedSignatoryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateAuthorizedSignatoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOM<VShareSignatory>(2, _omitFieldNames ? '' : 'signatory', subBuilder: VShareSignatory.create)
+    ..pc<VShareSignatory>(3, _omitFieldNames ? '' : 'currentSignatory', $pb.PbFieldType.PM, protoName: 'currentSignatory', subBuilder: VShareSignatory.create)
     ..hasRequiredFields = false
   ;
 
@@ -1254,6 +1502,9 @@ class ValidateAuthorizedSignatoryRequest extends $pb.GeneratedMessage {
   void clearSignatory() => clearField(2);
   @$pb.TagNumber(2)
   VShareSignatory ensureSignatory() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.List<VShareSignatory> get currentSignatory => $_getList(2);
 }
 
 class ValidateAuthorizedSignatoryReply extends $pb.GeneratedMessage {
@@ -1372,7 +1623,7 @@ class MsgUpdateHeight extends $pb.GeneratedMessage {
 
 class MsgScanTransactions extends $pb.GeneratedMessage {
   factory MsgScanTransactions({
-    $15.Timestamp? timestamp,
+    $16.Timestamp? timestamp,
     $fixnum.Int64? height,
     $0.MsgTransferFunds? msg,
     $core.String? exchangerate,
@@ -1397,7 +1648,7 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
   factory MsgScanTransactions.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgScanTransactions', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$15.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $15.Timestamp.create)
+    ..aOM<$16.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $16.Timestamp.create)
     ..aInt64(2, _omitFieldNames ? '' : 'height')
     ..aOM<$0.MsgTransferFunds>(3, _omitFieldNames ? '' : 'msg', subBuilder: $0.MsgTransferFunds.create)
     ..aOS(4, _omitFieldNames ? '' : 'exchangerate')
@@ -1426,15 +1677,15 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
   static MsgScanTransactions? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Timestamp get timestamp => $_getN(0);
+  $16.Timestamp get timestamp => $_getN(0);
   @$pb.TagNumber(1)
-  set timestamp($15.Timestamp v) { setField(1, v); }
+  set timestamp($16.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTimestamp() => $_has(0);
   @$pb.TagNumber(1)
   void clearTimestamp() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Timestamp ensureTimestamp() => $_ensure(0);
+  $16.Timestamp ensureTimestamp() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get height => $_getI64(1);
@@ -1518,7 +1769,7 @@ class MsgSyncWallets extends $pb.GeneratedMessage {
 
 class SyncWalletsReply extends $pb.GeneratedMessage {
   factory SyncWalletsReply({
-    $core.Iterable<$3.Wallet>? wallets,
+    $core.Iterable<$4.Wallet>? wallets,
   }) {
     final $result = create();
     if (wallets != null) {
@@ -1531,7 +1782,7 @@ class SyncWalletsReply extends $pb.GeneratedMessage {
   factory SyncWalletsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncWalletsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$3.Wallet>(1, _omitFieldNames ? '' : 'wallets', $pb.PbFieldType.PM, subBuilder: $3.Wallet.create)
+    ..pc<$4.Wallet>(1, _omitFieldNames ? '' : 'wallets', $pb.PbFieldType.PM, subBuilder: $4.Wallet.create)
     ..hasRequiredFields = false
   ;
 
@@ -1557,7 +1808,7 @@ class SyncWalletsReply extends $pb.GeneratedMessage {
   static SyncWalletsReply? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$3.Wallet> get wallets => $_getList(0);
+  $core.List<$4.Wallet> get wallets => $_getList(0);
 }
 
 class MsgSyncCredentials extends $pb.GeneratedMessage {
@@ -1612,7 +1863,7 @@ class MsgSyncCredentials extends $pb.GeneratedMessage {
 
 class SyncCredentialsReply extends $pb.GeneratedMessage {
   factory SyncCredentialsReply({
-    $core.Iterable<$6.Credential>? credentials,
+    $core.Iterable<$7.Credential>? credentials,
   }) {
     final $result = create();
     if (credentials != null) {
@@ -1625,7 +1876,7 @@ class SyncCredentialsReply extends $pb.GeneratedMessage {
   factory SyncCredentialsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncCredentialsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$6.Credential>(1, _omitFieldNames ? '' : 'credentials', $pb.PbFieldType.PM, subBuilder: $6.Credential.create)
+    ..pc<$7.Credential>(1, _omitFieldNames ? '' : 'credentials', $pb.PbFieldType.PM, subBuilder: $7.Credential.create)
     ..hasRequiredFields = false
   ;
 
@@ -1651,7 +1902,7 @@ class SyncCredentialsReply extends $pb.GeneratedMessage {
   static SyncCredentialsReply? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$6.Credential> get credentials => $_getList(0);
+  $core.List<$7.Credential> get credentials => $_getList(0);
 }
 
 class MsgSyncRecoverKeys extends $pb.GeneratedMessage {
@@ -1706,7 +1957,7 @@ class MsgSyncRecoverKeys extends $pb.GeneratedMessage {
 
 class SyncRecoverKeysReply extends $pb.GeneratedMessage {
   factory SyncRecoverKeysReply({
-    $core.Iterable<$5.RecoverKey>? recoverKeys,
+    $core.Iterable<$6.RecoverKey>? recoverKeys,
   }) {
     final $result = create();
     if (recoverKeys != null) {
@@ -1719,7 +1970,7 @@ class SyncRecoverKeysReply extends $pb.GeneratedMessage {
   factory SyncRecoverKeysReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncRecoverKeysReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$5.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKeys', $pb.PbFieldType.PM, protoName: 'recoverKeys', subBuilder: $5.RecoverKey.create)
+    ..pc<$6.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKeys', $pb.PbFieldType.PM, protoName: 'recoverKeys', subBuilder: $6.RecoverKey.create)
     ..hasRequiredFields = false
   ;
 
@@ -1745,7 +1996,7 @@ class SyncRecoverKeysReply extends $pb.GeneratedMessage {
   static SyncRecoverKeysReply? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$5.RecoverKey> get recoverKeys => $_getList(0);
+  $core.List<$6.RecoverKey> get recoverKeys => $_getList(0);
 }
 
 class SetSecretSharePrivateKeyReply extends $pb.GeneratedMessage {
@@ -1850,7 +2101,7 @@ class MsgSyncSuspiciousTransactions extends $pb.GeneratedMessage {
 
 class SyncSuspiciousTransactionsReply extends $pb.GeneratedMessage {
   factory SyncSuspiciousTransactionsReply({
-    $core.Iterable<$27.SuspiciousTransaction>? suspiciousTransactions,
+    $core.Iterable<$28.SuspiciousTransaction>? suspiciousTransactions,
   }) {
     final $result = create();
     if (suspiciousTransactions != null) {
@@ -1863,7 +2114,7 @@ class SyncSuspiciousTransactionsReply extends $pb.GeneratedMessage {
   factory SyncSuspiciousTransactionsReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncSuspiciousTransactionsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$27.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'suspiciousTransactions', $pb.PbFieldType.PM, protoName: 'suspiciousTransactions', subBuilder: $27.SuspiciousTransaction.create)
+    ..pc<$28.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'suspiciousTransactions', $pb.PbFieldType.PM, protoName: 'suspiciousTransactions', subBuilder: $28.SuspiciousTransaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -1889,7 +2140,7 @@ class SyncSuspiciousTransactionsReply extends $pb.GeneratedMessage {
   static SyncSuspiciousTransactionsReply? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$27.SuspiciousTransaction> get suspiciousTransactions => $_getList(0);
+  $core.List<$28.SuspiciousTransaction> get suspiciousTransactions => $_getList(0);
 }
 
 class InitEnclaveReply extends $pb.GeneratedMessage {
@@ -2242,6 +2493,172 @@ class SetWalletReply extends $pb.GeneratedMessage {
   void clearStatus() => clearField(1);
 }
 
+class SetEnclaveIdentityReply extends $pb.GeneratedMessage {
+  factory SetEnclaveIdentityReply({
+    $core.bool? status,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  SetEnclaveIdentityReply._() : super();
+  factory SetEnclaveIdentityReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetEnclaveIdentityReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetEnclaveIdentityReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetEnclaveIdentityReply clone() => SetEnclaveIdentityReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetEnclaveIdentityReply copyWith(void Function(SetEnclaveIdentityReply) updates) => super.copyWith((message) => updates(message as SetEnclaveIdentityReply)) as SetEnclaveIdentityReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetEnclaveIdentityReply create() => SetEnclaveIdentityReply._();
+  SetEnclaveIdentityReply createEmptyInstance() => create();
+  static $pb.PbList<SetEnclaveIdentityReply> createRepeated() => $pb.PbList<SetEnclaveIdentityReply>();
+  @$core.pragma('dart2js:noInline')
+  static SetEnclaveIdentityReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetEnclaveIdentityReply>(create);
+  static SetEnclaveIdentityReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
+class PioneerUpdateEnclaveIdentity extends $pb.GeneratedMessage {
+  factory PioneerUpdateEnclaveIdentity({
+    $3.EnclaveIdentity? enclaveIdentity,
+    $core.List<$core.int>? remoteReport,
+  }) {
+    final $result = create();
+    if (enclaveIdentity != null) {
+      $result.enclaveIdentity = enclaveIdentity;
+    }
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    return $result;
+  }
+  PioneerUpdateEnclaveIdentity._() : super();
+  factory PioneerUpdateEnclaveIdentity.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PioneerUpdateEnclaveIdentity.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PioneerUpdateEnclaveIdentity', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$3.EnclaveIdentity>(1, _omitFieldNames ? '' : 'enclaveIdentity', protoName: 'enclaveIdentity', subBuilder: $3.EnclaveIdentity.create)
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PioneerUpdateEnclaveIdentity clone() => PioneerUpdateEnclaveIdentity()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PioneerUpdateEnclaveIdentity copyWith(void Function(PioneerUpdateEnclaveIdentity) updates) => super.copyWith((message) => updates(message as PioneerUpdateEnclaveIdentity)) as PioneerUpdateEnclaveIdentity;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PioneerUpdateEnclaveIdentity create() => PioneerUpdateEnclaveIdentity._();
+  PioneerUpdateEnclaveIdentity createEmptyInstance() => create();
+  static $pb.PbList<PioneerUpdateEnclaveIdentity> createRepeated() => $pb.PbList<PioneerUpdateEnclaveIdentity>();
+  @$core.pragma('dart2js:noInline')
+  static PioneerUpdateEnclaveIdentity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PioneerUpdateEnclaveIdentity>(create);
+  static PioneerUpdateEnclaveIdentity? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.EnclaveIdentity get enclaveIdentity => $_getN(0);
+  @$pb.TagNumber(1)
+  set enclaveIdentity($3.EnclaveIdentity v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEnclaveIdentity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnclaveIdentity() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.EnclaveIdentity ensureEnclaveIdentity() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get remoteReport => $_getN(1);
+  @$pb.TagNumber(2)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRemoteReport() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRemoteReport() => clearField(2);
+}
+
+class UpdateEnclaveIdentityReply extends $pb.GeneratedMessage {
+  factory UpdateEnclaveIdentityReply({
+    $core.bool? status,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  UpdateEnclaveIdentityReply._() : super();
+  factory UpdateEnclaveIdentityReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateEnclaveIdentityReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateEnclaveIdentityReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateEnclaveIdentityReply clone() => UpdateEnclaveIdentityReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateEnclaveIdentityReply copyWith(void Function(UpdateEnclaveIdentityReply) updates) => super.copyWith((message) => updates(message as UpdateEnclaveIdentityReply)) as UpdateEnclaveIdentityReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateEnclaveIdentityReply create() => UpdateEnclaveIdentityReply._();
+  UpdateEnclaveIdentityReply createEmptyInstance() => create();
+  static $pb.PbList<UpdateEnclaveIdentityReply> createRepeated() => $pb.PbList<UpdateEnclaveIdentityReply>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateEnclaveIdentityReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateEnclaveIdentityReply>(create);
+  static UpdateEnclaveIdentityReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
 class SetProtectKeyReply extends $pb.GeneratedMessage {
   factory SetProtectKeyReply({
     $core.bool? status,
@@ -2381,6 +2798,56 @@ class SetCredentialReply extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SetCredentialReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetCredentialReply>(create);
   static SetCredentialReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
+class RemoveCredentialReply extends $pb.GeneratedMessage {
+  factory RemoveCredentialReply({
+    $core.bool? status,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  RemoveCredentialReply._() : super();
+  factory RemoveCredentialReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveCredentialReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveCredentialReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RemoveCredentialReply clone() => RemoveCredentialReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveCredentialReply copyWith(void Function(RemoveCredentialReply) updates) => super.copyWith((message) => updates(message as RemoveCredentialReply)) as RemoveCredentialReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RemoveCredentialReply create() => RemoveCredentialReply._();
+  RemoveCredentialReply createEmptyInstance() => create();
+  static $pb.PbList<RemoveCredentialReply> createRepeated() => $pb.PbList<RemoveCredentialReply>();
+  @$core.pragma('dart2js:noInline')
+  static RemoveCredentialReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoveCredentialReply>(create);
+  static RemoveCredentialReply? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.bool get status => $_getBF(0);
@@ -3035,6 +3502,50 @@ class EnclaveStoreString extends $pb.GeneratedMessage {
   $core.bool hasS() => $_has(0);
   @$pb.TagNumber(1)
   void clearS() => clearField(1);
+}
+
+class EnclaveEnclaveIdentityArray extends $pb.GeneratedMessage {
+  factory EnclaveEnclaveIdentityArray({
+    $core.Iterable<$3.EnclaveIdentity>? identity,
+  }) {
+    final $result = create();
+    if (identity != null) {
+      $result.identity.addAll(identity);
+    }
+    return $result;
+  }
+  EnclaveEnclaveIdentityArray._() : super();
+  factory EnclaveEnclaveIdentityArray.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EnclaveEnclaveIdentityArray.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EnclaveEnclaveIdentityArray', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..pc<$3.EnclaveIdentity>(1, _omitFieldNames ? '' : 'identity', $pb.PbFieldType.PM, subBuilder: $3.EnclaveIdentity.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EnclaveEnclaveIdentityArray clone() => EnclaveEnclaveIdentityArray()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EnclaveEnclaveIdentityArray copyWith(void Function(EnclaveEnclaveIdentityArray) updates) => super.copyWith((message) => updates(message as EnclaveEnclaveIdentityArray)) as EnclaveEnclaveIdentityArray;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EnclaveEnclaveIdentityArray create() => EnclaveEnclaveIdentityArray._();
+  EnclaveEnclaveIdentityArray createEmptyInstance() => create();
+  static $pb.PbList<EnclaveEnclaveIdentityArray> createRepeated() => $pb.PbList<EnclaveEnclaveIdentityArray>();
+  @$core.pragma('dart2js:noInline')
+  static EnclaveEnclaveIdentityArray getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EnclaveEnclaveIdentityArray>(create);
+  static EnclaveEnclaveIdentityArray? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$3.EnclaveIdentity> get identity => $_getList(0);
 }
 
 

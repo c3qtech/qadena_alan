@@ -23,7 +23,7 @@ import "qadena/qadena/bigint.proto";
 import "google/protobuf/timestamp.proto";
 
 
-option go_package = "qadena/x/qadena/types";
+option go_package = "github.com/c3qtech/qadena_v3/x/qadena/types";
 
 message EncryptableString {
 	string Value = 1;
@@ -45,7 +45,7 @@ message EncryptableClaimCredentialExtraParms {
 
 message EncryptableAuthorizedSignatory {
 	string Nonce = 1;
-	string WalletID = 2;
+	repeated string WalletID = 2;
 }
 
 message EncryptableSignatory {
@@ -210,6 +210,6 @@ message EncryptableSharedEnclaveParams {
 
 	// these only used temporarily to sync data from enclave to enclave
 	EncryptableEnclaveSSOwnerMap SSIntervalOwners = 9;
-	EncryptableEnclavePubKCacheMap SSInervalPubKCache = 10;
+	EncryptableEnclavePubKCacheMap SSIntervalPubKCache = 10;
 }
 

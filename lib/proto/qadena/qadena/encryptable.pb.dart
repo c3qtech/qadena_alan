@@ -13,11 +13,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../cosmos/base/v1beta1/coin.pb.dart' as $14;
-import 'b_pedersen_commit.pb.dart' as $18;
-import 'bigint.pb.dart' as $13;
-import 'pedersen_commit.pb.dart' as $21;
-import 'v_share_bind_data.pb.dart' as $20;
+import '../../cosmos/base/v1beta1/coin.pb.dart' as $15;
+import 'b_pedersen_commit.pb.dart' as $19;
+import 'bigint.pb.dart' as $14;
+import 'pedersen_commit.pb.dart' as $22;
+import 'v_share_bind_data.pb.dart' as $21;
 
 class EncryptableString extends $pb.GeneratedMessage {
   factory EncryptableString({
@@ -72,16 +72,16 @@ class EncryptableString extends $pb.GeneratedMessage {
 class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   factory EncryptableClaimCredentialExtraParms({
     $core.List<$core.int>? encCredentialInfoVShare,
-    $20.VShareBindData? credentialInfoVShareBind,
+    $21.VShareBindData? credentialInfoVShareBind,
     $core.String? walletID,
-    $18.BPedersenCommit? findCredentialPC,
-    $18.BPedersenCommit? newCredentialPC,
+    $19.BPedersenCommit? findCredentialPC,
+    $19.BPedersenCommit? newCredentialPC,
     $core.List<$core.int>? encWalletIDVShare,
-    $20.VShareBindData? walletIDVShareBind,
+    $21.VShareBindData? walletIDVShareBind,
     $core.List<$core.int>? encCredentialHashVShare,
-    $20.VShareBindData? credentialHashVShareBind,
-    $21.EncryptablePedersenCommit? zeroPC,
-    $18.BPedersenCommit? claimPC,
+    $21.VShareBindData? credentialHashVShareBind,
+    $22.EncryptablePedersenCommit? zeroPC,
+    $19.BPedersenCommit? claimPC,
   }) {
     final $result = create();
     if (encCredentialInfoVShare != null) {
@@ -125,16 +125,16 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableClaimCredentialExtraParms', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'EncCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'EncCredentialInfoVShare')
-    ..aOM<$20.VShareBindData>(2, _omitFieldNames ? '' : 'CredentialInfoVShareBind', protoName: 'CredentialInfoVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(2, _omitFieldNames ? '' : 'CredentialInfoVShareBind', protoName: 'CredentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
     ..aOS(3, _omitFieldNames ? '' : 'WalletID', protoName: 'WalletID')
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'FindCredentialPC', protoName: 'FindCredentialPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(5, _omitFieldNames ? '' : 'NewCredentialPC', protoName: 'NewCredentialPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'FindCredentialPC', protoName: 'FindCredentialPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'NewCredentialPC', protoName: 'NewCredentialPC', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'EncWalletIDVShare', $pb.PbFieldType.OY, protoName: 'EncWalletIDVShare')
-    ..aOM<$20.VShareBindData>(7, _omitFieldNames ? '' : 'WalletIDVShareBind', protoName: 'WalletIDVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(7, _omitFieldNames ? '' : 'WalletIDVShareBind', protoName: 'WalletIDVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'EncCredentialHashVShare', $pb.PbFieldType.OY, protoName: 'EncCredentialHashVShare')
-    ..aOM<$20.VShareBindData>(9, _omitFieldNames ? '' : 'CredentialHashVShareBind', protoName: 'CredentialHashVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$21.EncryptablePedersenCommit>(10, _omitFieldNames ? '' : 'ZeroPC', protoName: 'ZeroPC', subBuilder: $21.EncryptablePedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(11, _omitFieldNames ? '' : 'ClaimPC', protoName: 'ClaimPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$21.VShareBindData>(9, _omitFieldNames ? '' : 'CredentialHashVShareBind', protoName: 'CredentialHashVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$22.EncryptablePedersenCommit>(10, _omitFieldNames ? '' : 'ZeroPC', protoName: 'ZeroPC', subBuilder: $22.EncryptablePedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(11, _omitFieldNames ? '' : 'ClaimPC', protoName: 'ClaimPC', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -169,15 +169,15 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   void clearEncCredentialInfoVShare() => clearField(1);
 
   @$pb.TagNumber(2)
-  $20.VShareBindData get credentialInfoVShareBind => $_getN(1);
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(1);
   @$pb.TagNumber(2)
-  set credentialInfoVShareBind($20.VShareBindData v) { setField(2, v); }
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCredentialInfoVShareBind() => $_has(1);
   @$pb.TagNumber(2)
   void clearCredentialInfoVShareBind() => clearField(2);
   @$pb.TagNumber(2)
-  $20.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(1);
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get walletID => $_getSZ(2);
@@ -189,26 +189,26 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   void clearWalletID() => clearField(3);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get findCredentialPC => $_getN(3);
+  $19.BPedersenCommit get findCredentialPC => $_getN(3);
   @$pb.TagNumber(4)
-  set findCredentialPC($18.BPedersenCommit v) { setField(4, v); }
+  set findCredentialPC($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasFindCredentialPC() => $_has(3);
   @$pb.TagNumber(4)
   void clearFindCredentialPC() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureFindCredentialPC() => $_ensure(3);
+  $19.BPedersenCommit ensureFindCredentialPC() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $18.BPedersenCommit get newCredentialPC => $_getN(4);
+  $19.BPedersenCommit get newCredentialPC => $_getN(4);
   @$pb.TagNumber(5)
-  set newCredentialPC($18.BPedersenCommit v) { setField(5, v); }
+  set newCredentialPC($19.BPedersenCommit v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasNewCredentialPC() => $_has(4);
   @$pb.TagNumber(5)
   void clearNewCredentialPC() => clearField(5);
   @$pb.TagNumber(5)
-  $18.BPedersenCommit ensureNewCredentialPC() => $_ensure(4);
+  $19.BPedersenCommit ensureNewCredentialPC() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.int> get encWalletIDVShare => $_getN(5);
@@ -220,15 +220,15 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   void clearEncWalletIDVShare() => clearField(6);
 
   @$pb.TagNumber(7)
-  $20.VShareBindData get walletIDVShareBind => $_getN(6);
+  $21.VShareBindData get walletIDVShareBind => $_getN(6);
   @$pb.TagNumber(7)
-  set walletIDVShareBind($20.VShareBindData v) { setField(7, v); }
+  set walletIDVShareBind($21.VShareBindData v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasWalletIDVShareBind() => $_has(6);
   @$pb.TagNumber(7)
   void clearWalletIDVShareBind() => clearField(7);
   @$pb.TagNumber(7)
-  $20.VShareBindData ensureWalletIDVShareBind() => $_ensure(6);
+  $21.VShareBindData ensureWalletIDVShareBind() => $_ensure(6);
 
   @$pb.TagNumber(8)
   $core.List<$core.int> get encCredentialHashVShare => $_getN(7);
@@ -240,50 +240,50 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   void clearEncCredentialHashVShare() => clearField(8);
 
   @$pb.TagNumber(9)
-  $20.VShareBindData get credentialHashVShareBind => $_getN(8);
+  $21.VShareBindData get credentialHashVShareBind => $_getN(8);
   @$pb.TagNumber(9)
-  set credentialHashVShareBind($20.VShareBindData v) { setField(9, v); }
+  set credentialHashVShareBind($21.VShareBindData v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasCredentialHashVShareBind() => $_has(8);
   @$pb.TagNumber(9)
   void clearCredentialHashVShareBind() => clearField(9);
   @$pb.TagNumber(9)
-  $20.VShareBindData ensureCredentialHashVShareBind() => $_ensure(8);
+  $21.VShareBindData ensureCredentialHashVShareBind() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  $21.EncryptablePedersenCommit get zeroPC => $_getN(9);
+  $22.EncryptablePedersenCommit get zeroPC => $_getN(9);
   @$pb.TagNumber(10)
-  set zeroPC($21.EncryptablePedersenCommit v) { setField(10, v); }
+  set zeroPC($22.EncryptablePedersenCommit v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasZeroPC() => $_has(9);
   @$pb.TagNumber(10)
   void clearZeroPC() => clearField(10);
   @$pb.TagNumber(10)
-  $21.EncryptablePedersenCommit ensureZeroPC() => $_ensure(9);
+  $22.EncryptablePedersenCommit ensureZeroPC() => $_ensure(9);
 
   @$pb.TagNumber(11)
-  $18.BPedersenCommit get claimPC => $_getN(10);
+  $19.BPedersenCommit get claimPC => $_getN(10);
   @$pb.TagNumber(11)
-  set claimPC($18.BPedersenCommit v) { setField(11, v); }
+  set claimPC($19.BPedersenCommit v) { setField(11, v); }
   @$pb.TagNumber(11)
   $core.bool hasClaimPC() => $_has(10);
   @$pb.TagNumber(11)
   void clearClaimPC() => clearField(11);
   @$pb.TagNumber(11)
-  $18.BPedersenCommit ensureClaimPC() => $_ensure(10);
+  $19.BPedersenCommit ensureClaimPC() => $_ensure(10);
 }
 
 class EncryptableAuthorizedSignatory extends $pb.GeneratedMessage {
   factory EncryptableAuthorizedSignatory({
     $core.String? nonce,
-    $core.String? walletID,
+    $core.Iterable<$core.String>? walletID,
   }) {
     final $result = create();
     if (nonce != null) {
       $result.nonce = nonce;
     }
     if (walletID != null) {
-      $result.walletID = walletID;
+      $result.walletID.addAll(walletID);
     }
     return $result;
   }
@@ -293,7 +293,7 @@ class EncryptableAuthorizedSignatory extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableAuthorizedSignatory', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'Nonce', protoName: 'Nonce')
-    ..aOS(2, _omitFieldNames ? '' : 'WalletID', protoName: 'WalletID')
+    ..pPS(2, _omitFieldNames ? '' : 'WalletID', protoName: 'WalletID')
     ..hasRequiredFields = false
   ;
 
@@ -328,13 +328,7 @@ class EncryptableAuthorizedSignatory extends $pb.GeneratedMessage {
   void clearNonce() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get walletID => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set walletID($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasWalletID() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearWalletID() => clearField(2);
+  $core.List<$core.String> get walletID => $_getList(1);
 }
 
 class EncryptableSignatory extends $pb.GeneratedMessage {
@@ -419,7 +413,7 @@ class EncryptableWalletAmount extends $pb.GeneratedMessage {
   factory EncryptableWalletAmount({
     $core.String? nonce,
     $core.String? transactionID,
-    $21.EncryptablePedersenCommit? pedersenCommit,
+    $22.EncryptablePedersenCommit? pedersenCommit,
     $core.String? note,
     $core.String? requiredSenderPIN,
     $core.String? requiredSenderFirstName,
@@ -460,7 +454,7 @@ class EncryptableWalletAmount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableWalletAmount', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'Nonce', protoName: 'Nonce')
     ..aOS(2, _omitFieldNames ? '' : 'TransactionID', protoName: 'TransactionID')
-    ..aOM<$21.EncryptablePedersenCommit>(3, _omitFieldNames ? '' : 'PedersenCommit', protoName: 'PedersenCommit', subBuilder: $21.EncryptablePedersenCommit.create)
+    ..aOM<$22.EncryptablePedersenCommit>(3, _omitFieldNames ? '' : 'PedersenCommit', protoName: 'PedersenCommit', subBuilder: $22.EncryptablePedersenCommit.create)
     ..aOS(4, _omitFieldNames ? '' : 'Note', protoName: 'Note')
     ..aOS(5, _omitFieldNames ? '' : 'RequiredSenderPIN', protoName: 'RequiredSenderPIN')
     ..aOS(6, _omitFieldNames ? '' : 'RequiredSenderFirstName', protoName: 'RequiredSenderFirstName')
@@ -509,15 +503,15 @@ class EncryptableWalletAmount extends $pb.GeneratedMessage {
   void clearTransactionID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $21.EncryptablePedersenCommit get pedersenCommit => $_getN(2);
+  $22.EncryptablePedersenCommit get pedersenCommit => $_getN(2);
   @$pb.TagNumber(3)
-  set pedersenCommit($21.EncryptablePedersenCommit v) { setField(3, v); }
+  set pedersenCommit($22.EncryptablePedersenCommit v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasPedersenCommit() => $_has(2);
   @$pb.TagNumber(3)
   void clearPedersenCommit() => clearField(3);
   @$pb.TagNumber(3)
-  $21.EncryptablePedersenCommit ensurePedersenCommit() => $_ensure(2);
+  $22.EncryptablePedersenCommit ensurePedersenCommit() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get note => $_getSZ(3);
@@ -913,7 +907,7 @@ class EncryptableValidatedCredential extends $pb.GeneratedMessage {
   factory EncryptableValidatedCredential({
     $core.String? credentialType,
     $core.String? pIN,
-    $18.BPedersenCommit? credentialPC,
+    $19.BPedersenCommit? credentialPC,
   }) {
     final $result = create();
     if (credentialType != null) {
@@ -934,7 +928,7 @@ class EncryptableValidatedCredential extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableValidatedCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'CredentialType', protoName: 'CredentialType')
     ..aOS(2, _omitFieldNames ? '' : 'PIN', protoName: 'PIN')
-    ..aOM<$18.BPedersenCommit>(3, _omitFieldNames ? '' : 'CredentialPC', protoName: 'CredentialPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(3, _omitFieldNames ? '' : 'CredentialPC', protoName: 'CredentialPC', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -978,15 +972,15 @@ class EncryptableValidatedCredential extends $pb.GeneratedMessage {
   void clearPIN() => clearField(2);
 
   @$pb.TagNumber(3)
-  $18.BPedersenCommit get credentialPC => $_getN(2);
+  $19.BPedersenCommit get credentialPC => $_getN(2);
   @$pb.TagNumber(3)
-  set credentialPC($18.BPedersenCommit v) { setField(3, v); }
+  set credentialPC($19.BPedersenCommit v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCredentialPC() => $_has(2);
   @$pb.TagNumber(3)
   void clearCredentialPC() => clearField(3);
   @$pb.TagNumber(3)
-  $18.BPedersenCommit ensureCredentialPC() => $_ensure(2);
+  $19.BPedersenCommit ensureCredentialPC() => $_ensure(2);
 }
 
 class EncryptableValidatedCredentials extends $pb.GeneratedMessage {
@@ -1035,7 +1029,7 @@ class EncryptableValidatedCredentials extends $pb.GeneratedMessage {
 
 class EncryptableCreateWalletEWalletIDExtraParms extends $pb.GeneratedMessage {
   factory EncryptableCreateWalletEWalletIDExtraParms({
-    $18.BPedersenCommit? proofPC,
+    $19.BPedersenCommit? proofPC,
   }) {
     final $result = create();
     if (proofPC != null) {
@@ -1048,7 +1042,7 @@ class EncryptableCreateWalletEWalletIDExtraParms extends $pb.GeneratedMessage {
   factory EncryptableCreateWalletEWalletIDExtraParms.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableCreateWalletEWalletIDExtraParms', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$18.BPedersenCommit>(1, _omitFieldNames ? '' : 'ProofPC', protoName: 'ProofPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(1, _omitFieldNames ? '' : 'ProofPC', protoName: 'ProofPC', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -1074,15 +1068,15 @@ class EncryptableCreateWalletEWalletIDExtraParms extends $pb.GeneratedMessage {
   static EncryptableCreateWalletEWalletIDExtraParms? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.BPedersenCommit get proofPC => $_getN(0);
+  $19.BPedersenCommit get proofPC => $_getN(0);
   @$pb.TagNumber(1)
-  set proofPC($18.BPedersenCommit v) { setField(1, v); }
+  set proofPC($19.BPedersenCommit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasProofPC() => $_has(0);
   @$pb.TagNumber(1)
   void clearProofPC() => clearField(1);
   @$pb.TagNumber(1)
-  $18.BPedersenCommit ensureProofPC() => $_ensure(0);
+  $19.BPedersenCommit ensureProofPC() => $_ensure(0);
 }
 
 class EncryptableCreateWalletEWalletID extends $pb.GeneratedMessage {
@@ -1219,16 +1213,16 @@ class EncryptableCreateWallet extends $pb.GeneratedMessage {
 
 class EncryptableTransferFundsEWalletIDExtraParms extends $pb.GeneratedMessage {
   factory EncryptableTransferFundsEWalletIDExtraParms({
-    $18.BPedersenCommit? acceptPasswordPC,
+    $19.BPedersenCommit? acceptPasswordPC,
     $core.List<$core.int>? matchFirstNameHashHex,
     $core.List<$core.int>? matchMiddleNameHashHex,
     $core.List<$core.int>? matchLastNameHashHex,
-    $18.BPedersenCommit? requiredSenderFirstNameCheckPC,
-    $18.BPedersenCommit? requiredSenderFirstNameProofPC,
-    $18.BPedersenCommit? requiredSenderMiddleNameCheckPC,
-    $18.BPedersenCommit? requiredSenderMiddleNameProofPC,
-    $18.BPedersenCommit? requiredSenderLastNameCheckPC,
-    $18.BPedersenCommit? requiredSenderLastNameProofPC,
+    $19.BPedersenCommit? requiredSenderFirstNameCheckPC,
+    $19.BPedersenCommit? requiredSenderFirstNameProofPC,
+    $19.BPedersenCommit? requiredSenderMiddleNameCheckPC,
+    $19.BPedersenCommit? requiredSenderMiddleNameProofPC,
+    $19.BPedersenCommit? requiredSenderLastNameCheckPC,
+    $19.BPedersenCommit? requiredSenderLastNameProofPC,
   }) {
     final $result = create();
     if (acceptPasswordPC != null) {
@@ -1268,16 +1262,16 @@ class EncryptableTransferFundsEWalletIDExtraParms extends $pb.GeneratedMessage {
   factory EncryptableTransferFundsEWalletIDExtraParms.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableTransferFundsEWalletIDExtraParms', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$18.BPedersenCommit>(1, _omitFieldNames ? '' : 'AcceptPasswordPC', protoName: 'AcceptPasswordPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(1, _omitFieldNames ? '' : 'AcceptPasswordPC', protoName: 'AcceptPasswordPC', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'MatchFirstNameHashHex', $pb.PbFieldType.OY, protoName: 'MatchFirstNameHashHex')
     ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'MatchMiddleNameHashHex', $pb.PbFieldType.OY, protoName: 'MatchMiddleNameHashHex')
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'MatchLastNameHashHex', $pb.PbFieldType.OY, protoName: 'MatchLastNameHashHex')
-    ..aOM<$18.BPedersenCommit>(5, _omitFieldNames ? '' : 'RequiredSenderFirstNameCheckPC', protoName: 'RequiredSenderFirstNameCheckPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(6, _omitFieldNames ? '' : 'RequiredSenderFirstNameProofPC', protoName: 'RequiredSenderFirstNameProofPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(7, _omitFieldNames ? '' : 'RequiredSenderMiddleNameCheckPC', protoName: 'RequiredSenderMiddleNameCheckPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(8, _omitFieldNames ? '' : 'RequiredSenderMiddleNameProofPC', protoName: 'RequiredSenderMiddleNameProofPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(9, _omitFieldNames ? '' : 'RequiredSenderLastNameCheckPC', protoName: 'RequiredSenderLastNameCheckPC', subBuilder: $18.BPedersenCommit.create)
-    ..aOM<$18.BPedersenCommit>(10, _omitFieldNames ? '' : 'RequiredSenderLastNameProofPC', protoName: 'RequiredSenderLastNameProofPC', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'RequiredSenderFirstNameCheckPC', protoName: 'RequiredSenderFirstNameCheckPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(6, _omitFieldNames ? '' : 'RequiredSenderFirstNameProofPC', protoName: 'RequiredSenderFirstNameProofPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(7, _omitFieldNames ? '' : 'RequiredSenderMiddleNameCheckPC', protoName: 'RequiredSenderMiddleNameCheckPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(8, _omitFieldNames ? '' : 'RequiredSenderMiddleNameProofPC', protoName: 'RequiredSenderMiddleNameProofPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(9, _omitFieldNames ? '' : 'RequiredSenderLastNameCheckPC', protoName: 'RequiredSenderLastNameCheckPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(10, _omitFieldNames ? '' : 'RequiredSenderLastNameProofPC', protoName: 'RequiredSenderLastNameProofPC', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -1303,15 +1297,15 @@ class EncryptableTransferFundsEWalletIDExtraParms extends $pb.GeneratedMessage {
   static EncryptableTransferFundsEWalletIDExtraParms? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.BPedersenCommit get acceptPasswordPC => $_getN(0);
+  $19.BPedersenCommit get acceptPasswordPC => $_getN(0);
   @$pb.TagNumber(1)
-  set acceptPasswordPC($18.BPedersenCommit v) { setField(1, v); }
+  set acceptPasswordPC($19.BPedersenCommit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAcceptPasswordPC() => $_has(0);
   @$pb.TagNumber(1)
   void clearAcceptPasswordPC() => clearField(1);
   @$pb.TagNumber(1)
-  $18.BPedersenCommit ensureAcceptPasswordPC() => $_ensure(0);
+  $19.BPedersenCommit ensureAcceptPasswordPC() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.List<$core.int> get matchFirstNameHashHex => $_getN(1);
@@ -1341,70 +1335,70 @@ class EncryptableTransferFundsEWalletIDExtraParms extends $pb.GeneratedMessage {
   void clearMatchLastNameHashHex() => clearField(4);
 
   @$pb.TagNumber(5)
-  $18.BPedersenCommit get requiredSenderFirstNameCheckPC => $_getN(4);
+  $19.BPedersenCommit get requiredSenderFirstNameCheckPC => $_getN(4);
   @$pb.TagNumber(5)
-  set requiredSenderFirstNameCheckPC($18.BPedersenCommit v) { setField(5, v); }
+  set requiredSenderFirstNameCheckPC($19.BPedersenCommit v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasRequiredSenderFirstNameCheckPC() => $_has(4);
   @$pb.TagNumber(5)
   void clearRequiredSenderFirstNameCheckPC() => clearField(5);
   @$pb.TagNumber(5)
-  $18.BPedersenCommit ensureRequiredSenderFirstNameCheckPC() => $_ensure(4);
+  $19.BPedersenCommit ensureRequiredSenderFirstNameCheckPC() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $18.BPedersenCommit get requiredSenderFirstNameProofPC => $_getN(5);
+  $19.BPedersenCommit get requiredSenderFirstNameProofPC => $_getN(5);
   @$pb.TagNumber(6)
-  set requiredSenderFirstNameProofPC($18.BPedersenCommit v) { setField(6, v); }
+  set requiredSenderFirstNameProofPC($19.BPedersenCommit v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasRequiredSenderFirstNameProofPC() => $_has(5);
   @$pb.TagNumber(6)
   void clearRequiredSenderFirstNameProofPC() => clearField(6);
   @$pb.TagNumber(6)
-  $18.BPedersenCommit ensureRequiredSenderFirstNameProofPC() => $_ensure(5);
+  $19.BPedersenCommit ensureRequiredSenderFirstNameProofPC() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $18.BPedersenCommit get requiredSenderMiddleNameCheckPC => $_getN(6);
+  $19.BPedersenCommit get requiredSenderMiddleNameCheckPC => $_getN(6);
   @$pb.TagNumber(7)
-  set requiredSenderMiddleNameCheckPC($18.BPedersenCommit v) { setField(7, v); }
+  set requiredSenderMiddleNameCheckPC($19.BPedersenCommit v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasRequiredSenderMiddleNameCheckPC() => $_has(6);
   @$pb.TagNumber(7)
   void clearRequiredSenderMiddleNameCheckPC() => clearField(7);
   @$pb.TagNumber(7)
-  $18.BPedersenCommit ensureRequiredSenderMiddleNameCheckPC() => $_ensure(6);
+  $19.BPedersenCommit ensureRequiredSenderMiddleNameCheckPC() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $18.BPedersenCommit get requiredSenderMiddleNameProofPC => $_getN(7);
+  $19.BPedersenCommit get requiredSenderMiddleNameProofPC => $_getN(7);
   @$pb.TagNumber(8)
-  set requiredSenderMiddleNameProofPC($18.BPedersenCommit v) { setField(8, v); }
+  set requiredSenderMiddleNameProofPC($19.BPedersenCommit v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasRequiredSenderMiddleNameProofPC() => $_has(7);
   @$pb.TagNumber(8)
   void clearRequiredSenderMiddleNameProofPC() => clearField(8);
   @$pb.TagNumber(8)
-  $18.BPedersenCommit ensureRequiredSenderMiddleNameProofPC() => $_ensure(7);
+  $19.BPedersenCommit ensureRequiredSenderMiddleNameProofPC() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $18.BPedersenCommit get requiredSenderLastNameCheckPC => $_getN(8);
+  $19.BPedersenCommit get requiredSenderLastNameCheckPC => $_getN(8);
   @$pb.TagNumber(9)
-  set requiredSenderLastNameCheckPC($18.BPedersenCommit v) { setField(9, v); }
+  set requiredSenderLastNameCheckPC($19.BPedersenCommit v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasRequiredSenderLastNameCheckPC() => $_has(8);
   @$pb.TagNumber(9)
   void clearRequiredSenderLastNameCheckPC() => clearField(9);
   @$pb.TagNumber(9)
-  $18.BPedersenCommit ensureRequiredSenderLastNameCheckPC() => $_ensure(8);
+  $19.BPedersenCommit ensureRequiredSenderLastNameCheckPC() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  $18.BPedersenCommit get requiredSenderLastNameProofPC => $_getN(9);
+  $19.BPedersenCommit get requiredSenderLastNameProofPC => $_getN(9);
   @$pb.TagNumber(10)
-  set requiredSenderLastNameProofPC($18.BPedersenCommit v) { setField(10, v); }
+  set requiredSenderLastNameProofPC($19.BPedersenCommit v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasRequiredSenderLastNameProofPC() => $_has(9);
   @$pb.TagNumber(10)
   void clearRequiredSenderLastNameProofPC() => clearField(10);
   @$pb.TagNumber(10)
-  $18.BPedersenCommit ensureRequiredSenderLastNameProofPC() => $_ensure(9);
+  $19.BPedersenCommit ensureRequiredSenderLastNameProofPC() => $_ensure(9);
 }
 
 class EncryptableTransferFundsEWalletID extends $pb.GeneratedMessage {
@@ -1489,7 +1483,7 @@ class EncryptableTransferFundsEWalletID extends $pb.GeneratedMessage {
 
 class EncryptableTransferFunds extends $pb.GeneratedMessage {
   factory EncryptableTransferFunds({
-    $21.EncryptablePedersenCommit? hiddenTransferPC,
+    $22.EncryptablePedersenCommit? hiddenTransferPC,
     EncryptableTransferFundsEWalletID? dstEWalletID,
     $core.String? optInReason,
   }) {
@@ -1510,7 +1504,7 @@ class EncryptableTransferFunds extends $pb.GeneratedMessage {
   factory EncryptableTransferFunds.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableTransferFunds', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$21.EncryptablePedersenCommit>(1, _omitFieldNames ? '' : 'HiddenTransferPC', protoName: 'HiddenTransferPC', subBuilder: $21.EncryptablePedersenCommit.create)
+    ..aOM<$22.EncryptablePedersenCommit>(1, _omitFieldNames ? '' : 'HiddenTransferPC', protoName: 'HiddenTransferPC', subBuilder: $22.EncryptablePedersenCommit.create)
     ..aOM<EncryptableTransferFundsEWalletID>(2, _omitFieldNames ? '' : 'DstEWalletID', protoName: 'DstEWalletID', subBuilder: EncryptableTransferFundsEWalletID.create)
     ..aOS(3, _omitFieldNames ? '' : 'OptInReason', protoName: 'OptInReason')
     ..hasRequiredFields = false
@@ -1538,15 +1532,15 @@ class EncryptableTransferFunds extends $pb.GeneratedMessage {
   static EncryptableTransferFunds? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.EncryptablePedersenCommit get hiddenTransferPC => $_getN(0);
+  $22.EncryptablePedersenCommit get hiddenTransferPC => $_getN(0);
   @$pb.TagNumber(1)
-  set hiddenTransferPC($21.EncryptablePedersenCommit v) { setField(1, v); }
+  set hiddenTransferPC($22.EncryptablePedersenCommit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasHiddenTransferPC() => $_has(0);
   @$pb.TagNumber(1)
   void clearHiddenTransferPC() => clearField(1);
   @$pb.TagNumber(1)
-  $21.EncryptablePedersenCommit ensureHiddenTransferPC() => $_ensure(0);
+  $22.EncryptablePedersenCommit ensureHiddenTransferPC() => $_ensure(0);
 
   @$pb.TagNumber(2)
   EncryptableTransferFundsEWalletID get dstEWalletID => $_getN(1);
@@ -1817,8 +1811,8 @@ class EncryptableReceiveFunds extends $pb.GeneratedMessage {
 
 class EncryptableAnonTransferFunds extends $pb.GeneratedMessage {
   factory EncryptableAnonTransferFunds({
-    $21.EncryptablePedersenCommit? totalTransferPrimePC,
-    $13.BInt? transparentTransferBF,
+    $22.EncryptablePedersenCommit? totalTransferPrimePC,
+    $14.BInt? transparentTransferBF,
   }) {
     final $result = create();
     if (totalTransferPrimePC != null) {
@@ -1834,8 +1828,8 @@ class EncryptableAnonTransferFunds extends $pb.GeneratedMessage {
   factory EncryptableAnonTransferFunds.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableAnonTransferFunds', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$21.EncryptablePedersenCommit>(1, _omitFieldNames ? '' : 'TotalTransferPrimePC', protoName: 'TotalTransferPrimePC', subBuilder: $21.EncryptablePedersenCommit.create)
-    ..aOM<$13.BInt>(2, _omitFieldNames ? '' : 'TransparentTransferBF', protoName: 'TransparentTransferBF', subBuilder: $13.BInt.create)
+    ..aOM<$22.EncryptablePedersenCommit>(1, _omitFieldNames ? '' : 'TotalTransferPrimePC', protoName: 'TotalTransferPrimePC', subBuilder: $22.EncryptablePedersenCommit.create)
+    ..aOM<$14.BInt>(2, _omitFieldNames ? '' : 'TransparentTransferBF', protoName: 'TransparentTransferBF', subBuilder: $14.BInt.create)
     ..hasRequiredFields = false
   ;
 
@@ -1861,33 +1855,33 @@ class EncryptableAnonTransferFunds extends $pb.GeneratedMessage {
   static EncryptableAnonTransferFunds? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.EncryptablePedersenCommit get totalTransferPrimePC => $_getN(0);
+  $22.EncryptablePedersenCommit get totalTransferPrimePC => $_getN(0);
   @$pb.TagNumber(1)
-  set totalTransferPrimePC($21.EncryptablePedersenCommit v) { setField(1, v); }
+  set totalTransferPrimePC($22.EncryptablePedersenCommit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTotalTransferPrimePC() => $_has(0);
   @$pb.TagNumber(1)
   void clearTotalTransferPrimePC() => clearField(1);
   @$pb.TagNumber(1)
-  $21.EncryptablePedersenCommit ensureTotalTransferPrimePC() => $_ensure(0);
+  $22.EncryptablePedersenCommit ensureTotalTransferPrimePC() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $13.BInt get transparentTransferBF => $_getN(1);
+  $14.BInt get transparentTransferBF => $_getN(1);
   @$pb.TagNumber(2)
-  set transparentTransferBF($13.BInt v) { setField(2, v); }
+  set transparentTransferBF($14.BInt v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTransparentTransferBF() => $_has(1);
   @$pb.TagNumber(2)
   void clearTransparentTransferBF() => clearField(2);
   @$pb.TagNumber(2)
-  $13.BInt ensureTransparentTransferBF() => $_ensure(1);
+  $14.BInt ensureTransparentTransferBF() => $_ensure(1);
 }
 
 class EncryptableESuspiciousAmount extends $pb.GeneratedMessage {
   factory EncryptableESuspiciousAmount({
     $core.String? nonce,
-    $14.Coin? uSDCoinAmount,
-    $14.Coin? coinAmount,
+    $15.Coin? uSDCoinAmount,
+    $15.Coin? coinAmount,
   }) {
     final $result = create();
     if (nonce != null) {
@@ -1907,8 +1901,8 @@ class EncryptableESuspiciousAmount extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableESuspiciousAmount', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'Nonce', protoName: 'Nonce')
-    ..aOM<$14.Coin>(2, _omitFieldNames ? '' : 'USDCoinAmount', protoName: 'USDCoinAmount', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(3, _omitFieldNames ? '' : 'CoinAmount', protoName: 'CoinAmount', subBuilder: $14.Coin.create)
+    ..aOM<$15.Coin>(2, _omitFieldNames ? '' : 'USDCoinAmount', protoName: 'USDCoinAmount', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(3, _omitFieldNames ? '' : 'CoinAmount', protoName: 'CoinAmount', subBuilder: $15.Coin.create)
     ..hasRequiredFields = false
   ;
 
@@ -1943,26 +1937,26 @@ class EncryptableESuspiciousAmount extends $pb.GeneratedMessage {
   void clearNonce() => clearField(1);
 
   @$pb.TagNumber(2)
-  $14.Coin get uSDCoinAmount => $_getN(1);
+  $15.Coin get uSDCoinAmount => $_getN(1);
   @$pb.TagNumber(2)
-  set uSDCoinAmount($14.Coin v) { setField(2, v); }
+  set uSDCoinAmount($15.Coin v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasUSDCoinAmount() => $_has(1);
   @$pb.TagNumber(2)
   void clearUSDCoinAmount() => clearField(2);
   @$pb.TagNumber(2)
-  $14.Coin ensureUSDCoinAmount() => $_ensure(1);
+  $15.Coin ensureUSDCoinAmount() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $14.Coin get coinAmount => $_getN(2);
+  $15.Coin get coinAmount => $_getN(2);
   @$pb.TagNumber(3)
-  set coinAmount($14.Coin v) { setField(3, v); }
+  set coinAmount($15.Coin v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCoinAmount() => $_has(2);
   @$pb.TagNumber(3)
   void clearCoinAmount() => clearField(3);
   @$pb.TagNumber(3)
-  $14.Coin ensureCoinAmount() => $_ensure(2);
+  $15.Coin ensureCoinAmount() => $_ensure(2);
 }
 
 class EncryptableSSIDAndPrivK extends $pb.GeneratedMessage {
@@ -2186,7 +2180,7 @@ class EncryptableSharedEnclaveParams extends $pb.GeneratedMessage {
     $core.String? regulatorPrivK,
     $core.String? regulatorPubK,
     EncryptableEnclaveSSOwnerMap? sSIntervalOwners,
-    EncryptableEnclavePubKCacheMap? sSInervalPubKCache,
+    EncryptableEnclavePubKCacheMap? sSIntervalPubKCache,
   }) {
     final $result = create();
     if (jarID != null) {
@@ -2216,8 +2210,8 @@ class EncryptableSharedEnclaveParams extends $pb.GeneratedMessage {
     if (sSIntervalOwners != null) {
       $result.sSIntervalOwners = sSIntervalOwners;
     }
-    if (sSInervalPubKCache != null) {
-      $result.sSInervalPubKCache = sSInervalPubKCache;
+    if (sSIntervalPubKCache != null) {
+      $result.sSIntervalPubKCache = sSIntervalPubKCache;
     }
     return $result;
   }
@@ -2235,7 +2229,7 @@ class EncryptableSharedEnclaveParams extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'RegulatorPrivK', protoName: 'RegulatorPrivK')
     ..aOS(8, _omitFieldNames ? '' : 'RegulatorPubK', protoName: 'RegulatorPubK')
     ..aOM<EncryptableEnclaveSSOwnerMap>(9, _omitFieldNames ? '' : 'SSIntervalOwners', protoName: 'SSIntervalOwners', subBuilder: EncryptableEnclaveSSOwnerMap.create)
-    ..aOM<EncryptableEnclavePubKCacheMap>(10, _omitFieldNames ? '' : 'SSInervalPubKCache', protoName: 'SSInervalPubKCache', subBuilder: EncryptableEnclavePubKCacheMap.create)
+    ..aOM<EncryptableEnclavePubKCacheMap>(10, _omitFieldNames ? '' : 'SSIntervalPubKCache', protoName: 'SSIntervalPubKCache', subBuilder: EncryptableEnclavePubKCacheMap.create)
     ..hasRequiredFields = false
   ;
 
@@ -2345,15 +2339,15 @@ class EncryptableSharedEnclaveParams extends $pb.GeneratedMessage {
   EncryptableEnclaveSSOwnerMap ensureSSIntervalOwners() => $_ensure(8);
 
   @$pb.TagNumber(10)
-  EncryptableEnclavePubKCacheMap get sSInervalPubKCache => $_getN(9);
+  EncryptableEnclavePubKCacheMap get sSIntervalPubKCache => $_getN(9);
   @$pb.TagNumber(10)
-  set sSInervalPubKCache(EncryptableEnclavePubKCacheMap v) { setField(10, v); }
+  set sSIntervalPubKCache(EncryptableEnclavePubKCacheMap v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasSSInervalPubKCache() => $_has(9);
+  $core.bool hasSSIntervalPubKCache() => $_has(9);
   @$pb.TagNumber(10)
-  void clearSSInervalPubKCache() => clearField(10);
+  void clearSSIntervalPubKCache() => clearField(10);
   @$pb.TagNumber(10)
-  EncryptableEnclavePubKCacheMap ensureSSInervalPubKCache() => $_ensure(9);
+  EncryptableEnclavePubKCacheMap ensureSSIntervalPubKCache() => $_ensure(9);
 }
 
 

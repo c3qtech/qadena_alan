@@ -13,13 +13,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'recover_share.pb.dart' as $24;
+import 'recover_share.pb.dart' as $25;
 
 class ProtectKey extends $pb.GeneratedMessage {
   factory ProtectKey({
     $core.String? walletID,
     $core.int? threshold,
-    $core.Iterable<$24.RecoverShare>? recoverShare,
+    $core.Iterable<$25.RecoverShare>? recoverShare,
   }) {
     final $result = create();
     if (walletID != null) {
@@ -40,7 +40,7 @@ class ProtectKey extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ProtectKey', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'walletID', protoName: 'walletID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'threshold', $pb.PbFieldType.O3)
-    ..pc<$24.RecoverShare>(3, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $24.RecoverShare.create)
+    ..pc<$25.RecoverShare>(3, _omitFieldNames ? '' : 'recoverShare', $pb.PbFieldType.PM, protoName: 'recoverShare', subBuilder: $25.RecoverShare.create)
     ..hasRequiredFields = false
   ;
 
@@ -84,7 +84,7 @@ class ProtectKey extends $pb.GeneratedMessage {
   void clearThreshold() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$24.RecoverShare> get recoverShare => $_getList(2);
+  $core.List<$25.RecoverShare> get recoverShare => $_getList(2);
 }
 
 

@@ -13,12 +13,12 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'ec_point.pb.dart' as $12;
+import 'ec_point.pb.dart' as $13;
 
 /// a,x don't need to be transmitted
 class BPedersenCommit extends $pb.GeneratedMessage {
   factory BPedersenCommit({
-    $12.BECPoint? c,
+    $13.BECPoint? c,
   }) {
     final $result = create();
     if (c != null) {
@@ -31,7 +31,7 @@ class BPedersenCommit extends $pb.GeneratedMessage {
   factory BPedersenCommit.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BPedersenCommit', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$12.BECPoint>(1, _omitFieldNames ? '' : 'c', subBuilder: $12.BECPoint.create)
+    ..aOM<$13.BECPoint>(1, _omitFieldNames ? '' : 'c', subBuilder: $13.BECPoint.create)
     ..hasRequiredFields = false
   ;
 
@@ -57,15 +57,15 @@ class BPedersenCommit extends $pb.GeneratedMessage {
   static BPedersenCommit? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.BECPoint get c => $_getN(0);
+  $13.BECPoint get c => $_getN(0);
   @$pb.TagNumber(1)
-  set c($12.BECPoint v) { setField(1, v); }
+  set c($13.BECPoint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => clearField(1);
   @$pb.TagNumber(1)
-  $12.BECPoint ensureC() => $_ensure(0);
+  $13.BECPoint ensureC() => $_ensure(0);
 }
 
 

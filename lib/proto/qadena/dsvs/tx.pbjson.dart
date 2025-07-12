@@ -27,8 +27,8 @@ const MsgUpdateParams$json = {
 final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'Cg9Nc2dVcGRhdGVQYXJhbXMSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
     'NTdHJpbmdSCWF1dGhvcml0eRI2CgZwYXJhbXMYAiABKAsyEy5xYWRlbmEuZHN2cy5QYXJhbXNC'
-    'CcjeHwCo57AqAVIGcGFyYW1zOjCC57AqCWF1dGhvcml0eYrnsCodcWFkZW5hL3gvZHN2cy9Nc2'
-    'dVcGRhdGVQYXJhbXM=');
+    'CcjeHwCo57AqAVIGcGFyYW1zOkaC57AqCWF1dGhvcml0eYrnsCozZ2l0aHViLmNvbS9jM3F0ZW'
+    'NoL3FhZGVuYV92My94L2RzdnMvTXNnVXBkYXRlUGFyYW1z');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {
@@ -123,4 +123,28 @@ const MsgRegisterAuthorizedSignatoryResponse$json = {
 /// Descriptor for `MsgRegisterAuthorizedSignatoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgRegisterAuthorizedSignatoryResponseDescriptor = $convert.base64Decode(
     'CiZNc2dSZWdpc3RlckF1dGhvcml6ZWRTaWduYXRvcnlSZXNwb25zZQ==');
+
+@$core.Deprecated('Use msgRemoveDocumentDescriptor instead')
+const MsgRemoveDocument$json = {
+  '1': 'MsgRemoveDocument',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'documentID', '3': 2, '4': 1, '5': 9, '10': 'documentID'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgRemoveDocument`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveDocumentDescriptor = $convert.base64Decode(
+    'ChFNc2dSZW1vdmVEb2N1bWVudBIYCgdjcmVhdG9yGAEgASgJUgdjcmVhdG9yEh4KCmRvY3VtZW'
+    '50SUQYAiABKAlSCmRvY3VtZW50SUQ6DILnsCoHY3JlYXRvcg==');
+
+@$core.Deprecated('Use msgRemoveDocumentResponseDescriptor instead')
+const MsgRemoveDocumentResponse$json = {
+  '1': 'MsgRemoveDocumentResponse',
+};
+
+/// Descriptor for `MsgRemoveDocumentResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveDocumentResponseDescriptor = $convert.base64Decode(
+    'ChlNc2dSZW1vdmVEb2N1bWVudFJlc3BvbnNl');
 

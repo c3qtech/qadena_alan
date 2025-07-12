@@ -14,18 +14,19 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../cosmos/base/query/v1beta1/pagination.pb.dart' as $26;
-import '../../cosmos/base/v1beta1/coin.pb.dart' as $14;
-import 'credential.pb.dart' as $6;
-import 'interval_public_key_i_d.pb.dart' as $9;
-import 'jar_regulator.pb.dart' as $8;
-import 'params.pb.dart' as $19;
-import 'pioneer_jar.pb.dart' as $10;
-import 'protect_key.pb.dart' as $4;
-import 'public_key.pb.dart' as $7;
-import 'recover_key.pb.dart' as $5;
-import 'suspicious_transaction.pb.dart' as $27;
-import 'wallet.pb.dart' as $3;
+import '../../cosmos/base/query/v1beta1/pagination.pb.dart' as $27;
+import '../../cosmos/base/v1beta1/coin.pb.dart' as $15;
+import 'credential.pb.dart' as $7;
+import 'enclave_identity.pb.dart' as $3;
+import 'interval_public_key_i_d.pb.dart' as $10;
+import 'jar_regulator.pb.dart' as $9;
+import 'params.pb.dart' as $20;
+import 'pioneer_jar.pb.dart' as $11;
+import 'protect_key.pb.dart' as $5;
+import 'public_key.pb.dart' as $8;
+import 'recover_key.pb.dart' as $6;
+import 'suspicious_transaction.pb.dart' as $28;
+import 'wallet.pb.dart' as $4;
 
 /// QueryParamsRequest is request type for the Query/Params RPC method.
 class QueryParamsRequest extends $pb.GeneratedMessage {
@@ -63,7 +64,7 @@ class QueryParamsRequest extends $pb.GeneratedMessage {
 /// QueryParamsResponse is response type for the Query/Params RPC method.
 class QueryParamsResponse extends $pb.GeneratedMessage {
   factory QueryParamsResponse({
-    $19.Params? params,
+    $20.Params? params,
   }) {
     final $result = create();
     if (params != null) {
@@ -76,7 +77,7 @@ class QueryParamsResponse extends $pb.GeneratedMessage {
   factory QueryParamsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryParamsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$19.Params>(1, _omitFieldNames ? '' : 'params', subBuilder: $19.Params.create)
+    ..aOM<$20.Params>(1, _omitFieldNames ? '' : 'params', subBuilder: $20.Params.create)
     ..hasRequiredFields = false
   ;
 
@@ -103,15 +104,15 @@ class QueryParamsResponse extends $pb.GeneratedMessage {
 
   /// params holds all the parameters of this module.
   @$pb.TagNumber(1)
-  $19.Params get params => $_getN(0);
+  $20.Params get params => $_getN(0);
   @$pb.TagNumber(1)
-  set params($19.Params v) { setField(1, v); }
+  set params($20.Params v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasParams() => $_has(0);
   @$pb.TagNumber(1)
   void clearParams() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Params ensureParams() => $_ensure(0);
+  $20.Params ensureParams() => $_ensure(0);
 }
 
 class QueryGetCredentialRequest extends $pb.GeneratedMessage {
@@ -180,7 +181,7 @@ class QueryGetCredentialRequest extends $pb.GeneratedMessage {
 
 class QueryGetCredentialResponse extends $pb.GeneratedMessage {
   factory QueryGetCredentialResponse({
-    $6.Credential? credential,
+    $7.Credential? credential,
   }) {
     final $result = create();
     if (credential != null) {
@@ -193,7 +194,7 @@ class QueryGetCredentialResponse extends $pb.GeneratedMessage {
   factory QueryGetCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$6.Credential>(1, _omitFieldNames ? '' : 'credential', subBuilder: $6.Credential.create)
+    ..aOM<$7.Credential>(1, _omitFieldNames ? '' : 'credential', subBuilder: $7.Credential.create)
     ..hasRequiredFields = false
   ;
 
@@ -219,20 +220,20 @@ class QueryGetCredentialResponse extends $pb.GeneratedMessage {
   static QueryGetCredentialResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Credential get credential => $_getN(0);
+  $7.Credential get credential => $_getN(0);
   @$pb.TagNumber(1)
-  set credential($6.Credential v) { setField(1, v); }
+  set credential($7.Credential v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCredential() => $_has(0);
   @$pb.TagNumber(1)
   void clearCredential() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Credential ensureCredential() => $_ensure(0);
+  $7.Credential ensureCredential() => $_ensure(0);
 }
 
 class QueryAllCredentialRequest extends $pb.GeneratedMessage {
   factory QueryAllCredentialRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -245,7 +246,7 @@ class QueryAllCredentialRequest extends $pb.GeneratedMessage {
   factory QueryAllCredentialRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllCredentialRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -271,21 +272,21 @@ class QueryAllCredentialRequest extends $pb.GeneratedMessage {
   static QueryAllCredentialRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllCredentialResponse extends $pb.GeneratedMessage {
   factory QueryAllCredentialResponse({
-    $core.Iterable<$6.Credential>? credential,
-    $26.PageResponse? pagination,
+    $core.Iterable<$7.Credential>? credential,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (credential != null) {
@@ -301,8 +302,8 @@ class QueryAllCredentialResponse extends $pb.GeneratedMessage {
   factory QueryAllCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$6.Credential>(1, _omitFieldNames ? '' : 'credential', $pb.PbFieldType.PM, subBuilder: $6.Credential.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$7.Credential>(1, _omitFieldNames ? '' : 'credential', $pb.PbFieldType.PM, subBuilder: $7.Credential.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -328,18 +329,18 @@ class QueryAllCredentialResponse extends $pb.GeneratedMessage {
   static QueryAllCredentialResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$6.Credential> get credential => $_getList(0);
+  $core.List<$7.Credential> get credential => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetPublicKeyRequest extends $pb.GeneratedMessage {
@@ -408,7 +409,7 @@ class QueryGetPublicKeyRequest extends $pb.GeneratedMessage {
 
 class QueryGetPublicKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetPublicKeyResponse({
-    $7.PublicKey? publicKey,
+    $8.PublicKey? publicKey,
   }) {
     final $result = create();
     if (publicKey != null) {
@@ -421,7 +422,7 @@ class QueryGetPublicKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetPublicKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetPublicKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$7.PublicKey>(1, _omitFieldNames ? '' : 'publicKey', protoName: 'publicKey', subBuilder: $7.PublicKey.create)
+    ..aOM<$8.PublicKey>(1, _omitFieldNames ? '' : 'publicKey', protoName: 'publicKey', subBuilder: $8.PublicKey.create)
     ..hasRequiredFields = false
   ;
 
@@ -447,20 +448,20 @@ class QueryGetPublicKeyResponse extends $pb.GeneratedMessage {
   static QueryGetPublicKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.PublicKey get publicKey => $_getN(0);
+  $8.PublicKey get publicKey => $_getN(0);
   @$pb.TagNumber(1)
-  set publicKey($7.PublicKey v) { setField(1, v); }
+  set publicKey($8.PublicKey v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPublicKey() => $_has(0);
   @$pb.TagNumber(1)
   void clearPublicKey() => clearField(1);
   @$pb.TagNumber(1)
-  $7.PublicKey ensurePublicKey() => $_ensure(0);
+  $8.PublicKey ensurePublicKey() => $_ensure(0);
 }
 
 class QueryAllPublicKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllPublicKeyRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -473,7 +474,7 @@ class QueryAllPublicKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllPublicKeyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllPublicKeyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -499,21 +500,21 @@ class QueryAllPublicKeyRequest extends $pb.GeneratedMessage {
   static QueryAllPublicKeyRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllPublicKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllPublicKeyResponse({
-    $core.Iterable<$7.PublicKey>? publicKey,
-    $26.PageResponse? pagination,
+    $core.Iterable<$8.PublicKey>? publicKey,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (publicKey != null) {
@@ -529,8 +530,8 @@ class QueryAllPublicKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllPublicKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllPublicKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$7.PublicKey>(1, _omitFieldNames ? '' : 'publicKey', $pb.PbFieldType.PM, protoName: 'publicKey', subBuilder: $7.PublicKey.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$8.PublicKey>(1, _omitFieldNames ? '' : 'publicKey', $pb.PbFieldType.PM, protoName: 'publicKey', subBuilder: $8.PublicKey.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -556,18 +557,18 @@ class QueryAllPublicKeyResponse extends $pb.GeneratedMessage {
   static QueryAllPublicKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$7.PublicKey> get publicKey => $_getList(0);
+  $core.List<$8.PublicKey> get publicKey => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetWalletRequest extends $pb.GeneratedMessage {
@@ -622,7 +623,7 @@ class QueryGetWalletRequest extends $pb.GeneratedMessage {
 
 class QueryGetWalletResponse extends $pb.GeneratedMessage {
   factory QueryGetWalletResponse({
-    $3.Wallet? wallet,
+    $4.Wallet? wallet,
   }) {
     final $result = create();
     if (wallet != null) {
@@ -635,7 +636,7 @@ class QueryGetWalletResponse extends $pb.GeneratedMessage {
   factory QueryGetWalletResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetWalletResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$3.Wallet>(1, _omitFieldNames ? '' : 'wallet', subBuilder: $3.Wallet.create)
+    ..aOM<$4.Wallet>(1, _omitFieldNames ? '' : 'wallet', subBuilder: $4.Wallet.create)
     ..hasRequiredFields = false
   ;
 
@@ -661,20 +662,20 @@ class QueryGetWalletResponse extends $pb.GeneratedMessage {
   static QueryGetWalletResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.Wallet get wallet => $_getN(0);
+  $4.Wallet get wallet => $_getN(0);
   @$pb.TagNumber(1)
-  set wallet($3.Wallet v) { setField(1, v); }
+  set wallet($4.Wallet v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasWallet() => $_has(0);
   @$pb.TagNumber(1)
   void clearWallet() => clearField(1);
   @$pb.TagNumber(1)
-  $3.Wallet ensureWallet() => $_ensure(0);
+  $4.Wallet ensureWallet() => $_ensure(0);
 }
 
 class QueryAllWalletRequest extends $pb.GeneratedMessage {
   factory QueryAllWalletRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -687,7 +688,7 @@ class QueryAllWalletRequest extends $pb.GeneratedMessage {
   factory QueryAllWalletRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllWalletRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -713,21 +714,21 @@ class QueryAllWalletRequest extends $pb.GeneratedMessage {
   static QueryAllWalletRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllWalletResponse extends $pb.GeneratedMessage {
   factory QueryAllWalletResponse({
-    $core.Iterable<$3.Wallet>? wallet,
-    $26.PageResponse? pagination,
+    $core.Iterable<$4.Wallet>? wallet,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (wallet != null) {
@@ -743,8 +744,8 @@ class QueryAllWalletResponse extends $pb.GeneratedMessage {
   factory QueryAllWalletResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllWalletResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$3.Wallet>(1, _omitFieldNames ? '' : 'wallet', $pb.PbFieldType.PM, subBuilder: $3.Wallet.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$4.Wallet>(1, _omitFieldNames ? '' : 'wallet', $pb.PbFieldType.PM, subBuilder: $4.Wallet.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -770,18 +771,18 @@ class QueryAllWalletResponse extends $pb.GeneratedMessage {
   static QueryAllWalletResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$3.Wallet> get wallet => $_getList(0);
+  $core.List<$4.Wallet> get wallet => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetIntervalPublicKeyIDRequest extends $pb.GeneratedMessage {
@@ -850,7 +851,7 @@ class QueryGetIntervalPublicKeyIDRequest extends $pb.GeneratedMessage {
 
 class QueryGetIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   factory QueryGetIntervalPublicKeyIDResponse({
-    $9.IntervalPublicKeyID? intervalPublicKeyID,
+    $10.IntervalPublicKeyID? intervalPublicKeyID,
   }) {
     final $result = create();
     if (intervalPublicKeyID != null) {
@@ -863,7 +864,7 @@ class QueryGetIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   factory QueryGetIntervalPublicKeyIDResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetIntervalPublicKeyIDResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$9.IntervalPublicKeyID>(1, _omitFieldNames ? '' : 'intervalPublicKeyID', protoName: 'intervalPublicKeyID', subBuilder: $9.IntervalPublicKeyID.create)
+    ..aOM<$10.IntervalPublicKeyID>(1, _omitFieldNames ? '' : 'intervalPublicKeyID', protoName: 'intervalPublicKeyID', subBuilder: $10.IntervalPublicKeyID.create)
     ..hasRequiredFields = false
   ;
 
@@ -889,20 +890,20 @@ class QueryGetIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   static QueryGetIntervalPublicKeyIDResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.IntervalPublicKeyID get intervalPublicKeyID => $_getN(0);
+  $10.IntervalPublicKeyID get intervalPublicKeyID => $_getN(0);
   @$pb.TagNumber(1)
-  set intervalPublicKeyID($9.IntervalPublicKeyID v) { setField(1, v); }
+  set intervalPublicKeyID($10.IntervalPublicKeyID v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasIntervalPublicKeyID() => $_has(0);
   @$pb.TagNumber(1)
   void clearIntervalPublicKeyID() => clearField(1);
   @$pb.TagNumber(1)
-  $9.IntervalPublicKeyID ensureIntervalPublicKeyID() => $_ensure(0);
+  $10.IntervalPublicKeyID ensureIntervalPublicKeyID() => $_ensure(0);
 }
 
 class QueryAllIntervalPublicKeyIDRequest extends $pb.GeneratedMessage {
   factory QueryAllIntervalPublicKeyIDRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -915,7 +916,7 @@ class QueryAllIntervalPublicKeyIDRequest extends $pb.GeneratedMessage {
   factory QueryAllIntervalPublicKeyIDRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllIntervalPublicKeyIDRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -941,21 +942,21 @@ class QueryAllIntervalPublicKeyIDRequest extends $pb.GeneratedMessage {
   static QueryAllIntervalPublicKeyIDRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   factory QueryAllIntervalPublicKeyIDResponse({
-    $core.Iterable<$9.IntervalPublicKeyID>? intervalPublicKeyID,
-    $26.PageResponse? pagination,
+    $core.Iterable<$10.IntervalPublicKeyID>? intervalPublicKeyID,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (intervalPublicKeyID != null) {
@@ -971,8 +972,8 @@ class QueryAllIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   factory QueryAllIntervalPublicKeyIDResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllIntervalPublicKeyIDResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$9.IntervalPublicKeyID>(1, _omitFieldNames ? '' : 'intervalPublicKeyID', $pb.PbFieldType.PM, protoName: 'intervalPublicKeyID', subBuilder: $9.IntervalPublicKeyID.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$10.IntervalPublicKeyID>(1, _omitFieldNames ? '' : 'intervalPublicKeyID', $pb.PbFieldType.PM, protoName: 'intervalPublicKeyID', subBuilder: $10.IntervalPublicKeyID.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -998,18 +999,18 @@ class QueryAllIntervalPublicKeyIDResponse extends $pb.GeneratedMessage {
   static QueryAllIntervalPublicKeyIDResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$9.IntervalPublicKeyID> get intervalPublicKeyID => $_getList(0);
+  $core.List<$10.IntervalPublicKeyID> get intervalPublicKeyID => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetPioneerJarRequest extends $pb.GeneratedMessage {
@@ -1064,7 +1065,7 @@ class QueryGetPioneerJarRequest extends $pb.GeneratedMessage {
 
 class QueryGetPioneerJarResponse extends $pb.GeneratedMessage {
   factory QueryGetPioneerJarResponse({
-    $10.PioneerJar? pioneerJar,
+    $11.PioneerJar? pioneerJar,
   }) {
     final $result = create();
     if (pioneerJar != null) {
@@ -1077,7 +1078,7 @@ class QueryGetPioneerJarResponse extends $pb.GeneratedMessage {
   factory QueryGetPioneerJarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetPioneerJarResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$10.PioneerJar>(1, _omitFieldNames ? '' : 'pioneerJar', protoName: 'pioneerJar', subBuilder: $10.PioneerJar.create)
+    ..aOM<$11.PioneerJar>(1, _omitFieldNames ? '' : 'pioneerJar', protoName: 'pioneerJar', subBuilder: $11.PioneerJar.create)
     ..hasRequiredFields = false
   ;
 
@@ -1103,20 +1104,20 @@ class QueryGetPioneerJarResponse extends $pb.GeneratedMessage {
   static QueryGetPioneerJarResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.PioneerJar get pioneerJar => $_getN(0);
+  $11.PioneerJar get pioneerJar => $_getN(0);
   @$pb.TagNumber(1)
-  set pioneerJar($10.PioneerJar v) { setField(1, v); }
+  set pioneerJar($11.PioneerJar v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPioneerJar() => $_has(0);
   @$pb.TagNumber(1)
   void clearPioneerJar() => clearField(1);
   @$pb.TagNumber(1)
-  $10.PioneerJar ensurePioneerJar() => $_ensure(0);
+  $11.PioneerJar ensurePioneerJar() => $_ensure(0);
 }
 
 class QueryAllPioneerJarRequest extends $pb.GeneratedMessage {
   factory QueryAllPioneerJarRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -1129,7 +1130,7 @@ class QueryAllPioneerJarRequest extends $pb.GeneratedMessage {
   factory QueryAllPioneerJarRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllPioneerJarRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -1155,21 +1156,21 @@ class QueryAllPioneerJarRequest extends $pb.GeneratedMessage {
   static QueryAllPioneerJarRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllPioneerJarResponse extends $pb.GeneratedMessage {
   factory QueryAllPioneerJarResponse({
-    $core.Iterable<$10.PioneerJar>? pioneerJar,
-    $26.PageResponse? pagination,
+    $core.Iterable<$11.PioneerJar>? pioneerJar,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (pioneerJar != null) {
@@ -1185,8 +1186,8 @@ class QueryAllPioneerJarResponse extends $pb.GeneratedMessage {
   factory QueryAllPioneerJarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllPioneerJarResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$10.PioneerJar>(1, _omitFieldNames ? '' : 'pioneerJar', $pb.PbFieldType.PM, protoName: 'pioneerJar', subBuilder: $10.PioneerJar.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$11.PioneerJar>(1, _omitFieldNames ? '' : 'pioneerJar', $pb.PbFieldType.PM, protoName: 'pioneerJar', subBuilder: $11.PioneerJar.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -1212,18 +1213,18 @@ class QueryAllPioneerJarResponse extends $pb.GeneratedMessage {
   static QueryAllPioneerJarResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$10.PioneerJar> get pioneerJar => $_getList(0);
+  $core.List<$11.PioneerJar> get pioneerJar => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetJarRegulatorRequest extends $pb.GeneratedMessage {
@@ -1278,7 +1279,7 @@ class QueryGetJarRegulatorRequest extends $pb.GeneratedMessage {
 
 class QueryGetJarRegulatorResponse extends $pb.GeneratedMessage {
   factory QueryGetJarRegulatorResponse({
-    $8.JarRegulator? jarRegulator,
+    $9.JarRegulator? jarRegulator,
   }) {
     final $result = create();
     if (jarRegulator != null) {
@@ -1291,7 +1292,7 @@ class QueryGetJarRegulatorResponse extends $pb.GeneratedMessage {
   factory QueryGetJarRegulatorResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetJarRegulatorResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$8.JarRegulator>(1, _omitFieldNames ? '' : 'jarRegulator', protoName: 'jarRegulator', subBuilder: $8.JarRegulator.create)
+    ..aOM<$9.JarRegulator>(1, _omitFieldNames ? '' : 'jarRegulator', protoName: 'jarRegulator', subBuilder: $9.JarRegulator.create)
     ..hasRequiredFields = false
   ;
 
@@ -1317,20 +1318,20 @@ class QueryGetJarRegulatorResponse extends $pb.GeneratedMessage {
   static QueryGetJarRegulatorResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.JarRegulator get jarRegulator => $_getN(0);
+  $9.JarRegulator get jarRegulator => $_getN(0);
   @$pb.TagNumber(1)
-  set jarRegulator($8.JarRegulator v) { setField(1, v); }
+  set jarRegulator($9.JarRegulator v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasJarRegulator() => $_has(0);
   @$pb.TagNumber(1)
   void clearJarRegulator() => clearField(1);
   @$pb.TagNumber(1)
-  $8.JarRegulator ensureJarRegulator() => $_ensure(0);
+  $9.JarRegulator ensureJarRegulator() => $_ensure(0);
 }
 
 class QueryAllJarRegulatorRequest extends $pb.GeneratedMessage {
   factory QueryAllJarRegulatorRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -1343,7 +1344,7 @@ class QueryAllJarRegulatorRequest extends $pb.GeneratedMessage {
   factory QueryAllJarRegulatorRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllJarRegulatorRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -1369,21 +1370,21 @@ class QueryAllJarRegulatorRequest extends $pb.GeneratedMessage {
   static QueryAllJarRegulatorRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllJarRegulatorResponse extends $pb.GeneratedMessage {
   factory QueryAllJarRegulatorResponse({
-    $core.Iterable<$8.JarRegulator>? jarRegulator,
-    $26.PageResponse? pagination,
+    $core.Iterable<$9.JarRegulator>? jarRegulator,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (jarRegulator != null) {
@@ -1399,8 +1400,8 @@ class QueryAllJarRegulatorResponse extends $pb.GeneratedMessage {
   factory QueryAllJarRegulatorResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllJarRegulatorResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$8.JarRegulator>(1, _omitFieldNames ? '' : 'jarRegulator', $pb.PbFieldType.PM, protoName: 'jarRegulator', subBuilder: $8.JarRegulator.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$9.JarRegulator>(1, _omitFieldNames ? '' : 'jarRegulator', $pb.PbFieldType.PM, protoName: 'jarRegulator', subBuilder: $9.JarRegulator.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -1426,18 +1427,18 @@ class QueryAllJarRegulatorResponse extends $pb.GeneratedMessage {
   static QueryAllJarRegulatorResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$8.JarRegulator> get jarRegulator => $_getList(0);
+  $core.List<$9.JarRegulator> get jarRegulator => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetSuspiciousTransactionRequest extends $pb.GeneratedMessage {
@@ -1492,7 +1493,7 @@ class QueryGetSuspiciousTransactionRequest extends $pb.GeneratedMessage {
 
 class QueryGetSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   factory QueryGetSuspiciousTransactionResponse({
-    $27.SuspiciousTransaction? suspiciousTransaction,
+    $28.SuspiciousTransaction? suspiciousTransaction,
   }) {
     final $result = create();
     if (suspiciousTransaction != null) {
@@ -1505,7 +1506,7 @@ class QueryGetSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   factory QueryGetSuspiciousTransactionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetSuspiciousTransactionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$27.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'SuspiciousTransaction', protoName: 'SuspiciousTransaction', subBuilder: $27.SuspiciousTransaction.create)
+    ..aOM<$28.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'SuspiciousTransaction', protoName: 'SuspiciousTransaction', subBuilder: $28.SuspiciousTransaction.create)
     ..hasRequiredFields = false
   ;
 
@@ -1531,20 +1532,20 @@ class QueryGetSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   static QueryGetSuspiciousTransactionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SuspiciousTransaction get suspiciousTransaction => $_getN(0);
+  $28.SuspiciousTransaction get suspiciousTransaction => $_getN(0);
   @$pb.TagNumber(1)
-  set suspiciousTransaction($27.SuspiciousTransaction v) { setField(1, v); }
+  set suspiciousTransaction($28.SuspiciousTransaction v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSuspiciousTransaction() => $_has(0);
   @$pb.TagNumber(1)
   void clearSuspiciousTransaction() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SuspiciousTransaction ensureSuspiciousTransaction() => $_ensure(0);
+  $28.SuspiciousTransaction ensureSuspiciousTransaction() => $_ensure(0);
 }
 
 class QueryAllSuspiciousTransactionRequest extends $pb.GeneratedMessage {
   factory QueryAllSuspiciousTransactionRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
   }) {
     final $result = create();
     if (pagination != null) {
@@ -1557,7 +1558,7 @@ class QueryAllSuspiciousTransactionRequest extends $pb.GeneratedMessage {
   factory QueryAllSuspiciousTransactionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllSuspiciousTransactionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -1583,21 +1584,21 @@ class QueryAllSuspiciousTransactionRequest extends $pb.GeneratedMessage {
   static QueryAllSuspiciousTransactionRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 }
 
 class QueryAllSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   factory QueryAllSuspiciousTransactionResponse({
-    $core.Iterable<$27.SuspiciousTransaction>? suspiciousTransaction,
-    $26.PageResponse? pagination,
+    $core.Iterable<$28.SuspiciousTransaction>? suspiciousTransaction,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (suspiciousTransaction != null) {
@@ -1613,8 +1614,8 @@ class QueryAllSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   factory QueryAllSuspiciousTransactionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllSuspiciousTransactionResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$27.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'SuspiciousTransaction', $pb.PbFieldType.PM, protoName: 'SuspiciousTransaction', subBuilder: $27.SuspiciousTransaction.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$28.SuspiciousTransaction>(1, _omitFieldNames ? '' : 'SuspiciousTransaction', $pb.PbFieldType.PM, protoName: 'SuspiciousTransaction', subBuilder: $28.SuspiciousTransaction.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -1640,18 +1641,18 @@ class QueryAllSuspiciousTransactionResponse extends $pb.GeneratedMessage {
   static QueryAllSuspiciousTransactionResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$27.SuspiciousTransaction> get suspiciousTransaction => $_getList(0);
+  $core.List<$28.SuspiciousTransaction> get suspiciousTransaction => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetProtectKeyRequest extends $pb.GeneratedMessage {
@@ -1706,7 +1707,7 @@ class QueryGetProtectKeyRequest extends $pb.GeneratedMessage {
 
 class QueryGetProtectKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetProtectKeyResponse({
-    $4.ProtectKey? protectKey,
+    $5.ProtectKey? protectKey,
   }) {
     final $result = create();
     if (protectKey != null) {
@@ -1719,7 +1720,7 @@ class QueryGetProtectKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetProtectKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetProtectKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$4.ProtectKey>(1, _omitFieldNames ? '' : 'protectKey', protoName: 'protectKey', subBuilder: $4.ProtectKey.create)
+    ..aOM<$5.ProtectKey>(1, _omitFieldNames ? '' : 'protectKey', protoName: 'protectKey', subBuilder: $5.ProtectKey.create)
     ..hasRequiredFields = false
   ;
 
@@ -1745,20 +1746,20 @@ class QueryGetProtectKeyResponse extends $pb.GeneratedMessage {
   static QueryGetProtectKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $4.ProtectKey get protectKey => $_getN(0);
+  $5.ProtectKey get protectKey => $_getN(0);
   @$pb.TagNumber(1)
-  set protectKey($4.ProtectKey v) { setField(1, v); }
+  set protectKey($5.ProtectKey v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasProtectKey() => $_has(0);
   @$pb.TagNumber(1)
   void clearProtectKey() => clearField(1);
   @$pb.TagNumber(1)
-  $4.ProtectKey ensureProtectKey() => $_ensure(0);
+  $5.ProtectKey ensureProtectKey() => $_ensure(0);
 }
 
 class QueryAllProtectKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllProtectKeyRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
     $core.String? credentialID,
   }) {
     final $result = create();
@@ -1775,7 +1776,7 @@ class QueryAllProtectKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllProtectKeyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllProtectKeyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..aOS(2, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..hasRequiredFields = false
   ;
@@ -1802,15 +1803,15 @@ class QueryAllProtectKeyRequest extends $pb.GeneratedMessage {
   static QueryAllProtectKeyRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get credentialID => $_getSZ(1);
@@ -1824,8 +1825,8 @@ class QueryAllProtectKeyRequest extends $pb.GeneratedMessage {
 
 class QueryAllProtectKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllProtectKeyResponse({
-    $core.Iterable<$4.ProtectKey>? protectKey,
-    $26.PageResponse? pagination,
+    $core.Iterable<$5.ProtectKey>? protectKey,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (protectKey != null) {
@@ -1841,8 +1842,8 @@ class QueryAllProtectKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllProtectKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllProtectKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$4.ProtectKey>(1, _omitFieldNames ? '' : 'protectKey', $pb.PbFieldType.PM, protoName: 'protectKey', subBuilder: $4.ProtectKey.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$5.ProtectKey>(1, _omitFieldNames ? '' : 'protectKey', $pb.PbFieldType.PM, protoName: 'protectKey', subBuilder: $5.ProtectKey.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -1868,18 +1869,18 @@ class QueryAllProtectKeyResponse extends $pb.GeneratedMessage {
   static QueryAllProtectKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$4.ProtectKey> get protectKey => $_getList(0);
+  $core.List<$5.ProtectKey> get protectKey => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryGetRecoverKeyRequest extends $pb.GeneratedMessage {
@@ -1934,7 +1935,7 @@ class QueryGetRecoverKeyRequest extends $pb.GeneratedMessage {
 
 class QueryGetRecoverKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetRecoverKeyResponse({
-    $5.RecoverKey? recoverKey,
+    $6.RecoverKey? recoverKey,
   }) {
     final $result = create();
     if (recoverKey != null) {
@@ -1947,7 +1948,7 @@ class QueryGetRecoverKeyResponse extends $pb.GeneratedMessage {
   factory QueryGetRecoverKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetRecoverKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$5.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKey', protoName: 'recoverKey', subBuilder: $5.RecoverKey.create)
+    ..aOM<$6.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKey', protoName: 'recoverKey', subBuilder: $6.RecoverKey.create)
     ..hasRequiredFields = false
   ;
 
@@ -1973,20 +1974,20 @@ class QueryGetRecoverKeyResponse extends $pb.GeneratedMessage {
   static QueryGetRecoverKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $5.RecoverKey get recoverKey => $_getN(0);
+  $6.RecoverKey get recoverKey => $_getN(0);
   @$pb.TagNumber(1)
-  set recoverKey($5.RecoverKey v) { setField(1, v); }
+  set recoverKey($6.RecoverKey v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRecoverKey() => $_has(0);
   @$pb.TagNumber(1)
   void clearRecoverKey() => clearField(1);
   @$pb.TagNumber(1)
-  $5.RecoverKey ensureRecoverKey() => $_ensure(0);
+  $6.RecoverKey ensureRecoverKey() => $_ensure(0);
 }
 
 class QueryAllRecoverKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllRecoverKeyRequest({
-    $26.PageRequest? pagination,
+    $27.PageRequest? pagination,
     $core.String? credentialID,
   }) {
     final $result = create();
@@ -2003,7 +2004,7 @@ class QueryAllRecoverKeyRequest extends $pb.GeneratedMessage {
   factory QueryAllRecoverKeyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllRecoverKeyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$26.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageRequest.create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
     ..aOS(2, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..hasRequiredFields = false
   ;
@@ -2030,15 +2031,15 @@ class QueryAllRecoverKeyRequest extends $pb.GeneratedMessage {
   static QueryAllRecoverKeyRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.PageRequest get pagination => $_getN(0);
+  $27.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
-  set pagination($26.PageRequest v) { setField(1, v); }
+  set pagination($27.PageRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPagination() => $_has(0);
   @$pb.TagNumber(1)
   void clearPagination() => clearField(1);
   @$pb.TagNumber(1)
-  $26.PageRequest ensurePagination() => $_ensure(0);
+  $27.PageRequest ensurePagination() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get credentialID => $_getSZ(1);
@@ -2052,8 +2053,8 @@ class QueryAllRecoverKeyRequest extends $pb.GeneratedMessage {
 
 class QueryAllRecoverKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllRecoverKeyResponse({
-    $core.Iterable<$5.RecoverKey>? recoverKey,
-    $26.PageResponse? pagination,
+    $core.Iterable<$6.RecoverKey>? recoverKey,
+    $27.PageResponse? pagination,
   }) {
     final $result = create();
     if (recoverKey != null) {
@@ -2069,8 +2070,8 @@ class QueryAllRecoverKeyResponse extends $pb.GeneratedMessage {
   factory QueryAllRecoverKeyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllRecoverKeyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..pc<$5.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKey', $pb.PbFieldType.PM, protoName: 'recoverKey', subBuilder: $5.RecoverKey.create)
-    ..aOM<$26.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $26.PageResponse.create)
+    ..pc<$6.RecoverKey>(1, _omitFieldNames ? '' : 'recoverKey', $pb.PbFieldType.PM, protoName: 'recoverKey', subBuilder: $6.RecoverKey.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
     ..hasRequiredFields = false
   ;
 
@@ -2096,18 +2097,18 @@ class QueryAllRecoverKeyResponse extends $pb.GeneratedMessage {
   static QueryAllRecoverKeyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$5.RecoverKey> get recoverKey => $_getList(0);
+  $core.List<$6.RecoverKey> get recoverKey => $_getList(0);
 
   @$pb.TagNumber(2)
-  $26.PageResponse get pagination => $_getN(1);
+  $27.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
-  set pagination($26.PageResponse v) { setField(2, v); }
+  set pagination($27.PageResponse v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPagination() => $_has(1);
   @$pb.TagNumber(2)
   void clearPagination() => clearField(2);
   @$pb.TagNumber(2)
-  $26.PageResponse ensurePagination() => $_ensure(1);
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 class QueryTreasuryRequest extends $pb.GeneratedMessage {
@@ -2144,8 +2145,8 @@ class QueryTreasuryRequest extends $pb.GeneratedMessage {
 
 class QueryTreasuryResponse extends $pb.GeneratedMessage {
   factory QueryTreasuryResponse({
-    $14.Coin? totalBalance,
-    $14.Coin? encryptedBalance,
+    $15.Coin? totalBalance,
+    $15.Coin? encryptedBalance,
   }) {
     final $result = create();
     if (totalBalance != null) {
@@ -2161,8 +2162,8 @@ class QueryTreasuryResponse extends $pb.GeneratedMessage {
   factory QueryTreasuryResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryTreasuryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$14.Coin>(1, _omitFieldNames ? '' : 'totalBalance', protoName: 'totalBalance', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(2, _omitFieldNames ? '' : 'encryptedBalance', protoName: 'encryptedBalance', subBuilder: $14.Coin.create)
+    ..aOM<$15.Coin>(1, _omitFieldNames ? '' : 'totalBalance', protoName: 'totalBalance', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(2, _omitFieldNames ? '' : 'encryptedBalance', protoName: 'encryptedBalance', subBuilder: $15.Coin.create)
     ..hasRequiredFields = false
   ;
 
@@ -2188,26 +2189,26 @@ class QueryTreasuryResponse extends $pb.GeneratedMessage {
   static QueryTreasuryResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $14.Coin get totalBalance => $_getN(0);
+  $15.Coin get totalBalance => $_getN(0);
   @$pb.TagNumber(1)
-  set totalBalance($14.Coin v) { setField(1, v); }
+  set totalBalance($15.Coin v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTotalBalance() => $_has(0);
   @$pb.TagNumber(1)
   void clearTotalBalance() => clearField(1);
   @$pb.TagNumber(1)
-  $14.Coin ensureTotalBalance() => $_ensure(0);
+  $15.Coin ensureTotalBalance() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $14.Coin get encryptedBalance => $_getN(1);
+  $15.Coin get encryptedBalance => $_getN(1);
   @$pb.TagNumber(2)
-  set encryptedBalance($14.Coin v) { setField(2, v); }
+  set encryptedBalance($15.Coin v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasEncryptedBalance() => $_has(1);
   @$pb.TagNumber(2)
   void clearEncryptedBalance() => clearField(2);
   @$pb.TagNumber(2)
-  $14.Coin ensureEncryptedBalance() => $_ensure(1);
+  $15.Coin ensureEncryptedBalance() => $_ensure(1);
 }
 
 class QueryAccountRequest extends $pb.GeneratedMessage {
@@ -2358,10 +2359,10 @@ class QueryIncentivesRequest extends $pb.GeneratedMessage {
 
 class QueryIncentivesResponse extends $pb.GeneratedMessage {
   factory QueryIncentivesResponse({
-    $14.Coin? createWalletIncentive,
-    $14.Coin? createEphemeralWalletIncentive,
-    $14.Coin? createWalletTransparentIncentive,
-    $14.Coin? createEphemeralWalletTransparentIncentive,
+    $15.Coin? createWalletIncentive,
+    $15.Coin? createEphemeralWalletIncentive,
+    $15.Coin? createWalletTransparentIncentive,
+    $15.Coin? createEphemeralWalletTransparentIncentive,
   }) {
     final $result = create();
     if (createWalletIncentive != null) {
@@ -2383,10 +2384,10 @@ class QueryIncentivesResponse extends $pb.GeneratedMessage {
   factory QueryIncentivesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryIncentivesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$14.Coin>(1, _omitFieldNames ? '' : 'createWalletIncentive', protoName: 'createWalletIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(2, _omitFieldNames ? '' : 'createEphemeralWalletIncentive', protoName: 'createEphemeralWalletIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(3, _omitFieldNames ? '' : 'createWalletTransparentIncentive', protoName: 'createWalletTransparentIncentive', subBuilder: $14.Coin.create)
-    ..aOM<$14.Coin>(4, _omitFieldNames ? '' : 'createEphemeralWalletTransparentIncentive', protoName: 'createEphemeralWalletTransparentIncentive', subBuilder: $14.Coin.create)
+    ..aOM<$15.Coin>(1, _omitFieldNames ? '' : 'createWalletIncentive', protoName: 'createWalletIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(2, _omitFieldNames ? '' : 'createEphemeralWalletIncentive', protoName: 'createEphemeralWalletIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(3, _omitFieldNames ? '' : 'createWalletTransparentIncentive', protoName: 'createWalletTransparentIncentive', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(4, _omitFieldNames ? '' : 'createEphemeralWalletTransparentIncentive', protoName: 'createEphemeralWalletTransparentIncentive', subBuilder: $15.Coin.create)
     ..hasRequiredFields = false
   ;
 
@@ -2412,53 +2413,209 @@ class QueryIncentivesResponse extends $pb.GeneratedMessage {
   static QueryIncentivesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $14.Coin get createWalletIncentive => $_getN(0);
+  $15.Coin get createWalletIncentive => $_getN(0);
   @$pb.TagNumber(1)
-  set createWalletIncentive($14.Coin v) { setField(1, v); }
+  set createWalletIncentive($15.Coin v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreateWalletIncentive() => $_has(0);
   @$pb.TagNumber(1)
   void clearCreateWalletIncentive() => clearField(1);
   @$pb.TagNumber(1)
-  $14.Coin ensureCreateWalletIncentive() => $_ensure(0);
+  $15.Coin ensureCreateWalletIncentive() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $14.Coin get createEphemeralWalletIncentive => $_getN(1);
+  $15.Coin get createEphemeralWalletIncentive => $_getN(1);
   @$pb.TagNumber(2)
-  set createEphemeralWalletIncentive($14.Coin v) { setField(2, v); }
+  set createEphemeralWalletIncentive($15.Coin v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreateEphemeralWalletIncentive() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreateEphemeralWalletIncentive() => clearField(2);
   @$pb.TagNumber(2)
-  $14.Coin ensureCreateEphemeralWalletIncentive() => $_ensure(1);
+  $15.Coin ensureCreateEphemeralWalletIncentive() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $14.Coin get createWalletTransparentIncentive => $_getN(2);
+  $15.Coin get createWalletTransparentIncentive => $_getN(2);
   @$pb.TagNumber(3)
-  set createWalletTransparentIncentive($14.Coin v) { setField(3, v); }
+  set createWalletTransparentIncentive($15.Coin v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCreateWalletTransparentIncentive() => $_has(2);
   @$pb.TagNumber(3)
   void clearCreateWalletTransparentIncentive() => clearField(3);
   @$pb.TagNumber(3)
-  $14.Coin ensureCreateWalletTransparentIncentive() => $_ensure(2);
+  $15.Coin ensureCreateWalletTransparentIncentive() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $14.Coin get createEphemeralWalletTransparentIncentive => $_getN(3);
+  $15.Coin get createEphemeralWalletTransparentIncentive => $_getN(3);
   @$pb.TagNumber(4)
-  set createEphemeralWalletTransparentIncentive($14.Coin v) { setField(4, v); }
+  set createEphemeralWalletTransparentIncentive($15.Coin v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreateEphemeralWalletTransparentIncentive() => $_has(3);
   @$pb.TagNumber(4)
   void clearCreateEphemeralWalletTransparentIncentive() => clearField(4);
   @$pb.TagNumber(4)
-  $14.Coin ensureCreateEphemeralWalletTransparentIncentive() => $_ensure(3);
+  $15.Coin ensureCreateEphemeralWalletTransparentIncentive() => $_ensure(3);
 }
 
-class QuerySyncEnclaveRequest extends $pb.GeneratedMessage {
-  factory QuerySyncEnclaveRequest({
-    $core.String? remoteReport,
+class QueryEnclaveValidateEnclaveIdentityRequest extends $pb.GeneratedMessage {
+  factory QueryEnclaveValidateEnclaveIdentityRequest({
+    $core.List<$core.int>? remoteReport,
+    $core.String? uniqueID,
+    $core.String? signerID,
+    $core.String? productID,
+  }) {
+    final $result = create();
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    if (uniqueID != null) {
+      $result.uniqueID = uniqueID;
+    }
+    if (signerID != null) {
+      $result.signerID = signerID;
+    }
+    if (productID != null) {
+      $result.productID = productID;
+    }
+    return $result;
+  }
+  QueryEnclaveValidateEnclaveIdentityRequest._() : super();
+  factory QueryEnclaveValidateEnclaveIdentityRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryEnclaveValidateEnclaveIdentityRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveValidateEnclaveIdentityRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..aOS(2, _omitFieldNames ? '' : 'uniqueID', protoName: 'uniqueID')
+    ..aOS(3, _omitFieldNames ? '' : 'signerID', protoName: 'signerID')
+    ..aOS(4, _omitFieldNames ? '' : 'productID', protoName: 'productID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryEnclaveValidateEnclaveIdentityRequest clone() => QueryEnclaveValidateEnclaveIdentityRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryEnclaveValidateEnclaveIdentityRequest copyWith(void Function(QueryEnclaveValidateEnclaveIdentityRequest) updates) => super.copyWith((message) => updates(message as QueryEnclaveValidateEnclaveIdentityRequest)) as QueryEnclaveValidateEnclaveIdentityRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryEnclaveValidateEnclaveIdentityRequest create() => QueryEnclaveValidateEnclaveIdentityRequest._();
+  QueryEnclaveValidateEnclaveIdentityRequest createEmptyInstance() => create();
+  static $pb.PbList<QueryEnclaveValidateEnclaveIdentityRequest> createRepeated() => $pb.PbList<QueryEnclaveValidateEnclaveIdentityRequest>();
+  @$core.pragma('dart2js:noInline')
+  static QueryEnclaveValidateEnclaveIdentityRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryEnclaveValidateEnclaveIdentityRequest>(create);
+  static QueryEnclaveValidateEnclaveIdentityRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get remoteReport => $_getN(0);
+  @$pb.TagNumber(1)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRemoteReport() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRemoteReport() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get uniqueID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set uniqueID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUniqueID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUniqueID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get signerID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set signerID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSignerID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSignerID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get productID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set productID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProductID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProductID() => clearField(4);
+}
+
+class QueryEnclaveValidateEnclaveIdentityResponse extends $pb.GeneratedMessage {
+  factory QueryEnclaveValidateEnclaveIdentityResponse({
+    $core.List<$core.int>? remoteReport,
+    $core.String? status,
+  }) {
+    final $result = create();
+    if (remoteReport != null) {
+      $result.remoteReport = remoteReport;
+    }
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  QueryEnclaveValidateEnclaveIdentityResponse._() : super();
+  factory QueryEnclaveValidateEnclaveIdentityResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryEnclaveValidateEnclaveIdentityResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveValidateEnclaveIdentityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..aOS(2, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryEnclaveValidateEnclaveIdentityResponse clone() => QueryEnclaveValidateEnclaveIdentityResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryEnclaveValidateEnclaveIdentityResponse copyWith(void Function(QueryEnclaveValidateEnclaveIdentityResponse) updates) => super.copyWith((message) => updates(message as QueryEnclaveValidateEnclaveIdentityResponse)) as QueryEnclaveValidateEnclaveIdentityResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryEnclaveValidateEnclaveIdentityResponse create() => QueryEnclaveValidateEnclaveIdentityResponse._();
+  QueryEnclaveValidateEnclaveIdentityResponse createEmptyInstance() => create();
+  static $pb.PbList<QueryEnclaveValidateEnclaveIdentityResponse> createRepeated() => $pb.PbList<QueryEnclaveValidateEnclaveIdentityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static QueryEnclaveValidateEnclaveIdentityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryEnclaveValidateEnclaveIdentityResponse>(create);
+  static QueryEnclaveValidateEnclaveIdentityResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get remoteReport => $_getN(0);
+  @$pb.TagNumber(1)
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRemoteReport() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRemoteReport() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get status => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set status($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStatus() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStatus() => clearField(2);
+}
+
+class QueryEnclaveSyncEnclaveRequest extends $pb.GeneratedMessage {
+  factory QueryEnclaveSyncEnclaveRequest({
+    $core.List<$core.int>? remoteReport,
     $core.String? enclavePubK,
   }) {
     final $result = create();
@@ -2470,12 +2627,12 @@ class QuerySyncEnclaveRequest extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  QuerySyncEnclaveRequest._() : super();
-  factory QuerySyncEnclaveRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory QuerySyncEnclaveRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  QueryEnclaveSyncEnclaveRequest._() : super();
+  factory QueryEnclaveSyncEnclaveRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryEnclaveSyncEnclaveRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QuerySyncEnclaveRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveSyncEnclaveRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..aOS(2, _omitFieldNames ? '' : 'enclavePubK', protoName: 'enclavePubK')
     ..hasRequiredFields = false
   ;
@@ -2484,27 +2641,27 @@ class QuerySyncEnclaveRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  QuerySyncEnclaveRequest clone() => QuerySyncEnclaveRequest()..mergeFromMessage(this);
+  QueryEnclaveSyncEnclaveRequest clone() => QueryEnclaveSyncEnclaveRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  QuerySyncEnclaveRequest copyWith(void Function(QuerySyncEnclaveRequest) updates) => super.copyWith((message) => updates(message as QuerySyncEnclaveRequest)) as QuerySyncEnclaveRequest;
+  QueryEnclaveSyncEnclaveRequest copyWith(void Function(QueryEnclaveSyncEnclaveRequest) updates) => super.copyWith((message) => updates(message as QueryEnclaveSyncEnclaveRequest)) as QueryEnclaveSyncEnclaveRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static QuerySyncEnclaveRequest create() => QuerySyncEnclaveRequest._();
-  QuerySyncEnclaveRequest createEmptyInstance() => create();
-  static $pb.PbList<QuerySyncEnclaveRequest> createRepeated() => $pb.PbList<QuerySyncEnclaveRequest>();
+  static QueryEnclaveSyncEnclaveRequest create() => QueryEnclaveSyncEnclaveRequest._();
+  QueryEnclaveSyncEnclaveRequest createEmptyInstance() => create();
+  static $pb.PbList<QueryEnclaveSyncEnclaveRequest> createRepeated() => $pb.PbList<QueryEnclaveSyncEnclaveRequest>();
   @$core.pragma('dart2js:noInline')
-  static QuerySyncEnclaveRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QuerySyncEnclaveRequest>(create);
-  static QuerySyncEnclaveRequest? _defaultInstance;
+  static QueryEnclaveSyncEnclaveRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryEnclaveSyncEnclaveRequest>(create);
+  static QueryEnclaveSyncEnclaveRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -2520,9 +2677,9 @@ class QuerySyncEnclaveRequest extends $pb.GeneratedMessage {
   void clearEnclavePubK() => clearField(2);
 }
 
-class QuerySyncEnclaveResponse extends $pb.GeneratedMessage {
-  factory QuerySyncEnclaveResponse({
-    $core.String? remoteReport,
+class QueryEnclaveSyncEnclaveResponse extends $pb.GeneratedMessage {
+  factory QueryEnclaveSyncEnclaveResponse({
+    $core.List<$core.int>? remoteReport,
     $core.List<$core.int>? encEnclaveParamsEnclavePubK,
   }) {
     final $result = create();
@@ -2534,12 +2691,12 @@ class QuerySyncEnclaveResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  QuerySyncEnclaveResponse._() : super();
-  factory QuerySyncEnclaveResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory QuerySyncEnclaveResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  QueryEnclaveSyncEnclaveResponse._() : super();
+  factory QueryEnclaveSyncEnclaveResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryEnclaveSyncEnclaveResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QuerySyncEnclaveResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveSyncEnclaveResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encEnclaveParamsEnclavePubK', $pb.PbFieldType.OY, protoName: 'encEnclaveParamsEnclavePubK')
     ..hasRequiredFields = false
   ;
@@ -2548,27 +2705,27 @@ class QuerySyncEnclaveResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  QuerySyncEnclaveResponse clone() => QuerySyncEnclaveResponse()..mergeFromMessage(this);
+  QueryEnclaveSyncEnclaveResponse clone() => QueryEnclaveSyncEnclaveResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  QuerySyncEnclaveResponse copyWith(void Function(QuerySyncEnclaveResponse) updates) => super.copyWith((message) => updates(message as QuerySyncEnclaveResponse)) as QuerySyncEnclaveResponse;
+  QueryEnclaveSyncEnclaveResponse copyWith(void Function(QueryEnclaveSyncEnclaveResponse) updates) => super.copyWith((message) => updates(message as QueryEnclaveSyncEnclaveResponse)) as QueryEnclaveSyncEnclaveResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static QuerySyncEnclaveResponse create() => QuerySyncEnclaveResponse._();
-  QuerySyncEnclaveResponse createEmptyInstance() => create();
-  static $pb.PbList<QuerySyncEnclaveResponse> createRepeated() => $pb.PbList<QuerySyncEnclaveResponse>();
+  static QueryEnclaveSyncEnclaveResponse create() => QueryEnclaveSyncEnclaveResponse._();
+  QueryEnclaveSyncEnclaveResponse createEmptyInstance() => create();
+  static $pb.PbList<QueryEnclaveSyncEnclaveResponse> createRepeated() => $pb.PbList<QueryEnclaveSyncEnclaveResponse>();
   @$core.pragma('dart2js:noInline')
-  static QuerySyncEnclaveResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QuerySyncEnclaveResponse>(create);
-  static QuerySyncEnclaveResponse? _defaultInstance;
+  static QueryEnclaveSyncEnclaveResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryEnclaveSyncEnclaveResponse>(create);
+  static QueryEnclaveSyncEnclaveResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -2586,7 +2743,7 @@ class QuerySyncEnclaveResponse extends $pb.GeneratedMessage {
 
 class QueryEnclaveSecretShareRequest extends $pb.GeneratedMessage {
   factory QueryEnclaveSecretShareRequest({
-    $core.String? remoteReport,
+    $core.List<$core.int>? remoteReport,
     $core.String? enclavePubK,
     $core.String? pubKID,
   }) {
@@ -2607,7 +2764,7 @@ class QueryEnclaveSecretShareRequest extends $pb.GeneratedMessage {
   factory QueryEnclaveSecretShareRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveSecretShareRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..aOS(2, _omitFieldNames ? '' : 'enclavePubK', protoName: 'enclavePubK')
     ..aOS(3, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
     ..hasRequiredFields = false
@@ -2635,9 +2792,9 @@ class QueryEnclaveSecretShareRequest extends $pb.GeneratedMessage {
   static QueryEnclaveSecretShareRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -2664,7 +2821,7 @@ class QueryEnclaveSecretShareRequest extends $pb.GeneratedMessage {
 
 class QueryEnclaveSecretShareResponse extends $pb.GeneratedMessage {
   factory QueryEnclaveSecretShareResponse({
-    $core.String? remoteReport,
+    $core.List<$core.int>? remoteReport,
     $core.List<$core.int>? encSecretShareEnclavePubK,
   }) {
     final $result = create();
@@ -2681,7 +2838,7 @@ class QueryEnclaveSecretShareResponse extends $pb.GeneratedMessage {
   factory QueryEnclaveSecretShareResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveSecretShareResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encSecretShareEnclavePubK', $pb.PbFieldType.OY, protoName: 'encSecretShareEnclavePubK')
     ..hasRequiredFields = false
   ;
@@ -2708,9 +2865,9 @@ class QueryEnclaveSecretShareResponse extends $pb.GeneratedMessage {
   static QueryEnclaveSecretShareResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -2728,7 +2885,7 @@ class QueryEnclaveSecretShareResponse extends $pb.GeneratedMessage {
 
 class QueryEnclaveRecoverKeyShareRequest extends $pb.GeneratedMessage {
   factory QueryEnclaveRecoverKeyShareRequest({
-    $core.String? remoteReport,
+    $core.List<$core.int>? remoteReport,
     $core.String? newWalletID,
     $core.String? shareWalletID,
     $core.List<$core.int>? encShareWalletPubK,
@@ -2753,7 +2910,7 @@ class QueryEnclaveRecoverKeyShareRequest extends $pb.GeneratedMessage {
   factory QueryEnclaveRecoverKeyShareRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveRecoverKeyShareRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..aOS(2, _omitFieldNames ? '' : 'newWalletID', protoName: 'newWalletID')
     ..aOS(3, _omitFieldNames ? '' : 'shareWalletID', protoName: 'shareWalletID')
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'encShareWalletPubK', $pb.PbFieldType.OY, protoName: 'encShareWalletPubK')
@@ -2782,9 +2939,9 @@ class QueryEnclaveRecoverKeyShareRequest extends $pb.GeneratedMessage {
   static QueryEnclaveRecoverKeyShareRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -2820,7 +2977,7 @@ class QueryEnclaveRecoverKeyShareRequest extends $pb.GeneratedMessage {
 
 class QueryEnclaveRecoverKeyShareResponse extends $pb.GeneratedMessage {
   factory QueryEnclaveRecoverKeyShareResponse({
-    $core.String? remoteReport,
+    $core.List<$core.int>? remoteReport,
     $core.List<$core.int>? encShareWalletPubK,
   }) {
     final $result = create();
@@ -2837,7 +2994,7 @@ class QueryEnclaveRecoverKeyShareResponse extends $pb.GeneratedMessage {
   factory QueryEnclaveRecoverKeyShareResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryEnclaveRecoverKeyShareResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encShareWalletPubK', $pb.PbFieldType.OY, protoName: 'encShareWalletPubK')
     ..hasRequiredFields = false
   ;
@@ -2864,9 +3021,9 @@ class QueryEnclaveRecoverKeyShareResponse extends $pb.GeneratedMessage {
   static QueryEnclaveRecoverKeyShareResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get remoteReport => $_getSZ(0);
+  $core.List<$core.int> get remoteReport => $_getN(0);
   @$pb.TagNumber(1)
-  set remoteReport($core.String v) { $_setString(0, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasRemoteReport() => $_has(0);
   @$pb.TagNumber(1)
@@ -3064,6 +3221,220 @@ class QueryFindCredentialResponse extends $pb.GeneratedMessage {
   $core.bool hasEncCredentialIDUserCredentialPubK() => $_has(1);
   @$pb.TagNumber(2)
   void clearEncCredentialIDUserCredentialPubK() => clearField(2);
+}
+
+class QueryGetEnclaveIdentityRequest extends $pb.GeneratedMessage {
+  factory QueryGetEnclaveIdentityRequest({
+    $core.String? uniqueID,
+  }) {
+    final $result = create();
+    if (uniqueID != null) {
+      $result.uniqueID = uniqueID;
+    }
+    return $result;
+  }
+  QueryGetEnclaveIdentityRequest._() : super();
+  factory QueryGetEnclaveIdentityRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryGetEnclaveIdentityRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetEnclaveIdentityRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'uniqueID', protoName: 'uniqueID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryGetEnclaveIdentityRequest clone() => QueryGetEnclaveIdentityRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryGetEnclaveIdentityRequest copyWith(void Function(QueryGetEnclaveIdentityRequest) updates) => super.copyWith((message) => updates(message as QueryGetEnclaveIdentityRequest)) as QueryGetEnclaveIdentityRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryGetEnclaveIdentityRequest create() => QueryGetEnclaveIdentityRequest._();
+  QueryGetEnclaveIdentityRequest createEmptyInstance() => create();
+  static $pb.PbList<QueryGetEnclaveIdentityRequest> createRepeated() => $pb.PbList<QueryGetEnclaveIdentityRequest>();
+  @$core.pragma('dart2js:noInline')
+  static QueryGetEnclaveIdentityRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryGetEnclaveIdentityRequest>(create);
+  static QueryGetEnclaveIdentityRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get uniqueID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set uniqueID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUniqueID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUniqueID() => clearField(1);
+}
+
+class QueryGetEnclaveIdentityResponse extends $pb.GeneratedMessage {
+  factory QueryGetEnclaveIdentityResponse({
+    $3.EnclaveIdentity? enclaveIdentity,
+  }) {
+    final $result = create();
+    if (enclaveIdentity != null) {
+      $result.enclaveIdentity = enclaveIdentity;
+    }
+    return $result;
+  }
+  QueryGetEnclaveIdentityResponse._() : super();
+  factory QueryGetEnclaveIdentityResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryGetEnclaveIdentityResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetEnclaveIdentityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$3.EnclaveIdentity>(1, _omitFieldNames ? '' : 'enclaveIdentity', protoName: 'enclaveIdentity', subBuilder: $3.EnclaveIdentity.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryGetEnclaveIdentityResponse clone() => QueryGetEnclaveIdentityResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryGetEnclaveIdentityResponse copyWith(void Function(QueryGetEnclaveIdentityResponse) updates) => super.copyWith((message) => updates(message as QueryGetEnclaveIdentityResponse)) as QueryGetEnclaveIdentityResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryGetEnclaveIdentityResponse create() => QueryGetEnclaveIdentityResponse._();
+  QueryGetEnclaveIdentityResponse createEmptyInstance() => create();
+  static $pb.PbList<QueryGetEnclaveIdentityResponse> createRepeated() => $pb.PbList<QueryGetEnclaveIdentityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static QueryGetEnclaveIdentityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryGetEnclaveIdentityResponse>(create);
+  static QueryGetEnclaveIdentityResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.EnclaveIdentity get enclaveIdentity => $_getN(0);
+  @$pb.TagNumber(1)
+  set enclaveIdentity($3.EnclaveIdentity v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEnclaveIdentity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnclaveIdentity() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.EnclaveIdentity ensureEnclaveIdentity() => $_ensure(0);
+}
+
+class QueryAllEnclaveIdentityRequest extends $pb.GeneratedMessage {
+  factory QueryAllEnclaveIdentityRequest({
+    $27.PageRequest? pagination,
+  }) {
+    final $result = create();
+    if (pagination != null) {
+      $result.pagination = pagination;
+    }
+    return $result;
+  }
+  QueryAllEnclaveIdentityRequest._() : super();
+  factory QueryAllEnclaveIdentityRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryAllEnclaveIdentityRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllEnclaveIdentityRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$27.PageRequest>(1, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageRequest.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryAllEnclaveIdentityRequest clone() => QueryAllEnclaveIdentityRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryAllEnclaveIdentityRequest copyWith(void Function(QueryAllEnclaveIdentityRequest) updates) => super.copyWith((message) => updates(message as QueryAllEnclaveIdentityRequest)) as QueryAllEnclaveIdentityRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryAllEnclaveIdentityRequest create() => QueryAllEnclaveIdentityRequest._();
+  QueryAllEnclaveIdentityRequest createEmptyInstance() => create();
+  static $pb.PbList<QueryAllEnclaveIdentityRequest> createRepeated() => $pb.PbList<QueryAllEnclaveIdentityRequest>();
+  @$core.pragma('dart2js:noInline')
+  static QueryAllEnclaveIdentityRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryAllEnclaveIdentityRequest>(create);
+  static QueryAllEnclaveIdentityRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $27.PageRequest get pagination => $_getN(0);
+  @$pb.TagNumber(1)
+  set pagination($27.PageRequest v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPagination() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPagination() => clearField(1);
+  @$pb.TagNumber(1)
+  $27.PageRequest ensurePagination() => $_ensure(0);
+}
+
+class QueryAllEnclaveIdentityResponse extends $pb.GeneratedMessage {
+  factory QueryAllEnclaveIdentityResponse({
+    $core.Iterable<$3.EnclaveIdentity>? enclaveIdentity,
+    $27.PageResponse? pagination,
+  }) {
+    final $result = create();
+    if (enclaveIdentity != null) {
+      $result.enclaveIdentity.addAll(enclaveIdentity);
+    }
+    if (pagination != null) {
+      $result.pagination = pagination;
+    }
+    return $result;
+  }
+  QueryAllEnclaveIdentityResponse._() : super();
+  factory QueryAllEnclaveIdentityResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QueryAllEnclaveIdentityResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryAllEnclaveIdentityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..pc<$3.EnclaveIdentity>(1, _omitFieldNames ? '' : 'enclaveIdentity', $pb.PbFieldType.PM, protoName: 'enclaveIdentity', subBuilder: $3.EnclaveIdentity.create)
+    ..aOM<$27.PageResponse>(2, _omitFieldNames ? '' : 'pagination', subBuilder: $27.PageResponse.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QueryAllEnclaveIdentityResponse clone() => QueryAllEnclaveIdentityResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QueryAllEnclaveIdentityResponse copyWith(void Function(QueryAllEnclaveIdentityResponse) updates) => super.copyWith((message) => updates(message as QueryAllEnclaveIdentityResponse)) as QueryAllEnclaveIdentityResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static QueryAllEnclaveIdentityResponse create() => QueryAllEnclaveIdentityResponse._();
+  QueryAllEnclaveIdentityResponse createEmptyInstance() => create();
+  static $pb.PbList<QueryAllEnclaveIdentityResponse> createRepeated() => $pb.PbList<QueryAllEnclaveIdentityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static QueryAllEnclaveIdentityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryAllEnclaveIdentityResponse>(create);
+  static QueryAllEnclaveIdentityResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$3.EnclaveIdentity> get enclaveIdentity => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $27.PageResponse get pagination => $_getN(1);
+  @$pb.TagNumber(2)
+  set pagination($27.PageResponse v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPagination() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPagination() => clearField(2);
+  @$pb.TagNumber(2)
+  $27.PageResponse ensurePagination() => $_ensure(1);
 }
 
 

@@ -13,20 +13,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'b_pedersen_commit.pb.dart' as $18;
-import 'v_share_bind_data.pb.dart' as $20;
+import 'b_pedersen_commit.pb.dart' as $19;
+import 'v_share_bind_data.pb.dart' as $21;
 
 class Credential extends $pb.GeneratedMessage {
   factory Credential({
     $core.String? credentialID,
     $core.String? credentialType,
     $core.String? walletID,
-    $18.BPedersenCommit? credentialPedersenCommit,
+    $19.BPedersenCommit? credentialPedersenCommit,
     $core.List<$core.int>? encCredentialHashVShare,
-    $20.VShareBindData? credentialHashVShareBind,
+    $21.VShareBindData? credentialHashVShareBind,
     $core.List<$core.int>? encCredentialInfoVShare,
-    $20.VShareBindData? credentialInfoVShareBind,
-    $18.BPedersenCommit? findCredentialPedersenCommit,
+    $21.VShareBindData? credentialInfoVShareBind,
+    $19.BPedersenCommit? findCredentialPedersenCommit,
     $core.String? providerWalletID,
     $core.String? referenceCredentialID,
   }) {
@@ -74,12 +74,12 @@ class Credential extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
     ..aOS(2, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
     ..aOS(3, _omitFieldNames ? '' : 'walletID', protoName: 'walletID')
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'credentialPedersenCommit', protoName: 'credentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'encCredentialHashVShare', $pb.PbFieldType.OY, protoName: 'encCredentialHashVShare')
-    ..aOM<$20.VShareBindData>(6, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $20.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(6, _omitFieldNames ? '' : 'credentialHashVShareBind', protoName: 'credentialHashVShareBind', subBuilder: $21.VShareBindData.create)
     ..a<$core.List<$core.int>>(7, _omitFieldNames ? '' : 'encCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'encCredentialInfoVShare')
-    ..aOM<$20.VShareBindData>(8, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $20.VShareBindData.create)
-    ..aOM<$18.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$21.VShareBindData>(8, _omitFieldNames ? '' : 'credentialInfoVShareBind', protoName: 'credentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$19.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..aOS(10, _omitFieldNames ? '' : 'providerWalletID', protoName: 'providerWalletID')
     ..aOS(11, _omitFieldNames ? '' : 'referenceCredentialID', protoName: 'referenceCredentialID')
     ..hasRequiredFields = false
@@ -134,15 +134,15 @@ class Credential extends $pb.GeneratedMessage {
   void clearWalletID() => clearField(3);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get credentialPedersenCommit => $_getN(3);
+  $19.BPedersenCommit get credentialPedersenCommit => $_getN(3);
   @$pb.TagNumber(4)
-  set credentialPedersenCommit($18.BPedersenCommit v) { setField(4, v); }
+  set credentialPedersenCommit($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCredentialPedersenCommit() => $_has(3);
   @$pb.TagNumber(4)
   void clearCredentialPedersenCommit() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(3);
+  $19.BPedersenCommit ensureCredentialPedersenCommit() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.List<$core.int> get encCredentialHashVShare => $_getN(4);
@@ -154,15 +154,15 @@ class Credential extends $pb.GeneratedMessage {
   void clearEncCredentialHashVShare() => clearField(5);
 
   @$pb.TagNumber(6)
-  $20.VShareBindData get credentialHashVShareBind => $_getN(5);
+  $21.VShareBindData get credentialHashVShareBind => $_getN(5);
   @$pb.TagNumber(6)
-  set credentialHashVShareBind($20.VShareBindData v) { setField(6, v); }
+  set credentialHashVShareBind($21.VShareBindData v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasCredentialHashVShareBind() => $_has(5);
   @$pb.TagNumber(6)
   void clearCredentialHashVShareBind() => clearField(6);
   @$pb.TagNumber(6)
-  $20.VShareBindData ensureCredentialHashVShareBind() => $_ensure(5);
+  $21.VShareBindData ensureCredentialHashVShareBind() => $_ensure(5);
 
   @$pb.TagNumber(7)
   $core.List<$core.int> get encCredentialInfoVShare => $_getN(6);
@@ -174,26 +174,26 @@ class Credential extends $pb.GeneratedMessage {
   void clearEncCredentialInfoVShare() => clearField(7);
 
   @$pb.TagNumber(8)
-  $20.VShareBindData get credentialInfoVShareBind => $_getN(7);
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(7);
   @$pb.TagNumber(8)
-  set credentialInfoVShareBind($20.VShareBindData v) { setField(8, v); }
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasCredentialInfoVShareBind() => $_has(7);
   @$pb.TagNumber(8)
   void clearCredentialInfoVShareBind() => clearField(8);
   @$pb.TagNumber(8)
-  $20.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(7);
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $18.BPedersenCommit get findCredentialPedersenCommit => $_getN(8);
+  $19.BPedersenCommit get findCredentialPedersenCommit => $_getN(8);
   @$pb.TagNumber(9)
-  set findCredentialPedersenCommit($18.BPedersenCommit v) { setField(9, v); }
+  set findCredentialPedersenCommit($19.BPedersenCommit v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasFindCredentialPedersenCommit() => $_has(8);
   @$pb.TagNumber(9)
   void clearFindCredentialPedersenCommit() => clearField(9);
   @$pb.TagNumber(9)
-  $18.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(8);
+  $19.BPedersenCommit ensureFindCredentialPedersenCommit() => $_ensure(8);
 
   @$pb.TagNumber(10)
   $core.String get providerWalletID => $_getSZ(9);
@@ -220,7 +220,7 @@ class MsgBindCredential extends $pb.GeneratedMessage {
     $core.String? creator,
     $core.String? credentialType,
     $core.String? credentialInfo,
-    $18.BPedersenCommit? proofPedersenCommit,
+    $19.BPedersenCommit? proofPedersenCommit,
   }) {
     final $result = create();
     if (creator != null) {
@@ -245,7 +245,7 @@ class MsgBindCredential extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'creator')
     ..aOS(2, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
     ..aOS(3, _omitFieldNames ? '' : 'credentialInfo', protoName: 'credentialInfo')
-    ..aOM<$18.BPedersenCommit>(4, _omitFieldNames ? '' : 'proofPedersenCommit', protoName: 'proofPedersenCommit', subBuilder: $18.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'proofPedersenCommit', protoName: 'proofPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..hasRequiredFields = false
   ;
 
@@ -298,15 +298,15 @@ class MsgBindCredential extends $pb.GeneratedMessage {
   void clearCredentialInfo() => clearField(3);
 
   @$pb.TagNumber(4)
-  $18.BPedersenCommit get proofPedersenCommit => $_getN(3);
+  $19.BPedersenCommit get proofPedersenCommit => $_getN(3);
   @$pb.TagNumber(4)
-  set proofPedersenCommit($18.BPedersenCommit v) { setField(4, v); }
+  set proofPedersenCommit($19.BPedersenCommit v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProofPedersenCommit() => $_has(3);
   @$pb.TagNumber(4)
   void clearProofPedersenCommit() => clearField(4);
   @$pb.TagNumber(4)
-  $18.BPedersenCommit ensureProofPedersenCommit() => $_ensure(3);
+  $19.BPedersenCommit ensureProofPedersenCommit() => $_ensure(3);
 }
 
 class MsgBindCredentialResponse extends $pb.GeneratedMessage {

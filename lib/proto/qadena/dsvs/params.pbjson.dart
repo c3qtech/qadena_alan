@@ -21,5 +21,6 @@ const Params$json = {
 
 /// Descriptor for `Params`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List paramsDescriptor = $convert.base64Decode(
-    'CgZQYXJhbXM6HeigHwGK57AqFHFhZGVuYS94L2RzdnMvUGFyYW1z');
+    'CgZQYXJhbXM6M+igHwGK57AqKmdpdGh1Yi5jb20vYzNxdGVjaC9xYWRlbmFfdjMveC9kc3ZzL1'
+    'BhcmFtcw==');
 

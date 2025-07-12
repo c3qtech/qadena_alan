@@ -21,7 +21,7 @@ const PublicKey$json = {
     {'1': 'pubKType', '3': 2, '4': 1, '5': 9, '10': 'pubKType'},
     {'1': 'pubK', '3': 3, '4': 1, '5': 9, '10': 'pubK'},
     {'1': 'shares', '3': 4, '4': 3, '5': 11, '6': '.qadena.qadena.Share', '10': 'shares'},
-    {'1': 'remoteReport', '3': 5, '4': 1, '5': 9, '10': 'remoteReport'},
+    {'1': 'remoteReport', '3': 5, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
 };
 
@@ -29,5 +29,5 @@ const PublicKey$json = {
 final $typed_data.Uint8List publicKeyDescriptor = $convert.base64Decode(
     'CglQdWJsaWNLZXkSFgoGcHViS0lEGAEgASgJUgZwdWJLSUQSGgoIcHViS1R5cGUYAiABKAlSCH'
     'B1YktUeXBlEhIKBHB1YksYAyABKAlSBHB1YksSLAoGc2hhcmVzGAQgAygLMhQucWFkZW5hLnFh'
-    'ZGVuYS5TaGFyZVIGc2hhcmVzEiIKDHJlbW90ZVJlcG9ydBgFIAEoCVIMcmVtb3RlUmVwb3J0');
+    'ZGVuYS5TaGFyZVIGc2hhcmVzEiIKDHJlbW90ZVJlcG9ydBgFIAEoDFIMcmVtb3RlUmVwb3J0');
 

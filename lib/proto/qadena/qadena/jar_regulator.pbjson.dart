@@ -19,11 +19,12 @@ const JarRegulator$json = {
   '2': [
     {'1': 'jarID', '3': 1, '4': 1, '5': 9, '10': 'jarID'},
     {'1': 'regulatorID', '3': 2, '4': 1, '5': 9, '10': 'regulatorID'},
+    {'1': 'remoteReport', '3': 3, '4': 1, '5': 12, '10': 'remoteReport'},
   ],
 };
 
 /// Descriptor for `JarRegulator`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List jarRegulatorDescriptor = $convert.base64Decode(
     'CgxKYXJSZWd1bGF0b3ISFAoFamFySUQYASABKAlSBWphcklEEiAKC3JlZ3VsYXRvcklEGAIgAS'
-    'gJUgtyZWd1bGF0b3JJRA==');
+    'gJUgtyZWd1bGF0b3JJRBIiCgxyZW1vdGVSZXBvcnQYAyABKAxSDHJlbW90ZVJlcG9ydA==');
 

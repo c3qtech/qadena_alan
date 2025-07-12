@@ -23,7 +23,7 @@ import "google/protobuf/timestamp.proto";
 
 
 
-option go_package = "qadena/x/qadena/types";
+option go_package = "github.com/c3qtech/qadena_v3/x/qadena/types";
 
 // Msg defines the Msg service.
 service Msg {
@@ -35,10 +35,6 @@ service Msg {
 
   // AUTHORIZATION:
   rpc AddPublicKey                          (MsgAddPublicKey                         ) returns (MsgAddPublicKeyResponse                         );
-  rpc UpdateIntervalPublicKeyID             (MsgUpdateIntervalPublicKeyID            ) returns (MsgUpdateIntervalPublicKeyIDResponse            );
-  rpc UpdatePioneerJar                      (MsgUpdatePioneerJar                     ) returns (MsgUpdatePioneerJarResponse                     );
-  rpc UpdateJarRegulator                    (MsgUpdateJarRegulator                   ) returns (MsgUpdateJarRegulatorResponse                   );
-
 
   // AUTHORIZATION:
   rpc CreateWallet                          (MsgCreateWallet                         ) returns (MsgCreateWalletResponse                         );
@@ -48,17 +44,28 @@ service Msg {
   rpc SignRecoverPrivateKey                 (MsgSignRecoverPrivateKey                ) returns (MsgSignRecoverPrivateKeyResponse                );
   rpc ClaimCredential                       (MsgClaimCredential                      ) returns (MsgClaimCredentialResponse                      );
 
+  // AUTHORIZATION: gov module
+  rpc AddServiceProvider                    (MsgAddServiceProvider                   ) returns (MsgAddServiceProviderResponse                   );
+  rpc DeactivateServiceProvider             (MsgDeactivateServiceProvider            ) returns (MsgDeactivateServiceProviderResponse            );
+  rpc UpdateEnclaveIdentity                 (MsgUpdateEnclaveIdentity                ) returns (MsgUpdateEnclaveIdentityResponse                );
+
   // AUTHORIZATION:
   // make sure that the creator *IS* a Pioneer via enclave
   rpc PioneerAddPublicKey                   (MsgPioneerAddPublicKey                  ) returns (MsgPioneerAddPublicKeyResponse                  );
   rpc PioneerUpdateIntervalPublicKeyID      (MsgPioneerUpdateIntervalPublicKeyID     ) returns (MsgPioneerUpdateIntervalPublicKeyIDResponse     );
   rpc PioneerEnclaveExchange                (MsgPioneerEnclaveExchange               ) returns (MsgPioneerEnclaveExchangeResponse               );
   rpc PioneerBroadcastSecretSharePrivateKey (MsgPioneerBroadcastSecretSharePrivateKey) returns (MsgPioneerBroadcastSecretSharePrivateKeyResponse);
+  //rpc PioneerUpdateIntervalPublicKeyID             (MsgPioneerUpdateIntervalPublicKeyID            ) returns (MsgPioneerUpdateIntervalPublicKeyIDResponse            );
+  rpc PioneerUpdatePioneerJar                      (MsgPioneerUpdatePioneerJar                     ) returns (MsgPioneerUpdatePioneerJarResponse                     );
+  rpc PioneerUpdateJarRegulator                    (MsgPioneerUpdateJarRegulator                   ) returns (MsgPioneerUpdateJarRegulatorResponse                   );
+  rpc PioneerUpdateEnclaveIdentity                 (MsgPioneerUpdateEnclaveIdentity                ) returns (MsgPioneerUpdateEnclaveIdentityResponse                );
+
 
   // AUTHORIZATION:
   // make sure that the creator *IS* an identity service provider
   // make sure that all the required signatory vshares ccPubK has ss interval public key
   rpc CreateCredential                      (MsgCreateCredential                     ) returns (MsgCreateCredentialResponse                     );
+  rpc RemoveCredential                      (MsgRemoveCredential                     ) returns (MsgRemoveCredentialResponse                     );
   rpc CreateBulkCredentials                 (MsgCreateBulkCredentials                ) returns (MsgCreateBulkCredentialsResponse                );
 
 // RAV removed for now
@@ -68,7 +75,7 @@ service Msg {
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
   option (cosmos.msg.v1.signer) =                       "authority";
-  option           (amino.name) = "qadena/x/qadena/MsgUpdateParams";
+  option           (amino.name) = "github.com/c3qtech/qadena_v3/x/qadena/MsgUpdateParams";
   
   // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
@@ -139,33 +146,72 @@ message MsgAddPublicKey {
 
 message MsgAddPublicKeyResponse {}
 
-message MsgUpdateIntervalPublicKeyID {
-  option (cosmos.msg.v1.signer) = "creator";
-  string creator  = 1;
-  string nodeID   = 2;
-  string nodeType = 3;
+
+message MsgAddServiceProvider {
+  option (cosmos.msg.v1.signer) =                       "authority";
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  string pubKID    = 2;
+  string nodeID   = 3;
   string serviceProviderType = 4;
 }
 
-message MsgUpdateIntervalPublicKeyIDResponse {}
+message MsgAddServiceProviderResponse {}
 
-message MsgUpdatePioneerJar {
+message MsgDeactivateServiceProvider {
+  option (cosmos.msg.v1.signer) =                       "authority";
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string nodeID   = 2;
+}
+
+message MsgDeactivateServiceProviderResponse {}
+
+message MsgUpdateEnclaveIdentity {
+  option (cosmos.msg.v1.signer) = "authority";
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  string uniqueID = 2; 
+  string signerID = 3; 
+  string productID = 4; 
+  string status = 5;   
+}
+
+message MsgUpdateEnclaveIdentityResponse {}
+
+message MsgPioneerUpdatePioneerJar {
   option (cosmos.msg.v1.signer) = "creator";
   string creator   = 1;
   string pioneerID = 2;
   string jarID     = 3;
+  bytes remoteReport = 4;
 }
 
-message MsgUpdatePioneerJarResponse {}
+message MsgPioneerUpdatePioneerJarResponse {}
 
-message MsgUpdateJarRegulator {
+message MsgPioneerUpdateJarRegulator {
   option (cosmos.msg.v1.signer) = "creator";
   string creator     = 1;
   string jarID       = 2;
   string regulatorID = 3;
+  bytes remoteReport = 4;
 }
 
-message MsgUpdateJarRegulatorResponse {}
+message MsgPioneerUpdateJarRegulatorResponse {}
+
+message MsgPioneerUpdateEnclaveIdentity {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string uniqueID = 2;
+  string signerID = 3;
+  string productID = 4;
+  string status = 5;
+  bytes remoteReport = 6;
+}
+
+message MsgPioneerUpdateEnclaveIdentityResponse {}
 
 message MsgCreateWallet {
   option (cosmos.msg.v1.signer) = "creator";
@@ -265,6 +311,16 @@ message MsgCreateCredential {
 
 message MsgCreateCredentialResponse {}
 
+message MsgRemoveCredential {
+  option (cosmos.msg.v1.signer) = "creator";
+  string          creator                         =  1;
+  string          credentialID                    =  2;
+  string          credentialType                  =  3;
+}
+
+message MsgRemoveCredentialResponse {}
+
+
 message MsgPioneerAddPublicKey {
   option (cosmos.msg.v1.signer) = "creator";
   string creator  = 1;
@@ -272,7 +328,7 @@ message MsgPioneerAddPublicKey {
   string pubK     = 3;
   string pubKType = 4;
   repeated Share  shares   = 5;
-  string remoteReport     = 6;
+  bytes remoteReport     = 6;
 }
 
 message MsgPioneerAddPublicKeyResponse {}
@@ -284,6 +340,7 @@ message MsgPioneerUpdateIntervalPublicKeyID {
   string nodeID            = 3;
   string nodeType          = 4;
   string externalIPAddress = 5;
+  bytes remoteReport      = 6;
 }
 
 message MsgPioneerUpdateIntervalPublicKeyIDResponse {}
@@ -301,7 +358,7 @@ message MsgPioneerBroadcastSecretSharePrivateKey {
   option (cosmos.msg.v1.signer) = "creator";
            string           creator      = 1;
   repeated SecretSharePrivK privateKeys  = 2;
-           string           remoteReport = 3;
+           bytes           remoteReport = 3;
 }
 
 message MsgPioneerBroadcastSecretSharePrivateKeyResponse {}

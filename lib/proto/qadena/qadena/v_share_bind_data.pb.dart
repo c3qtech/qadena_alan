@@ -13,9 +13,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'b_v_shared_secret.pb.dart' as $17;
-import 'bigint.pb.dart' as $13;
-import 'ec_point.pb.dart' as $12;
+import 'b_v_shared_secret.pb.dart' as $18;
+import 'bigint.pb.dart' as $14;
+import 'ec_point.pb.dart' as $13;
 
 class VShareBindData extends $pb.GeneratedMessage {
   factory VShareBindData({
@@ -63,7 +63,7 @@ class VShareBindData extends $pb.GeneratedMessage {
 
 class BECPointInfo extends $pb.GeneratedMessage {
   factory BECPointInfo({
-    $12.BECPoint? eCPoint,
+    $13.BECPoint? eCPoint,
     $core.String? nodeType,
     $core.String? nodeID,
   }) {
@@ -84,7 +84,7 @@ class BECPointInfo extends $pb.GeneratedMessage {
   factory BECPointInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BECPointInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$12.BECPoint>(1, _omitFieldNames ? '' : 'ECPoint', protoName: 'ECPoint', subBuilder: $12.BECPoint.create)
+    ..aOM<$13.BECPoint>(1, _omitFieldNames ? '' : 'ECPoint', protoName: 'ECPoint', subBuilder: $13.BECPoint.create)
     ..aOS(2, _omitFieldNames ? '' : 'NodeType', protoName: 'NodeType')
     ..aOS(3, _omitFieldNames ? '' : 'NodeID', protoName: 'NodeID')
     ..hasRequiredFields = false
@@ -112,15 +112,15 @@ class BECPointInfo extends $pb.GeneratedMessage {
   static BECPointInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.BECPoint get eCPoint => $_getN(0);
+  $13.BECPoint get eCPoint => $_getN(0);
   @$pb.TagNumber(1)
-  set eCPoint($12.BECPoint v) { setField(1, v); }
+  set eCPoint($13.BECPoint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasECPoint() => $_has(0);
   @$pb.TagNumber(1)
   void clearECPoint() => clearField(1);
   @$pb.TagNumber(1)
-  $12.BECPoint ensureECPoint() => $_ensure(0);
+  $13.BECPoint ensureECPoint() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get nodeType => $_getSZ(1);
@@ -143,13 +143,13 @@ class BECPointInfo extends $pb.GeneratedMessage {
 
 class VShareBindDataInternal extends $pb.GeneratedMessage {
   factory VShareBindDataInternal({
-    $13.BInt? w,
-    $13.BInt? z,
-    $12.BECPoint? c,
+    $14.BInt? w,
+    $14.BInt? z,
+    $13.BECPoint? c,
     BECPointInfo? y,
     $core.Iterable<BECPointInfo>? cc,
-    $17.BVSharedSecret? r,
-    $core.Iterable<$17.BVSharedSecret>? rr,
+    $18.BVSharedSecret? r,
+    $core.Iterable<$18.BVSharedSecret>? rr,
   }) {
     final $result = create();
     if (w != null) {
@@ -180,13 +180,13 @@ class VShareBindDataInternal extends $pb.GeneratedMessage {
   factory VShareBindDataInternal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VShareBindDataInternal', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$13.BInt>(1, _omitFieldNames ? '' : 'W', protoName: 'W', subBuilder: $13.BInt.create)
-    ..aOM<$13.BInt>(2, _omitFieldNames ? '' : 'Z', protoName: 'Z', subBuilder: $13.BInt.create)
-    ..aOM<$12.BECPoint>(3, _omitFieldNames ? '' : 'C', protoName: 'C', subBuilder: $12.BECPoint.create)
+    ..aOM<$14.BInt>(1, _omitFieldNames ? '' : 'W', protoName: 'W', subBuilder: $14.BInt.create)
+    ..aOM<$14.BInt>(2, _omitFieldNames ? '' : 'Z', protoName: 'Z', subBuilder: $14.BInt.create)
+    ..aOM<$13.BECPoint>(3, _omitFieldNames ? '' : 'C', protoName: 'C', subBuilder: $13.BECPoint.create)
     ..aOM<BECPointInfo>(4, _omitFieldNames ? '' : 'Y', protoName: 'Y', subBuilder: BECPointInfo.create)
     ..pc<BECPointInfo>(5, _omitFieldNames ? '' : 'Cc', $pb.PbFieldType.PM, protoName: 'Cc', subBuilder: BECPointInfo.create)
-    ..aOM<$17.BVSharedSecret>(6, _omitFieldNames ? '' : 'R', protoName: 'R', subBuilder: $17.BVSharedSecret.create)
-    ..pc<$17.BVSharedSecret>(7, _omitFieldNames ? '' : 'Rr', $pb.PbFieldType.PM, protoName: 'Rr', subBuilder: $17.BVSharedSecret.create)
+    ..aOM<$18.BVSharedSecret>(6, _omitFieldNames ? '' : 'R', protoName: 'R', subBuilder: $18.BVSharedSecret.create)
+    ..pc<$18.BVSharedSecret>(7, _omitFieldNames ? '' : 'Rr', $pb.PbFieldType.PM, protoName: 'Rr', subBuilder: $18.BVSharedSecret.create)
     ..hasRequiredFields = false
   ;
 
@@ -212,37 +212,37 @@ class VShareBindDataInternal extends $pb.GeneratedMessage {
   static VShareBindDataInternal? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.BInt get w => $_getN(0);
+  $14.BInt get w => $_getN(0);
   @$pb.TagNumber(1)
-  set w($13.BInt v) { setField(1, v); }
+  set w($14.BInt v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasW() => $_has(0);
   @$pb.TagNumber(1)
   void clearW() => clearField(1);
   @$pb.TagNumber(1)
-  $13.BInt ensureW() => $_ensure(0);
+  $14.BInt ensureW() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $13.BInt get z => $_getN(1);
+  $14.BInt get z => $_getN(1);
   @$pb.TagNumber(2)
-  set z($13.BInt v) { setField(2, v); }
+  set z($14.BInt v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasZ() => $_has(1);
   @$pb.TagNumber(2)
   void clearZ() => clearField(2);
   @$pb.TagNumber(2)
-  $13.BInt ensureZ() => $_ensure(1);
+  $14.BInt ensureZ() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $12.BECPoint get c => $_getN(2);
+  $13.BECPoint get c => $_getN(2);
   @$pb.TagNumber(3)
-  set c($12.BECPoint v) { setField(3, v); }
+  set c($13.BECPoint v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasC() => $_has(2);
   @$pb.TagNumber(3)
   void clearC() => clearField(3);
   @$pb.TagNumber(3)
-  $12.BECPoint ensureC() => $_ensure(2);
+  $13.BECPoint ensureC() => $_ensure(2);
 
   @$pb.TagNumber(4)
   BECPointInfo get y => $_getN(3);
@@ -259,18 +259,18 @@ class VShareBindDataInternal extends $pb.GeneratedMessage {
   $core.List<BECPointInfo> get cc => $_getList(4);
 
   @$pb.TagNumber(6)
-  $17.BVSharedSecret get r => $_getN(5);
+  $18.BVSharedSecret get r => $_getN(5);
   @$pb.TagNumber(6)
-  set r($17.BVSharedSecret v) { setField(6, v); }
+  set r($18.BVSharedSecret v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasR() => $_has(5);
   @$pb.TagNumber(6)
   void clearR() => clearField(6);
   @$pb.TagNumber(6)
-  $17.BVSharedSecret ensureR() => $_ensure(5);
+  $18.BVSharedSecret ensureR() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $core.List<$17.BVSharedSecret> get rr => $_getList(6);
+  $core.List<$18.BVSharedSecret> get rr => $_getList(6);
 }
 
 

@@ -27,8 +27,8 @@ const MsgUpdateParams$json = {
 final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'Cg9Nc2dVcGRhdGVQYXJhbXMSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
     'NTdHJpbmdSCWF1dGhvcml0eRI7CgZwYXJhbXMYAiABKAsyGC5xYWRlbmEucHJpY2VmZWVkLlBh'
-    'cmFtc0IJyN4fAKjnsCoBUgZwYXJhbXM6NYLnsCoJYXV0aG9yaXR5iuewKiJxYWRlbmEveC9wcm'
-    'ljZWZlZWQvTXNnVXBkYXRlUGFyYW1z');
+    'cmFtc0IJyN4fAKjnsCoBUgZwYXJhbXM6S4LnsCoJYXV0aG9yaXR5iuewKjhnaXRodWIuY29tL2'
+    'MzcXRlY2gvcWFkZW5hX3YzL3gvcHJpY2VmZWVkL01zZ1VwZGF0ZVBhcmFtcw==');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {

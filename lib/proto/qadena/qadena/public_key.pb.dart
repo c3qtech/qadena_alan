@@ -13,15 +13,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'share.pb.dart' as $23;
+import 'share.pb.dart' as $24;
 
 class PublicKey extends $pb.GeneratedMessage {
   factory PublicKey({
     $core.String? pubKID,
     $core.String? pubKType,
     $core.String? pubK,
-    $core.Iterable<$23.Share>? shares,
-    $core.String? remoteReport,
+    $core.Iterable<$24.Share>? shares,
+    $core.List<$core.int>? remoteReport,
   }) {
     final $result = create();
     if (pubKID != null) {
@@ -49,8 +49,8 @@ class PublicKey extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
     ..aOS(2, _omitFieldNames ? '' : 'pubKType', protoName: 'pubKType')
     ..aOS(3, _omitFieldNames ? '' : 'pubK', protoName: 'pubK')
-    ..pc<$23.Share>(4, _omitFieldNames ? '' : 'shares', $pb.PbFieldType.PM, subBuilder: $23.Share.create)
-    ..aOS(5, _omitFieldNames ? '' : 'remoteReport', protoName: 'remoteReport')
+    ..pc<$24.Share>(4, _omitFieldNames ? '' : 'shares', $pb.PbFieldType.PM, subBuilder: $24.Share.create)
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
     ..hasRequiredFields = false
   ;
 
@@ -103,12 +103,12 @@ class PublicKey extends $pb.GeneratedMessage {
   void clearPubK() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$23.Share> get shares => $_getList(3);
+  $core.List<$24.Share> get shares => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.String get remoteReport => $_getSZ(4);
+  $core.List<$core.int> get remoteReport => $_getN(4);
   @$pb.TagNumber(5)
-  set remoteReport($core.String v) { $_setString(4, v); }
+  set remoteReport($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasRemoteReport() => $_has(4);
   @$pb.TagNumber(5)

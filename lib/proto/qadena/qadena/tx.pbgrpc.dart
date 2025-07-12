@@ -29,18 +29,6 @@ class MsgClient extends $grpc.Client {
       '/qadena.qadena.Msg/AddPublicKey',
       ($0.MsgAddPublicKey value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgAddPublicKeyResponse.fromBuffer(value));
-  static final _$updateIntervalPublicKeyID = $grpc.ClientMethod<$0.MsgUpdateIntervalPublicKeyID, $0.MsgUpdateIntervalPublicKeyIDResponse>(
-      '/qadena.qadena.Msg/UpdateIntervalPublicKeyID',
-      ($0.MsgUpdateIntervalPublicKeyID value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.MsgUpdateIntervalPublicKeyIDResponse.fromBuffer(value));
-  static final _$updatePioneerJar = $grpc.ClientMethod<$0.MsgUpdatePioneerJar, $0.MsgUpdatePioneerJarResponse>(
-      '/qadena.qadena.Msg/UpdatePioneerJar',
-      ($0.MsgUpdatePioneerJar value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.MsgUpdatePioneerJarResponse.fromBuffer(value));
-  static final _$updateJarRegulator = $grpc.ClientMethod<$0.MsgUpdateJarRegulator, $0.MsgUpdateJarRegulatorResponse>(
-      '/qadena.qadena.Msg/UpdateJarRegulator',
-      ($0.MsgUpdateJarRegulator value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.MsgUpdateJarRegulatorResponse.fromBuffer(value));
   static final _$createWallet = $grpc.ClientMethod<$0.MsgCreateWallet, $0.MsgCreateWalletResponse>(
       '/qadena.qadena.Msg/CreateWallet',
       ($0.MsgCreateWallet value) => value.writeToBuffer(),
@@ -65,6 +53,18 @@ class MsgClient extends $grpc.Client {
       '/qadena.qadena.Msg/ClaimCredential',
       ($0.MsgClaimCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgClaimCredentialResponse.fromBuffer(value));
+  static final _$addServiceProvider = $grpc.ClientMethod<$0.MsgAddServiceProvider, $0.MsgAddServiceProviderResponse>(
+      '/qadena.qadena.Msg/AddServiceProvider',
+      ($0.MsgAddServiceProvider value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgAddServiceProviderResponse.fromBuffer(value));
+  static final _$deactivateServiceProvider = $grpc.ClientMethod<$0.MsgDeactivateServiceProvider, $0.MsgDeactivateServiceProviderResponse>(
+      '/qadena.qadena.Msg/DeactivateServiceProvider',
+      ($0.MsgDeactivateServiceProvider value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgDeactivateServiceProviderResponse.fromBuffer(value));
+  static final _$updateEnclaveIdentity = $grpc.ClientMethod<$0.MsgUpdateEnclaveIdentity, $0.MsgUpdateEnclaveIdentityResponse>(
+      '/qadena.qadena.Msg/UpdateEnclaveIdentity',
+      ($0.MsgUpdateEnclaveIdentity value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgUpdateEnclaveIdentityResponse.fromBuffer(value));
   static final _$pioneerAddPublicKey = $grpc.ClientMethod<$0.MsgPioneerAddPublicKey, $0.MsgPioneerAddPublicKeyResponse>(
       '/qadena.qadena.Msg/PioneerAddPublicKey',
       ($0.MsgPioneerAddPublicKey value) => value.writeToBuffer(),
@@ -81,10 +81,26 @@ class MsgClient extends $grpc.Client {
       '/qadena.qadena.Msg/PioneerBroadcastSecretSharePrivateKey',
       ($0.MsgPioneerBroadcastSecretSharePrivateKey value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgPioneerBroadcastSecretSharePrivateKeyResponse.fromBuffer(value));
+  static final _$pioneerUpdatePioneerJar = $grpc.ClientMethod<$0.MsgPioneerUpdatePioneerJar, $0.MsgPioneerUpdatePioneerJarResponse>(
+      '/qadena.qadena.Msg/PioneerUpdatePioneerJar',
+      ($0.MsgPioneerUpdatePioneerJar value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgPioneerUpdatePioneerJarResponse.fromBuffer(value));
+  static final _$pioneerUpdateJarRegulator = $grpc.ClientMethod<$0.MsgPioneerUpdateJarRegulator, $0.MsgPioneerUpdateJarRegulatorResponse>(
+      '/qadena.qadena.Msg/PioneerUpdateJarRegulator',
+      ($0.MsgPioneerUpdateJarRegulator value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgPioneerUpdateJarRegulatorResponse.fromBuffer(value));
+  static final _$pioneerUpdateEnclaveIdentity = $grpc.ClientMethod<$0.MsgPioneerUpdateEnclaveIdentity, $0.MsgPioneerUpdateEnclaveIdentityResponse>(
+      '/qadena.qadena.Msg/PioneerUpdateEnclaveIdentity',
+      ($0.MsgPioneerUpdateEnclaveIdentity value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgPioneerUpdateEnclaveIdentityResponse.fromBuffer(value));
   static final _$createCredential = $grpc.ClientMethod<$0.MsgCreateCredential, $0.MsgCreateCredentialResponse>(
       '/qadena.qadena.Msg/CreateCredential',
       ($0.MsgCreateCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgCreateCredentialResponse.fromBuffer(value));
+  static final _$removeCredential = $grpc.ClientMethod<$0.MsgRemoveCredential, $0.MsgRemoveCredentialResponse>(
+      '/qadena.qadena.Msg/RemoveCredential',
+      ($0.MsgRemoveCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgRemoveCredentialResponse.fromBuffer(value));
   static final _$createBulkCredentials = $grpc.ClientMethod<$0.MsgCreateBulkCredentials, $0.MsgCreateBulkCredentialsResponse>(
       '/qadena.qadena.Msg/CreateBulkCredentials',
       ($0.MsgCreateBulkCredentials value) => value.writeToBuffer(),
@@ -102,18 +118,6 @@ class MsgClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.MsgAddPublicKeyResponse> addPublicKey($0.MsgAddPublicKey request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addPublicKey, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.MsgUpdateIntervalPublicKeyIDResponse> updateIntervalPublicKeyID($0.MsgUpdateIntervalPublicKeyID request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateIntervalPublicKeyID, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.MsgUpdatePioneerJarResponse> updatePioneerJar($0.MsgUpdatePioneerJar request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updatePioneerJar, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.MsgUpdateJarRegulatorResponse> updateJarRegulator($0.MsgUpdateJarRegulator request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateJarRegulator, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.MsgCreateWalletResponse> createWallet($0.MsgCreateWallet request, {$grpc.CallOptions? options}) {
@@ -140,6 +144,18 @@ class MsgClient extends $grpc.Client {
     return $createUnaryCall(_$claimCredential, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.MsgAddServiceProviderResponse> addServiceProvider($0.MsgAddServiceProvider request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$addServiceProvider, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgDeactivateServiceProviderResponse> deactivateServiceProvider($0.MsgDeactivateServiceProvider request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deactivateServiceProvider, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity($0.MsgUpdateEnclaveIdentity request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateEnclaveIdentity, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey($0.MsgPioneerAddPublicKey request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$pioneerAddPublicKey, request, options: options);
   }
@@ -156,8 +172,24 @@ class MsgClient extends $grpc.Client {
     return $createUnaryCall(_$pioneerBroadcastSecretSharePrivateKey, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.MsgPioneerUpdatePioneerJarResponse> pioneerUpdatePioneerJar($0.MsgPioneerUpdatePioneerJar request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$pioneerUpdatePioneerJar, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgPioneerUpdateJarRegulatorResponse> pioneerUpdateJarRegulator($0.MsgPioneerUpdateJarRegulator request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$pioneerUpdateJarRegulator, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgPioneerUpdateEnclaveIdentityResponse> pioneerUpdateEnclaveIdentity($0.MsgPioneerUpdateEnclaveIdentity request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$pioneerUpdateEnclaveIdentity, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.MsgCreateCredentialResponse> createCredential($0.MsgCreateCredential request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgRemoveCredentialResponse> removeCredential($0.MsgRemoveCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$removeCredential, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.MsgCreateBulkCredentialsResponse> createBulkCredentials($0.MsgCreateBulkCredentials request, {$grpc.CallOptions? options}) {
@@ -184,27 +216,6 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgAddPublicKey.fromBuffer(value),
         ($0.MsgAddPublicKeyResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.MsgUpdateIntervalPublicKeyID, $0.MsgUpdateIntervalPublicKeyIDResponse>(
-        'UpdateIntervalPublicKeyID',
-        updateIntervalPublicKeyID_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.MsgUpdateIntervalPublicKeyID.fromBuffer(value),
-        ($0.MsgUpdateIntervalPublicKeyIDResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.MsgUpdatePioneerJar, $0.MsgUpdatePioneerJarResponse>(
-        'UpdatePioneerJar',
-        updatePioneerJar_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.MsgUpdatePioneerJar.fromBuffer(value),
-        ($0.MsgUpdatePioneerJarResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.MsgUpdateJarRegulator, $0.MsgUpdateJarRegulatorResponse>(
-        'UpdateJarRegulator',
-        updateJarRegulator_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.MsgUpdateJarRegulator.fromBuffer(value),
-        ($0.MsgUpdateJarRegulatorResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgCreateWallet, $0.MsgCreateWalletResponse>(
         'CreateWallet',
         createWallet_Pre,
@@ -247,6 +258,27 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgClaimCredential.fromBuffer(value),
         ($0.MsgClaimCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgAddServiceProvider, $0.MsgAddServiceProviderResponse>(
+        'AddServiceProvider',
+        addServiceProvider_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgAddServiceProvider.fromBuffer(value),
+        ($0.MsgAddServiceProviderResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgDeactivateServiceProvider, $0.MsgDeactivateServiceProviderResponse>(
+        'DeactivateServiceProvider',
+        deactivateServiceProvider_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgDeactivateServiceProvider.fromBuffer(value),
+        ($0.MsgDeactivateServiceProviderResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgUpdateEnclaveIdentity, $0.MsgUpdateEnclaveIdentityResponse>(
+        'UpdateEnclaveIdentity',
+        updateEnclaveIdentity_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgUpdateEnclaveIdentity.fromBuffer(value),
+        ($0.MsgUpdateEnclaveIdentityResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgPioneerAddPublicKey, $0.MsgPioneerAddPublicKeyResponse>(
         'PioneerAddPublicKey',
         pioneerAddPublicKey_Pre,
@@ -275,6 +307,27 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgPioneerBroadcastSecretSharePrivateKey.fromBuffer(value),
         ($0.MsgPioneerBroadcastSecretSharePrivateKeyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgPioneerUpdatePioneerJar, $0.MsgPioneerUpdatePioneerJarResponse>(
+        'PioneerUpdatePioneerJar',
+        pioneerUpdatePioneerJar_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgPioneerUpdatePioneerJar.fromBuffer(value),
+        ($0.MsgPioneerUpdatePioneerJarResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgPioneerUpdateJarRegulator, $0.MsgPioneerUpdateJarRegulatorResponse>(
+        'PioneerUpdateJarRegulator',
+        pioneerUpdateJarRegulator_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgPioneerUpdateJarRegulator.fromBuffer(value),
+        ($0.MsgPioneerUpdateJarRegulatorResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgPioneerUpdateEnclaveIdentity, $0.MsgPioneerUpdateEnclaveIdentityResponse>(
+        'PioneerUpdateEnclaveIdentity',
+        pioneerUpdateEnclaveIdentity_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgPioneerUpdateEnclaveIdentity.fromBuffer(value),
+        ($0.MsgPioneerUpdateEnclaveIdentityResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgCreateCredential, $0.MsgCreateCredentialResponse>(
         'CreateCredential',
         createCredential_Pre,
@@ -282,6 +335,13 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgCreateCredential.fromBuffer(value),
         ($0.MsgCreateCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgRemoveCredential, $0.MsgRemoveCredentialResponse>(
+        'RemoveCredential',
+        removeCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgRemoveCredential.fromBuffer(value),
+        ($0.MsgRemoveCredentialResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgCreateBulkCredentials, $0.MsgCreateBulkCredentialsResponse>(
         'CreateBulkCredentials',
         createBulkCredentials_Pre,
@@ -297,18 +357,6 @@ abstract class MsgServiceBase extends $grpc.Service {
 
   $async.Future<$0.MsgAddPublicKeyResponse> addPublicKey_Pre($grpc.ServiceCall call, $async.Future<$0.MsgAddPublicKey> request) async {
     return addPublicKey(call, await request);
-  }
-
-  $async.Future<$0.MsgUpdateIntervalPublicKeyIDResponse> updateIntervalPublicKeyID_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateIntervalPublicKeyID> request) async {
-    return updateIntervalPublicKeyID(call, await request);
-  }
-
-  $async.Future<$0.MsgUpdatePioneerJarResponse> updatePioneerJar_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdatePioneerJar> request) async {
-    return updatePioneerJar(call, await request);
-  }
-
-  $async.Future<$0.MsgUpdateJarRegulatorResponse> updateJarRegulator_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateJarRegulator> request) async {
-    return updateJarRegulator(call, await request);
   }
 
   $async.Future<$0.MsgCreateWalletResponse> createWallet_Pre($grpc.ServiceCall call, $async.Future<$0.MsgCreateWallet> request) async {
@@ -335,6 +383,18 @@ abstract class MsgServiceBase extends $grpc.Service {
     return claimCredential(call, await request);
   }
 
+  $async.Future<$0.MsgAddServiceProviderResponse> addServiceProvider_Pre($grpc.ServiceCall call, $async.Future<$0.MsgAddServiceProvider> request) async {
+    return addServiceProvider(call, await request);
+  }
+
+  $async.Future<$0.MsgDeactivateServiceProviderResponse> deactivateServiceProvider_Pre($grpc.ServiceCall call, $async.Future<$0.MsgDeactivateServiceProvider> request) async {
+    return deactivateServiceProvider(call, await request);
+  }
+
+  $async.Future<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateEnclaveIdentity> request) async {
+    return updateEnclaveIdentity(call, await request);
+  }
+
   $async.Future<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey_Pre($grpc.ServiceCall call, $async.Future<$0.MsgPioneerAddPublicKey> request) async {
     return pioneerAddPublicKey(call, await request);
   }
@@ -351,8 +411,24 @@ abstract class MsgServiceBase extends $grpc.Service {
     return pioneerBroadcastSecretSharePrivateKey(call, await request);
   }
 
+  $async.Future<$0.MsgPioneerUpdatePioneerJarResponse> pioneerUpdatePioneerJar_Pre($grpc.ServiceCall call, $async.Future<$0.MsgPioneerUpdatePioneerJar> request) async {
+    return pioneerUpdatePioneerJar(call, await request);
+  }
+
+  $async.Future<$0.MsgPioneerUpdateJarRegulatorResponse> pioneerUpdateJarRegulator_Pre($grpc.ServiceCall call, $async.Future<$0.MsgPioneerUpdateJarRegulator> request) async {
+    return pioneerUpdateJarRegulator(call, await request);
+  }
+
+  $async.Future<$0.MsgPioneerUpdateEnclaveIdentityResponse> pioneerUpdateEnclaveIdentity_Pre($grpc.ServiceCall call, $async.Future<$0.MsgPioneerUpdateEnclaveIdentity> request) async {
+    return pioneerUpdateEnclaveIdentity(call, await request);
+  }
+
   $async.Future<$0.MsgCreateCredentialResponse> createCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgCreateCredential> request) async {
     return createCredential(call, await request);
+  }
+
+  $async.Future<$0.MsgRemoveCredentialResponse> removeCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgRemoveCredential> request) async {
+    return removeCredential(call, await request);
   }
 
   $async.Future<$0.MsgCreateBulkCredentialsResponse> createBulkCredentials_Pre($grpc.ServiceCall call, $async.Future<$0.MsgCreateBulkCredentials> request) async {
@@ -361,19 +437,23 @@ abstract class MsgServiceBase extends $grpc.Service {
 
   $async.Future<$0.MsgUpdateParamsResponse> updateParams($grpc.ServiceCall call, $0.MsgUpdateParams request);
   $async.Future<$0.MsgAddPublicKeyResponse> addPublicKey($grpc.ServiceCall call, $0.MsgAddPublicKey request);
-  $async.Future<$0.MsgUpdateIntervalPublicKeyIDResponse> updateIntervalPublicKeyID($grpc.ServiceCall call, $0.MsgUpdateIntervalPublicKeyID request);
-  $async.Future<$0.MsgUpdatePioneerJarResponse> updatePioneerJar($grpc.ServiceCall call, $0.MsgUpdatePioneerJar request);
-  $async.Future<$0.MsgUpdateJarRegulatorResponse> updateJarRegulator($grpc.ServiceCall call, $0.MsgUpdateJarRegulator request);
   $async.Future<$0.MsgCreateWalletResponse> createWallet($grpc.ServiceCall call, $0.MsgCreateWallet request);
   $async.Future<$0.MsgTransferFundsResponse> transferFunds($grpc.ServiceCall call, $0.MsgTransferFunds request);
   $async.Future<$0.MsgReceiveFundsResponse> receiveFunds($grpc.ServiceCall call, $0.MsgReceiveFunds request);
   $async.Future<$0.MsgProtectPrivateKeyResponse> protectPrivateKey($grpc.ServiceCall call, $0.MsgProtectPrivateKey request);
   $async.Future<$0.MsgSignRecoverPrivateKeyResponse> signRecoverPrivateKey($grpc.ServiceCall call, $0.MsgSignRecoverPrivateKey request);
   $async.Future<$0.MsgClaimCredentialResponse> claimCredential($grpc.ServiceCall call, $0.MsgClaimCredential request);
+  $async.Future<$0.MsgAddServiceProviderResponse> addServiceProvider($grpc.ServiceCall call, $0.MsgAddServiceProvider request);
+  $async.Future<$0.MsgDeactivateServiceProviderResponse> deactivateServiceProvider($grpc.ServiceCall call, $0.MsgDeactivateServiceProvider request);
+  $async.Future<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity($grpc.ServiceCall call, $0.MsgUpdateEnclaveIdentity request);
   $async.Future<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey($grpc.ServiceCall call, $0.MsgPioneerAddPublicKey request);
   $async.Future<$0.MsgPioneerUpdateIntervalPublicKeyIDResponse> pioneerUpdateIntervalPublicKeyID($grpc.ServiceCall call, $0.MsgPioneerUpdateIntervalPublicKeyID request);
   $async.Future<$0.MsgPioneerEnclaveExchangeResponse> pioneerEnclaveExchange($grpc.ServiceCall call, $0.MsgPioneerEnclaveExchange request);
   $async.Future<$0.MsgPioneerBroadcastSecretSharePrivateKeyResponse> pioneerBroadcastSecretSharePrivateKey($grpc.ServiceCall call, $0.MsgPioneerBroadcastSecretSharePrivateKey request);
+  $async.Future<$0.MsgPioneerUpdatePioneerJarResponse> pioneerUpdatePioneerJar($grpc.ServiceCall call, $0.MsgPioneerUpdatePioneerJar request);
+  $async.Future<$0.MsgPioneerUpdateJarRegulatorResponse> pioneerUpdateJarRegulator($grpc.ServiceCall call, $0.MsgPioneerUpdateJarRegulator request);
+  $async.Future<$0.MsgPioneerUpdateEnclaveIdentityResponse> pioneerUpdateEnclaveIdentity($grpc.ServiceCall call, $0.MsgPioneerUpdateEnclaveIdentity request);
   $async.Future<$0.MsgCreateCredentialResponse> createCredential($grpc.ServiceCall call, $0.MsgCreateCredential request);
+  $async.Future<$0.MsgRemoveCredentialResponse> removeCredential($grpc.ServiceCall call, $0.MsgRemoveCredential request);
   $async.Future<$0.MsgCreateBulkCredentialsResponse> createBulkCredentials($grpc.ServiceCall call, $0.MsgCreateBulkCredentials request);
 }

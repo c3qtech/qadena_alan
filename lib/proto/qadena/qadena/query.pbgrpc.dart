@@ -109,10 +109,10 @@ class QueryClient extends $grpc.Client {
       '/qadena.qadena.Query/Incentives',
       ($1.QueryIncentivesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.QueryIncentivesResponse.fromBuffer(value));
-  static final _$syncEnclave = $grpc.ClientMethod<$1.QuerySyncEnclaveRequest, $1.QuerySyncEnclaveResponse>(
-      '/qadena.qadena.Query/SyncEnclave',
-      ($1.QuerySyncEnclaveRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.QuerySyncEnclaveResponse.fromBuffer(value));
+  static final _$enclaveSyncEnclave = $grpc.ClientMethod<$1.QueryEnclaveSyncEnclaveRequest, $1.QueryEnclaveSyncEnclaveResponse>(
+      '/qadena.qadena.Query/EnclaveSyncEnclave',
+      ($1.QueryEnclaveSyncEnclaveRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.QueryEnclaveSyncEnclaveResponse.fromBuffer(value));
   static final _$enclaveSecretShare = $grpc.ClientMethod<$1.QueryEnclaveSecretShareRequest, $1.QueryEnclaveSecretShareResponse>(
       '/qadena.qadena.Query/EnclaveSecretShare',
       ($1.QueryEnclaveSecretShareRequest value) => value.writeToBuffer(),
@@ -121,10 +121,22 @@ class QueryClient extends $grpc.Client {
       '/qadena.qadena.Query/EnclaveRecoverKeyShare',
       ($1.QueryEnclaveRecoverKeyShareRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.QueryEnclaveRecoverKeyShareResponse.fromBuffer(value));
+  static final _$enclaveValidateEnclaveIdentity = $grpc.ClientMethod<$1.QueryEnclaveValidateEnclaveIdentityRequest, $1.QueryEnclaveValidateEnclaveIdentityResponse>(
+      '/qadena.qadena.Query/EnclaveValidateEnclaveIdentity',
+      ($1.QueryEnclaveValidateEnclaveIdentityRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.QueryEnclaveValidateEnclaveIdentityResponse.fromBuffer(value));
   static final _$findCredential = $grpc.ClientMethod<$1.QueryFindCredentialRequest, $1.QueryFindCredentialResponse>(
       '/qadena.qadena.Query/FindCredential',
       ($1.QueryFindCredentialRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.QueryFindCredentialResponse.fromBuffer(value));
+  static final _$enclaveIdentity = $grpc.ClientMethod<$1.QueryGetEnclaveIdentityRequest, $1.QueryGetEnclaveIdentityResponse>(
+      '/qadena.qadena.Query/EnclaveIdentity',
+      ($1.QueryGetEnclaveIdentityRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.QueryGetEnclaveIdentityResponse.fromBuffer(value));
+  static final _$enclaveIdentityAll = $grpc.ClientMethod<$1.QueryAllEnclaveIdentityRequest, $1.QueryAllEnclaveIdentityResponse>(
+      '/qadena.qadena.Query/EnclaveIdentityAll',
+      ($1.QueryAllEnclaveIdentityRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.QueryAllEnclaveIdentityResponse.fromBuffer(value));
 
   QueryClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -220,8 +232,8 @@ class QueryClient extends $grpc.Client {
     return $createUnaryCall(_$incentives, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.QuerySyncEnclaveResponse> syncEnclave($1.QuerySyncEnclaveRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$syncEnclave, request, options: options);
+  $grpc.ResponseFuture<$1.QueryEnclaveSyncEnclaveResponse> enclaveSyncEnclave($1.QueryEnclaveSyncEnclaveRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$enclaveSyncEnclave, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.QueryEnclaveSecretShareResponse> enclaveSecretShare($1.QueryEnclaveSecretShareRequest request, {$grpc.CallOptions? options}) {
@@ -232,8 +244,20 @@ class QueryClient extends $grpc.Client {
     return $createUnaryCall(_$enclaveRecoverKeyShare, request, options: options);
   }
 
+  $grpc.ResponseFuture<$1.QueryEnclaveValidateEnclaveIdentityResponse> enclaveValidateEnclaveIdentity($1.QueryEnclaveValidateEnclaveIdentityRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$enclaveValidateEnclaveIdentity, request, options: options);
+  }
+
   $grpc.ResponseFuture<$1.QueryFindCredentialResponse> findCredential($1.QueryFindCredentialRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$findCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.QueryGetEnclaveIdentityResponse> enclaveIdentity($1.QueryGetEnclaveIdentityRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$enclaveIdentity, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.QueryAllEnclaveIdentityResponse> enclaveIdentityAll($1.QueryAllEnclaveIdentityRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$enclaveIdentityAll, request, options: options);
   }
 }
 
@@ -396,13 +420,13 @@ abstract class QueryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.QueryIncentivesRequest.fromBuffer(value),
         ($1.QueryIncentivesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.QuerySyncEnclaveRequest, $1.QuerySyncEnclaveResponse>(
-        'SyncEnclave',
-        syncEnclave_Pre,
+    $addMethod($grpc.ServiceMethod<$1.QueryEnclaveSyncEnclaveRequest, $1.QueryEnclaveSyncEnclaveResponse>(
+        'EnclaveSyncEnclave',
+        enclaveSyncEnclave_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $1.QuerySyncEnclaveRequest.fromBuffer(value),
-        ($1.QuerySyncEnclaveResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $1.QueryEnclaveSyncEnclaveRequest.fromBuffer(value),
+        ($1.QueryEnclaveSyncEnclaveResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.QueryEnclaveSecretShareRequest, $1.QueryEnclaveSecretShareResponse>(
         'EnclaveSecretShare',
         enclaveSecretShare_Pre,
@@ -417,6 +441,13 @@ abstract class QueryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.QueryEnclaveRecoverKeyShareRequest.fromBuffer(value),
         ($1.QueryEnclaveRecoverKeyShareResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.QueryEnclaveValidateEnclaveIdentityRequest, $1.QueryEnclaveValidateEnclaveIdentityResponse>(
+        'EnclaveValidateEnclaveIdentity',
+        enclaveValidateEnclaveIdentity_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.QueryEnclaveValidateEnclaveIdentityRequest.fromBuffer(value),
+        ($1.QueryEnclaveValidateEnclaveIdentityResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.QueryFindCredentialRequest, $1.QueryFindCredentialResponse>(
         'FindCredential',
         findCredential_Pre,
@@ -424,6 +455,20 @@ abstract class QueryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.QueryFindCredentialRequest.fromBuffer(value),
         ($1.QueryFindCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.QueryGetEnclaveIdentityRequest, $1.QueryGetEnclaveIdentityResponse>(
+        'EnclaveIdentity',
+        enclaveIdentity_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.QueryGetEnclaveIdentityRequest.fromBuffer(value),
+        ($1.QueryGetEnclaveIdentityResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.QueryAllEnclaveIdentityRequest, $1.QueryAllEnclaveIdentityResponse>(
+        'EnclaveIdentityAll',
+        enclaveIdentityAll_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.QueryAllEnclaveIdentityRequest.fromBuffer(value),
+        ($1.QueryAllEnclaveIdentityResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.QueryParamsResponse> params_Pre($grpc.ServiceCall call, $async.Future<$1.QueryParamsRequest> request) async {
@@ -514,8 +559,8 @@ abstract class QueryServiceBase extends $grpc.Service {
     return incentives(call, await request);
   }
 
-  $async.Future<$1.QuerySyncEnclaveResponse> syncEnclave_Pre($grpc.ServiceCall call, $async.Future<$1.QuerySyncEnclaveRequest> request) async {
-    return syncEnclave(call, await request);
+  $async.Future<$1.QueryEnclaveSyncEnclaveResponse> enclaveSyncEnclave_Pre($grpc.ServiceCall call, $async.Future<$1.QueryEnclaveSyncEnclaveRequest> request) async {
+    return enclaveSyncEnclave(call, await request);
   }
 
   $async.Future<$1.QueryEnclaveSecretShareResponse> enclaveSecretShare_Pre($grpc.ServiceCall call, $async.Future<$1.QueryEnclaveSecretShareRequest> request) async {
@@ -526,8 +571,20 @@ abstract class QueryServiceBase extends $grpc.Service {
     return enclaveRecoverKeyShare(call, await request);
   }
 
+  $async.Future<$1.QueryEnclaveValidateEnclaveIdentityResponse> enclaveValidateEnclaveIdentity_Pre($grpc.ServiceCall call, $async.Future<$1.QueryEnclaveValidateEnclaveIdentityRequest> request) async {
+    return enclaveValidateEnclaveIdentity(call, await request);
+  }
+
   $async.Future<$1.QueryFindCredentialResponse> findCredential_Pre($grpc.ServiceCall call, $async.Future<$1.QueryFindCredentialRequest> request) async {
     return findCredential(call, await request);
+  }
+
+  $async.Future<$1.QueryGetEnclaveIdentityResponse> enclaveIdentity_Pre($grpc.ServiceCall call, $async.Future<$1.QueryGetEnclaveIdentityRequest> request) async {
+    return enclaveIdentity(call, await request);
+  }
+
+  $async.Future<$1.QueryAllEnclaveIdentityResponse> enclaveIdentityAll_Pre($grpc.ServiceCall call, $async.Future<$1.QueryAllEnclaveIdentityRequest> request) async {
+    return enclaveIdentityAll(call, await request);
   }
 
   $async.Future<$1.QueryParamsResponse> params($grpc.ServiceCall call, $1.QueryParamsRequest request);
@@ -552,8 +609,11 @@ abstract class QueryServiceBase extends $grpc.Service {
   $async.Future<$1.QueryTreasuryResponse> treasury($grpc.ServiceCall call, $1.QueryTreasuryRequest request);
   $async.Future<$1.QueryAccountResponse> account($grpc.ServiceCall call, $1.QueryAccountRequest request);
   $async.Future<$1.QueryIncentivesResponse> incentives($grpc.ServiceCall call, $1.QueryIncentivesRequest request);
-  $async.Future<$1.QuerySyncEnclaveResponse> syncEnclave($grpc.ServiceCall call, $1.QuerySyncEnclaveRequest request);
+  $async.Future<$1.QueryEnclaveSyncEnclaveResponse> enclaveSyncEnclave($grpc.ServiceCall call, $1.QueryEnclaveSyncEnclaveRequest request);
   $async.Future<$1.QueryEnclaveSecretShareResponse> enclaveSecretShare($grpc.ServiceCall call, $1.QueryEnclaveSecretShareRequest request);
   $async.Future<$1.QueryEnclaveRecoverKeyShareResponse> enclaveRecoverKeyShare($grpc.ServiceCall call, $1.QueryEnclaveRecoverKeyShareRequest request);
+  $async.Future<$1.QueryEnclaveValidateEnclaveIdentityResponse> enclaveValidateEnclaveIdentity($grpc.ServiceCall call, $1.QueryEnclaveValidateEnclaveIdentityRequest request);
   $async.Future<$1.QueryFindCredentialResponse> findCredential($grpc.ServiceCall call, $1.QueryFindCredentialRequest request);
+  $async.Future<$1.QueryGetEnclaveIdentityResponse> enclaveIdentity($grpc.ServiceCall call, $1.QueryGetEnclaveIdentityRequest request);
+  $async.Future<$1.QueryAllEnclaveIdentityResponse> enclaveIdentityAll($grpc.ServiceCall call, $1.QueryAllEnclaveIdentityRequest request);
 }

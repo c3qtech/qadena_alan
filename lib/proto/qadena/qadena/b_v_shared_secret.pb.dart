@@ -13,12 +13,12 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'ec_point.pb.dart' as $12;
+import 'ec_point.pb.dart' as $13;
 
 class BVSharedSecret extends $pb.GeneratedMessage {
   factory BVSharedSecret({
-    $12.BECPoint? s1,
-    $12.BECPoint? s2,
+    $13.BECPoint? s1,
+    $13.BECPoint? s2,
   }) {
     final $result = create();
     if (s1 != null) {
@@ -34,8 +34,8 @@ class BVSharedSecret extends $pb.GeneratedMessage {
   factory BVSharedSecret.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BVSharedSecret', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
-    ..aOM<$12.BECPoint>(1, _omitFieldNames ? '' : 'S1', protoName: 'S1', subBuilder: $12.BECPoint.create)
-    ..aOM<$12.BECPoint>(2, _omitFieldNames ? '' : 'S2', protoName: 'S2', subBuilder: $12.BECPoint.create)
+    ..aOM<$13.BECPoint>(1, _omitFieldNames ? '' : 'S1', protoName: 'S1', subBuilder: $13.BECPoint.create)
+    ..aOM<$13.BECPoint>(2, _omitFieldNames ? '' : 'S2', protoName: 'S2', subBuilder: $13.BECPoint.create)
     ..hasRequiredFields = false
   ;
 
@@ -61,26 +61,26 @@ class BVSharedSecret extends $pb.GeneratedMessage {
   static BVSharedSecret? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.BECPoint get s1 => $_getN(0);
+  $13.BECPoint get s1 => $_getN(0);
   @$pb.TagNumber(1)
-  set s1($12.BECPoint v) { setField(1, v); }
+  set s1($13.BECPoint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasS1() => $_has(0);
   @$pb.TagNumber(1)
   void clearS1() => clearField(1);
   @$pb.TagNumber(1)
-  $12.BECPoint ensureS1() => $_ensure(0);
+  $13.BECPoint ensureS1() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $12.BECPoint get s2 => $_getN(1);
+  $13.BECPoint get s2 => $_getN(1);
   @$pb.TagNumber(2)
-  set s2($12.BECPoint v) { setField(2, v); }
+  set s2($13.BECPoint v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasS2() => $_has(1);
   @$pb.TagNumber(2)
   void clearS2() => clearField(2);
   @$pb.TagNumber(2)
-  $12.BECPoint ensureS2() => $_ensure(1);
+  $13.BECPoint ensureS2() => $_ensure(1);
 }
 
 
