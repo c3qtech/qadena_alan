@@ -1,13 +1,14 @@
-import 'package:qadena_alan/alan.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
 import 'package:qadena_alan/qadena/core/client.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:test/test.dart';
+import 'package:qadena_alan/alan.dart' as alan;
+
 
 void main() {
   bool testLocalChain = true;
 
-  final networkInfo = NetworkInfo.fromSingleHost(
+  final networkInfo = alan.NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
       isEthSecP256K1Addr: false,
@@ -15,8 +16,16 @@ void main() {
 
   QadenaClient client = QadenaClient(networkInfo);
 
+  final hardCodedSponsorAcct = alan.Wallet.derive(
+      "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
+          .split(' '),
+      networkInfo,
+      derivationPath: "m/44'/744'/0'/0/0");
+
+
   test('create account (create wallets, claim credentials, register authorized signatory)', () async {
-    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111), client.hardCodedSponsorWallet.address);
+
+    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111), hardCodedSponsorAcct);
 
     expect(account.errorMessage, isNull);
 
@@ -35,9 +44,9 @@ void main() {
 
   test('createWallet anonymous', () async {
     final wallet =
-        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv");
+        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address); 
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     expect(ephWallet, isNotNull);
@@ -48,9 +57,9 @@ void main() {
     final annmnemonic =
         "inherit rebel absorb diamond leopard lens approve deny balcony toast merry text metal pair diamond lumber gravity song liberty pumpkin goddess nature slush basic";
     final wallet = await client.createWallet(
-        "pioneer1", annmnemonic.split(' '), 0, "secdsvssrvprv");
+        "pioneer1", annmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 2, null);
+        await client.createWallet("pioneer1", wallet!.seed, 2, null, hardCodedSponsorAcct.bech32Address);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.registerAuthorizedSignatory();
@@ -71,9 +80,9 @@ void main() {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
 
@@ -98,9 +107,9 @@ void main() {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv");
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.signDocument(
@@ -112,7 +121,7 @@ void main() {
   });
   test('claimCredentials', () async {
     final wallet =
-        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv");
+        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
     print("wallet: $wallet");
     final result =
         await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
@@ -129,7 +138,7 @@ void main() {
     final sponsormnemonic =
         "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before";
 
-    final networkInfo = NetworkInfo.fromSingleHost(
+    final networkInfo = alan.NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
       isEthSecP256K1Addr: false,
@@ -138,13 +147,13 @@ void main() {
     final almnemonicSplit = almnemonic.split(' ');
     final annmnemonicSplit = annmnemonic.split(' ');
 
-    var alwallet = Wallet.derive(almnemonicSplit, networkInfo,
+    var alwallet = alan.Wallet.derive(almnemonicSplit, networkInfo,
         derivationPath: "m/44'/744'/0'/0/0");
 
-    var annwallet = Wallet.derive(annmnemonicSplit, networkInfo,
+    var annwallet = alan.Wallet.derive(annmnemonicSplit, networkInfo,
         derivationPath: "m/44'/744'/0'/0/0");
 
-    final sponsorwallet = Wallet.derive(sponsormnemonic.split(' '), networkInfo,
+    final sponsorwallet = alan.Wallet.derive(sponsormnemonic.split(' '), networkInfo,
         derivationPath: "m/44'/744'/0'/0/0");
 
     alwallet = sponsorwallet;
@@ -153,15 +162,15 @@ void main() {
     final message = bank.MsgSend.create();
     message.fromAddress = alwallet.bech32Address;
     message.toAddress = annwallet.bech32Address;
-    message.amount.add(Coin.create()
+    message.amount.add(alan.Coin.create()
       ..denom = 'aqdn'
       ..amount = '1234');
 
-    final signer = TxSigner.fromNetworkInfo(networkInfo);
+    final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
     final tx = await signer.createAndSign(alwallet, [message]);
 
     // 4. Broadcast the transaction
-    final txSender = TxSender.fromNetworkInfo(networkInfo);
+    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
     final response = await txSender.broadcastTx(tx);
 
     // Check the result

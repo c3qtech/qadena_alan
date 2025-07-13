@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:qadena_alan/alan.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
 import 'package:qadena_alan/qadena/core/client.dart';
+import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
+import 'package:qadena_alan/wallet/wallet.dart' as alan;
 import 'package:test/test.dart';
 
 void main(List<String> args) async {
@@ -22,9 +24,14 @@ void main(List<String> args) async {
 
   BigInt claimAmount = BigInt.from(int.parse(args[0]));
   BigInt claimBF = BigInt.from(int.parse(args[1]));
-  
 
-  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, client.hardCodedSponsorWallet.address);
+  final hardCodedSponsorAcct = alan.Wallet.derive(
+      "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
+          .split(' '),
+      networkInfo,
+      derivationPath: "m/44'/744'/0'/0/0");
+
+  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, hardCodedSponsorAcct);
 
   if (account.errorMessage != null) {
     print("Failed to create account: ${account.errorMessage}");

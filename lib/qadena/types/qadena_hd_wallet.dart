@@ -70,7 +70,7 @@ class QadenaHDWallet {
   late final alan.Wallet cxAcct;
   late final alan.Wallet pioneerAcct;
   late final alan.Wallet sponsorAcct;
-  late final WalletResponse sponsorWallet;
+//  late final WalletResponse sponsorWallet;
   late final WalletResponse transactionWallet;
   late final WalletResponse credentialWallet;
   late final String transactionPublicKey;
@@ -97,6 +97,7 @@ class QadenaHDWallet {
     cxAcct = alan.Wallet.derive(seed, networkInfo, derivationPath: cxpath);
 
     // HARD-CODED FOR NOW!!! THERE SHOULD BE AN APPSVR ENDPONT THAT DOES THE FEEGRANT
+    /*
     sponsorAcct = alan.Wallet.derive(
         "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
             .split(' '),
@@ -104,6 +105,7 @@ class QadenaHDWallet {
         derivationPath: "m/44'/744'/0'/0/0");
 
     sponsorWallet = toWallet(sponsorAcct);
+    */
     transactionWallet = toWallet(txAcct);
     credentialWallet = toWallet(cxAcct);
     credentialWalletAddress = credentialWallet.address;
@@ -111,7 +113,7 @@ class QadenaHDWallet {
     credentialPublicKey = credentialWallet.pubkeyHex;
   }
 
-  Future<String?> feeGrant() async {
+  Future<String?> feeGrant(String feeGranterAddress) async {
     final basicAllowance = BasicAllowance.create();
 
     final allowance = AllowedMsgAllowance.create();
@@ -127,7 +129,7 @@ class QadenaHDWallet {
     try {
       final msg = MsgGrantAllowance.create();
       msg.grantee = transactionWallet.address;
-      msg.granter = sponsorWallet.address;
+      msg.granter = feeGranterAddress;
       msg.allowance = alan.Any(
         typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
         value: allowance.writeToBuffer(),
@@ -249,7 +251,7 @@ class QadenaHDWallet {
   }
 
   Future<String?> registerWallet(
-      String pioneerID, String serviceProviderID) async {
+      String pioneerID, String serviceProviderID, String feeGranterAddress) async {
     final isEphemeral = ephIndex > 0;
     dynamic acceptCredentialTypes;
     dynamic requireSenderCredentialTypes;
@@ -293,7 +295,7 @@ class QadenaHDWallet {
       }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs,
-          feeGranter: sponsorWallet.address);
+          feeGranter: feeGranterAddress);
 
       if (response == null) {
         if (common.Debug) {

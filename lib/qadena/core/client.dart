@@ -62,12 +62,13 @@ class QadenaClient {
   final NetworkInfo networkInfo;
   late final Chain chain;
 
-  late final alan.Wallet hardCodedSponsorAcct;
-  late final WalletResponse hardCodedSponsorWallet;
+//  late final alan.Wallet hardCodedSponsorAcct;
+//  late final WalletResponse hardCodedSponsorWallet;
 
 
   QadenaClient(this.networkInfo) {
     chain = Chain(networkInfo);
+    /*
     // HARD CODED FOR NOW
     hardCodedSponsorAcct = alan.Wallet.derive(
       "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
@@ -76,6 +77,7 @@ class QadenaClient {
       derivationPath: "m/44'/744'/0'/0/0");
 
      hardCodedSponsorWallet = toWallet(hardCodedSponsorAcct);
+     */
      QadenaClientTx.networkInfo = networkInfo;
      QadenaClientTx.chain = chain;
      initECPedersen();
@@ -119,7 +121,7 @@ class QadenaClient {
     }
   }
 
-  List<GeneratedMessage> createFeeGrantMessages(String mainWalletAddress, String ephWalletAddress) {
+  List<GeneratedMessage> createFeeGrantMessages(String mainWalletAddress, String ephWalletAddress, String feeGranterAddress) {
     final basicAllowance = BasicAllowance.create();
 
     final allowance = AllowedMsgAllowance.create();
@@ -134,7 +136,7 @@ class QadenaClient {
 
     final msg = MsgGrantAllowance.create();
     msg.grantee = mainWalletAddress;
-    msg.granter = hardCodedSponsorWallet.address;
+    msg.granter = feeGranterAddress;
     msg.allowance = alan.Any(
       typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
       value: allowance.writeToBuffer(),
@@ -142,7 +144,7 @@ class QadenaClient {
 
     final msg2 = MsgGrantAllowance.create();
     msg2.grantee = ephWalletAddress;
-    msg2.granter = hardCodedSponsorWallet.address;
+    msg2.granter = feeGranterAddress;
     msg2.allowance = alan.Any(
       typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
       value: allowance.writeToBuffer(),
@@ -164,7 +166,7 @@ class QadenaClient {
       }
   }
 
-  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress) async {
+  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, Wallet feeGranterWallet) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
@@ -185,9 +187,9 @@ class QadenaClient {
 
 
       if (networkInfo.isTesting) {
-        final msgs = createFeeGrantMessages(mainWallet.transactionWalletAddress, ephWallet.transactionWalletAddress);
+        final msgs = createFeeGrantMessages(mainWallet.transactionWalletAddress, ephWallet.transactionWalletAddress, feeGranterWallet.bech32Address);
 
-        final response = await QadenaClientTx.broadcastTx(hardCodedSponsorAcct, msgs);
+        final response = await QadenaClientTx.broadcastTx(feeGranterWallet, msgs);
 
         if (response == null) {
           if (common.Debug) {
@@ -221,7 +223,7 @@ class QadenaClient {
       final saveMainWalletAmountRef = WalletAmountRef(mainWalletAmountRef.value);
 
       final mainCWTxHashRef = StringRef("");
-      final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: feeGranterAddress, txHashRef: mainCWTxHashRef);
+      final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: feeGranterWallet.bech32Address, txHashRef: mainCWTxHashRef);
 
       if (mainCWResponse == null) {
         if (common.Debug) {
@@ -251,7 +253,7 @@ class QadenaClient {
       ));
 
       final ephCWTxHashRef = StringRef("");
-      final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: feeGranterAddress, txHashRef: ephCWTxHashRef);
+      final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: feeGranterWallet.bech32Address, txHashRef: ephCWTxHashRef);
 
       if (ephCWResponse == null) {
         if (common.Debug) {
@@ -401,7 +403,7 @@ class QadenaClient {
   }
 
   Future<QadenaHDWallet?> createWallet(String pioneerID, List<String>? mnemonic,
-      int? ephIndex, String? serviceProviderID) async {
+      int? ephIndex, String? serviceProviderID, String feeGranterAddress) async {
     try {
       initECPedersen();
 
@@ -417,13 +419,13 @@ class QadenaClient {
       }
 
       if (networkInfo.isTesting) {
-        final feeGrantSuccess = await wallet.feeGrant();
+        final feeGrantSuccess = await wallet.feeGrant(feeGranterAddress);
         if (common.Debug) {
           print("Fee grant completed: $feeGrantSuccess");
         }
       }
 
-      final registerWalletSuccess = await wallet.registerWallet(pioneerID, serviceProviderID);
+      final registerWalletSuccess = await wallet.registerWallet(pioneerID, serviceProviderID, feeGranterAddress);
       if (common.Debug) {
         print("Wallet registration successful: $registerWalletSuccess");
       }
