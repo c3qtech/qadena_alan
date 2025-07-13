@@ -425,6 +425,13 @@ class QadenaClient {
         }
       }
 
+      if (feeGranterAddress == "") {
+        if (common.Debug) {
+          print("Fee granter address is empty, and it looks like we need to call registerWallet");
+        }
+        return null;
+      }
+
       final registerWalletSuccess = await wallet.registerWallet(pioneerID, serviceProviderID, feeGranterAddress);
       if (common.Debug) {
         print("Wallet registration successful: $registerWalletSuccess");
