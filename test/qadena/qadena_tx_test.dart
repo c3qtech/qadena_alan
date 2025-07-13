@@ -16,7 +16,7 @@ void main() {
   QadenaClient client = QadenaClient(networkInfo);
 
   test('create account (create wallets, claim credentials, register authorized signatory)', () async {
-    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111));
+    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111), client.hardCodedSponsorWallet.address);
 
     expect(account.errorMessage, isNull);
 

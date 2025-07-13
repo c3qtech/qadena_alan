@@ -24,7 +24,7 @@ void main(List<String> args) async {
   BigInt claimBF = BigInt.from(int.parse(args[1]));
   
 
-  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF);
+  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, client.hardCodedSponsorWallet.address);
 
   if (account.errorMessage != null) {
     print("Failed to create account: ${account.errorMessage}");
