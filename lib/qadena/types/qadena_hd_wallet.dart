@@ -141,7 +141,7 @@ class QadenaHDWallet {
         print("feegrant msg: $msg");
       }
       if (response == null) {
-        print('Tx sent successfully');
+        print('Fee grant successful');
 
         return null;
       }

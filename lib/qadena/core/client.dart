@@ -166,7 +166,7 @@ class QadenaClient {
       }
   }
 
-  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, Wallet feeGranterWallet) async {
+  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
@@ -187,19 +187,13 @@ class QadenaClient {
 
 
       if (networkInfo.isTesting) {
-        final msgs = createFeeGrantMessages(mainWallet.transactionWalletAddress, ephWallet.transactionWalletAddress, feeGranterWallet.bech32Address);
-
-        final response = await QadenaClientTx.broadcastTx(feeGranterWallet, msgs);
-
-        if (response == null) {
-          if (common.Debug) {
-            print('SUCCESS:  feegrant');
-          }
-        } else {
-          if (common.Debug) {
-            print("FAIL:  feegrant $response");
-          }
-          return AccountResponse.fromErrorMessage("Feegrant failed");
+        final mainFeeGrantError = await mainWallet.feeGrant(feeGranterAddress);
+        if (mainFeeGrantError != null) {
+          return AccountResponse.fromErrorMessage(mainFeeGrantError);
+        }
+        final ephFeeGrantError = await ephWallet.feeGrant(feeGranterAddress);
+        if (ephFeeGrantError != null) {
+          return AccountResponse.fromErrorMessage(ephFeeGrantError);
         }
       }
 
@@ -223,7 +217,7 @@ class QadenaClient {
       final saveMainWalletAmountRef = WalletAmountRef(mainWalletAmountRef.value);
 
       final mainCWTxHashRef = StringRef("");
-      final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: feeGranterWallet.bech32Address, txHashRef: mainCWTxHashRef);
+      final mainCWResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, mainCWMsgs, feeGranter: feeGranterAddress, txHashRef: mainCWTxHashRef);
 
       if (mainCWResponse == null) {
         if (common.Debug) {
@@ -253,7 +247,7 @@ class QadenaClient {
       ));
 
       final ephCWTxHashRef = StringRef("");
-      final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: feeGranterWallet.bech32Address, txHashRef: ephCWTxHashRef);
+      final ephCWResponse = await QadenaClientTx.broadcastTx(ephWallet.txAcct, ephCWMsgs, feeGranter: feeGranterAddress, txHashRef: ephCWTxHashRef);
 
       if (ephCWResponse == null) {
         if (common.Debug) {

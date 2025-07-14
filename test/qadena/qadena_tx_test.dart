@@ -25,7 +25,7 @@ void main() {
 
   test('create account (create wallets, claim credentials, register authorized signatory)', () async {
 
-    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111), hardCodedSponsorAcct);
+    final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", BigInt.from(1115), BigInt.from(1111), hardCodedSponsorAcct.bech32Address);
 
     expect(account.errorMessage, isNull);
 

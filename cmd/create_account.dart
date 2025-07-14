@@ -31,7 +31,7 @@ void main(List<String> args) async {
       networkInfo,
       derivationPath: "m/44'/744'/0'/0/0");
 
-  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, hardCodedSponsorAcct);
+  final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, hardCodedSponsorAcct.bech32Address);
 
   if (account.errorMessage != null) {
     print("Failed to create account: ${account.errorMessage}");
