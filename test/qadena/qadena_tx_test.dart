@@ -35,6 +35,14 @@ void main() {
     expect(account.mainWallet, isNotNull);
   });
 
+  test('create qadena address', () async {
+    final mnemonic = "artist globe adapt code mesh boil olympic boil retire lucky armor plug wet next please divorce engine peanut riot vanish silver daughter advance six";
+    var wallet = alan.Wallet.derive(mnemonic.split(' '), networkInfo,
+        derivationPath: "m/44'/744'/0'/0/0");
+    print("address: ${wallet.bech32Address}");
+    expect(wallet.bech32Address, isNotNull);
+  });
+
   test('createLocalAccount', () async {
     final localWallet = client.createLocalAccount();
     print("localWallet: $localWallet");
