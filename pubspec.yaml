@@ -27,7 +27,7 @@ dependencies:
   json_serializable: ^6.8.0
   meta: ^1.15.0
   pointycastle: ^4.0.0
-  protobuf: ^5.0.0
+  protobuf: ^3.1.0
   blockchain_utils: ^3.4.0
   web3dart: ^3.0.0
   elliptic: ^0.3.11

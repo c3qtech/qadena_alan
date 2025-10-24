@@ -328,10 +328,10 @@ packages:
     dependency: "direct main"
     description:
       name: grpc
-      sha256: "05ee99647485380706daee6342bcd3b5bc78a9f39d8d3d77798546554886956e"
+      sha256: "2dde469ddd8bbd7a33a0765da417abe1ad2142813efce3a86c512041294e2b26"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.1.0"
   hex:
     dependency: "direct main"
     description:
@@ -520,10 +520,10 @@ packages:
     dependency: "direct main"
     description:
       name: protobuf
-      sha256: "826d6a306be26f29e5cd9faeb0c97aad5897270341dab6dbd7b8acd675937006"
+      sha256: "68645b24e0716782e58948f8467fd42a880f255096a821f9e7d0ec625b00c84d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "3.1.0"
   pub_semver:
     dependency: transitive
     description:
@@ -805,4 +805,4 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.8.0 <4.0.0"
+  dart: ">=3.6.0 <4.0.0"
