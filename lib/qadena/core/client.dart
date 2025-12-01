@@ -260,53 +260,58 @@ class QadenaClient {
         return AccountResponse.fromErrorMessage(ephCWResponse);
       }
 
+      final rasTxHashRef = StringRef("");
       final ccTxHashRef = StringRef("");
 
-      final ccMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
-        chain: chain,
-        txwallet: mainWallet.transactionWallet,
-        cxwallet: mainWallet.credentialWallet,
-        claimAmount: claimAmount,
-        claimBlindingFactor: claimBlindingFactor,
-        recoverKey: false,
-        mainWalletQadenaWalletAmount: saveMainWalletAmountRef,
-        mainWalletServiceProviderID: [serviceProviderID],
-        ));
-
-      final ccResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
-
-      if (ccResponse == null) {
-        if (common.Debug) {
-          print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
-        }
+      if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
+        print("claimAmount or claimBlindingFactor is zero, not claiming");
       } else {
-        if (common.Debug) {
-          print("REJECTED:  claim credentials $ccResponse");
-        }
-        return AccountResponse.fromErrorMessage(ccResponse);
-      }
 
-      final rasMsgs =
-            await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+        final ccMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
           chain: chain,
-          txwallet: ephWallet.transactionWallet,
-          realWalletTransaction: mainWallet.transactionWallet,
-          realWalletCredential: mainWallet.credentialWallet,
+          txwallet: mainWallet.transactionWallet,
+          cxwallet: mainWallet.credentialWallet,
+          claimAmount: claimAmount,
+          claimBlindingFactor: claimBlindingFactor,
+          recoverKey: false,
+          mainWalletQadenaWalletAmount: saveMainWalletAmountRef,
           mainWalletServiceProviderID: [serviceProviderID],
-        ));
+          ));
 
-      final rasTxHashRef = StringRef("");
-      final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
+        final ccResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
 
-      if (rasResponse == null) {
-        if (common.Debug) {
-          print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
+        if (ccResponse == null) {
+          if (common.Debug) {
+            print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED:  claim credentials $ccResponse");
+          }
+          return AccountResponse.fromErrorMessage(ccResponse);
         }
-      } else {
-        if (common.Debug) {
-          print("REJECTED:  register authorized signatory $rasResponse");
+
+        final rasMsgs =
+              await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
+            chain: chain,
+            txwallet: ephWallet.transactionWallet,
+            realWalletTransaction: mainWallet.transactionWallet,
+            realWalletCredential: mainWallet.credentialWallet,
+            mainWalletServiceProviderID: [serviceProviderID],
+          ));
+
+        final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
+
+        if (rasResponse == null) {
+          if (common.Debug) {
+            print('Accepted:  register authorized signatory, TxHash: ${rasTxHashRef.value}');
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED:  register authorized signatory $rasResponse");
+          }
+          return AccountResponse.fromErrorMessage(rasResponse);
         }
-        return AccountResponse.fromErrorMessage(rasResponse);
       }
 
       String? response = null;
@@ -333,27 +338,30 @@ class QadenaClient {
         return AccountResponse.fromErrorMessage(response!);
       }
 
-      if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
-        if (common.Debug) {
-          print("claim credential success");
-        }
+      if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
+        print("claimAmount or claimBlindingFactor is zero, not claiming");
       } else {
-        if (common.Debug) {
-          print("REJECTED:  claim credential $response");
+        if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
+          if (common.Debug) {
+            print("claim credential success");
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED:  claim credential $response");
+          }
+          return AccountResponse.fromErrorMessage(response!);
         }
-        return AccountResponse.fromErrorMessage(response!);
-      }
 
-
-      if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
-        if (common.Debug) {
-          print("register authorized signatory success");
+        if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
+          if (common.Debug) {
+            print("register authorized signatory success");
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED:  register authorized signatory $response");
+          }
+          return AccountResponse.fromErrorMessage(response!);
         }
-      } else {
-        if (common.Debug) {
-          print("REJECTED:  register authorized signatory $response");
-        }
-        return AccountResponse.fromErrorMessage(response!);
       }
 
       return AccountResponse(
