@@ -264,7 +264,7 @@ class QadenaClient {
       final ccTxHashRef = StringRef("");
 
       if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
-        print("claimAmount or claimBlindingFactor is zero, not claiming");
+        print("claimAmount or claimBlindingFactor is zero, not claiming nor registering authorized signatory");
       } else {
 
         final ccMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
@@ -339,7 +339,7 @@ class QadenaClient {
       }
 
       if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
-        print("claimAmount or claimBlindingFactor is zero, not claiming");
+        print("claimAmount or claimBlindingFactor is zero, not waiting for claim/register authorized signatory results");
       } else {
         if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
           if (common.Debug) {
