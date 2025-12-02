@@ -7,8 +7,10 @@ import 'package:qadena_alan/qadena/core/client/query/auth_query.dart';
 import 'package:qadena_alan/qadena/core/client/query/bank.dart';
 import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadena;
 import 'package:qadena_alan/proto/qadena/dsvs/export.dart' as dsvs;
+import 'package:qadena_alan/proto/qadena/nameservice/export.dart' as nameservice;
 import 'package:qadena_alan/qadena/core/client/tx/feegrant_tx.dart';
 import 'package:qadena_alan/qadena/core/client/query/dsvs_query.dart';
+import 'package:qadena_alan/qadena/core/client/query/name_service_query.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/export.dart'
     as feegrant;
@@ -22,6 +24,7 @@ class Chain {
   late final FeeGrantTx feegrantTx;
   late final QadenaQuery qadenaQuery;
   late final DSVSQuery dsvsQuery;
+  late final NameServiceQuery nameServiceQuery;
 
   Chain(this.networkInfo) {
     authQuery = AuthQuery(AuthQuerier.build(networkInfo.gRPCChannel));
@@ -29,5 +32,6 @@ class Chain {
     feegrantTx = FeeGrantTx(feegrant.MsgClient(networkInfo.gRPCChannel));
     qadenaQuery = QadenaQuery(qadena.QueryClient(networkInfo.gRPCChannel));
     dsvsQuery = DSVSQuery(dsvs.QueryClient(networkInfo.gRPCChannel));
+    nameServiceQuery = NameServiceQuery(nameservice.QueryClient(networkInfo.gRPCChannel));
   }
 }

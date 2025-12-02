@@ -1,8 +1,16 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:convert/convert.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
+import 'package:qadena_alan/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:test/test.dart';
 import 'package:qadena_alan/alan.dart' as alan;
+import 'package:web3dart/web3dart.dart';
+import 'package:qadena_alan/qadena/types/shamir.dart';
+
 
 
 void main() {
@@ -84,6 +92,74 @@ void main() {
     expect(result, isNull);
   });
 
+  test('shamir join', () async {
+
+    final byteShare0 = hex.decode("e960aa9c23");
+    final byteShare1 = hex.decode("8f7a21c677");
+    final byteShare2 = hex.decode("2eed4283f9");
+    final result = combine(List.from([byteShare0, byteShare1, byteShare2]));
+    // convert result to string
+    final resultString = String.fromCharCodes(result);
+    print("shamir join result: $resultString");
+    expect(resultString, "1234");
+  });
+
+  test('shamir split', () async {
+    final result = split(utf8.encode("1234"), 3, 2);
+    print("shamir split result: $result");
+    expect(result.length, 3);
+    // join
+    final result2 = combine(result);
+    // convert result2 to string
+    final result2String = String.fromCharCodes(result2);
+    print("shamir join result: $result2String");
+    expect(result2String, "1234");
+  });
+
+  test('protectKey', () async {
+    final almnemonic =
+        "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
+    final wallet = await client.createWallet(
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 3, null, hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+    print("ephWallet: $ephWallet");
+
+    final recoveryPartners = [ "pioneer1",
+                "+63288888802",
+                "victortorres@c3qtech.com"];
+
+    final result = await ephWallet!.protectKey(almnemonic, 2, recoveryPartners);
+    print("result: $result");
+    expect(result, isNull);
+  });
+
+  test('recoverKey alvillarica@c3qtech.com', () async {
+    // after running setup.sh, then test_key_recovery.sh
+    final recoveralmnemonic="join total tent make bone program uncle pitch prize body night snake chest mass switch glad opera security evidence catch maid behave gloom ahead";
+    final wallet = await client.createWallet(
+        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+ 
+    final result = await wallet!.recoverKey();
+    print("result: $result");
+    expect(result, "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush");
+  });
+
+  test('recoverKey ann@c3qtech.com', () async {
+    // after running setup.sh, then test_key_recovery.sh
+    final recoverannmnemonic="puppy acid muffin pottery flock theory ghost sugar hope thumb gasp misery edge abuse soul moon quiz multiply market pyramid judge build action replace";
+    final wallet = await client.createWallet(
+        "pioneer1", recoverannmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+ 
+    final result = await wallet!.recoverKey();
+    print("result: $result");
+    expect(result, "inherit rebel absorb diamond leopard lens approve deny balcony toast merry text metal pair diamond lumber gravity song liberty pumpkin goddess nature slush basic");
+  });
+
+
   test('getAuthorizedSignatory', () async {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
@@ -135,6 +211,8 @@ void main() {
         await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
     print("claimCredentials result: $result");
   });
+
+  
 
   test('Signed transaction is broadcast properly', () async {
     if (!testLocalChain) return;

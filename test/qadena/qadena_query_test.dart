@@ -98,6 +98,7 @@ void main() {
 
     if (!testLocalChain) return;
 
+
     test('query chain', () async {
       final req = tendermint.GetNodeInfoRequest();
       ResponseFuture<GetNodeInfoResponse> res = client.getNodeInfo(req);

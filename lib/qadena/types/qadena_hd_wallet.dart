@@ -11,6 +11,7 @@ import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/dsvs/query.pb.dart';
+import 'package:qadena_alan/proto/qadena/nameservice/query.pb.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
@@ -19,6 +20,7 @@ import 'package:qadena_alan/qadena/core/client/msg/qadena/sign_document.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
+import 'package:qadena_alan/qadena/core/client/query/name_service_query.dart';
 import 'package:qadena_alan/qadena/types/hdpath.dart';
 import 'package:hex/hex.dart';
 import 'package:protobuf/protobuf.dart';
@@ -26,6 +28,9 @@ import 'package:qadena_alan/proto/qadena/qadena/export.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
+import 'package:qadena_alan/qadena/types/shamir.dart';
+import 'package:qadena_alan/qadena/encrypt.dart' show bDecryptAndUnmarshal, marshalAndBEncrypt;
+
 
 class WalletResponse {
   final String address;
@@ -183,6 +188,47 @@ class QadenaHDWallet {
       return "UNKNOWN";
     }
   }
+
+/*
+  Future<String?> findSubWalletPublicKey(String credential, String credentialType) async {
+    try {
+      final nameBinding = await chain.nameServiceQuery.queryClient
+          .nameBinding(
+           QueryGetNameBindingRequest(credential: credential, credentialType: credentialType),
+            options: CallOptions(timeout: Duration(seconds: 4)),
+          );
+      if (common.Debug) {
+        print("name binding: $nameBinding");
+      }
+      final queryClient = chain.qadenaQuery.queryClient;
+
+      final pubKID = nameBinding.nameBinding.address;
+
+      // Prepare the second request parameters
+      final params2 = QueryGetPublicKeyRequest(
+        pubKID: pubKID,
+        pubKType: TransactionPubKType,
+      );
+
+      // Call the query client method for public key
+      final res2 = await queryClient.publicKey(params2);      
+
+      return res2.publicKey.pubK;
+    } catch (e) {
+      // if wallet not found, return false
+      if (e is GrpcError) {
+        if (e.code == StatusCode.notFound) {
+          if (common.Debug) {
+            print("credential not found");
+          }
+          return null;
+        }
+        rethrow;
+      }
+      return null;
+    }
+  }
+  */
 
   Future<bool> walletExists() async {
     try {
@@ -436,6 +482,333 @@ class QadenaHDWallet {
       return "UNKNOWN";
     }
   }
+
+  Future<String?> protectKey(
+      String mnemonic, int threshold, List<String> recoveryPartners) async {
+    final isEphemeral = ephIndex > 0;
+    if (!isEphemeral) {
+      if (common.Debug) {
+        print("can only protect a key from an ephemeral wallets");
+      }
+      return "NOT_EPHEMERAL";
+    }
+
+    final recoveryPartnersCount = recoveryPartners.length;
+
+    if (recoveryPartnersCount < threshold) {
+      return "NOT_ENOUGH_RECOVERY_PARTNERS";
+    }
+
+    if (recoveryPartnersCount > 1 && threshold < 2) {
+      return "THRESHOLD_NEEDS_TO_BE_AT_LEAST_2";
+    }
+
+    final walletPubKs = <String>[];
+    final walletIDs = <String>[];
+
+    // Find all the pubk of the recovery partners
+    for (int i = 0; i < recoveryPartners.length; i++) {
+      final id = recoveryPartners[i];
+      String? walletPubK;
+      String? walletID;
+      bool isPioneerID = false;
+
+      // Check if it's an address
+      try {
+        // Try to get wallet by address
+        final walletResponse = await chain.qadenaQuery.queryClient.wallet(
+          QueryGetWalletRequest(walletID: id),
+          options: CallOptions(timeout: Duration(seconds: 4)),
+        );
+        walletID = walletResponse.wallet.walletID;
+
+        if (common.Debug) {
+          print("GetAddress success for $id");
+        }
+
+        // Check if it's a pioneer ID
+        try {
+          await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
+          if (common.Debug) {
+            print("it's a pioneer ID");
+          }
+          isPioneerID = true;
+        } catch (e) {
+          // Not a pioneer ID
+        }
+      } catch (e) {
+        if (common.Debug) {
+          print("GetAddress failed for $id");
+        }
+
+        // Check if it's a pioneer name
+        try {
+          final result = await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
+          walletID = result.item1;
+          walletPubK = result.item2;
+          if (common.Debug) {
+            print("GetIntervalPublicKey success, it's a pioneer ID");
+          }
+          isPioneerID = true;
+        } catch (e) {
+          if (common.Debug) {
+            print("GetIntervalPublicKey failed");
+          }
+
+          // Check via naming service - phone
+          try {
+            walletID = await common.clientFindSubWallet(chain, id, common.PhoneContactCredentialType);
+            if (common.Debug) {
+              print("FindSubWallet 'phone' success");
+            }
+          } catch (e) {
+            if (common.Debug) {
+              print("FindSubWallet 'phone' failed");
+            }
+
+            // Check via naming service - email
+            try {
+              walletID = await common.clientFindSubWallet(chain, id, common.EmailContactCredentialType);
+              if (common.Debug) {
+                print("FindSubWallet 'email' success");
+              }
+            } catch (e) {
+              if (common.Debug) {
+                print("FindSubWallet 'email' failed");
+              }
+              return "RECOVERY_PARTNER_NOT_FOUND: $id";
+            }
+          }
+        }
+      }
+
+      // Get public key for the wallet
+      try {
+        walletPubK = await common.clientGetPublicKey(chain, walletID!, common.EnclavePubKType);
+        if (common.Debug) {
+          print("GetPublicKey 'enclave' success");
+        }
+      } catch (e) {
+        if (common.Debug) {
+          print("GetPublicKey 'enclave' failed");
+        }
+
+        try {
+          walletPubK = await common.clientGetPublicKey(chain, walletID!, common.CredentialPubKType);
+          if (common.Debug) {
+            print("GetPublicKey 'credential' success");
+          }
+        } catch (e) {
+          if (common.Debug) {
+            print("GetPublicKey 'credential' failed");
+          }
+          return "PUBLIC_KEY_NOT_FOUND: $id";
+        }
+      }
+
+      if (common.Debug) {
+        print("walletID: $walletID, walletPubK: $walletPubK");
+      }
+
+      if (isPioneerID) {
+        walletIDs.add(id);
+      } else {
+        walletIDs.add(walletID!);
+      }
+
+      walletPubKs.add(walletPubK!);
+    }
+
+    // Check for duplicates
+    if (_hasDuplicates(walletIDs)) {
+      return "DUPLICATES_IN_WALLET_IDS_NOT_ALLOWED";
+    }
+
+    final recoverShares = <RecoverShare>[];
+
+    if (recoveryPartnersCount == 1) {
+      // Only one recovery partner - no need for Shamir
+      final encShare = marshalAndBEncrypt(walletPubKs[0], mnemonic);
+      recoverShares.add(RecoverShare(
+        walletID: walletIDs[0],
+        encWalletPubKShare: encShare,
+      ));
+    } else {
+      // Create Shamir shares using sss256
+      final shares = split(
+        utf8.encode(mnemonic),
+        recoveryPartnersCount,
+        threshold,
+      );
+
+      if (common.Debug) {
+        print("threshold: $threshold");
+        print("mnemonic: $mnemonic");
+      }
+
+      for (int i = 0; i < shares.length; i++) {
+        // print hex share
+        final shareString = shares[i];
+        if (common.Debug) {
+          print("shareString: $shareString");
+        }
+        final encShare = marshalAndBEncrypt(walletPubKs[i], base64Encode(shareString));
+        recoverShares.add(RecoverShare(
+          walletID: walletIDs[i],
+          encWalletPubKShare: encShare,
+        ));
+      }
+    }
+
+    try {
+      final msg = MsgProtectPrivateKey(
+        creator: transactionWallet.address,
+        threshold: threshold,
+        recoverShare: recoverShares,
+      );
+
+      final response = await QadenaClientTx.broadcastTx(txAcct, [msg]);
+
+      if (response == null) {
+        if (common.Debug) {
+          print('Tx sent successfully');
+        }
+        return null;
+      }
+      if (common.Debug) {
+        print('Tx errored: $response');
+      }
+
+      return response;
+    } on GrpcError catch (e) {
+      final codeName = e.codeName;
+      final message = e.message;
+
+      if (common.Debug) {
+        print("message: $message");
+      }
+
+      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
+      final match = regExp.firstMatch(message!);
+      String errorMessage;
+
+      if (match != null) {
+        final parsedMessage = match.group(3);
+        if (common.Debug) {
+          print('parsed message: $parsedMessage');
+        }
+        errorMessage = parsedMessage!;
+      } else {
+        if (common.Debug) {
+          print('Could not parse.');
+        }
+        errorMessage = codeName;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      if (common.Debug) {
+        print('Failed: $e');
+      }
+      return "UNKNOWN";
+    }
+  }
+
+  /// Recovers a protected key (mnemonic/seed phrase) for a given wallet ID.
+  /// Returns the recovered seed phrase on success, or an error string on failure.
+  Future<String> recoverKey() async {
+    try {
+      // Get the wallet ID from the provided identifier
+      String walletID = transactionWallet.address;
+      try {
+        final walletResponse = await chain.qadenaQuery.queryClient.wallet(
+          QueryGetWalletRequest(walletID: walletID),
+          options: CallOptions(timeout: Duration(seconds: 4)),
+        );
+        walletID = walletResponse.wallet.walletID;
+      } catch (e) {
+        if (common.Debug) {
+          print("GetAddress failed for $walletID: $e");
+        }
+        return "WALLET_NOT_FOUND: $walletID";
+      }
+
+      // Query for the recover key
+      final params = QueryGetRecoverKeyRequest(walletID: walletID);
+      final res = await chain.qadenaQuery.queryClient.recoverKey(params);
+      final recoverKey = res.recoverKey;
+
+      if (common.Debug) {
+        print("recoverKey: $recoverKey");
+      }
+
+      // Build the credential private key string for decryption
+      final credPrivateKey = '${credentialWallet.privkeyHex}_privkhex:${credentialWallet.pubkeyB64}_privk';
+
+      if (recoverKey.recoverShare.length == 1) {
+        // Single share - no Shamir needed, just decrypt
+        final seedPhrase = bDecryptAndUnmarshal(
+          credPrivateKey,
+          Uint8List.fromList(recoverKey.recoverShare[0].encWalletPubKShare),
+        );
+        if (common.Debug) {
+          print("seed phrase: $seedPhrase");
+        }
+        return seedPhrase;
+      } else {
+        // Multiple shares - need to assemble using Shamir
+        final byteShares = <Uint8List>[];
+
+        for (final rShare in recoverKey.recoverShare) {
+          final shareString = bDecryptAndUnmarshal(
+            credPrivateKey,
+            Uint8List.fromList(rShare.encWalletPubKShare),
+          );
+
+          if (common.Debug) {
+            print("decrypted shareString: $shareString");
+          }
+
+          // Decode from base64
+          final shareBytes = base64Decode(shareString);
+          byteShares.add(Uint8List.fromList(shareBytes));
+        }
+
+        // Combine shares using Shamir
+        final seedPhraseBytes = combine(byteShares);
+        final seedPhrase = utf8.decode(seedPhraseBytes);
+
+        if (common.Debug) {
+          print("seed phrase: $seedPhrase");
+        }
+
+        return seedPhrase;
+      }
+    } on GrpcError catch (e) {
+      if (common.Debug) {
+        print("gRPC error: ${e.message}");
+      }
+      return "GRPC_ERROR: ${e.message}";
+    } catch (e) {
+      if (common.Debug) {
+        print("Failed to recover key: $e");
+      }
+      return "RECOVER_FAILED: $e";
+    }
+  }
+
+  /// Helper method to check for duplicates in a list
+  bool _hasDuplicates(List<String> list) {
+    final seen = <String>{};
+    for (final item in list) {
+      if (seen.contains(item)) {
+        return true;
+      }
+      seen.add(item);
+    }
+    return false;
+  }
+  
 
   Future<String?> signDocument(
       String document, String hashHex, String newHashHex) async {

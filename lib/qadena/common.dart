@@ -3,8 +3,10 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart';
+import 'package:grpc/grpc.dart';
 import 'package:pointycastle/digests/sha256.dart';
 import 'package:protobuf/protobuf.dart';
+import 'package:qadena_alan/proto/qadena/nameservice/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/export.dart' as types;
 import 'package:qadena_alan/proto/qadena/dsvs/export.dart' as dsvstypes;
 import 'package:qadena_alan/qadena.dart';
@@ -73,7 +75,7 @@ const String CredentialPubKType = "credential";
 const String TransactionPubKType = "transaction";
 const String EnclavePubKType = "enclave";
 
-const bool Debug = false;
+const bool Debug = true;
 
 String nonce() {
   final random = Random();
@@ -98,6 +100,26 @@ String hashStringHex(String input) {
 BigInt hashUint8List(Uint8List input) {
   return BigInt.parse(hex.encode(SHA256Digest().process(input)) , radix: 16);
 }
+
+  /// Helper method to find a sub-wallet by credential
+  Future<String> clientFindSubWallet(qadena.Chain chain, String credential, String credentialType) async {
+    final nameBinding = await chain.nameServiceQuery.queryClient.nameBinding(
+      QueryGetNameBindingRequest(credential: credential, credentialType: credentialType),
+      options: CallOptions(timeout: Duration(seconds: 4)),
+    );
+    return nameBinding.nameBinding.address;
+  }
+
+  /// Helper method to get public key for a wallet
+  Future<String> clientGetPublicKey(qadena.Chain chain, String walletID, String pubKType) async {
+    final params = types.QueryGetPublicKeyRequest(
+      pubKID: walletID,
+      pubKType: pubKType,
+    );
+    final res = await chain.qadenaQuery.queryClient.publicKey(params);
+    return res.publicKey.pubK;
+  }
+
 
 Future<Tuple3<String, String, String>> clientGetIntervalPublicKey(
     qadena.Chain chain, String intervalNodeID, String intervalNodeType) async {
