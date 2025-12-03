@@ -23,6 +23,7 @@ const Document$json = {
     {'1': 'requiredSignatory', '3': 4, '4': 3, '5': 11, '6': '.qadena.dsvs.VShareSignatory', '10': 'requiredSignatory'},
     {'1': 'completedSignatory', '3': 5, '4': 3, '5': 11, '6': '.qadena.dsvs.VShareSignatory', '10': 'completedSignatory'},
     {'1': 'hash', '3': 6, '4': 3, '5': 11, '6': '.qadena.dsvs.HashInfo', '10': 'hash'},
+    {'1': 'metadata', '3': 7, '4': 1, '5': 9, '10': 'metadata'},
   ],
 };
 
@@ -33,5 +34,6 @@ final $typed_data.Uint8List documentDescriptor = $convert.base64Decode(
     'ZRJKChFyZXF1aXJlZFNpZ25hdG9yeRgEIAMoCzIcLnFhZGVuYS5kc3ZzLlZTaGFyZVNpZ25hdG'
     '9yeVIRcmVxdWlyZWRTaWduYXRvcnkSTAoSY29tcGxldGVkU2lnbmF0b3J5GAUgAygLMhwucWFk'
     'ZW5hLmRzdnMuVlNoYXJlU2lnbmF0b3J5UhJjb21wbGV0ZWRTaWduYXRvcnkSKQoEaGFzaBgGIA'
-    'MoCzIVLnFhZGVuYS5kc3ZzLkhhc2hJbmZvUgRoYXNo');
+    'MoCzIVLnFhZGVuYS5kc3ZzLkhhc2hJbmZvUgRoYXNoEhoKCG1ldGFkYXRhGAcgASgJUghtZXRh'
+    'ZGF0YQ==');
 

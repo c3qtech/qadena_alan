@@ -765,6 +765,7 @@ class MsgAddServiceProvider extends $pb.GeneratedMessage {
     $core.String? pubKID,
     $core.String? nodeID,
     $core.String? serviceProviderType,
+    $core.String? homePioneerID,
   }) {
     final $result = create();
     if (authority != null) {
@@ -779,6 +780,9 @@ class MsgAddServiceProvider extends $pb.GeneratedMessage {
     if (serviceProviderType != null) {
       $result.serviceProviderType = serviceProviderType;
     }
+    if (homePioneerID != null) {
+      $result.homePioneerID = homePioneerID;
+    }
     return $result;
   }
   MsgAddServiceProvider._() : super();
@@ -790,6 +794,7 @@ class MsgAddServiceProvider extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'pubKID', protoName: 'pubKID')
     ..aOS(3, _omitFieldNames ? '' : 'nodeID', protoName: 'nodeID')
     ..aOS(4, _omitFieldNames ? '' : 'serviceProviderType', protoName: 'serviceProviderType')
+    ..aOS(5, _omitFieldNames ? '' : 'homePioneerID', protoName: 'homePioneerID')
     ..hasRequiredFields = false
   ;
 
@@ -850,6 +855,15 @@ class MsgAddServiceProvider extends $pb.GeneratedMessage {
   $core.bool hasServiceProviderType() => $_has(3);
   @$pb.TagNumber(4)
   void clearServiceProviderType() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get homePioneerID => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set homePioneerID($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasHomePioneerID() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearHomePioneerID() => clearField(5);
 }
 
 class MsgAddServiceProviderResponse extends $pb.GeneratedMessage {
@@ -2631,6 +2645,7 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
     $19.BPedersenCommit? findCredentialPedersenCommit,
     $core.String? eKYCAppWalletID,
     $core.String? referenceCredentialID,
+    $core.String? identityOwnerWalletID,
   }) {
     final $result = create();
     if (creator != null) {
@@ -2666,6 +2681,9 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
     if (referenceCredentialID != null) {
       $result.referenceCredentialID = referenceCredentialID;
     }
+    if (identityOwnerWalletID != null) {
+      $result.identityOwnerWalletID = identityOwnerWalletID;
+    }
     return $result;
   }
   MsgCreateCredential._() : super();
@@ -2684,6 +2702,7 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
     ..aOM<$19.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..aOS(10, _omitFieldNames ? '' : 'eKYCAppWalletID', protoName: 'eKYCAppWalletID')
     ..aOS(11, _omitFieldNames ? '' : 'referenceCredentialID', protoName: 'referenceCredentialID')
+    ..aOS(12, _omitFieldNames ? '' : 'identityOwnerWalletID', protoName: 'identityOwnerWalletID')
     ..hasRequiredFields = false
   ;
 
@@ -2814,6 +2833,15 @@ class MsgCreateCredential extends $pb.GeneratedMessage {
   $core.bool hasReferenceCredentialID() => $_has(10);
   @$pb.TagNumber(11)
   void clearReferenceCredentialID() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get identityOwnerWalletID => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set identityOwnerWalletID($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasIdentityOwnerWalletID() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearIdentityOwnerWalletID() => clearField(12);
 }
 
 class MsgCreateCredentialResponse extends $pb.GeneratedMessage {

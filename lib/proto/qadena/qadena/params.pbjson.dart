@@ -25,6 +25,8 @@ const Params$json = {
     {'1': 'ekyc_submit_new_app_royalty_percentage', '3': 6, '4': 1, '5': 9, '10': 'ekycSubmitNewAppRoyaltyPercentage'},
     {'1': 'ekyc_submit_reuse_app_royalty_percentage', '3': 7, '4': 1, '5': 9, '10': 'ekycSubmitReuseAppRoyaltyPercentage'},
     {'1': 'ekyc_submit_reuse_provider_royalty_percentage', '3': 8, '4': 1, '5': 9, '10': 'ekycSubmitReuseProviderRoyaltyPercentage'},
+    {'1': 'ekyc_identity_owner_royalty_percentage', '3': 9, '4': 1, '5': 9, '10': 'ekycIdentityOwnerRoyaltyPercentage'},
+    {'1': 'create_bulk_credentials_fee', '3': 10, '4': 1, '5': 9, '10': 'createBulkCredentialsFee'},
   ],
   '7': {},
 };
@@ -48,6 +50,8 @@ final $typed_data.Uint8List paramsDescriptor = $convert.base64Decode(
     'Ym1pdF9yZXVzZV9hcHBfcm95YWx0eV9wZXJjZW50YWdlGAcgASgJUiNla3ljU3VibWl0UmV1c2'
     'VBcHBSb3lhbHR5UGVyY2VudGFnZRJfCi1la3ljX3N1Ym1pdF9yZXVzZV9wcm92aWRlcl9yb3lh'
     'bHR5X3BlcmNlbnRhZ2UYCCABKAlSKGVreWNTdWJtaXRSZXVzZVByb3ZpZGVyUm95YWx0eVBlcm'
-    'NlbnRhZ2U6NeigHwGK57AqLGdpdGh1Yi5jb20vYzNxdGVjaC9xYWRlbmFfdjMveC9xYWRlbmEv'
-    'UGFyYW1z');
+    'NlbnRhZ2USUgomZWt5Y19pZGVudGl0eV9vd25lcl9yb3lhbHR5X3BlcmNlbnRhZ2UYCSABKAlS'
+    'ImVreWNJZGVudGl0eU93bmVyUm95YWx0eVBlcmNlbnRhZ2USPQobY3JlYXRlX2J1bGtfY3JlZG'
+    'VudGlhbHNfZmVlGAogASgJUhhjcmVhdGVCdWxrQ3JlZGVudGlhbHNGZWU6NeigHwGK57AqLGdp'
+    'dGh1Yi5jb20vYzNxdGVjaC9xYWRlbmFfdjMveC9xYWRlbmEvUGFyYW1z');
 

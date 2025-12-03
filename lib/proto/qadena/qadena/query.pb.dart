@@ -1886,10 +1886,18 @@ class QueryAllProtectKeyResponse extends $pb.GeneratedMessage {
 class QueryGetRecoverKeyRequest extends $pb.GeneratedMessage {
   factory QueryGetRecoverKeyRequest({
     $core.String? walletID,
+    $fixnum.Int64? timestamp,
+    $core.List<$core.int>? timestampSignature,
   }) {
     final $result = create();
     if (walletID != null) {
       $result.walletID = walletID;
+    }
+    if (timestamp != null) {
+      $result.timestamp = timestamp;
+    }
+    if (timestampSignature != null) {
+      $result.timestampSignature = timestampSignature;
     }
     return $result;
   }
@@ -1899,6 +1907,8 @@ class QueryGetRecoverKeyRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'QueryGetRecoverKeyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'walletID', protoName: 'walletID')
+    ..aInt64(2, _omitFieldNames ? '' : 'timestamp')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'timestampSignature', $pb.PbFieldType.OY, protoName: 'timestampSignature')
     ..hasRequiredFields = false
   ;
 
@@ -1931,6 +1941,24 @@ class QueryGetRecoverKeyRequest extends $pb.GeneratedMessage {
   $core.bool hasWalletID() => $_has(0);
   @$pb.TagNumber(1)
   void clearWalletID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get timestamp => $_getI64(1);
+  @$pb.TagNumber(2)
+  set timestamp($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTimestamp() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTimestamp() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get timestampSignature => $_getN(2);
+  @$pb.TagNumber(3)
+  set timestampSignature($core.List<$core.int> v) { $_setBytes(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTimestampSignature() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTimestampSignature() => clearField(3);
 }
 
 class QueryGetRecoverKeyResponse extends $pb.GeneratedMessage {

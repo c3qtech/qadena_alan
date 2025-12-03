@@ -21,6 +21,7 @@ class IntervalPublicKeyID extends $pb.GeneratedMessage {
     $core.String? externalIPAddress,
     $core.String? serviceProviderType,
     $core.List<$core.int>? remoteReport,
+    $core.String? homePioneerID,
   }) {
     final $result = create();
     if (nodeID != null) {
@@ -41,6 +42,9 @@ class IntervalPublicKeyID extends $pb.GeneratedMessage {
     if (remoteReport != null) {
       $result.remoteReport = remoteReport;
     }
+    if (homePioneerID != null) {
+      $result.homePioneerID = homePioneerID;
+    }
     return $result;
   }
   IntervalPublicKeyID._() : super();
@@ -54,6 +58,7 @@ class IntervalPublicKeyID extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'externalIPAddress', protoName: 'externalIPAddress')
     ..aOS(5, _omitFieldNames ? '' : 'serviceProviderType', protoName: 'serviceProviderType')
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'remoteReport', $pb.PbFieldType.OY, protoName: 'remoteReport')
+    ..aOS(7, _omitFieldNames ? '' : 'homePioneerID', protoName: 'homePioneerID')
     ..hasRequiredFields = false
   ;
 
@@ -131,6 +136,15 @@ class IntervalPublicKeyID extends $pb.GeneratedMessage {
   $core.bool hasRemoteReport() => $_has(5);
   @$pb.TagNumber(6)
   void clearRemoteReport() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get homePioneerID => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set homePioneerID($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasHomePioneerID() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearHomePioneerID() => clearField(7);
 }
 
 

@@ -482,13 +482,16 @@ const QueryGetRecoverKeyRequest$json = {
   '1': 'QueryGetRecoverKeyRequest',
   '2': [
     {'1': 'walletID', '3': 1, '4': 1, '5': 9, '10': 'walletID'},
+    {'1': 'timestamp', '3': 2, '4': 1, '5': 3, '10': 'timestamp'},
+    {'1': 'timestampSignature', '3': 3, '4': 1, '5': 12, '10': 'timestampSignature'},
   ],
 };
 
 /// Descriptor for `QueryGetRecoverKeyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryGetRecoverKeyRequestDescriptor = $convert.base64Decode(
-    'ChlRdWVyeUdldFJlY292ZXJLZXlSZXF1ZXN0EhoKCHdhbGxldElEGAEgASgJUgh3YWxsZXRJRA'
-    '==');
+    'ChlRdWVyeUdldFJlY292ZXJLZXlSZXF1ZXN0EhoKCHdhbGxldElEGAEgASgJUgh3YWxsZXRJRB'
+    'IcCgl0aW1lc3RhbXAYAiABKANSCXRpbWVzdGFtcBIuChJ0aW1lc3RhbXBTaWduYXR1cmUYAyAB'
+    'KAxSEnRpbWVzdGFtcFNpZ25hdHVyZQ==');
 
 @$core.Deprecated('Use queryGetRecoverKeyResponseDescriptor instead')
 const QueryGetRecoverKeyResponse$json = {

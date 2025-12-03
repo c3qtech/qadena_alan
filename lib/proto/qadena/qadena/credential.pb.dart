@@ -29,6 +29,8 @@ class Credential extends $pb.GeneratedMessage {
     $19.BPedersenCommit? findCredentialPedersenCommit,
     $core.String? providerWalletID,
     $core.String? referenceCredentialID,
+    $core.String? identityOwnerWalletID,
+    $core.String? ekycAppWalletID,
   }) {
     final $result = create();
     if (credentialID != null) {
@@ -64,6 +66,12 @@ class Credential extends $pb.GeneratedMessage {
     if (referenceCredentialID != null) {
       $result.referenceCredentialID = referenceCredentialID;
     }
+    if (identityOwnerWalletID != null) {
+      $result.identityOwnerWalletID = identityOwnerWalletID;
+    }
+    if (ekycAppWalletID != null) {
+      $result.ekycAppWalletID = ekycAppWalletID;
+    }
     return $result;
   }
   Credential._() : super();
@@ -82,6 +90,8 @@ class Credential extends $pb.GeneratedMessage {
     ..aOM<$19.BPedersenCommit>(9, _omitFieldNames ? '' : 'findCredentialPedersenCommit', protoName: 'findCredentialPedersenCommit', subBuilder: $19.BPedersenCommit.create)
     ..aOS(10, _omitFieldNames ? '' : 'providerWalletID', protoName: 'providerWalletID')
     ..aOS(11, _omitFieldNames ? '' : 'referenceCredentialID', protoName: 'referenceCredentialID')
+    ..aOS(12, _omitFieldNames ? '' : 'identityOwnerWalletID', protoName: 'identityOwnerWalletID')
+    ..aOS(13, _omitFieldNames ? '' : 'ekycAppWalletID', protoName: 'ekycAppWalletID')
     ..hasRequiredFields = false
   ;
 
@@ -212,6 +222,24 @@ class Credential extends $pb.GeneratedMessage {
   $core.bool hasReferenceCredentialID() => $_has(10);
   @$pb.TagNumber(11)
   void clearReferenceCredentialID() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get identityOwnerWalletID => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set identityOwnerWalletID($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasIdentityOwnerWalletID() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearIdentityOwnerWalletID() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get ekycAppWalletID => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set ekycAppWalletID($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasEkycAppWalletID() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearEkycAppWalletID() => clearField(13);
 }
 
 /// clone alert, this is also in nameservice/tx.proto!!!!

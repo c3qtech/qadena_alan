@@ -155,6 +155,7 @@ message MsgAddServiceProvider {
   string pubKID    = 2;
   string nodeID   = 3;
   string serviceProviderType = 4;
+  string homePioneerID = 5;
 }
 
 message MsgAddServiceProviderResponse {}
@@ -307,6 +308,7 @@ message MsgCreateCredential {
   BPedersenCommit findCredentialPedersenCommit    =  9;
   string          eKYCAppWalletID                 = 10;
   string          referenceCredentialID           = 11;
+  string          identityOwnerWalletID           = 12;
 }
 
 message MsgCreateCredentialResponse {}

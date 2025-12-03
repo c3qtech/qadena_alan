@@ -49,6 +49,7 @@ const MsgCreateDocument$json = {
     {'1': 'companyName', '3': 4, '4': 1, '5': 9, '10': 'companyName'},
     {'1': 'requiredSignatory', '3': 5, '4': 3, '5': 11, '6': '.qadena.dsvs.VShareSignatory', '10': 'requiredSignatory'},
     {'1': 'hash', '3': 6, '4': 1, '5': 12, '10': 'hash'},
+    {'1': 'metadata', '3': 7, '4': 1, '5': 9, '10': 'metadata'},
   ],
   '7': {},
 };
@@ -59,7 +60,8 @@ final $typed_data.Uint8List msgCreateDocumentDescriptor = $convert.base64Decode(
     '50SUQYAiABKAlSCmRvY3VtZW50SUQSIgoMZG9jdW1lbnRUeXBlGAMgASgJUgxkb2N1bWVudFR5'
     'cGUSIAoLY29tcGFueU5hbWUYBCABKAlSC2NvbXBhbnlOYW1lEkoKEXJlcXVpcmVkU2lnbmF0b3'
     'J5GAUgAygLMhwucWFkZW5hLmRzdnMuVlNoYXJlU2lnbmF0b3J5UhFyZXF1aXJlZFNpZ25hdG9y'
-    'eRISCgRoYXNoGAYgASgMUgRoYXNoOgyC57AqB2NyZWF0b3I=');
+    'eRISCgRoYXNoGAYgASgMUgRoYXNoEhoKCG1ldGFkYXRhGAcgASgJUghtZXRhZGF0YToMguewKg'
+    'djcmVhdG9y');
 
 @$core.Deprecated('Use msgCreateDocumentResponseDescriptor instead')
 const MsgCreateDocumentResponse$json = {

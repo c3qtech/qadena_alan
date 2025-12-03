@@ -23,6 +23,7 @@ const IntervalPublicKeyID$json = {
     {'1': 'externalIPAddress', '3': 4, '4': 1, '5': 9, '10': 'externalIPAddress'},
     {'1': 'serviceProviderType', '3': 5, '4': 1, '5': 9, '10': 'serviceProviderType'},
     {'1': 'remoteReport', '3': 6, '4': 1, '5': 12, '10': 'remoteReport'},
+    {'1': 'homePioneerID', '3': 7, '4': 1, '5': 9, '10': 'homePioneerID'},
   ],
 };
 
@@ -32,5 +33,5 @@ final $typed_data.Uint8List intervalPublicKeyIDDescriptor = $convert.base64Decod
     'BlGAIgASgJUghub2RlVHlwZRIWCgZwdWJLSUQYAyABKAlSBnB1YktJRBIsChFleHRlcm5hbElQ'
     'QWRkcmVzcxgEIAEoCVIRZXh0ZXJuYWxJUEFkZHJlc3MSMAoTc2VydmljZVByb3ZpZGVyVHlwZR'
     'gFIAEoCVITc2VydmljZVByb3ZpZGVyVHlwZRIiCgxyZW1vdGVSZXBvcnQYBiABKAxSDHJlbW90'
-    'ZVJlcG9ydA==');
+    'ZVJlcG9ydBIkCg1ob21lUGlvbmVlcklEGAcgASgJUg1ob21lUGlvbmVlcklE');
 

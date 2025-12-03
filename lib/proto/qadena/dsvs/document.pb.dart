@@ -24,6 +24,7 @@ class Document extends $pb.GeneratedMessage {
     $core.Iterable<$8.VShareSignatory>? requiredSignatory,
     $core.Iterable<$8.VShareSignatory>? completedSignatory,
     $core.Iterable<$10.HashInfo>? hash,
+    $core.String? metadata,
   }) {
     final $result = create();
     if (documentID != null) {
@@ -44,6 +45,9 @@ class Document extends $pb.GeneratedMessage {
     if (hash != null) {
       $result.hash.addAll(hash);
     }
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
     return $result;
   }
   Document._() : super();
@@ -57,6 +61,7 @@ class Document extends $pb.GeneratedMessage {
     ..pc<$8.VShareSignatory>(4, _omitFieldNames ? '' : 'requiredSignatory', $pb.PbFieldType.PM, protoName: 'requiredSignatory', subBuilder: $8.VShareSignatory.create)
     ..pc<$8.VShareSignatory>(5, _omitFieldNames ? '' : 'completedSignatory', $pb.PbFieldType.PM, protoName: 'completedSignatory', subBuilder: $8.VShareSignatory.create)
     ..pc<$10.HashInfo>(6, _omitFieldNames ? '' : 'hash', $pb.PbFieldType.PM, subBuilder: $10.HashInfo.create)
+    ..aOS(7, _omitFieldNames ? '' : 'metadata')
     ..hasRequiredFields = false
   ;
 
@@ -116,6 +121,15 @@ class Document extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(6)
   $core.List<$10.HashInfo> get hash => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $core.String get metadata => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set metadata($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMetadata() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMetadata() => clearField(7);
 }
 
 

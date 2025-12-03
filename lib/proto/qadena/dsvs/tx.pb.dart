@@ -128,6 +128,7 @@ class MsgCreateDocument extends $pb.GeneratedMessage {
     $core.String? companyName,
     $core.Iterable<$8.VShareSignatory>? requiredSignatory,
     $core.List<$core.int>? hash,
+    $core.String? metadata,
   }) {
     final $result = create();
     if (creator != null) {
@@ -148,6 +149,9 @@ class MsgCreateDocument extends $pb.GeneratedMessage {
     if (hash != null) {
       $result.hash = hash;
     }
+    if (metadata != null) {
+      $result.metadata = metadata;
+    }
     return $result;
   }
   MsgCreateDocument._() : super();
@@ -161,6 +165,7 @@ class MsgCreateDocument extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'companyName', protoName: 'companyName')
     ..pc<$8.VShareSignatory>(5, _omitFieldNames ? '' : 'requiredSignatory', $pb.PbFieldType.PM, protoName: 'requiredSignatory', subBuilder: $8.VShareSignatory.create)
     ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'hash', $pb.PbFieldType.OY)
+    ..aOS(7, _omitFieldNames ? '' : 'metadata')
     ..hasRequiredFields = false
   ;
 
@@ -232,6 +237,15 @@ class MsgCreateDocument extends $pb.GeneratedMessage {
   $core.bool hasHash() => $_has(5);
   @$pb.TagNumber(6)
   void clearHash() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get metadata => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set metadata($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMetadata() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMetadata() => clearField(7);
 }
 
 class MsgCreateDocumentResponse extends $pb.GeneratedMessage {

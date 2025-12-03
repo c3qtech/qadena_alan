@@ -26,6 +26,8 @@ class Params extends $pb.GeneratedMessage {
     $core.String? ekycSubmitNewAppRoyaltyPercentage,
     $core.String? ekycSubmitReuseAppRoyaltyPercentage,
     $core.String? ekycSubmitReuseProviderRoyaltyPercentage,
+    $core.String? ekycIdentityOwnerRoyaltyPercentage,
+    $core.String? createBulkCredentialsFee,
   }) {
     final $result = create();
     if (createWalletIncentive != null) {
@@ -52,6 +54,12 @@ class Params extends $pb.GeneratedMessage {
     if (ekycSubmitReuseProviderRoyaltyPercentage != null) {
       $result.ekycSubmitReuseProviderRoyaltyPercentage = ekycSubmitReuseProviderRoyaltyPercentage;
     }
+    if (ekycIdentityOwnerRoyaltyPercentage != null) {
+      $result.ekycIdentityOwnerRoyaltyPercentage = ekycIdentityOwnerRoyaltyPercentage;
+    }
+    if (createBulkCredentialsFee != null) {
+      $result.createBulkCredentialsFee = createBulkCredentialsFee;
+    }
     return $result;
   }
   Params._() : super();
@@ -67,6 +75,8 @@ class Params extends $pb.GeneratedMessage {
     ..aOS(6, _omitFieldNames ? '' : 'ekycSubmitNewAppRoyaltyPercentage')
     ..aOS(7, _omitFieldNames ? '' : 'ekycSubmitReuseAppRoyaltyPercentage')
     ..aOS(8, _omitFieldNames ? '' : 'ekycSubmitReuseProviderRoyaltyPercentage')
+    ..aOS(9, _omitFieldNames ? '' : 'ekycIdentityOwnerRoyaltyPercentage')
+    ..aOS(10, _omitFieldNames ? '' : 'createBulkCredentialsFee')
     ..hasRequiredFields = false
   ;
 
@@ -170,6 +180,24 @@ class Params extends $pb.GeneratedMessage {
   $core.bool hasEkycSubmitReuseProviderRoyaltyPercentage() => $_has(7);
   @$pb.TagNumber(8)
   void clearEkycSubmitReuseProviderRoyaltyPercentage() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get ekycIdentityOwnerRoyaltyPercentage => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set ekycIdentityOwnerRoyaltyPercentage($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasEkycIdentityOwnerRoyaltyPercentage() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearEkycIdentityOwnerRoyaltyPercentage() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get createBulkCredentialsFee => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set createBulkCredentialsFee($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasCreateBulkCredentialsFee() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearCreateBulkCredentialsFee() => clearField(10);
 }
 
 

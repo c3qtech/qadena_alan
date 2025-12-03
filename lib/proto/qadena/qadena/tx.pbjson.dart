@@ -179,6 +179,7 @@ const MsgAddServiceProvider$json = {
     {'1': 'pubKID', '3': 2, '4': 1, '5': 9, '10': 'pubKID'},
     {'1': 'nodeID', '3': 3, '4': 1, '5': 9, '10': 'nodeID'},
     {'1': 'serviceProviderType', '3': 4, '4': 1, '5': 9, '10': 'serviceProviderType'},
+    {'1': 'homePioneerID', '3': 5, '4': 1, '5': 9, '10': 'homePioneerID'},
   ],
   '7': {},
 };
@@ -188,7 +189,8 @@ final $typed_data.Uint8List msgAddServiceProviderDescriptor = $convert.base64Dec
     'ChVNc2dBZGRTZXJ2aWNlUHJvdmlkZXISNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLk'
     'FkZHJlc3NTdHJpbmdSCWF1dGhvcml0eRIWCgZwdWJLSUQYAiABKAlSBnB1YktJRBIWCgZub2Rl'
     'SUQYAyABKAlSBm5vZGVJRBIwChNzZXJ2aWNlUHJvdmlkZXJUeXBlGAQgASgJUhNzZXJ2aWNlUH'
-    'JvdmlkZXJUeXBlOg6C57AqCWF1dGhvcml0eQ==');
+    'JvdmlkZXJUeXBlEiQKDWhvbWVQaW9uZWVySUQYBSABKAlSDWhvbWVQaW9uZWVySUQ6DoLnsCoJ'
+    'YXV0aG9yaXR5');
 
 @$core.Deprecated('Use msgAddServiceProviderResponseDescriptor instead')
 const MsgAddServiceProviderResponse$json = {
@@ -570,6 +572,7 @@ const MsgCreateCredential$json = {
     {'1': 'findCredentialPedersenCommit', '3': 9, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'findCredentialPedersenCommit'},
     {'1': 'eKYCAppWalletID', '3': 10, '4': 1, '5': 9, '10': 'eKYCAppWalletID'},
     {'1': 'referenceCredentialID', '3': 11, '4': 1, '5': 9, '10': 'referenceCredentialID'},
+    {'1': 'identityOwnerWalletID', '3': 12, '4': 1, '5': 9, '10': 'identityOwnerWalletID'},
   ],
   '7': {},
 };
@@ -588,8 +591,8 @@ final $typed_data.Uint8List msgCreateCredentialDescriptor = $convert.base64Decod
     'hhc2hWU2hhcmVCaW5kEmIKHGZpbmRDcmVkZW50aWFsUGVkZXJzZW5Db21taXQYCSABKAsyHi5x'
     'YWRlbmEucWFkZW5hLkJQZWRlcnNlbkNvbW1pdFIcZmluZENyZWRlbnRpYWxQZWRlcnNlbkNvbW'
     '1pdBIoCg9lS1lDQXBwV2FsbGV0SUQYCiABKAlSD2VLWUNBcHBXYWxsZXRJRBI0ChVyZWZlcmVu'
-    'Y2VDcmVkZW50aWFsSUQYCyABKAlSFXJlZmVyZW5jZUNyZWRlbnRpYWxJRDoMguewKgdjcmVhdG'
-    '9y');
+    'Y2VDcmVkZW50aWFsSUQYCyABKAlSFXJlZmVyZW5jZUNyZWRlbnRpYWxJRBI0ChVpZGVudGl0eU'
+    '93bmVyV2FsbGV0SUQYDCABKAlSFWlkZW50aXR5T3duZXJXYWxsZXRJRDoMguewKgdjcmVhdG9y');
 
 @$core.Deprecated('Use msgCreateCredentialResponseDescriptor instead')
 const MsgCreateCredentialResponse$json = {

@@ -28,6 +28,8 @@ const Credential$json = {
     {'1': 'findCredentialPedersenCommit', '3': 9, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'findCredentialPedersenCommit'},
     {'1': 'providerWalletID', '3': 10, '4': 1, '5': 9, '10': 'providerWalletID'},
     {'1': 'referenceCredentialID', '3': 11, '4': 1, '5': 9, '10': 'referenceCredentialID'},
+    {'1': 'identityOwnerWalletID', '3': 12, '4': 1, '5': 9, '10': 'identityOwnerWalletID'},
+    {'1': 'ekycAppWalletID', '3': 13, '4': 1, '5': 9, '10': 'ekycAppWalletID'},
   ],
 };
 
@@ -45,7 +47,9 @@ final $typed_data.Uint8List credentialDescriptor = $convert.base64Decode(
     'FyZUJpbmQSYgocZmluZENyZWRlbnRpYWxQZWRlcnNlbkNvbW1pdBgJIAEoCzIeLnFhZGVuYS5x'
     'YWRlbmEuQlBlZGVyc2VuQ29tbWl0UhxmaW5kQ3JlZGVudGlhbFBlZGVyc2VuQ29tbWl0EioKEH'
     'Byb3ZpZGVyV2FsbGV0SUQYCiABKAlSEHByb3ZpZGVyV2FsbGV0SUQSNAoVcmVmZXJlbmNlQ3Jl'
-    'ZGVudGlhbElEGAsgASgJUhVyZWZlcmVuY2VDcmVkZW50aWFsSUQ=');
+    'ZGVudGlhbElEGAsgASgJUhVyZWZlcmVuY2VDcmVkZW50aWFsSUQSNAoVaWRlbnRpdHlPd25lcl'
+    'dhbGxldElEGAwgASgJUhVpZGVudGl0eU93bmVyV2FsbGV0SUQSKAoPZWt5Y0FwcFdhbGxldElE'
+    'GA0gASgJUg9la3ljQXBwV2FsbGV0SUQ=');
 
 @$core.Deprecated('Use msgBindCredentialDescriptor instead')
 const MsgBindCredential$json = {

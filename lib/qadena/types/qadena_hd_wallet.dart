@@ -733,8 +733,23 @@ class QadenaHDWallet {
         return "WALLET_NOT_FOUND: $walletID";
       }
 
+      // Get timestamp and sign it with the transaction private key
+      final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      final tsBytes = utf8.encode(timestamp.toString());
+      final signature = txAcct.sign(Uint8List.fromList(tsBytes));
+
+      if (common.Debug) {
+        print("timestamp: $timestamp");
+        print("timestamp_signature_hex: ${HEX.encode(signature)}");
+        print("timestamp_pubkey: ${transactionWallet.pubkeyB64}");
+      }
+
       // Query for the recover key
-      final params = QueryGetRecoverKeyRequest(walletID: walletID);
+      final params = QueryGetRecoverKeyRequest(
+        walletID: walletID,
+        timestamp: Int64(timestamp),
+        timestampSignature: signature,
+      );
       final res = await chain.qadenaQuery.queryClient.recoverKey(params);
       final recoverKey = res.recoverKey;
 
