@@ -154,6 +154,21 @@ void main() {
     expect(result, isNull);
   });
 
+  test('isProtected', () async {
+    final almnemonic =
+        "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
+    final wallet = await client.createWallet(
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+    print("ephWallet: $ephWallet");
+
+    final result = await ephWallet!.isProtected();
+    print("result: $result");
+    expect(result, true);
+  });
+
   test('recoverKey alvillarica@c3qtech.com', () async {
     // after running setup.sh, then test_key_recovery.sh
     final recoveralmnemonic="join total tent make bone program uncle pitch prize body night snake chest mass switch glad opera security evidence catch maid behave gloom ahead";

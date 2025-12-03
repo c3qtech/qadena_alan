@@ -743,6 +743,26 @@ class QadenaHDWallet {
     }
   }
 
+  /// Checks if the wallet has a protected key.
+  /// Returns true if the wallet is protected, false otherwise.
+  Future<bool> isProtected() async {
+    try {
+      final params = QueryGetProtectKeyRequest(walletID: transactionWallet.address);
+      final res = await chain.qadenaQuery.queryClient.protectKey(params);
+      
+      // If we get a response with a valid protectKey, it's protected
+      if (common.Debug) {
+        print("protectKey: ${res.protectKey}");
+      }
+      return res.protectKey.walletID.isNotEmpty;
+    } catch (e) {
+      if (common.Debug) {
+        print("isProtected check failed: $e");
+      }
+      return false;
+    }
+  }
+
   /// Recovers a protected key (mnemonic/seed phrase) for a given wallet ID.
   /// Returns the recovered seed phrase on success, or an error string on failure.
   Future<String> recoverKey() async {
