@@ -130,7 +130,26 @@ void main() {
                 "+63288888802",
                 "victortorres@c3qtech.com"];
 
-    final result = await ephWallet!.protectKey(almnemonic, 2, recoveryPartners);
+    final result = await ephWallet!.protectKey(almnemonic, 1, recoveryPartners);
+    print("result: $result");
+    expect(result, isNull);
+  });
+
+  test('protectKey 2', () async {
+    final jillmnemonic =
+        "catalog sword rack income garment shoot south crouch capital slush essence escape fit bike country firm fly faculty theory fragile nominee shoot erode cherry";
+    final wallet = await client.createWallet(
+        "pioneer1", jillmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    final ephWallet =
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+    print("ephWallet: $ephWallet");
+
+    final recoveryPartners = [ "testidentitysrvprv",
+                "pioneer1",
+                "victortorres@c3qtech.com"];
+
+    final result = await ephWallet!.protectKey(jillmnemonic, 2, recoveryPartners);
     print("result: $result");
     expect(result, isNull);
   });

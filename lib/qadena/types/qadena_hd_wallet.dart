@@ -512,6 +512,7 @@ class QadenaHDWallet {
       String? walletPubK;
       String? walletID;
       bool isPioneerID = false;
+      bool isServiceProviderID = false;
 
       // Check if it's an address
       try {
@@ -534,7 +535,18 @@ class QadenaHDWallet {
           }
           isPioneerID = true;
         } catch (e) {
-          // Not a pioneer ID
+          // Not a pioneer ID, check if it's a service provider ID
+          try {
+            await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
+            if (common.Debug) {
+              print("it's a service provider ID");
+            }
+            isServiceProviderID = true;
+          } catch (e) {
+            if (common.Debug) {
+              print("it's neither a pioneer ID nor service provider ID");
+            }
+          }
         }
       } catch (e) {
         if (common.Debug) {
@@ -552,31 +564,46 @@ class QadenaHDWallet {
           isPioneerID = true;
         } catch (e) {
           if (common.Debug) {
-            print("GetIntervalPublicKey failed");
+            print("GetIntervalPublicKey pioneer failed");
           }
 
-          // Check via naming service - phone
+          // Check if it's a service provider name
           try {
-            walletID = await common.clientFindSubWallet(chain, id, common.PhoneContactCredentialType);
+            final result = await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
+            walletID = result.item1;
+            walletPubK = result.item2;
             if (common.Debug) {
-              print("FindSubWallet 'phone' success");
+              print("it's a service provider ID");
             }
+            isServiceProviderID = true;
           } catch (e) {
             if (common.Debug) {
-              print("FindSubWallet 'phone' failed");
+              print("it's neither a pioneer ID nor service provider ID");
             }
 
-            // Check via naming service - email
+            // Check via naming service - phone
             try {
-              walletID = await common.clientFindSubWallet(chain, id, common.EmailContactCredentialType);
+              walletID = await common.clientFindSubWallet(chain, id, common.PhoneContactCredentialType);
               if (common.Debug) {
-                print("FindSubWallet 'email' success");
+                print("FindSubWallet 'phone' success");
               }
             } catch (e) {
               if (common.Debug) {
-                print("FindSubWallet 'email' failed");
+                print("FindSubWallet 'phone' failed");
               }
-              return "RECOVERY_PARTNER_NOT_FOUND: $id";
+
+              // Check via naming service - email
+              try {
+                walletID = await common.clientFindSubWallet(chain, id, common.EmailContactCredentialType);
+                if (common.Debug) {
+                  print("FindSubWallet 'email' success");
+                }
+              } catch (e) {
+                if (common.Debug) {
+                  print("FindSubWallet 'email' failed");
+                }
+                return "RECOVERY_PARTNER_NOT_FOUND: $id";
+              }
             }
           }
         }
@@ -607,10 +634,12 @@ class QadenaHDWallet {
       }
 
       if (common.Debug) {
+        print("isPioneerID: $isPioneerID");
+        print("isServiceProviderID: $isServiceProviderID");
         print("walletID: $walletID, walletPubK: $walletPubK");
       }
 
-      if (isPioneerID) {
+      if (isPioneerID || isServiceProviderID) {
         walletIDs.add(id);
       } else {
         walletIDs.add(walletID!);
