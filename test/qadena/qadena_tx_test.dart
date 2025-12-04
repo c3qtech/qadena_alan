@@ -181,6 +181,29 @@ void main() {
     expect(result, "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush");
   });
 
+test('recoverKey alvillarica@gmail.com', () async {
+  // this uses the SEC qadena
+  final networkInfo = alan.NetworkInfo.fromSingleHost(
+      bech32Hrp: 'qadena',
+      host: 'dev-nlb-97f5978861fac526.elb.ap-southeast-1.amazonaws.com',
+      isEthSecP256K1Addr: false,
+      isTesting: true);
+
+  QadenaClient client = QadenaClient(networkInfo);  
+
+    // after running setup.sh, then test_key_recovery.sh
+    final recoveralmnemonic="convince slow tree choose suggest gift steel deny border seat prefer cage reason vessel nurse car embody multiply tongue ugly staff uphold upset dish";
+    final wallet = await client.createWallet(
+        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+    print("wallet: $wallet");
+ 
+    final result = await wallet!.recoverKey();
+    print("result: $result");
+    expect(result, "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush");
+  });
+
+  
+
   test('recoverKey ann@c3qtech.com', () async {
     // after running setup.sh, then test_key_recovery.sh
     final recoverannmnemonic="puppy acid muffin pottery flock theory ghost sugar hope thumb gasp misery edge abuse soul moon quiz multiply market pyramid judge build action replace";
