@@ -342,7 +342,7 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
         srcWalletID,
         srcServiceProviderID,
         ewa,
-        false
+        args.recoverKey
       );
       msgs.add(msg);
     } else {
@@ -359,7 +359,7 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
         srcWalletID,
         srcServiceProviderID,
         ewa,
-        false
+        args.recoverKey
       );
 
       msgs.add(msg);
