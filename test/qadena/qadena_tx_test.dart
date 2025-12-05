@@ -195,7 +195,7 @@ test('recoverKey alvillarica@gmail.com', () async {
     final recoveralmnemonic="convince slow tree choose suggest gift steel deny border seat prefer cage reason vessel nurse car embody multiply tongue ugly staff uphold upset dish";
     final wallet = await client.createWallet(
         "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
-    print("wallet: $wallet");
+    print("wallet: ${wallet!.transactionWalletAddress}");
  
     final result = await wallet!.recoverKey();
     print("result: $result");

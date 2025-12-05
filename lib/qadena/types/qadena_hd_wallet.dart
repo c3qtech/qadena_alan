@@ -31,6 +31,13 @@ import 'package:qadena_alan/qadena/common.dart' as common;
 import 'package:qadena_alan/qadena/types/shamir.dart';
 import 'package:qadena_alan/qadena/encrypt.dart' show bDecryptAndUnmarshal, marshalAndBEncrypt;
 
+class RecoverKeyResponse {
+  final String? seed;
+  final String? errorMessage;
+
+  RecoverKeyResponse({this.seed, this.errorMessage});
+}
+
 
 class WalletResponse {
   final String address;
@@ -765,7 +772,8 @@ class QadenaHDWallet {
 
   /// Recovers a protected key (mnemonic/seed phrase) for a given wallet ID.
   /// Returns the recovered seed phrase on success, or an error string on failure.
-  Future<String> recoverKey() async {
+  /// 
+  Future<RecoverKeyResponse> recoverKey() async {
     try {
       // Get the wallet ID from the provided identifier
       String walletID = transactionWallet.address;
@@ -779,7 +787,7 @@ class QadenaHDWallet {
         if (common.Debug) {
           print("GetAddress failed for $walletID: $e");
         }
-        return "WALLET_NOT_FOUND: $walletID";
+        return RecoverKeyResponse(errorMessage: "WALLET_NOT_FOUND: $walletID");
       }
 
       // Get timestamp and sign it with the transaction private key
@@ -818,7 +826,7 @@ class QadenaHDWallet {
         if (common.Debug) {
           print("seed phrase: $seedPhrase");
         }
-        return seedPhrase;
+        return RecoverKeyResponse(seed: seedPhrase);
       } else {
         // Multiple shares - need to assemble using Shamir
         final byteShares = <Uint8List>[];
@@ -846,18 +854,18 @@ class QadenaHDWallet {
           print("seed phrase: $seedPhrase");
         }
 
-        return seedPhrase;
+        return RecoverKeyResponse(seed: seedPhrase);
       }
     } on GrpcError catch (e) {
       if (common.Debug) {
         print("gRPC error: ${e.message}");
       }
-      return "GRPC_ERROR: ${e.message}";
+      return RecoverKeyResponse(errorMessage: "GRPC_ERROR: ${e.message}");
     } catch (e) {
       if (common.Debug) {
         print("Failed to recover key: $e");
       }
-      return "RECOVER_FAILED: $e";
+      return RecoverKeyResponse(errorMessage: "RECOVER_EXCEPTION: $e");
     }
   }
 
