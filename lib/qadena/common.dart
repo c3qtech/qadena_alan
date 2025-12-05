@@ -28,6 +28,13 @@ enum AccountType {
   }
 }
 
+class RecoverKeyResponse {
+  final String? seed;
+  final String? errorMessage;
+
+  RecoverKeyResponse({this.seed, this.errorMessage});
+}
+
 const String QadenaTokenDenom  = "qdn";
 const String AQadenaTokenDenom = "aqdn";
 const String USDFiatDenom      = "usd";

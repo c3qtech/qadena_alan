@@ -31,13 +31,6 @@ import 'package:qadena_alan/qadena/common.dart' as common;
 import 'package:qadena_alan/qadena/types/shamir.dart';
 import 'package:qadena_alan/qadena/encrypt.dart' show bDecryptAndUnmarshal, marshalAndBEncrypt;
 
-class RecoverKeyResponse {
-  final String? seed;
-  final String? errorMessage;
-
-  RecoverKeyResponse({this.seed, this.errorMessage});
-}
-
 
 class WalletResponse {
   final String address;
