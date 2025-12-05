@@ -277,8 +277,9 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
       options: CallOptions(timeout: Duration(seconds: 4)),
     );
 
-    mainWalletQadenaWalletAmount!.value = srcWallet.wallet.walletAmount[QadenaTokenDenom];
-    srcServiceProviderID = args.mainWalletServiceProviderID!;
+
+    mainWalletQadenaWalletAmount = WalletAmountRef(srcWallet.wallet.walletAmount[QadenaTokenDenom]);
+    srcServiceProviderID = srcWallet.wallet.serviceProviderID;
   } else {
     srcServiceProviderID = args.mainWalletServiceProviderID!;
   }
