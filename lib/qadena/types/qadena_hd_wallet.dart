@@ -1035,7 +1035,7 @@ class QadenaHDWallet {
       if (common.Debug) {
         print('Failed: $e');
       }
-      return "UNKNOWN";
+      return "UNKNOWN ($e)";
     }
   }
 
