@@ -120,9 +120,9 @@ void main() {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 3, null, hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", wallet!.seed, 3, null, hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
 
@@ -139,9 +139,9 @@ void main() {
     final jillmnemonic =
         "catalog sword rack income garment shoot south crouch capital slush essence escape fit bike country firm fly faculty theory fragile nominee shoot erode cherry";
     final wallet = await client.createWallet(
-        "pioneer1", jillmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", jillmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
 
@@ -158,9 +158,9 @@ void main() {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
 
@@ -173,7 +173,7 @@ void main() {
     // after running setup.sh, then test_key_recovery.sh
     final recoveralmnemonic="join total tent make bone program uncle pitch prize body night snake chest mass switch glad opera security evidence catch maid behave gloom ahead";
     final wallet = await client.createWallet(
-        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
  
     final result = await wallet!.recoverKey();
@@ -194,7 +194,7 @@ test('recoverKey alvillarica@gmail.com', () async {
     // after running setup.sh, then test_key_recovery.sh
     final recoveralmnemonic="convince slow tree choose suggest gift steel deny border seat prefer cage reason vessel nurse car embody multiply tongue ugly staff uphold upset dish";
     final wallet = await client.createWallet(
-        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", recoveralmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: ${wallet!.transactionWalletAddress}");
  
     final result = await wallet!.recoverKey();
@@ -208,7 +208,7 @@ test('recoverKey alvillarica@gmail.com', () async {
     // after running setup.sh, then test_key_recovery.sh
     final recoverannmnemonic="puppy acid muffin pottery flock theory ghost sugar hope thumb gasp misery edge abuse soul moon quiz multiply market pyramid judge build action replace";
     final wallet = await client.createWallet(
-        "pioneer1", recoverannmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", recoverannmnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
  
     final result = await wallet!.recoverKey();
@@ -221,9 +221,9 @@ test('recoverKey alvillarica@gmail.com', () async {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
 
@@ -248,9 +248,9 @@ test('recoverKey alvillarica@gmail.com', () async {
     final almnemonic =
         "palace friend deposit baby crunch flag airport mistake enlist island auction phrase double truck coffee salad hidden story orange couch useful feature electric crush";
     final wallet = await client.createWallet(
-        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        "pioneer1", almnemonic.split(' '), 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     final ephWallet =
-        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", wallet!.seed, 1, null, hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     print("ephWallet: $ephWallet");
     final result = await ephWallet!.signDocument(
@@ -262,7 +262,7 @@ test('recoverKey alvillarica@gmail.com', () async {
   });
   test('claimCredentials', () async {
     final wallet =
-        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address);
+        await client.createWallet("pioneer1", null, 0, "secdsvssrvprv", hardCodedSponsorAcct.bech32Address, checkAndReturnOnly: true);
     print("wallet: $wallet");
     final result =
         await wallet!.claimCredentials(BigInt.from(10234), BigInt.from(5678));
