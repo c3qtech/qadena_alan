@@ -405,7 +405,7 @@ class QadenaClient {
   }
 
   Future<QadenaHDWallet?> createWallet(String pioneerID, List<String>? mnemonic,
-      int? ephIndex, String? serviceProviderID, String feeGranterAddress) async {
+      int? ephIndex, String? serviceProviderID, String feeGranterAddress, {checkAndReturnOnly = false}) async {
     try {
       initECPedersen();
 
@@ -418,6 +418,10 @@ class QadenaClient {
 
       if (await wallet.walletExists()) {
         return wallet;
+      }
+
+      if (checkAndReturnOnly) {
+        return null;
       }
 
       if (networkInfo.isTesting) {
