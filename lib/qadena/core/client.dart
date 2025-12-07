@@ -17,6 +17,7 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
+import 'package:qadena_alan/qadena/core/client/msg/qadena/bind_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
@@ -348,6 +349,50 @@ class QadenaClient {
         } else {
           if (common.Debug) {
             print("REJECTED:  claim credential $response");
+          }
+          return AccountResponse.fromErrorMessage(response!);
+        }
+
+        // use naming service to bind credentials
+        final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
+          chain: chain,
+          txwallet: mainWallet.transactionWallet,
+          cxwallet: mainWallet.credentialWallet,
+          credentialType: common.EmailContactCredentialType,
+        ));
+
+        final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
+          chain: chain,
+          txwallet: mainWallet.transactionWallet,
+          cxwallet: mainWallet.credentialWallet,
+          credentialType: common.PhoneContactCredentialType,
+        ));
+
+        final bindTxHashRef = StringRef("");
+        final bindResponse = await QadenaClientTx.broadcastTx(
+          ephWallet.txAcct, 
+          [bindEmailMsg, bindPhoneMsg], 
+          txHashRef: bindTxHashRef
+        );
+
+        if (bindResponse == null) {
+          if (common.Debug) {
+            print('Accepted: bind credentials, TxHash: ${bindTxHashRef.value}');
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED: bind credentials $bindResponse");
+          }
+          return AccountResponse.fromErrorMessage(bindResponse);
+        }
+
+        if ((response = await QadenaClientTx.checkTxResult(txSender, bindTxHashRef.value)) == null) {
+          if (common.Debug) {
+            print("bind credentials success");
+          }
+        } else {
+          if (common.Debug) {
+            print("REJECTED: bind credentials $response");
           }
           return AccountResponse.fromErrorMessage(response!);
         }
