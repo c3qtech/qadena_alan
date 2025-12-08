@@ -181,14 +181,14 @@ class QadenaClient {
     // use naming service to bind credentials
     final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
       chain: chain,
-      txwallet: mainWallet.transactionWallet,
+      ephtxwallet: ephWallet.transactionWallet,
       cxwallet: mainWallet.credentialWallet,
       credentialType: common.EmailContactCredentialType,
     ));
 
     final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
       chain: chain,
-      txwallet: mainWallet.transactionWallet,
+      ephtxwallet: ephWallet.transactionWallet,
       cxwallet: mainWallet.credentialWallet,
       credentialType: common.PhoneContactCredentialType,
     ));

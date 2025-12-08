@@ -13,13 +13,13 @@ import 'package:grpc/grpc.dart';
 /// Arguments for msgBindCredential function
 class MsgBindCredentialArgs {
   final Chain chain;
-  final WalletResponse txwallet;
+  final WalletResponse ephtxwallet;
   final WalletResponse cxwallet;
   final String credentialType;
 
   MsgBindCredentialArgs({
     required this.chain,
-    required this.txwallet,
+    required this.ephtxwallet,
     required this.cxwallet,
     required this.credentialType,
   });
@@ -48,7 +48,7 @@ nstypes.BECPoint nsProtoizeBECPoint(ECPoint point) {
 /// 3. Creates a Pedersen commitment proof
 /// 4. Returns a MsgBindCredential message
 Future<GeneratedMessage> msgBindCredential(MsgBindCredentialArgs args) async {
-  final srcWalletID = args.txwallet.address;
+  final srcWalletID = args.ephtxwallet.address;
   final credentialID = args.cxwallet.address;
   final credentialPubKey = args.cxwallet.pubkeyB64;
   final credentialPrivKeyHex = args.cxwallet.privkeyHex;
