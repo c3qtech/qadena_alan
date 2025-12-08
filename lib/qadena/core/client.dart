@@ -167,6 +167,64 @@ class QadenaClient {
       }
   }
 
+  Future<bool> bindCredentials(List<String>? seedPhrase) async {
+    final chain = Chain(networkInfo);
+
+    // main wallet index=0
+    var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase!, 0);
+
+    // ephemeral wallet index=1
+    var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase!, 1);
+
+    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
+
+    // use naming service to bind credentials
+    final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
+      chain: chain,
+      txwallet: mainWallet.transactionWallet,
+      cxwallet: mainWallet.credentialWallet,
+      credentialType: common.EmailContactCredentialType,
+    ));
+
+    final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
+      chain: chain,
+      txwallet: mainWallet.transactionWallet,
+      cxwallet: mainWallet.credentialWallet,
+      credentialType: common.PhoneContactCredentialType,
+    ));
+
+    final bindTxHashRef = StringRef("");
+    final bindResponse = await QadenaClientTx.broadcastTx(
+      ephWallet.txAcct, 
+      [bindEmailMsg, bindPhoneMsg], 
+      txHashRef: bindTxHashRef
+    );
+
+    if (bindResponse == null) {
+      if (common.Debug) {
+        print('Accepted: bind credentials, TxHash: ${bindTxHashRef.value}');
+      }
+    } else {
+      if (common.Debug) {
+        print("REJECTED: bind credentials $bindResponse");
+      }
+      return false;
+    }
+
+    String? response;
+    if ((response = await QadenaClientTx.checkTxResult(txSender, bindTxHashRef.value)) == null) {
+      if (common.Debug) {
+        print("bind credentials success");
+      }
+    } else {
+      if (common.Debug) {
+        print("REJECTED: bind credentials $response");
+      }
+      return false;
+    }
+    return true;
+  }
+
   Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
@@ -353,49 +411,6 @@ class QadenaClient {
           return AccountResponse.fromErrorMessage(response!);
         }
 
-        // use naming service to bind credentials
-        final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
-          chain: chain,
-          txwallet: mainWallet.transactionWallet,
-          cxwallet: mainWallet.credentialWallet,
-          credentialType: common.EmailContactCredentialType,
-        ));
-
-        final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
-          chain: chain,
-          txwallet: mainWallet.transactionWallet,
-          cxwallet: mainWallet.credentialWallet,
-          credentialType: common.PhoneContactCredentialType,
-        ));
-
-        final bindTxHashRef = StringRef("");
-        final bindResponse = await QadenaClientTx.broadcastTx(
-          ephWallet.txAcct, 
-          [bindEmailMsg, bindPhoneMsg], 
-          txHashRef: bindTxHashRef
-        );
-
-        if (bindResponse == null) {
-          if (common.Debug) {
-            print('Accepted: bind credentials, TxHash: ${bindTxHashRef.value}');
-          }
-        } else {
-          if (common.Debug) {
-            print("REJECTED: bind credentials $bindResponse");
-          }
-          return AccountResponse.fromErrorMessage(bindResponse);
-        }
-
-        if ((response = await QadenaClientTx.checkTxResult(txSender, bindTxHashRef.value)) == null) {
-          if (common.Debug) {
-            print("bind credentials success");
-          }
-        } else {
-          if (common.Debug) {
-            print("REJECTED: bind credentials $response");
-          }
-          return AccountResponse.fromErrorMessage(response!);
-        }
 
         if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
           if (common.Debug) {

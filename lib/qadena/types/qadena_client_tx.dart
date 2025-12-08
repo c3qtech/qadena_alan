@@ -95,6 +95,8 @@ class QadenaClientTx {
         // remember the current sequence number of the signingWallet
         oldSequence = await getSequenceNumber(signingWallet);
 
+        print("oldSequence: $oldSequence for wallet ${signingWallet.bech32Address}");
+
         var fee = Fee();
         gas = Int64(500000);
         fee.gasLimit = gas;
@@ -109,7 +111,7 @@ class QadenaClientTx {
           accountSequence: oldSequence, simulate: true, fee: fee);
         final simulateResponse = await txSender.simulate(tx);
         if (c.Debug) {
-          print("simulateResponse: $simulateResponse");
+          print("simulateResponse: $simulateResponse for wallet ${signingWallet.bech32Address}");
         }
         if (simulateResponse.hasGasInfo()) {
           gas = simulateResponse.gasInfo.gasUsed;
@@ -117,14 +119,14 @@ class QadenaClientTx {
         }
       } on GrpcError catch (e) {
         if (c.Debug) {
-          print("simulate error: $e");
+          print("simulate error for wallet ${signingWallet.bech32Address}: $e");
         }
         // get code and message from e
         final code = e.code;
         final codeName = e.codeName;
         final message = e.message;
         if (c.Debug) {
-          print("simulate error: $e, code: $code, codeName: $codeName, MESSAGE: $message");
+          print("simulate error for wallet ${signingWallet.bech32Address}: $e, code: $code, codeName: $codeName, MESSAGE: $message");
         }
         if (code == 2 && message!.contains("sequence mismatch")) {
           // sequence not found, retry
@@ -158,7 +160,7 @@ class QadenaClientTx {
         double gasDouble = gas.toDouble() * gasMultiplier;
         gas = gasDouble.toInt().toInt64();
         if (c.Debug) {
-          print("gas (adjusted) $gas");
+          print("gas (adjusted) $gas for wallet ${signingWallet.bech32Address}");
         }
 
         var fee = Fee();
@@ -335,13 +337,13 @@ class QadenaClientTx {
 static Future<bool> waitForSequenceChange(
     alan.Wallet wallet, Int64 oldSequence) async {
     if (c.Debug) {
-      print("Waiting for sequence change from $oldSequence");
+      print("Waiting for sequence change for wallet ${wallet.bech32Address} from $oldSequence");
     }
     for (int i = 0; i < 15; i++) {
       final newSequence = await getSequenceNumber(wallet);
       if (newSequence > oldSequence) {
         if (c.Debug) {
-          print("Sequence number increased from $oldSequence to $newSequence");
+          print("Sequence number increased for wallet ${wallet.bech32Address} from $oldSequence to $newSequence");
         }
         if (newSequence > oldSequence + 1) {
           return true;
