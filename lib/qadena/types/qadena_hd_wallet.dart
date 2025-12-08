@@ -12,6 +12,7 @@ import 'package:qadena_alan/proto/cosmos/tx/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/proto/qadena/qadena/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/dsvs/query.pb.dart';
 import 'package:qadena_alan/proto/qadena/nameservice/query.pb.dart';
+import 'package:qadena_alan/proto/qadena/nameservice/name_binding.pb.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
@@ -253,6 +254,61 @@ class QadenaHDWallet {
         rethrow;
       }
       return false;
+    }
+  }
+
+  /// Get name binding for a credential and credential type.
+  /// Returns the NameBinding if found, null otherwise.
+  Future<NameBinding?> getNameBinding(String credential, String credentialType) async {
+    try {
+      final response = await chain.nameServiceQuery.queryClient.nameBinding(
+        QueryGetNameBindingRequest(
+          credential: credential,
+          credentialType: credentialType,
+        ),
+        options: CallOptions(timeout: Duration(seconds: 4)),
+      );
+      if (common.Debug) {
+        print("nameBinding: ${response.nameBinding}");
+      }
+      return response.nameBinding;
+    } catch (e) {
+      if (e is GrpcError) {
+        if (e.code == StatusCode.notFound) {
+          if (common.Debug) {
+            print("name binding not found for credential: $credential, type: $credentialType");
+          }
+          return null;
+        }
+        rethrow;
+      }
+      return null;
+    }
+  }
+
+  /// Get protect key for this wallet.
+  /// Returns the ProtectKey if found, null otherwise.
+  Future<ProtectKey?> getProtectKey() async {
+    try {
+      final response = await chain.qadenaQuery.queryClient.protectKey(
+        QueryGetProtectKeyRequest(walletID: transactionWallet.address),
+        options: CallOptions(timeout: Duration(seconds: 4)),
+      );
+      if (common.Debug) {
+        print("protectKey: ${response.protectKey}");
+      }
+      return response.protectKey;
+    } catch (e) {
+      if (e is GrpcError) {
+        if (e.code == StatusCode.notFound) {
+          if (common.Debug) {
+            print("protect key not found for wallet: ${transactionWallet.address}");
+          }
+          return null;
+        }
+        rethrow;
+      }
+      return null;
     }
   }
 
