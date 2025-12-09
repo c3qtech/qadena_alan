@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
@@ -18,6 +19,7 @@ import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/bind_credentials.dart';
+import 'package:qadena_alan/qadena/core/client/msg/qadena/protect_key.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
@@ -225,7 +227,7 @@ class QadenaClient {
     return true;
   }
 
-  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress) async {
+  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress, List<String> recoveryPartners, int recoveryThreshold) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
@@ -240,7 +242,8 @@ class QadenaClient {
       }
 
       // ephemeral wallet index=1
-      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 1);
+      final ephIndex = 1;
+      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex);
 
       final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
 
@@ -320,13 +323,15 @@ class QadenaClient {
       }
 
       final rasTxHashRef = StringRef("");
-      final ccTxHashRef = StringRef("");
+      final claimCredentialsTxHashRef = StringRef("");
+
+      final emailRef = StringRef("");
 
       if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
         print("claimAmount or claimBlindingFactor is zero, not claiming nor registering authorized signatory");
       } else {
 
-        final ccMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
+        final claimCredentialsMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
           chain: chain,
           txwallet: mainWallet.transactionWallet,
           cxwallet: mainWallet.credentialWallet,
@@ -335,19 +340,20 @@ class QadenaClient {
           recoverKey: false,
           mainWalletQadenaWalletAmount: saveMainWalletAmountRef,
           mainWalletServiceProviderID: [serviceProviderID],
+          emailRef: emailRef,
           ));
 
-        final ccResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, ccMsgs, txHashRef: ccTxHashRef);
+        final claimCredentialsResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, claimCredentialsMsgs, txHashRef: claimCredentialsTxHashRef);
 
-        if (ccResponse == null) {
+        if (claimCredentialsResponse == null) {
           if (common.Debug) {
-            print('Accepted:  claim credentials, TxHash: ${ccTxHashRef.value}');
+            print('Accepted:  claim credentials, TxHash: ${claimCredentialsTxHashRef.value}');
           }
         } else {
           if (common.Debug) {
-            print("REJECTED:  claim credentials $ccResponse");
+            print("REJECTED:  claim credentials $claimCredentialsResponse");
           }
-          return AccountResponse.fromErrorMessage(ccResponse);
+          return AccountResponse.fromErrorMessage(claimCredentialsResponse);
         }
 
         final rasMsgs =
@@ -375,6 +381,9 @@ class QadenaClient {
 
       String? response = null;
 
+      if (common.Debug) {
+        print("checking main create wallet results");
+      }
       if ((response = await QadenaClientTx.checkTxResult(txSender, mainCWTxHashRef.value)) == null) {
         if (common.Debug) {
           print("main create wallet success");
@@ -386,6 +395,9 @@ class QadenaClient {
         return AccountResponse.fromErrorMessage(response!);
       }
 
+      if (common.Debug) {
+        print("checking eph create wallet results");
+      }
       if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
         if (common.Debug) {
           print("eph create wallet success");
@@ -400,9 +412,66 @@ class QadenaClient {
       if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
         print("claimAmount or claimBlindingFactor is zero, not waiting for claim/register authorized signatory results");
       } else {
-        if ((response = await QadenaClientTx.checkTxResult(txSender, ccTxHashRef.value)) == null) {
+        if (common.Debug) {
+          print("checking claim credentials results");
+        }
+        if ((response = await QadenaClientTx.checkTxResult(txSender, claimCredentialsTxHashRef.value)) == null) {
           if (common.Debug) {
             print("claim credential success");
+          }
+
+          if (common.Debug) {
+            print("binding credentials for email and phone");
+          }
+
+          // use naming service to bind credentials
+          final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
+            chain: chain,
+            ephtxwallet: ephWallet.transactionWallet,
+            cxwallet: mainWallet.credentialWallet,
+            credentialType: common.EmailContactCredentialType,
+          ));
+
+          final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
+            chain: chain,
+            ephtxwallet: ephWallet.transactionWallet,
+            cxwallet: mainWallet.credentialWallet,
+            credentialType: common.PhoneContactCredentialType,
+          ));
+
+          String encodedWalletCredentials = jsonEncode([
+            {
+              "email": emailRef.value,
+              "seedPhrase": seedPhrase.toString(),
+              "ephemeralAccountIndex": ephIndex
+            }
+          ]);
+
+          // protect the key
+          final protectKeyMsg = await msgProtectKey(MsgProtectKeyArgs(
+            chain: chain,
+            ephtxwallet: ephWallet.transactionWallet,
+            mnemonic: seedPhrase.join(' '),
+            threshold: recoveryThreshold,
+            recoveryPartners: recoveryPartners,
+          ));
+
+          final bindAndProtectTxHashRef = StringRef("");
+          final bindAndProtectResponse = await QadenaClientTx.broadcastTx(
+            ephWallet.txAcct, 
+            [bindEmailMsg, bindPhoneMsg, protectKeyMsg], 
+            txHashRef: bindAndProtectTxHashRef
+          );
+
+          if (bindAndProtectResponse == null) {
+            if (common.Debug) {
+              print('Accepted: bind credentials and protect key, TxHash: ${bindAndProtectTxHashRef.value}');
+            }
+          } else {
+            if (common.Debug) {
+              print("REJECTED: bind credentials and protect key $bindAndProtectResponse");
+            }
+            return AccountResponse.fromErrorMessage("Failed to bind credentials and protect key");
           }
         } else {
           if (common.Debug) {
@@ -411,7 +480,9 @@ class QadenaClient {
           return AccountResponse.fromErrorMessage(response!);
         }
 
-
+        if (common.Debug) {
+          print("checking register authorized signatory results");
+        }
         if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
           if (common.Debug) {
             print("register authorized signatory success");

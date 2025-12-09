@@ -16,6 +16,12 @@ import 'package:qadena_alan/qadena/core/client/query/export.dart' as qadena;
 
 import 'package:tuple/tuple.dart';
 
+class StringRef {
+  String value;
+  StringRef(this.value);
+}
+
+
 enum AccountType {
   transactionWalletType(0),
   credentialWalletType(1);

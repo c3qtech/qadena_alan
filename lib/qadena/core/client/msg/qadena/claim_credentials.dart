@@ -29,6 +29,7 @@ class MsgClaimCredentialsArgs {
   final bool recoverKey;
   final WalletAmountRef? mainWalletQadenaWalletAmount;
   final List<String>? mainWalletServiceProviderID;
+  final StringRef? emailRef;
 
   MsgClaimCredentialsArgs({
     required this.chain,
@@ -39,6 +40,7 @@ class MsgClaimCredentialsArgs {
     required this.recoverKey,
     this.mainWalletQadenaWalletAmount,
     this.mainWalletServiceProviderID,
+    this.emailRef,
   });
 }
 
@@ -54,7 +56,7 @@ Future<GeneratedMessage> createClaimContactInfoMessage (
   String srcWalletID,
   List<String> srcServiceProviderID,
   EncryptableWalletAmount ewa,
-  bool recoverKey
+  bool recoverKey,
 ) async {
 
   Uint8List all = contactDetails.writeToBuffer();
@@ -346,6 +348,17 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
       );
       msgs.add(msg);
     } else {
+      if (credentialTypes[i] == EmailContactCredentialType) {
+        if (common.Debug  ) {
+          print("email: ${credentialIDs[i].value}");
+        }
+        if (args.emailRef != null) {
+          if (common.Debug) {
+            print("setting email ref: ${credentialIDs[i].value}");
+          }
+          args.emailRef!.value = credentialIDs[i].value;
+        }
+      }
       EncryptableSingleContactInfo pSCI = encryptables[i] as EncryptableSingleContactInfo;
       final msg = await createClaimContactInfoMessage(
         args.chain,

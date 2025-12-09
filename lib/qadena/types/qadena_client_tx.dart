@@ -30,10 +30,6 @@ Server unavailable or network error
 
 */
 
-class StringRef {
-  String value;
-  StringRef(this.value);
-}
 
 class QadenaClientTx {
   static  NetworkInfo? networkInfo;
