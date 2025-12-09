@@ -7,10 +7,8 @@ import 'package:pointycastle/ecc/api.dart';
 import 'package:pointycastle/ecc/curves/secp256k1.dart';
 import 'package:pointycastle/api.dart' show SecureRandom, KeyParameter;
 import 'package:pointycastle/random/fortuna_random.dart';
+import 'package:qadena_alan/qadena/common.dart' as common;
 //import 'package:chia_crypto_utils/chia_crypto_utils.dart'; // Import chia_crypto_utils
-
-var debug = false;
-var debugFull = false;
 
 class ECPointInfo {
   ECPoint ecPoint;
@@ -99,7 +97,7 @@ BigInt paddedHash(String part1, int i) {
   final hash = Uint8List(hasher.digestSize);
   hasher.doFinal(hash, 0);
   final hashResult = BigInt.parse(hex.encode(hash), radix: 16);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('hashResult: $hashResult');
   }
   return hashResult;
@@ -210,7 +208,7 @@ PedersenCommit? subPedersenCommit(
 
   final diff = input.A! - transfer.A!;
   if (diff < BigInt.zero) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("cannot commit transfer=${transfer.A} > input=${input.A}");
     }
     return null;
@@ -218,7 +216,7 @@ PedersenCommit? subPedersenCommit(
 
   final changeX = input.X! - transfer.X!;
   final change = PedersenCommit(diff, changeX);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('subPedersenCommit: $input - $transfer = $change');
   }
   return change;
@@ -259,7 +257,7 @@ PedersenCommit? addPedersenCommit(
   final sum = input.A! + transfer.A!;
   final sumX = input.X! + transfer.X!;
   if (sum > bigIntMax) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("cannot commit sum=${sum} > max=${bigIntMax}");
     }
     return null;
@@ -393,28 +391,28 @@ bool isValidPoint(ECPoint pt) {
   ECPoint? point;
   bool success = false;
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('seed: ${seed}');
     print('order: ${groupOrder}');
   }
   final x = seed % groupOrder;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('x $x');
   }
   final x2 = x * x;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('x2 $x2');
   }
   final x3 = x2 * x;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('x3 $x3');
   }
   var rhs = (x3 + b);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('rhs: $rhs');
   }
   rhs = rhs % p;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('rhs mod p $rhs');
   }
   final y = modSqrt(rhs, p);
@@ -439,34 +437,34 @@ ECPoint mapInto(BigInt seed) {
   bool success = false;
 
   while (!success) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('seed: ${seed}');
       print('order: ${groupOrder}');
     }
     final x = seed % groupOrder;
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('x $x');
     }
     final x2 = x * x;
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('x2 $x2');
     }
     final x3 = x2 * x;
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('x3 $x3');
     }
     var rhs = (x3 + b);
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('rhs: $rhs');
     }
     rhs = rhs % p;
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print('rhs mod p $rhs');
     }
     final y = modSqrt(rhs, p);
 
     if (y != null) {
-      if (debug && debugFull) {
+      if (common.DebugFull) {
         print('x: ${hex.encode(bigIntToByteArray(x))}');
         print('y: ${hex.encode(bigIntToByteArray(y))}');
       }
@@ -492,7 +490,7 @@ CryptoParams newECPrimeGroupKeyV2(int n) {
 
   // print out gVals
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     // Print out gVals
     for (var i = 0; i < n; i++) {
       print(
@@ -508,11 +506,11 @@ CryptoParams newECPrimeGroupKeyV2(int n) {
 
   final curValue = curve.G.x;
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('Gx: $curValue');
   }
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print('G: $cg');
     print('H: $ch');
   }
@@ -521,7 +519,7 @@ CryptoParams newECPrimeGroupKeyV2(int n) {
   BigInt baseGX = BigInt.parse("79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798", radix: 16);
   BigInt baseGY = BigInt.parse("483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8", radix: 16);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("BaseGX, BaseGY: $baseGX, $baseGY");
   }
 

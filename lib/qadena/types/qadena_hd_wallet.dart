@@ -92,7 +92,7 @@ class QadenaHDWallet {
             walletType: AccountType.transactionWalletType.value,
             addressIdx: ephIndex)
         .toString();
-    if (common.Debug) {
+    if (common.DebugFull) {
       print("txpath: $txpath");
     }
     final cxpath = HDPath(
@@ -143,16 +143,18 @@ class QadenaHDWallet {
 
       final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("feegrant msg: $msg");
       }
       if (response == null) {
-        print('Fee grant successful');
+        if (common.Debug) {
+          print('Fee grant successful');
+        }
 
         return null;
       }
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Tx errored: $response');
       }
       return response;
@@ -161,7 +163,7 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("message: $message");
       }
 
@@ -172,7 +174,7 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $message');
         }
         errorMessage = message!;
@@ -190,46 +192,7 @@ class QadenaHDWallet {
     }
   }
 
-/*
-  Future<String?> findSubWalletPublicKey(String credential, String credentialType) async {
-    try {
-      final nameBinding = await chain.nameServiceQuery.queryClient
-          .nameBinding(
-           QueryGetNameBindingRequest(credential: credential, credentialType: credentialType),
-            options: CallOptions(timeout: Duration(seconds: 4)),
-          );
-      if (common.Debug) {
-        print("name binding: $nameBinding");
-      }
-      final queryClient = chain.qadenaQuery.queryClient;
 
-      final pubKID = nameBinding.nameBinding.address;
-
-      // Prepare the second request parameters
-      final params2 = QueryGetPublicKeyRequest(
-        pubKID: pubKID,
-        pubKType: TransactionPubKType,
-      );
-
-      // Call the query client method for public key
-      final res2 = await queryClient.publicKey(params2);      
-
-      return res2.publicKey.pubK;
-    } catch (e) {
-      // if wallet not found, return false
-      if (e is GrpcError) {
-        if (e.code == StatusCode.notFound) {
-          if (common.Debug) {
-            print("credential not found");
-          }
-          return null;
-        }
-        rethrow;
-      }
-      return null;
-    }
-  }
-  */
 
   Future<bool> walletExists() async {
     try {
@@ -358,7 +321,7 @@ class QadenaHDWallet {
     dynamic acceptCredentialTypes;
     dynamic requireSenderCredentialTypes;
 
-    if (common.Debug) {
+    if (common.DebugFull) {
       print('seed: ${seed.join(' ')}');
       print('txAddress: ${transactionWallet.address}');
       print('cxAddress: ${credentialWallet.address}');
@@ -392,7 +355,7 @@ class QadenaHDWallet {
           mainWallet: realWalletTransaction,
           mainWalletQadenaWalletAmount: WalletAmountRef(null)));
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('msgs: $msgs');
       }
 
@@ -426,24 +389,24 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $message');
         }
         errorMessage = message!;
       } else {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Could not parse.');
         }
         errorMessage = codeName;
       }
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('parsed message: $errorMessage');
       }
 
       return errorMessage;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Failed: $e');
       }
       return "UNKNOWN";
@@ -456,7 +419,7 @@ class QadenaHDWallet {
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("can only register authorized signatory for ephemeral wallets");
       }
       return "NOT_EPHEMERAL";
@@ -492,13 +455,13 @@ class QadenaHDWallet {
           await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
 
       if (response == null) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Tx sent successfully');
         }
         return null;
       }
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Tx errored: $response');
       }
 
@@ -508,7 +471,7 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("message: $message");
       }
 
@@ -519,12 +482,12 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $message');
         }
         errorMessage = message!;
       } else {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Could not parse.');
         }
         errorMessage = codeName;
@@ -532,7 +495,7 @@ class QadenaHDWallet {
 
       return errorMessage;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Failed: $e');
       }
       return "UNKNOWN";
@@ -543,7 +506,7 @@ class QadenaHDWallet {
       String mnemonic, int threshold, List<String> recoveryPartners) async {
     final isEphemeral = ephIndex > 0;
     if (!isEphemeral) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("can only protect a key from an ephemeral wallets");
       }
       return "NOT_EPHEMERAL";
@@ -579,14 +542,14 @@ class QadenaHDWallet {
         );
         walletID = walletResponse.wallet.walletID;
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("GetAddress success for $id");
         }
 
         // Check if it's a pioneer ID
         try {
           await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("it's a pioneer ID");
           }
           isPioneerID = true;
@@ -594,18 +557,18 @@ class QadenaHDWallet {
           // Not a pioneer ID, check if it's a service provider ID
           try {
             await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
-            if (common.Debug) {
+            if (common.DebugFull) {
               print("it's a service provider ID");
             }
             isServiceProviderID = true;
           } catch (e) {
-            if (common.Debug) {
+            if (common.DebugFull) {
               print("it's neither a pioneer ID nor service provider ID");
             }
           }
         }
       } catch (e) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("GetAddress failed for $id");
         }
 
@@ -614,12 +577,12 @@ class QadenaHDWallet {
           final result = await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
           walletID = result.item1;
           walletPubK = result.item2;
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("GetIntervalPublicKey success, it's a pioneer ID");
           }
           isPioneerID = true;
         } catch (e) {
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("GetIntervalPublicKey pioneer failed");
           }
 
@@ -628,34 +591,34 @@ class QadenaHDWallet {
             final result = await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
             walletID = result.item1;
             walletPubK = result.item2;
-            if (common.Debug) {
+            if (common.DebugFull) {
               print("it's a service provider ID");
             }
             isServiceProviderID = true;
           } catch (e) {
-            if (common.Debug) {
+            if (common.DebugFull) {
               print("it's neither a pioneer ID nor service provider ID");
             }
 
             // Check via naming service - phone
             try {
               walletID = await common.clientFindSubWallet(chain, id, common.PhoneContactCredentialType);
-              if (common.Debug) {
+              if (common.DebugFull) {
                 print("FindSubWallet 'phone' success");
               }
             } catch (e) {
-              if (common.Debug) {
+              if (common.DebugFull) {
                 print("FindSubWallet 'phone' failed");
               }
 
               // Check via naming service - email
               try {
                 walletID = await common.clientFindSubWallet(chain, id, common.EmailContactCredentialType);
-                if (common.Debug) {
+                if (common.DebugFull) {
                   print("FindSubWallet 'email' success");
                 }
               } catch (e) {
-                if (common.Debug) {
+                if (common.DebugFull) {
                   print("FindSubWallet 'email' failed");
                 }
                 return "RECOVERY_PARTNER_NOT_FOUND: $id";
@@ -668,28 +631,28 @@ class QadenaHDWallet {
       // Get public key for the wallet
       try {
         walletPubK = await common.clientGetPublicKey(chain, walletID!, common.EnclavePubKType);
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("GetPublicKey 'enclave' success");
         }
       } catch (e) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("GetPublicKey 'enclave' failed");
         }
 
         try {
           walletPubK = await common.clientGetPublicKey(chain, walletID!, common.CredentialPubKType);
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("GetPublicKey 'credential' success");
           }
         } catch (e) {
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("GetPublicKey 'credential' failed");
           }
           return "PUBLIC_KEY_NOT_FOUND: $id";
         }
       }
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("isPioneerID: $isPioneerID");
         print("isServiceProviderID: $isServiceProviderID");
         print("walletID: $walletID, walletPubK: $walletPubK");
@@ -726,7 +689,7 @@ class QadenaHDWallet {
         threshold,
       );
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("threshold: $threshold");
         print("mnemonic: $mnemonic");
       }
@@ -734,7 +697,7 @@ class QadenaHDWallet {
       for (int i = 0; i < shares.length; i++) {
         // print hex share
         final shareString = shares[i];
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("shareString: $shareString");
         }
         final encShare = marshalAndBEncrypt(walletPubKs[i], base64Encode(shareString));
@@ -755,12 +718,12 @@ class QadenaHDWallet {
       final response = await QadenaClientTx.broadcastTx(txAcct, [msg]);
 
       if (response == null) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Tx sent successfully');
         }
         return null;
       }
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Tx errored: $response');
       }
 
@@ -769,7 +732,7 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("message: $message");
       }
 
@@ -779,12 +742,12 @@ class QadenaHDWallet {
 
       if (match != null) {
         final parsedMessage = match.group(3);
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $parsedMessage');
         }
         errorMessage = parsedMessage!;
       } else {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Could not parse.');
         }
         errorMessage = codeName;
@@ -792,7 +755,7 @@ class QadenaHDWallet {
 
       return errorMessage;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Failed: $e');
       }
       return "UNKNOWN";
@@ -807,12 +770,12 @@ class QadenaHDWallet {
       final res = await chain.qadenaQuery.queryClient.protectKey(params);
       
       // If we get a response with a valid protectKey, it's protected
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("protectKey: ${res.protectKey}");
       }
       return res.protectKey.walletID.isNotEmpty;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("isProtected check failed: $e");
       }
       return false;
@@ -833,7 +796,7 @@ class QadenaHDWallet {
         );
         walletID = walletResponse.wallet.walletID;
       } catch (e) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("GetAddress failed for $walletID: $e");
         }
         return RecoverKeyResponse(errorMessage: "WALLET_NOT_FOUND: $walletID");
@@ -844,7 +807,7 @@ class QadenaHDWallet {
       final tsBytes = utf8.encode(timestamp.toString());
       final signature = txAcct.sign(Uint8List.fromList(tsBytes));
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("timestamp: $timestamp");
         print("timestamp_signature_hex: ${HEX.encode(signature)}");
         print("timestamp_pubkey: ${transactionWallet.pubkeyB64}");
@@ -859,7 +822,7 @@ class QadenaHDWallet {
       final res = await chain.qadenaQuery.queryClient.recoverKey(params);
       final recoverKey = res.recoverKey;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("recoverKey: $recoverKey");
       }
 
@@ -872,7 +835,7 @@ class QadenaHDWallet {
           credPrivateKey,
           Uint8List.fromList(recoverKey.recoverShare[0].encWalletPubKShare),
         );
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("seed phrase: $seedPhrase");
         }
         return RecoverKeyResponse(seed: seedPhrase);
@@ -886,7 +849,7 @@ class QadenaHDWallet {
             Uint8List.fromList(rShare.encWalletPubKShare),
           );
 
-          if (common.Debug) {
+          if (common.DebugFull) {
             print("decrypted shareString: $shareString");
           }
 
@@ -899,19 +862,19 @@ class QadenaHDWallet {
         final seedPhraseBytes = combine(byteShares);
         final seedPhrase = utf8.decode(seedPhraseBytes);
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print("seed phrase: $seedPhrase");
         }
 
         return RecoverKeyResponse(seed: seedPhrase);
       }
     } on GrpcError catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("gRPC error: ${e.message}");
       }
       return RecoverKeyResponse(errorMessage: "GRPC_ERROR: ${e.message}");
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("Failed to recover key: $e");
       }
       return RecoverKeyResponse(errorMessage: "RECOVER_EXCEPTION: $e");
@@ -938,7 +901,7 @@ class QadenaHDWallet {
     WalletResponse? realWalletCredential;
     alan.Wallet? realWalletTransactionAccount;
     if (!isEphemeral) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("can only sign a document from an ephemeral wallets");
       }
       return "NOT_EPHEMERAL";
@@ -972,19 +935,19 @@ class QadenaHDWallet {
           hashHex: hashHex,
           newHashHex: newHashHex));
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("msgs: $msgs");
       }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
       if (response == null) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Tx sent successfully');
         }
         return null;
       }
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Tx errored: $response');
       }
       return response;
@@ -993,7 +956,7 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("message: $message");
       }
 
@@ -1004,12 +967,12 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $message');
         }
         errorMessage = message!;
       } else {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Could not parse.');
         }
         errorMessage = codeName;
@@ -1041,20 +1004,20 @@ class QadenaHDWallet {
           claimBlindingFactor: claimBlindingFactor,
           recoverKey: recoverKey));
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("msgs: $msgs");
       }
 
       final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
 
       if (response == null) {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Tx sent successfully');
         }
         return null;
       }
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Tx errored: $response');
       }
 
@@ -1064,7 +1027,7 @@ class QadenaHDWallet {
       final codeName = e.codeName;
       final message = e.message;
 
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("message: $message");
       }
 
@@ -1075,12 +1038,12 @@ class QadenaHDWallet {
       if (match != null) {
         final message = match.group(3); // 'Signatory already exists'
 
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('parsed message: $message');
         }
         errorMessage = message!;
       } else {
-        if (common.Debug) {
+        if (common.DebugFull) {
           print('Could not parse.');
         }
         errorMessage = codeName;
@@ -1088,7 +1051,7 @@ class QadenaHDWallet {
 
       return errorMessage;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Failed: $e');
       }
       return "UNKNOWN ($e)";
@@ -1103,7 +1066,7 @@ class QadenaHDWallet {
       final incentivesRes = await chain.qadenaQuery.incentives(metadatas);
       return incentivesRes;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('Failed to get incentives: $e');
       }
       return {};

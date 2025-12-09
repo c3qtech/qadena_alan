@@ -60,7 +60,7 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
       );
       srcServiceProviderID = srcWallet.wallet.serviceProviderID;
     } catch (e) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print("wallet not found $args");
       }
       return [];
@@ -77,7 +77,7 @@ Future<List<GeneratedMessage>> msgRegisterAuthorizedSignatory(
   vshare.VShareBindData bind =
       vshare.VShareBindData.fromEmpty();
   final encryptedDocument = protoMarshalAndVShareBEncrypt(ccPubK, authorizedSignatory, bind);
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("encryptedDocument: $encryptedDocument");
   }
 

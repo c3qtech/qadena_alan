@@ -43,7 +43,7 @@ PublicPrivateKey createPublicPrivateKeypair(common.AccountType accountType,
   // Convert mnemonic to seed
   Uint8List seed = bip39.mnemonicToSeed(mnemonic);
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("Seed: ${hex.encode(seed)}");
   }
 
@@ -52,11 +52,11 @@ PublicPrivateKey createPublicPrivateKeypair(common.AccountType accountType,
 
   // Derive a specific child key (e.g., m/44'/0'/0'/0/0)
   final path = "m/44'/$qadenaCoinType'/${accountType.value}'/$ephAccountIndex/0";
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("path: $path");
   }
   final child = root.derivePath(path);
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("Child: ${child.toString()}");
   }
 
@@ -66,7 +66,7 @@ PublicPrivateKey createPublicPrivateKeypair(common.AccountType accountType,
   // Derive the public key from the private key using elliptic curve cryptography (ECC)
   final publicKey = _privateKeyToPublicKey(privateKey);
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     // Display the keys in hex format
     print("Private Key: ${hex.encode(privateKey)}");
     print("Public Key (compressed): ${hex.encode(publicKey.second)}");
@@ -176,7 +176,7 @@ Uint8List _eciesDecrypt(var rawPrivKeyHex, var encryptedData) {
 // pub is base64 encoded public key
 String encrypt(String pub, String plainText) {
   pub = pub.replaceAll('_pubk', '');
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('pub: $pub');
     print('plainText: $plainText, length: ${plainText.length}');
   }
@@ -199,7 +199,7 @@ String encrypt(String pub, String plainText) {
   }
 
   String cipherTextHex = hex.encode(cipherText);
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('plaintext encrypted hex: $cipherTextHex');
   }
 
@@ -218,7 +218,7 @@ String decrypt(String priv, String encrypted) {
     List<String> split = priv.split('_privkhex:');
 
     if (split.length != 2) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('invalid priv key: $priv');
       }
       return '';
@@ -230,7 +230,7 @@ String decrypt(String priv, String encrypted) {
     privkhex = priv;
   }
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('privkhex: $privkhex');
     print('encryptedhex: $encrypted');
   }
@@ -250,7 +250,7 @@ String decrypt(String priv, String encrypted) {
 
 Uint8List bEncrypt(String pub, Uint8List plainText) {
   pub = pub.replaceAll('_pubk', '');
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('pub: $pub');
     print('plainText: $plainText, length: ${plainText.length}');
   }
@@ -286,7 +286,7 @@ Uint8List bDecrypt(String priv, Uint8List encrypted) {
     List<String> split = priv.split('_privkhex:');
 
     if (split.length != 2) {
-      if (common.Debug) {
+      if (common.DebugFull) {
         print('invalid priv key: $priv');
       }
       return Uint8List(0);
@@ -297,7 +297,7 @@ Uint8List bDecrypt(String priv, Uint8List encrypted) {
     privkhex = split[0];
   }
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('privkhex: $privkhex');
     print('encryptedhex: ${hex.encode(encrypted)}');
   }
@@ -310,7 +310,7 @@ Uint8List bDecrypt(String priv, Uint8List encrypted) {
     return Uint8List(0);
   }
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('ciphertext decrypted hex: ${hex.encode(plaintext)}');
   }
 
@@ -337,7 +337,7 @@ String marshalAndEncrypt(String pubk, dynamic v) {
 String decryptAndUnmarshal(String priv, String encrypted, dynamic v) {
   String j = decrypt(priv, encrypted);
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('decrypted: $j');
   }
 
@@ -345,12 +345,12 @@ String decryptAndUnmarshal(String priv, String encrypted, dynamic v) {
     var m = jsonDecode(j);
     v.fromJson(m);
   } catch (e) {
-    if (common.Debug) {
+    if (common.DebugFull) {
       print("couldn't unmarshal: $e");
     }
   }
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print('unmarshalled: $j');
   }
 

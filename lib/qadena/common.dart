@@ -83,6 +83,7 @@ const String TransactionPubKType = "transaction";
 const String EnclavePubKType = "enclave";
 
 const bool Debug = true;
+const bool DebugFull = false;
 
 String nonce() {
   final random = Random();

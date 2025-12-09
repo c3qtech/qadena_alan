@@ -8,6 +8,7 @@ import 'package:pointycastle/ecc/api.dart';
 import 'package:pointycastle/ecc/curves/secp256k1.dart';
 import 'package:pointycastle/random/fortuna_random.dart';
 import 'package:pointycastle/src/utils.dart';
+import 'package:qadena_alan/qadena/common.dart' as common;
 import 'ecpedersen.dart'; // For bigIntToByteArray
 import 'encrypt.dart' as encrypt;
 
@@ -312,12 +313,12 @@ ECPoint? commitPolyCommitmentExp(
   List<ECPoint?> multiplyECPoint =
       List<ECPoint?>.filled(polyCommitment.length, null);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xs: $xs");
   }
 
   for (int i = 0; i < polyCommitment.length; i++) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("polyCommitment $i: ${polyCommitment[i].C}");
     }
     multiplyECPoint[i] = safeMultECPointBigInt(polyCommitment[i].C!, xs[i]);
@@ -349,7 +350,7 @@ InnerProductProofV2? generateInnerProductProofV2(
     VectorBase base, ECPoint c, InnerProductWitness witness, BigInt? salt) {
   int n = base.Gs.length;
   if ((n & (n - 1)) != 0) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("generateInnerProductProof: Uh oh! n not a power of 2");
       print("n: $n");
     }
@@ -392,35 +393,35 @@ InnerProductProofV2? generateInnerProductProofSubV2(
   List<ECPoint?> hRight = hs.sublist(nPrime, n);
 
   BigInt cL = innerProductQ(asLeft, bsRight, base.Q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("cL: $cL");
   }
   BigInt cR = innerProductQ(asRight, bsLeft, base.Q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("cR: $cR");
   }
 
   ECPoint? L =
       vectorCommitExp(gRight, asLeft) + vectorCommitExp(hLeft, bsRight);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("L: $L");
   }
   ECPoint? R =
       vectorCommitExp(gLeft, asRight) + vectorCommitExp(hRight, bsLeft);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("R: $R");
   }
 
   ECPoint u = base.H;
 
   L = (L! + safeMultECPointBigInt(u, cL));
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("L: $L");
   }
   ls.add(L!);
 
   R = R! + safeMultECPointBigInt(u, cR)!;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("R: $R");
   }
   rs.add(R!);
@@ -428,70 +429,70 @@ InnerProductProofV2? generateInnerProductProofSubV2(
   BigInt q = base.Q;
 
   BigInt x = computeChallengeFromSaltECPoints(q, previousChallenge, [L, R!]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("x: $x");
   }
 
   BigInt xInv = x.modInverse(q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xInv: $xInv");
   }
 
   BigInt xSquare = x.modPow(BigInt.two, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xSquare: $xSquare");
   }
 
   BigInt xSquareInv = xSquare.modInverse(q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xSquareInv: $xSquareInv");
   }
 
   List<BigInt> xs = List<BigInt>.filled(nPrime, x);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xs: $xs");
   }
 
   List<BigInt> xInverse = List<BigInt>.filled(nPrime, xInv);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("xInverse: $xInverse");
   }
 
   List<ECPoint?> gPrime = vectorSumECPointWithECPoint(
       vectorHadamardECPointQ(gLeft, xInverse, q),
       vectorHadamardECPointQ(gRight, xs, q));
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("gPrime: $gPrime");
   }
 
   List<ECPoint?> hPrime = vectorSumECPointWithECPoint(
       vectorHadamardECPointQ(hLeft, xs, q),
       vectorHadamardECPointQ(hRight, xInverse, q));
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hPrime: $hPrime");
   }
 
   List<BigInt> aPrime = vectorAddQ(
       vectorMulScalarQ(asLeft, x, q), vectorMulScalarQ(asRight, xInv, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("aPrime: $aPrime");
   }
 
   List<BigInt> bPrime = vectorAddQ(
       vectorMulScalarQ(bsLeft, xInv, q), vectorMulScalarQ(bsRight, x, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("bPrime: $bPrime");
   }
 
   ECPoint? PPrime = (P + safeMultECPointBigInt(L, xSquare))! +
       safeMultECPointBigInt(R, xSquareInv);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("PPrime: $PPrime");
   }
 
   VectorBase basePrime =
       VectorBase(Gs: gPrime, Hs: hPrime, G: base.G, H: u, Q: q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("basePrime: $basePrime");
   }
 
@@ -540,13 +541,13 @@ List<BigInt> reverse(List<BigInt> list) {
 
 RangeProofV2 newRangeProofV2(
     VectorBase vectorBase, PedersenCommit commitment, PedersenCommit witness) {
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("commitment: $commitment");
   }
 
   BigInt number = witness.A!;
   BigInt q = vectorBase.Q;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("q: $q");
   }
 
@@ -554,20 +555,20 @@ RangeProofV2 newRangeProofV2(
   List<BigInt> aL =
       reverse(strToBigIntArray(padLeft(number.toRadixString(2), "0", n)));
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("aL: $aL");
   }
 
   List<BigInt> aR = List<BigInt>.filled(n, -BigInt.one);
   aR = vectorAddQ(aL, aR, q);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("aR: $aR");
   }
 
   BigInt alpha = randomNumber256();
   ECPoint? a = vectorBaseCommitGExpHExpBlinding(vectorBase, aL, aR, alpha);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("a: $a");
   }
 
@@ -576,66 +577,66 @@ RangeProofV2 newRangeProofV2(
   BigInt rho = randomNumber256();
 
   ECPoint? s = vectorBaseCommitGExpHExpBlinding(vectorBase, sL, sR, rho);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("s: $s");
   }
 
   BigInt y = computeChallengeFromECPoints(q, [commitment.C!, a!, s!]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("y: $y");
   }
 
   List<BigInt> ys = generateSequence1_x_xx_xxx(n, y);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("ys: $ys");
   }
 
   BigInt z = computeChallengeFromInts(q, [y]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("z: $z");
   }
 
   BigInt zSquared = z.modPow(BigInt.two, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("zSquared: $zSquared");
   }
 
   BigInt three = BigInt.from(3);
 
   BigInt zCubed = z.modPow(three, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("zCubed: $zCubed");
   }
 
   BigInt negz = -z;
   List<BigInt> l0 = vectorAddScalarQ(aL, negz, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("l0: $l0");
   }
 
   List<BigInt> twos = powerVectorQ(n, BigInt.two, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("twos: $twos");
   }
 
   List<BigInt> l1 = sL;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("l1: $l1");
   }
 
   List<BigInt> twoTimesZSquared = vectorMulScalarQ(twos, zSquared, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("twoTimesZSquared: $twoTimesZSquared");
   }
 
   List<BigInt> r0 = vectorAddQ(
       vectorHadamardQ(ys, vectorAddScalarQ(aR, z, q), q), twoTimesZSquared, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("r0: $r0");
   }
 
   List<BigInt> r1 = vectorHadamardQ(sR, ys, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("r1: $r1");
   }
 
@@ -645,119 +646,119 @@ RangeProofV2 newRangeProofV2(
   BigInt zCubedShiftLeft = zCubed << n;
   BigInt zCubedShiftLeftSubZCubed = zCubedShiftLeft - zCubed;
   BigInt k = sumysMultiplyZSubZSquared - zCubedShiftLeftSubZCubed;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("k: $k");
   }
 
   BigInt t0 = (k + (zSquared * number)) % q;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("t0: $t0");
   }
 
   BigInt l1r0innerproduct = innerProductQ(l1, r0, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("l1r0innerproduct: $l1r0innerproduct");
   }
   BigInt l0r1innerproduct = innerProductQ(l0, r1, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("l0r1innerproduct: $l0r1innerproduct");
   }
   BigInt t1 = l1r0innerproduct + l0r1innerproduct;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("t1: $t1");
   }
 
   BigInt t2 = innerProductQ(l1, r1, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("t2: $t2");
   }
 
   List<PedersenCommit> polyCommitment = createPolyCommitment(t0, [t1, t2]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     for (int i = 0; i < polyCommitment.length; i++) {
       print("polyCommitment $i: ${polyCommitment[i]}");
     }
   }
 
   BigInt x = computeChallengeFromPedersenCommit(q, z, polyCommitment);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("x: $x");
   }
 
   PedersenCommit evalCommit = evaluatePolyCommitment(polyCommitment, x);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("evalCommit: $evalCommit");
   }
 
   BigInt tauX = (zSquared * witness.X! + evalCommit.X!) % q;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("tauX: $tauX");
   }
 
   BigInt t = evalCommit.A!;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("t: $t");
   }
 
   BigInt mu = (alpha + (rho * x)) % q;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("mu: $mu");
   }
 
   BigInt uChallenge = computeChallengeFromInts(q, [x, tauX, mu, t]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("uChallenge: $uChallenge");
   }
 
   ECPoint? u = safeMultECPointBigInt(vectorBase.G!, uChallenge);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("u: $u");
   }
 
   List<ECPoint?> hs = vectorBase.Hs;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hs: $hs");
   }
 
   List<ECPoint?> gs = vectorBase.Gs;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("gs: $gs");
   }
 
   List<ECPoint?> hPrimes =
       vectorHadamardECPointQ(hs, vectorModInverseQ(ys, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hPrimes: $hPrimes");
   }
 
   List<BigInt> l = vectorAddQ(l0, vectorMulScalarQ(l1, x, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("l: $l");
   }
 
   List<BigInt> r = vectorAddQ(r0, vectorMulScalarQ(r1, x, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("r: $r");
   }
 
   List<BigInt> hExp =
       vectorAddQ(vectorMulScalarQ(ys, z, q), twoTimesZSquared, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hExp: $hExp");
   }
 
   ECPoint hprimescommithexp = vectorCommitExp(hPrimes, hExp);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hprimescommithexp: $hprimescommithexp");
   }
 
   ECPoint? umultiplyt = safeMultECPointBigInt(u!, t);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("umultiplyt: $umultiplyt");
   }
 
   ECPoint? hmultiplymu = safeMultECPointBigInt(vectorBase.H, mu);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hmultiplymu: $hmultiplymu");
   }
 
@@ -766,31 +767,31 @@ RangeProofV2 newRangeProofV2(
   ECPoint? gssum = vectorSumECPoint(gs);
 
   ECPoint? gssummulnegz = safeMultECPointBigInt(gssum!, negz);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("gssummulnegz $gssummulnegz");
   }
 
   ECPoint? P = ((((a + smultiplyx!)! + gssummulnegz!)! + hprimescommithexp)! +
           umultiplyt)! -
       hmultiplymu!;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("P: $P");
   }
 
   VectorBase primeBase =
       VectorBase(Gs: gs, Hs: hPrimes, G: vectorBase.G, H: u, Q: q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("primeBase: $primeBase");
   }
 
   InnerProductWitness innerProductWitness = InnerProductWitness(l, r);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("innerProductWitness: $innerProductWitness");
   }
 
   InnerProductProofV2? proof = generateInnerProductProofV2(
       primeBase, P!, innerProductWitness, uChallenge);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("proof: $proof");
 
     print("y: $y");
@@ -825,47 +826,47 @@ bool verifyRangeProofV2(
   List<ECPoint> points = [input.C!, a, s];
 
   BigInt y = computeChallengeFromECPoints(q, points);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("y: $y");
   }
 
   List<BigInt> ys = generateSequence1_x_xx_xxx(n, y);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("ys: $ys");
   }
 
   BigInt z = computeChallengeFromInts(q, [y]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("z: $z");
   }
 
   BigInt zSquared = z.modPow(BigInt.two, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("zSquared: $zSquared");
   }
 
   BigInt zCubed = z.modPow(BigInt.from(3), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("zCubed: $zCubed");
   }
 
   List<BigInt> twos = powerVectorQ(n, BigInt.two, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("twos: $twos");
   }
 
   List<BigInt> twoTimesZSquared = vectorMulScalarQ(twos, zSquared, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("twoTimesZSquared: $twoTimesZSquared");
   }
 
   List<PedersenCommit> tCommits = proof.TCommits;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("tCommits: $tCommits");
   }
 
   BigInt x = computeChallengeFromPedersenCommit(q, z, tCommits);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("x: $x");
   }
 
@@ -882,41 +883,41 @@ bool verifyRangeProofV2(
 
   PedersenCommit lhsPC = PedersenCommit(t - k, tauX);
   ECPoint lhs = lhsPC.C!;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("lhs: $lhs");
   }
 
   BigInt xSquared = x.modPow(BigInt.two, q);
 
   ECPoint? rhsx = commitPolyCommitmentExp(tCommits, [x, xSquared]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("rhsx: $rhsx");
   }
 
   ECPoint? testrhsx = commitPolyCommitmentExp(tCommits.sublist(0, 1), [x]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("testrhsx: $testrhsx");
   }
 
   ECPoint? rhs = rhsx! + safeMultECPointBigInt(input.C!, zSquared);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("rhs: $rhs");
   }
 
   if (lhs != rhs) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("Range proof verification failed");
     }
     return false;
   }
 
   BigInt uChallenge = computeChallengeFromInts(q, [x, tauX, mu, t]);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("uChallenge: $uChallenge");
   }
 
   ECPoint? u = safeMultECPointBigInt(vectorBase.G!, uChallenge);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("u: $u");
   }
 
@@ -924,13 +925,13 @@ bool verifyRangeProofV2(
   List<ECPoint?> gs = vectorBase.Gs;
   List<ECPoint?> hPrimes =
       vectorHadamardECPointQ(hs, vectorModInverseQ(ys, q), q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hPrimes: $hPrimes");
   }
 
   List<BigInt> hExp =
       vectorAddQ(vectorMulScalarQ(ys, z, q), twoTimesZSquared, q);
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("hExp: $hExp");
   }
 
@@ -944,7 +945,7 @@ bool verifyRangeProofV2(
                   vectorCommitExp(hPrimes, hExp))! +
               safeMultECPointBigInt(u!, t))! -
           safeMultECPointBigInt(vectorBase.H, mu)!;
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("P: $P");
   }
 
@@ -981,7 +982,7 @@ bool verifyInnerProductProofV2(
         safeMultECPointBigInt(r, xInv.modPow(BigInt.two, q));
     previousChallenge = x;
   }
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("challenges: $challenges");
   }
 
@@ -1008,7 +1009,7 @@ bool verifyInnerProductProofV2(
     }
   }
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     for (int i = 0; i < otherExponents.length; i++) {
       print("otherExponents[$i]: ${otherExponents[i]}");
     }
@@ -1030,7 +1031,7 @@ bool verifyInnerProductProofV2(
     challengeVector2[i] = ithChallenge;
   }
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     for (int i = 0; i < challengeVector2.length; i++) {
       print("challengeVector2[$i]: ${challengeVector2[i]}");
     }
@@ -1039,7 +1040,7 @@ bool verifyInnerProductProofV2(
   List<BigInt> challengeVector = otherExponents;
 
   if (ListEquality().equals(challengeVector, challengeVector2)) {
-    if (debug && debugFull) {
+    if (common.DebugFull) {
       print("Challenge vectors are equal");
     }
   } else {
@@ -1048,7 +1049,7 @@ bool verifyInnerProductProofV2(
 
   List<BigInt> sleft = multiplySlice(challengeVector, proof.A);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     for (int i = 0; i < sleft.length; i++) {
       print("sleft[$i]: ${sleft[i]}");
     }
@@ -1057,7 +1058,7 @@ bool verifyInnerProductProofV2(
   List<BigInt> reversedChallengeVector = challengeVector.reversed.toList();
   List<BigInt> sright = multiplySlice(reversedChallengeVector, proof.B);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     for (int i = 0; i < sright.length; i++) {
       print("sright[$i]: ${sright[i]}");
     }
@@ -1070,7 +1071,7 @@ bool verifyInnerProductProofV2(
 
   ECPoint? cProof = (g + h)! + safeMultECPointBigInt(params.H, prod);
 
-  if (debug && debugFull) {
+  if (common.DebugFull) {
     print("c: $c");
     print("cProof: $cProof");
   }

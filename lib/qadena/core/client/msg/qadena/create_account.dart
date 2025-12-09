@@ -65,7 +65,7 @@ Future<List<GeneratedMessage>> msgCreateAccount(
   cmsg.pubKType = 'credential';
   cmsg.pubK = fromPubKCredential;
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("tmsg: $tmsg");
     print("cmsg: $cmsg");
   }

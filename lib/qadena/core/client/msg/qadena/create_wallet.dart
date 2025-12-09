@@ -65,7 +65,7 @@ Future<List<GeneratedMessage>> msgCreateWallet(
   cmsg.pubKType = 'credential';
   cmsg.pubK = fromPubKCredential;
 
-  if (common.Debug) {
+  if (common.DebugFull) {
     print("tmsg: $tmsg");
     print("cmsg: $cmsg");
   }
@@ -177,7 +177,9 @@ Future<List<GeneratedMessage>> msgCreateWallet(
             acceptValidatedCredentialsVShareBind);
         final verified = vShareBVerifyAll(acceptValidatedCredentialsVShareBind,
             encAcceptValidatedCredentialsVShare!);
-        print("verified: $verified");
+        if (common.DebugFull) {
+          print("verified: $verified");
+        }
       }
 
 
@@ -188,7 +190,7 @@ Future<List<GeneratedMessage>> msgCreateWallet(
     var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(
         mainWalletQadenaWalletAmount.value!.walletAmountVShareBind);
 
-    if (common.Debug) {
+    if (common.DebugFull) {
       print("privkeyHex: ${args.mainWallet!.privkeyHex}");
       print("pubkeyB64: ${args.mainWallet!.pubkeyB64}");
       print("unprotoWalletAmountVShareBind: $unprotoWalletAmountVShareBind");
@@ -204,7 +206,7 @@ Future<List<GeneratedMessage>> msgCreateWallet(
     if (!success) {
       throw Exception('Failed to decrypt wallet amount');
     }
-    if (common.Debug) {
+    if (common.DebugFull) {
       print("decrypted wallet amount: $ewa");
     }
 
