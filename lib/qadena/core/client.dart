@@ -7,7 +7,7 @@ import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:qadena_alan/utils/bip_39.dart';
 import 'package:qadena_alan/wallet/network_info.dart';
-import 'package:qadena_alan/wallet/wallet.dart';
+import 'package:qadena_alan/wallet/wallet.dart' as qadenaWallet;
 import 'package:qadena_alan/alan.dart' as alan;
 import 'package:protobuf/protobuf.dart';
 import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/feegrant.pb.dart';
@@ -23,6 +23,7 @@ import 'package:qadena_alan/qadena/core/client/msg/qadena/protect_key.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
+import 'package:web3dart/web3dart.dart';
 
 
 //import 'package:qadena_alan/proto/qadena/qadena/export.dart' as qadenaproto;
@@ -100,9 +101,9 @@ class QadenaClient {
               walletType: AccountType.credentialWalletType.value, addressIdx: 1)
           .toString();
       var txWallet =
-          Wallet.derive(seedPhrase, networkInfo, derivationPath: txpath);
+          qadenaWallet.Wallet.derive(seedPhrase, networkInfo, derivationPath: txpath);
       var cxWallet =
-          Wallet.derive(seedPhrase, networkInfo, derivationPath: cxpath);
+          qadenaWallet.Wallet.derive(seedPhrase, networkInfo, derivationPath: cxpath);
 
       return LocalAccountResponse(
         mnemonic: seedPhrase,
@@ -424,54 +425,78 @@ class QadenaClient {
             print("binding credentials for email and phone");
           }
 
-          // use naming service to bind credentials
-          final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
-            chain: chain,
-            ephtxwallet: ephWallet.transactionWallet,
-            cxwallet: mainWallet.credentialWallet,
-            credentialType: common.EmailContactCredentialType,
-          ));
-
-          final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
-            chain: chain,
-            ephtxwallet: ephWallet.transactionWallet,
-            cxwallet: mainWallet.credentialWallet,
-            credentialType: common.PhoneContactCredentialType,
-          ));
-
-          String encodedWalletCredentials = jsonEncode([
-            {
-              "email": emailRef.value,
-              "seedPhrase": seedPhrase.toString(),
-              "ephemeralAccountIndex": ephIndex
-            }
-          ]);
-
-          // protect the key
-          final protectKeyMsg = await msgProtectKey(MsgProtectKeyArgs(
-            chain: chain,
-            ephtxwallet: ephWallet.transactionWallet,
-            mnemonic: seedPhrase.join(' '),
-            threshold: recoveryThreshold,
-            recoveryPartners: recoveryPartners,
-          ));
-
-          final bindAndProtectTxHashRef = StringRef("");
-          final bindAndProtectResponse = await QadenaClientTx.broadcastTx(
-            ephWallet.txAcct, 
-            [bindEmailMsg, bindPhoneMsg, protectKeyMsg], 
-            txHashRef: bindAndProtectTxHashRef
-          );
-
-          if (bindAndProtectResponse == null) {
+          if (recoveryThreshold > 0) {
             if (common.Debug) {
-              print('Accepted: bind credentials and protect key, TxHash: ${bindAndProtectTxHashRef.value}');
+              print("binding credentials for email and phone with recovery");
+            }
+              
+            // use naming service to bind credentials
+            final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
+              chain: chain,
+              ephtxwallet: ephWallet.transactionWallet,
+              cxwallet: mainWallet.credentialWallet,
+              credentialType: common.EmailContactCredentialType,
+            ));
+
+            final bindPhoneMsg = await msgBindCredential(MsgBindCredentialArgs(
+              chain: chain,
+              ephtxwallet: ephWallet.transactionWallet,
+              cxwallet: mainWallet.credentialWallet,
+              credentialType: common.PhoneContactCredentialType,
+            ));
+
+            String encodedWalletCredentials = jsonEncode([
+              {
+                "email": emailRef.value,
+                "seedPhrase": seedPhrase.toString(),
+                "ephemeralAccountIndex": ephIndex
+              }
+            ]);
+
+            // protect the key
+            final protectKeyMsg = await msgProtectKey(MsgProtectKeyArgs(
+              chain: chain,
+              ephtxwallet: ephWallet.transactionWallet,
+              mnemonic: encodedWalletCredentials,
+              threshold: recoveryThreshold,
+              recoveryPartners: recoveryPartners,
+            ));
+
+            final bindAndProtectTxHashRef = StringRef("");
+            final bindAndProtectResponse = await QadenaClientTx.broadcastTx(
+              ephWallet.txAcct, 
+              [bindEmailMsg, bindPhoneMsg, protectKeyMsg], 
+              txHashRef: bindAndProtectTxHashRef
+            );
+
+            if (bindAndProtectResponse == null) {
+              if (common.Debug) {
+                print('Accepted: bind credentials and protect key, TxHash: ${bindAndProtectTxHashRef.value}');
+              }
+            } else {
+              if (common.Debug) {
+                print("REJECTED: bind credentials and protect key $bindAndProtectResponse");
+              }
+              return AccountResponse.fromErrorMessage("Failed to bind credentials and protect key");
+            }
+
+            if (common.Debug) {
+              print("checking bind credentials and protect key results");
+            }
+            if ((response = await QadenaClientTx.checkTxResult(txSender, bindAndProtectTxHashRef.value)) == null) {
+              if (common.Debug) {
+                print("bind credentials and protect key success");
+              }
+            } else {
+              if (common.Debug) {
+                print("REJECTED:  bind credentials and protect key $response");
+              }
+              return AccountResponse.fromErrorMessage(response!);
             }
           } else {
             if (common.Debug) {
-              print("REJECTED: bind credentials and protect key $bindAndProtectResponse");
+              print("not binding credentials nor protecting key");
             }
-            return AccountResponse.fromErrorMessage("Failed to bind credentials and protect key");
           }
         } else {
           if (common.Debug) {
