@@ -305,7 +305,7 @@ Uint8List? protoMarshalAndVShareBEncrypt(
   List<VSharedSecret> sharedSecrets = List.generate(2, (i) {
     VSharedSecret secret = generateVSharedSecret();
     // Print shared secret
-    if (Debug) {
+    if (DebugFull) {
       print("S1: $i, ${secret.s1}");
       print("S2: $i, ${secret.s2}");
     }
@@ -323,20 +323,20 @@ Uint8List? protoMarshalAndVShareBEncrypt(
     return null;
   }
 
-  if (Debug) {
+  if (DebugFull) {
     print("sharedSecretBytes: ${hex.encode(sharedSecretBytes)}");
   }
 
   final sharedSecretHash = SHA256Digest().process(sharedSecretBytes);
 
-  if (Debug) {
+  if (DebugFull) {
     print("sharedSecretHash: ${hex.encode(sharedSecretHash)}");
   }
 
   // Encrypt the serialized protobuf message
   Uint8List cipherText = sharedSecretEncrypt(sharedSecretHash, vBytes);
 
-  if (Debug) {
+  if (DebugFull) {
     print("ciphertext encrypted hex: ${hex.encode(cipherText)}");
   }
 
@@ -364,7 +364,9 @@ bool vShareBDecryptAndProtoUnmarshal(String priv, String pubK,
     List<String> split = priv.split('_privkhex:');
 
     if (split.length != 2) {
-      print('invalid priv key: $priv');
+      if (Debug) {
+        print('invalid priv key: $priv');
+      }
       return false;
     }
 

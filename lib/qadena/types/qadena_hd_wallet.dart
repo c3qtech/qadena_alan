@@ -19,6 +19,7 @@ import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/sign_document.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
+import 'package:qadena_alan/qadena/core/client/msg/qadena/protect_key.dart';
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/qadena/core/client/query/name_service_query.dart';
@@ -30,7 +31,7 @@ import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/common.dart' as common;
 import 'package:qadena_alan/qadena/types/shamir.dart';
-import 'package:qadena_alan/qadena/encrypt.dart' show bDecryptAndUnmarshal, marshalAndBEncrypt;
+import 'package:qadena_alan/qadena/encrypt.dart' show bDecryptAndUnmarshal;
 
 
 class WalletResponse {
@@ -512,209 +513,17 @@ class QadenaHDWallet {
       return "NOT_EPHEMERAL";
     }
 
-    final recoveryPartnersCount = recoveryPartners.length;
-
-    if (recoveryPartnersCount < threshold) {
-      return "NOT_ENOUGH_RECOVERY_PARTNERS";
-    }
-
-    if (recoveryPartnersCount > 1 && threshold < 2) {
-      return "THRESHOLD_NEEDS_TO_BE_AT_LEAST_2";
-    }
-
-    final walletPubKs = <String>[];
-    final walletIDs = <String>[];
-
-    // Find all the pubk of the recovery partners
-    for (int i = 0; i < recoveryPartners.length; i++) {
-      final id = recoveryPartners[i];
-      String? walletPubK;
-      String? walletID;
-      bool isPioneerID = false;
-      bool isServiceProviderID = false;
-
-      // Check if it's an address
-      try {
-        // Try to get wallet by address
-        final walletResponse = await chain.qadenaQuery.queryClient.wallet(
-          QueryGetWalletRequest(walletID: id),
-          options: CallOptions(timeout: Duration(seconds: 4)),
-        );
-        walletID = walletResponse.wallet.walletID;
-
-        if (common.DebugFull) {
-          print("GetAddress success for $id");
-        }
-
-        // Check if it's a pioneer ID
-        try {
-          await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
-          if (common.DebugFull) {
-            print("it's a pioneer ID");
-          }
-          isPioneerID = true;
-        } catch (e) {
-          // Not a pioneer ID, check if it's a service provider ID
-          try {
-            await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
-            if (common.DebugFull) {
-              print("it's a service provider ID");
-            }
-            isServiceProviderID = true;
-          } catch (e) {
-            if (common.DebugFull) {
-              print("it's neither a pioneer ID nor service provider ID");
-            }
-          }
-        }
-      } catch (e) {
-        if (common.DebugFull) {
-          print("GetAddress failed for $id");
-        }
-
-        // Check if it's a pioneer name
-        try {
-          final result = await common.clientGetIntervalPublicKey(chain, id, common.PioneerNodeType);
-          walletID = result.item1;
-          walletPubK = result.item2;
-          if (common.DebugFull) {
-            print("GetIntervalPublicKey success, it's a pioneer ID");
-          }
-          isPioneerID = true;
-        } catch (e) {
-          if (common.DebugFull) {
-            print("GetIntervalPublicKey pioneer failed");
-          }
-
-          // Check if it's a service provider name
-          try {
-            final result = await common.clientGetIntervalPublicKey(chain, id, common.ServiceProviderNodeType);
-            walletID = result.item1;
-            walletPubK = result.item2;
-            if (common.DebugFull) {
-              print("it's a service provider ID");
-            }
-            isServiceProviderID = true;
-          } catch (e) {
-            if (common.DebugFull) {
-              print("it's neither a pioneer ID nor service provider ID");
-            }
-
-            // Check via naming service - phone
-            try {
-              walletID = await common.clientFindSubWallet(chain, id, common.PhoneContactCredentialType);
-              if (common.DebugFull) {
-                print("FindSubWallet 'phone' success");
-              }
-            } catch (e) {
-              if (common.DebugFull) {
-                print("FindSubWallet 'phone' failed");
-              }
-
-              // Check via naming service - email
-              try {
-                walletID = await common.clientFindSubWallet(chain, id, common.EmailContactCredentialType);
-                if (common.DebugFull) {
-                  print("FindSubWallet 'email' success");
-                }
-              } catch (e) {
-                if (common.DebugFull) {
-                  print("FindSubWallet 'email' failed");
-                }
-                return "RECOVERY_PARTNER_NOT_FOUND: $id";
-              }
-            }
-          }
-        }
-      }
-
-      // Get public key for the wallet
-      try {
-        walletPubK = await common.clientGetPublicKey(chain, walletID!, common.EnclavePubKType);
-        if (common.DebugFull) {
-          print("GetPublicKey 'enclave' success");
-        }
-      } catch (e) {
-        if (common.DebugFull) {
-          print("GetPublicKey 'enclave' failed");
-        }
-
-        try {
-          walletPubK = await common.clientGetPublicKey(chain, walletID!, common.CredentialPubKType);
-          if (common.DebugFull) {
-            print("GetPublicKey 'credential' success");
-          }
-        } catch (e) {
-          if (common.DebugFull) {
-            print("GetPublicKey 'credential' failed");
-          }
-          return "PUBLIC_KEY_NOT_FOUND: $id";
-        }
-      }
-
-      if (common.DebugFull) {
-        print("isPioneerID: $isPioneerID");
-        print("isServiceProviderID: $isServiceProviderID");
-        print("walletID: $walletID, walletPubK: $walletPubK");
-      }
-
-      if (isPioneerID || isServiceProviderID) {
-        walletIDs.add(id);
-      } else {
-        walletIDs.add(walletID!);
-      }
-
-      walletPubKs.add(walletPubK!);
-    }
-
-    // Check for duplicates
-    if (_hasDuplicates(walletIDs)) {
-      return "DUPLICATES_IN_WALLET_IDS_NOT_ALLOWED";
-    }
-
-    final recoverShares = <RecoverShare>[];
-
-    if (recoveryPartnersCount == 1) {
-      // Only one recovery partner - no need for Shamir
-      final encShare = marshalAndBEncrypt(walletPubKs[0], mnemonic);
-      recoverShares.add(RecoverShare(
-        walletID: walletIDs[0],
-        encWalletPubKShare: encShare,
-      ));
-    } else {
-      // Create Shamir shares using sss256
-      final shares = split(
-        utf8.encode(mnemonic),
-        recoveryPartnersCount,
-        threshold,
-      );
-
-      if (common.DebugFull) {
-        print("threshold: $threshold");
-        print("mnemonic: $mnemonic");
-      }
-
-      for (int i = 0; i < shares.length; i++) {
-        // print hex share
-        final shareString = shares[i];
-        if (common.DebugFull) {
-          print("shareString: $shareString");
-        }
-        final encShare = marshalAndBEncrypt(walletPubKs[i], base64Encode(shareString));
-        recoverShares.add(RecoverShare(
-          walletID: walletIDs[i],
-          encWalletPubKShare: encShare,
-        ));
-      }
-    }
-
     try {
-      final msg = MsgProtectPrivateKey(
-        creator: transactionWallet.address,
+      // Create the MsgProtectPrivateKey message using msgProtectKey
+      final msg = await msgProtectKey(MsgProtectKeyArgs(
+        chain: chain,
+        ephtxwallet: transactionWallet,
+        mnemonic: mnemonic,
         threshold: threshold,
-        recoverShare: recoverShares,
-      );
+        recoveryPartners: recoveryPartners,
+      ));
 
+      // Broadcast the transaction
       final response = await QadenaClientTx.broadcastTx(txAcct, [msg]);
 
       if (response == null) {
@@ -758,7 +567,7 @@ class QadenaHDWallet {
       if (common.DebugFull) {
         print('Failed: $e');
       }
-      return "UNKNOWN";
+      return "UNKNOWN: $e";
     }
   }
 
@@ -880,19 +689,6 @@ class QadenaHDWallet {
       return RecoverKeyResponse(errorMessage: "RECOVER_EXCEPTION: $e");
     }
   }
-
-  /// Helper method to check for duplicates in a list
-  bool _hasDuplicates(List<String> list) {
-    final seen = <String>{};
-    for (final item in list) {
-      if (seen.contains(item)) {
-        return true;
-      }
-      seen.add(item);
-    }
-    return false;
-  }
-  
 
   Future<String?> signDocument(
       String document, String hashHex, String newHashHex) async {
