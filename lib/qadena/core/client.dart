@@ -453,6 +453,8 @@ class QadenaClient {
               }
             ]);
 
+            print("encoded wallet credentials: $encodedWalletCredentials");
+
             // protect the key
             final protectKeyMsg = await msgProtectKey(MsgProtectKeyArgs(
               chain: chain,

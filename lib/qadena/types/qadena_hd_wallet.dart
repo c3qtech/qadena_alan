@@ -310,7 +310,7 @@ class QadenaHDWallet {
       return authorizedSignatory.walletID;
     } catch (e) {
       if (common.Debug) {
-        print("signatories not found");
+        print("authorized signatories not found");
       }
       return [];
     }

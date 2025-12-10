@@ -348,18 +348,15 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
       );
       msgs.add(msg);
     } else {
+      EncryptableSingleContactInfo pSCI = encryptables[i] as EncryptableSingleContactInfo;
       if (credentialTypes[i] == EmailContactCredentialType) {
-        if (common.Debug  ) {
-          print("email: ${credentialIDs[i].value}");
-        }
         if (args.emailRef != null) {
           if (common.Debug) {
-            print("setting email ref: ${credentialIDs[i].value}");
+            print("setting email ref: ${pSCI.details.contact}");
           }
-          args.emailRef!.value = credentialIDs[i].value;
+          args.emailRef!.value = pSCI.details.contact;
         }
       }
-      EncryptableSingleContactInfo pSCI = encryptables[i] as EncryptableSingleContactInfo;
       final msg = await createClaimContactInfoMessage(
         args.chain,
         findCredentialPC,
