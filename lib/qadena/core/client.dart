@@ -228,7 +228,7 @@ class QadenaClient {
     return true;
   }
 
-  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress, List<String> recoveryPartners, int recoveryThreshold) async {
+  Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress, List<String> recoveryPartners, int recoveryThreshold, {void Function(String message)? onProgress, String? onProgressBaseMessage}) async {
     try {
       var seedPhrase = mnemonic ?? Bip39.generateMnemonic(strength: 256);
       serviceProviderID = serviceProviderID ?? "";
@@ -259,6 +259,8 @@ class QadenaClient {
           return AccountResponse.fromErrorMessage(ephFeeGrantError);
         }
       }
+
+      onProgress?.call('$onProgressBaseMessage Creating wallet...');
 
       final mainWalletAmountRef = WalletAmountRef(null);
 
@@ -385,6 +387,9 @@ class QadenaClient {
       if (common.Debug) {
         print("checking main create wallet results");
       }
+
+      onProgress?.call('$onProgressBaseMessage Waiting for main wallet...');
+
       if ((response = await QadenaClientTx.checkTxResult(txSender, mainCWTxHashRef.value)) == null) {
         if (common.Debug) {
           print("main create wallet success");
@@ -399,6 +404,9 @@ class QadenaClient {
       if (common.Debug) {
         print("checking eph create wallet results");
       }
+
+      onProgress?.call('$onProgressBaseMessage Waiting for sub wallet...');
+
       if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
         if (common.Debug) {
           print("eph create wallet success");
@@ -416,6 +424,9 @@ class QadenaClient {
         if (common.Debug) {
           print("checking claim credentials results");
         }
+
+        onProgress?.call('$onProgressBaseMessage Waiting for credentials...');
+
         if ((response = await QadenaClientTx.checkTxResult(txSender, claimCredentialsTxHashRef.value)) == null) {
           if (common.Debug) {
             print("claim credential success");
@@ -485,6 +496,8 @@ class QadenaClient {
             if (common.Debug) {
               print("checking bind credentials and protect key results");
             }
+            onProgress?.call('$onProgressBaseMessage Protecting your wallet via Social Recovery...');
+
             if ((response = await QadenaClientTx.checkTxResult(txSender, bindAndProtectTxHashRef.value)) == null) {
               if (common.Debug) {
                 print("bind credentials and protect key success");
@@ -510,6 +523,7 @@ class QadenaClient {
         if (common.Debug) {
           print("checking register authorized signatory results");
         }
+            onProgress?.call('$onProgressBaseMessage Waiting for authorized signatory registration...');
         if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
           if (common.Debug) {
             print("register authorized signatory success");
