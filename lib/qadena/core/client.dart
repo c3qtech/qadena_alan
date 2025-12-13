@@ -295,6 +295,7 @@ class QadenaClient {
         return AccountResponse.fromErrorMessage(mainCWResponse);
       }
 
+      onProgress?.call('$onProgressBaseMessage Creating sub wallet...');
 
       final ephCWMsgs = await msgCreateWallet(MsgCreateWalletArgs(
         chain: chain,
@@ -334,6 +335,8 @@ class QadenaClient {
         print("claimAmount or claimBlindingFactor is zero, not claiming nor registering authorized signatory");
       } else {
 
+        onProgress?.call('$onProgressBaseMessage Claiming credentials...');
+
         final claimCredentialsMsgs = await msgClaimCredentials(MsgClaimCredentialsArgs(
           chain: chain,
           txwallet: mainWallet.transactionWallet,
@@ -358,6 +361,8 @@ class QadenaClient {
           }
           return AccountResponse.fromErrorMessage(claimCredentialsResponse);
         }
+
+        onProgress?.call('$onProgressBaseMessage Registering authorized signatory...');
 
         final rasMsgs =
               await msgRegisterAuthorizedSignatory(MsgRegisterAuthorizedSignatoryArgs(
@@ -388,7 +393,7 @@ class QadenaClient {
         print("checking main create wallet results");
       }
 
-      onProgress?.call('$onProgressBaseMessage Waiting for main wallet...');
+      onProgress?.call('$onProgressBaseMessage Waiting for main wallet creation to finish...');
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, mainCWTxHashRef.value)) == null) {
         if (common.Debug) {
@@ -405,7 +410,7 @@ class QadenaClient {
         print("checking eph create wallet results");
       }
 
-      onProgress?.call('$onProgressBaseMessage Waiting for sub wallet...');
+      onProgress?.call('$onProgressBaseMessage Waiting for sub wallet creation to finish...');
 
       if ((response = await QadenaClientTx.checkTxResult(txSender, ephCWTxHashRef.value)) == null) {
         if (common.Debug) {
@@ -425,7 +430,7 @@ class QadenaClient {
           print("checking claim credentials results");
         }
 
-        onProgress?.call('$onProgressBaseMessage Waiting for credentials...');
+        onProgress?.call('$onProgressBaseMessage Waiting for credentials to finish...');
 
         if ((response = await QadenaClientTx.checkTxResult(txSender, claimCredentialsTxHashRef.value)) == null) {
           if (common.Debug) {
@@ -441,6 +446,8 @@ class QadenaClient {
               print("binding credentials for email and phone with recovery");
             }
               
+            onProgress?.call('$onProgressBaseMessage Protecting DSC with Social Recovery...');
+
             // use naming service to bind credentials
             final bindEmailMsg = await msgBindCredential(MsgBindCredentialArgs(
               chain: chain,
@@ -496,7 +503,7 @@ class QadenaClient {
             if (common.Debug) {
               print("checking bind credentials and protect key results");
             }
-            onProgress?.call('$onProgressBaseMessage Protecting your wallet via Social Recovery...');
+            onProgress?.call('$onProgressBaseMessage Waiting for for DSC protection to finish...');
 
             if ((response = await QadenaClientTx.checkTxResult(txSender, bindAndProtectTxHashRef.value)) == null) {
               if (common.Debug) {
@@ -523,7 +530,7 @@ class QadenaClient {
         if (common.Debug) {
           print("checking register authorized signatory results");
         }
-            onProgress?.call('$onProgressBaseMessage Waiting for authorized signatory registration...');
+        onProgress?.call('$onProgressBaseMessage Waiting for authorized signatory registration...');
         if ((response = await QadenaClientTx.checkTxResult(txSender, rasTxHashRef.value)) == null) {
           if (common.Debug) {
             print("register authorized signatory success");
