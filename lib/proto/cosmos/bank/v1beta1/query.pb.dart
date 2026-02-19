@@ -211,9 +211,7 @@ class QueryAllBalancesRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $4.PageRequest ensurePagination() => $_ensure(1);
 
-  ///  resolve_denom is the flag to resolve the denom into a human-readable form from the metadata.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// resolve_denom is the flag to resolve the denom into a human-readable form from the metadata.
   @$pb.TagNumber(3)
   $core.bool get resolveDenom => $_getBF(2);
   @$pb.TagNumber(3)
@@ -288,10 +286,8 @@ class QueryAllBalancesResponse extends $pb.GeneratedMessage {
   $4.PageResponse ensurePagination() => $_ensure(1);
 }
 
-///  QuerySpendableBalancesRequest defines the gRPC request structure for querying
-///  an account's spendable balances.
-///
-///  Since: cosmos-sdk 0.46
+/// QuerySpendableBalancesRequest defines the gRPC request structure for querying
+/// an account's spendable balances.
 class QuerySpendableBalancesRequest extends $pb.GeneratedMessage {
   factory QuerySpendableBalancesRequest({
     $core.String? address,
@@ -360,10 +356,8 @@ class QuerySpendableBalancesRequest extends $pb.GeneratedMessage {
   $4.PageRequest ensurePagination() => $_ensure(1);
 }
 
-///  QuerySpendableBalancesResponse defines the gRPC response structure for querying
-///  an account's spendable balances.
-///
-///  Since: cosmos-sdk 0.46
+/// QuerySpendableBalancesResponse defines the gRPC response structure for querying
+/// an account's spendable balances.
 class QuerySpendableBalancesResponse extends $pb.GeneratedMessage {
   factory QuerySpendableBalancesResponse({
     $core.Iterable<$2.Coin>? balances,
@@ -426,10 +420,8 @@ class QuerySpendableBalancesResponse extends $pb.GeneratedMessage {
   $4.PageResponse ensurePagination() => $_ensure(1);
 }
 
-///  QuerySpendableBalanceByDenomRequest defines the gRPC request structure for
-///  querying an account's spendable balance for a specific denom.
-///
-///  Since: cosmos-sdk 0.47
+/// QuerySpendableBalanceByDenomRequest defines the gRPC request structure for
+/// querying an account's spendable balance for a specific denom.
 class QuerySpendableBalanceByDenomRequest extends $pb.GeneratedMessage {
   factory QuerySpendableBalanceByDenomRequest({
     $core.String? address,
@@ -496,10 +488,8 @@ class QuerySpendableBalanceByDenomRequest extends $pb.GeneratedMessage {
   void clearDenom() => clearField(2);
 }
 
-///  QuerySpendableBalanceByDenomResponse defines the gRPC response structure for
-///  querying an account's spendable balance for a specific denom.
-///
-///  Since: cosmos-sdk 0.47
+/// QuerySpendableBalanceByDenomResponse defines the gRPC response structure for
+/// querying an account's spendable balance for a specific denom.
 class QuerySpendableBalanceByDenomResponse extends $pb.GeneratedMessage {
   factory QuerySpendableBalanceByDenomResponse({
     $2.Coin? balance,
@@ -595,9 +585,7 @@ class QueryTotalSupplyRequest extends $pb.GeneratedMessage {
   static QueryTotalSupplyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryTotalSupplyRequest>(create);
   static QueryTotalSupplyRequest? _defaultInstance;
 
-  ///  pagination defines an optional pagination for the request.
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// pagination defines an optional pagination for the request.
   @$pb.TagNumber(1)
   $4.PageRequest get pagination => $_getN(0);
   @$pb.TagNumber(1)
@@ -661,9 +649,7 @@ class QueryTotalSupplyResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.List<$2.Coin> get supply => $_getList(0);
 
-  ///  pagination defines the pagination in the response.
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// pagination defines the pagination in the response.
   @$pb.TagNumber(2)
   $4.PageResponse get pagination => $_getN(1);
   @$pb.TagNumber(2)
@@ -1273,11 +1259,9 @@ class QueryDenomOwnersRequest extends $pb.GeneratedMessage {
   $4.PageRequest ensurePagination() => $_ensure(1);
 }
 
-///  DenomOwner defines structure representing an account that owns or holds a
-///  particular denominated token. It contains the account address and account
-///  balance of the denominated token.
-///
-///  Since: cosmos-sdk 0.46
+/// DenomOwner defines structure representing an account that owns or holds a
+/// particular denominated token. It contains the account address and account
+/// balance of the denominated token.
 class DenomOwner extends $pb.GeneratedMessage {
   factory DenomOwner({
     $core.String? address,
@@ -1346,9 +1330,7 @@ class DenomOwner extends $pb.GeneratedMessage {
   $2.Coin ensureBalance() => $_ensure(1);
 }
 
-///  QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
-///
-///  Since: cosmos-sdk 0.46
+/// QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
 class QueryDenomOwnersResponse extends $pb.GeneratedMessage {
   factory QueryDenomOwnersResponse({
     $core.Iterable<DenomOwner>? denomOwners,
@@ -1410,11 +1392,9 @@ class QueryDenomOwnersResponse extends $pb.GeneratedMessage {
   $4.PageResponse ensurePagination() => $_ensure(1);
 }
 
-///  QueryDenomOwnersByQueryRequest defines the request type for the DenomOwnersByQuery RPC query,
-///  which queries for a paginated set of all account holders of a particular
-///  denomination.
-///
-///  Since: cosmos-sdk 0.50.3
+/// QueryDenomOwnersByQueryRequest defines the request type for the DenomOwnersByQuery RPC query,
+/// which queries for a paginated set of all account holders of a particular
+/// denomination.
 class QueryDenomOwnersByQueryRequest extends $pb.GeneratedMessage {
   factory QueryDenomOwnersByQueryRequest({
     $core.String? denom,
@@ -1483,9 +1463,7 @@ class QueryDenomOwnersByQueryRequest extends $pb.GeneratedMessage {
   $4.PageRequest ensurePagination() => $_ensure(1);
 }
 
-///  QueryDenomOwnersByQueryResponse defines the RPC response of a DenomOwnersByQuery RPC query.
-///
-///  Since: cosmos-sdk 0.50.3
+/// QueryDenomOwnersByQueryResponse defines the RPC response of a DenomOwnersByQuery RPC query.
 class QueryDenomOwnersByQueryResponse extends $pb.GeneratedMessage {
   factory QueryDenomOwnersByQueryResponse({
     $core.Iterable<DenomOwner>? denomOwners,
@@ -1547,9 +1525,7 @@ class QueryDenomOwnersByQueryResponse extends $pb.GeneratedMessage {
   $4.PageResponse ensurePagination() => $_ensure(1);
 }
 
-///  QuerySendEnabledRequest defines the RPC request for looking up SendEnabled entries.
-///
-///  Since: cosmos-sdk 0.47
+/// QuerySendEnabledRequest defines the RPC request for looking up SendEnabled entries.
 class QuerySendEnabledRequest extends $pb.GeneratedMessage {
   factory QuerySendEnabledRequest({
     $core.Iterable<$core.String>? denoms,
@@ -1613,9 +1589,7 @@ class QuerySendEnabledRequest extends $pb.GeneratedMessage {
   $4.PageRequest ensurePagination() => $_ensure(1);
 }
 
-///  QuerySendEnabledResponse defines the RPC response of a SendEnable query.
-///
-///  Since: cosmos-sdk 0.47
+/// QuerySendEnabledResponse defines the RPC response of a SendEnable query.
 class QuerySendEnabledResponse extends $pb.GeneratedMessage {
   factory QuerySendEnabledResponse({
     $core.Iterable<$3.SendEnabled>? sendEnabled,

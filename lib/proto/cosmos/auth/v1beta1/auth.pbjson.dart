@@ -66,8 +66,8 @@ const ModuleCredential$json = {
 /// Descriptor for `ModuleCredential`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List moduleCredentialDescriptor = $convert.base64Decode(
     'ChBNb2R1bGVDcmVkZW50aWFsEh8KC21vZHVsZV9uYW1lGAEgASgJUgptb2R1bGVOYW1lEicKD2'
-    'Rlcml2YXRpb25fa2V5cxgCIAMoDFIOZGVyaXZhdGlvbktleXM6JornsCohY29zbW9zLXNkay9H'
-    'cm91cEFjY291bnRDcmVkZW50aWFs');
+    'Rlcml2YXRpb25fa2V5cxgCIAMoDFIOZGVyaXZhdGlvbktleXM6OdK0LQ9jb3Ntb3Mtc2RrIDAu'
+    'NDeK57AqIWNvc21vcy1zZGsvR3JvdXBBY2NvdW50Q3JlZGVudGlhbA==');
 
 @$core.Deprecated('Use paramsDescriptor instead')
 const Params$json = {

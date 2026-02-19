@@ -224,7 +224,6 @@ class MsgWithdrawDelegatorRewardResponse extends $pb.GeneratedMessage {
   static MsgWithdrawDelegatorRewardResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgWithdrawDelegatorRewardResponse>(create);
   static MsgWithdrawDelegatorRewardResponse? _defaultInstance;
 
-  /// Since: cosmos-sdk 0.46
   @$pb.TagNumber(1)
   $core.List<$2.Coin> get amount => $_getList(0);
 }
@@ -323,7 +322,6 @@ class MsgWithdrawValidatorCommissionResponse extends $pb.GeneratedMessage {
   static MsgWithdrawValidatorCommissionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgWithdrawValidatorCommissionResponse>(create);
   static MsgWithdrawValidatorCommissionResponse? _defaultInstance;
 
-  /// Since: cosmos-sdk 0.46
   @$pb.TagNumber(1)
   $core.List<$2.Coin> get amount => $_getList(0);
 }
@@ -421,9 +419,7 @@ class MsgFundCommunityPoolResponse extends $pb.GeneratedMessage {
   static MsgFundCommunityPoolResponse? _defaultInstance;
 }
 
-///  MsgUpdateParams is the Msg/UpdateParams request type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
@@ -494,10 +490,8 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   $3.Params ensureParams() => $_ensure(1);
 }
 
-///  MsgUpdateParamsResponse defines the response structure for executing a
-///  MsgUpdateParams message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParamsResponse defines the response structure for executing a
+/// MsgUpdateParams message.
 class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   factory MsgUpdateParamsResponse() => create();
   MsgUpdateParamsResponse._() : super();
@@ -530,11 +524,9 @@ class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   static MsgUpdateParamsResponse? _defaultInstance;
 }
 
-///  MsgCommunityPoolSpend defines a message for sending tokens from the community
-///  pool to another account. This message is typically executed via a governance
-///  proposal with the governance module being the executing authority.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgCommunityPoolSpend defines a message for sending tokens from the community
+/// pool to another account. This message is typically executed via a governance
+/// proposal with the governance module being the executing authority.
 class MsgCommunityPoolSpend extends $pb.GeneratedMessage {
   factory MsgCommunityPoolSpend({
     $core.String? authority,
@@ -608,10 +600,8 @@ class MsgCommunityPoolSpend extends $pb.GeneratedMessage {
   $core.List<$2.Coin> get amount => $_getList(2);
 }
 
-///  MsgCommunityPoolSpendResponse defines the response to executing a
-///  MsgCommunityPoolSpend message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgCommunityPoolSpendResponse defines the response to executing a
+/// MsgCommunityPoolSpend message.
 class MsgCommunityPoolSpendResponse extends $pb.GeneratedMessage {
   factory MsgCommunityPoolSpendResponse() => create();
   MsgCommunityPoolSpendResponse._() : super();
@@ -644,10 +634,8 @@ class MsgCommunityPoolSpendResponse extends $pb.GeneratedMessage {
   static MsgCommunityPoolSpendResponse? _defaultInstance;
 }
 
-///  DepositValidatorRewardsPool defines the request structure to provide
-///  additional rewards to delegators from a specific validator.
-///
-///  Since: cosmos-sdk 0.50
+/// DepositValidatorRewardsPool defines the request structure to provide
+/// additional rewards to delegators from a specific validator.
 class MsgDepositValidatorRewardsPool extends $pb.GeneratedMessage {
   factory MsgDepositValidatorRewardsPool({
     $core.String? depositor,
@@ -720,10 +708,8 @@ class MsgDepositValidatorRewardsPool extends $pb.GeneratedMessage {
   $core.List<$2.Coin> get amount => $_getList(2);
 }
 
-///  MsgDepositValidatorRewardsPoolResponse defines the response to executing a
-///  MsgDepositValidatorRewardsPool message.
-///
-///  Since: cosmos-sdk 0.50
+/// MsgDepositValidatorRewardsPoolResponse defines the response to executing a
+/// MsgDepositValidatorRewardsPool message.
 class MsgDepositValidatorRewardsPoolResponse extends $pb.GeneratedMessage {
   factory MsgDepositValidatorRewardsPoolResponse() => create();
   MsgDepositValidatorRewardsPoolResponse._() : super();

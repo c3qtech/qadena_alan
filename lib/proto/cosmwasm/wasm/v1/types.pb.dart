@@ -290,6 +290,7 @@ class ContractInfo extends $pb.GeneratedMessage {
     AbsoluteTxPosition? created,
     $core.String? ibcPortId,
     $2.Any? extension_7,
+    $core.String? ibc2PortId,
   }) {
     final $result = create();
     if (codeId != null) {
@@ -313,6 +314,9 @@ class ContractInfo extends $pb.GeneratedMessage {
     if (extension_7 != null) {
       $result.extension_7 = extension_7;
     }
+    if (ibc2PortId != null) {
+      $result.ibc2PortId = ibc2PortId;
+    }
     return $result;
   }
   ContractInfo._() : super();
@@ -327,6 +331,7 @@ class ContractInfo extends $pb.GeneratedMessage {
     ..aOM<AbsoluteTxPosition>(5, _omitFieldNames ? '' : 'created', subBuilder: AbsoluteTxPosition.create)
     ..aOS(6, _omitFieldNames ? '' : 'ibcPortId')
     ..aOM<$2.Any>(7, _omitFieldNames ? '' : 'extension', subBuilder: $2.Any.create)
+    ..aOS(8, _omitFieldNames ? '' : 'ibc2PortId')
     ..hasRequiredFields = false
   ;
 
@@ -424,6 +429,15 @@ class ContractInfo extends $pb.GeneratedMessage {
   void clearExtension_7() => clearField(7);
   @$pb.TagNumber(7)
   $2.Any ensureExtension_7() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $core.String get ibc2PortId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set ibc2PortId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasIbc2PortId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearIbc2PortId() => clearField(8);
 }
 
 /// ContractCodeHistoryEntry metadata to a contract.

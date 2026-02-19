@@ -22,12 +22,14 @@ const StoreKVPair$json = {
     {'1': 'key', '3': 3, '4': 1, '5': 12, '10': 'key'},
     {'1': 'value', '3': 4, '4': 1, '5': 12, '10': 'value'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `StoreKVPair`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List storeKVPairDescriptor = $convert.base64Decode(
     'CgtTdG9yZUtWUGFpchIbCglzdG9yZV9rZXkYASABKAlSCHN0b3JlS2V5EhYKBmRlbGV0ZRgCIA'
-    'EoCFIGZGVsZXRlEhAKA2tleRgDIAEoDFIDa2V5EhQKBXZhbHVlGAQgASgMUgV2YWx1ZQ==');
+    'EoCFIGZGVsZXRlEhAKA2tleRgDIAEoDFIDa2V5EhQKBXZhbHVlGAQgASgMUgV2YWx1ZToT0rQt'
+    'D2Nvc21vcy1zZGsgMC40Mw==');
 
 @$core.Deprecated('Use blockMetadataDescriptor instead')
 const BlockMetadata$json = {

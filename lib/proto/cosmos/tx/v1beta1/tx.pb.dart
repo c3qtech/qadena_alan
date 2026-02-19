@@ -15,9 +15,10 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../google/protobuf/any.pb.dart' as $2;
-import '../../base/v1beta1/coin.pb.dart' as $4;
-import '../../crypto/multisig/v1beta1/multisig.pb.dart' as $3;
-import '../signing/v1beta1/signing.pbenum.dart' as $5;
+import '../../../google/protobuf/timestamp.pb.dart' as $3;
+import '../../base/v1beta1/coin.pb.dart' as $5;
+import '../../crypto/multisig/v1beta1/multisig.pb.dart' as $4;
+import '../signing/v1beta1/signing.pbenum.dart' as $6;
 
 /// Tx is the standard type used for broadcasting transactions.
 class Tx extends $pb.GeneratedMessage {
@@ -287,10 +288,8 @@ class SignDoc extends $pb.GeneratedMessage {
   void clearAccountNumber() => clearField(4);
 }
 
-///  SignDocDirectAux is the type used for generating sign bytes for
-///  SIGN_MODE_DIRECT_AUX.
-///
-///  Since: cosmos-sdk 0.46
+/// SignDocDirectAux is the type used for generating sign bytes for
+/// SIGN_MODE_DIRECT_AUX.
 class SignDocDirectAux extends $pb.GeneratedMessage {
   factory SignDocDirectAux({
     $core.List<$core.int>? bodyBytes,
@@ -437,6 +436,8 @@ class TxBody extends $pb.GeneratedMessage {
     $core.Iterable<$2.Any>? messages,
     $core.String? memo,
     $fixnum.Int64? timeoutHeight,
+    $core.bool? unordered,
+    $3.Timestamp? timeoutTimestamp,
     $core.Iterable<$2.Any>? extensionOptions,
     $core.Iterable<$2.Any>? nonCriticalExtensionOptions,
   }) {
@@ -449,6 +450,12 @@ class TxBody extends $pb.GeneratedMessage {
     }
     if (timeoutHeight != null) {
       $result.timeoutHeight = timeoutHeight;
+    }
+    if (unordered != null) {
+      $result.unordered = unordered;
+    }
+    if (timeoutTimestamp != null) {
+      $result.timeoutTimestamp = timeoutTimestamp;
     }
     if (extensionOptions != null) {
       $result.extensionOptions.addAll(extensionOptions);
@@ -466,6 +473,8 @@ class TxBody extends $pb.GeneratedMessage {
     ..pc<$2.Any>(1, _omitFieldNames ? '' : 'messages', $pb.PbFieldType.PM, subBuilder: $2.Any.create)
     ..aOS(2, _omitFieldNames ? '' : 'memo')
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'timeoutHeight', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(4, _omitFieldNames ? '' : 'unordered')
+    ..aOM<$3.Timestamp>(5, _omitFieldNames ? '' : 'timeoutTimestamp', subBuilder: $3.Timestamp.create)
     ..pc<$2.Any>(1023, _omitFieldNames ? '' : 'extensionOptions', $pb.PbFieldType.PM, subBuilder: $2.Any.create)
     ..pc<$2.Any>(2047, _omitFieldNames ? '' : 'nonCriticalExtensionOptions', $pb.PbFieldType.PM, subBuilder: $2.Any.create)
     ..hasRequiredFields = false
@@ -504,7 +513,8 @@ class TxBody extends $pb.GeneratedMessage {
 
   /// memo is any arbitrary note/comment to be added to the transaction.
   /// WARNING: in clients, any publicly exposed text should not be called memo,
-  /// but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
+  /// but should be called `note` instead (see
+  /// https://github.com/cosmos/cosmos-sdk/issues/9122).
   @$pb.TagNumber(2)
   $core.String get memo => $_getSZ(1);
   @$pb.TagNumber(2)
@@ -514,8 +524,8 @@ class TxBody extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearMemo() => clearField(2);
 
-  /// timeout is the block height after which this transaction will not
-  /// be processed by the chain
+  /// timeout_height is the block height after which this transaction will not
+  /// be processed by the chain.
   @$pb.TagNumber(3)
   $fixnum.Int64 get timeoutHeight => $_getI64(2);
   @$pb.TagNumber(3)
@@ -525,17 +535,56 @@ class TxBody extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearTimeoutHeight() => clearField(3);
 
+  ///  unordered, when set to true, indicates that the transaction signer(s)
+  ///  intend for the transaction to be evaluated and executed in an un-ordered
+  ///  fashion. Specifically, the account's nonce will NOT be checked or
+  ///  incremented, which allows for fire-and-forget as well as concurrent
+  ///  transaction execution.
+  ///
+  ///  Note, when set to true, the existing 'timeout_timestamp' value must
+  ///  be set and will be used to correspond to a timestamp in which the transaction is deemed
+  ///  valid.
+  ///
+  ///  When true, the sequence value MUST be 0, and any transaction with unordered=true and a non-zero sequence value will
+  ///  be rejected.
+  ///  External services that make assumptions about sequence values may need to be updated because of this.
+  @$pb.TagNumber(4)
+  $core.bool get unordered => $_getBF(3);
+  @$pb.TagNumber(4)
+  set unordered($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasUnordered() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUnordered() => clearField(4);
+
+  ///  timeout_timestamp is the block time after which this transaction will not
+  ///  be processed by the chain.
+  ///
+  ///  Note, if unordered=true this value MUST be set
+  ///  and will act as a short-lived TTL in which the transaction is deemed valid
+  ///  and kept in memory to prevent duplicates.
+  @$pb.TagNumber(5)
+  $3.Timestamp get timeoutTimestamp => $_getN(4);
+  @$pb.TagNumber(5)
+  set timeoutTimestamp($3.Timestamp v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTimeoutTimestamp() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTimeoutTimestamp() => clearField(5);
+  @$pb.TagNumber(5)
+  $3.Timestamp ensureTimeoutTimestamp() => $_ensure(4);
+
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, the transaction will be rejected
   @$pb.TagNumber(1023)
-  $core.List<$2.Any> get extensionOptions => $_getList(3);
+  $core.List<$2.Any> get extensionOptions => $_getList(5);
 
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, they will be ignored
   @$pb.TagNumber(2047)
-  $core.List<$2.Any> get nonCriticalExtensionOptions => $_getList(4);
+  $core.List<$2.Any> get nonCriticalExtensionOptions => $_getList(6);
 }
 
 /// AuthInfo describes the fee and signer modes that are used to sign a
@@ -618,8 +667,6 @@ class AuthInfo extends $pb.GeneratedMessage {
   ///
   ///  This field is ignored if the chain didn't enable tips, i.e. didn't add the
   ///  `TipDecorator` in its posthandler.
-  ///
-  ///  Since: cosmos-sdk 0.46
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(3)
   Tip get tip => $_getN(2);
@@ -734,7 +781,7 @@ class SignerInfo extends $pb.GeneratedMessage {
 /// future
 class ModeInfo_Single extends $pb.GeneratedMessage {
   factory ModeInfo_Single({
-    $5.SignMode? mode,
+    $6.SignMode? mode,
   }) {
     final $result = create();
     if (mode != null) {
@@ -747,7 +794,7 @@ class ModeInfo_Single extends $pb.GeneratedMessage {
   factory ModeInfo_Single.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModeInfo.Single', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.tx.v1beta1'), createEmptyInstance: create)
-    ..e<$5.SignMode>(1, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: $5.SignMode.SIGN_MODE_UNSPECIFIED, valueOf: $5.SignMode.valueOf, enumValues: $5.SignMode.values)
+    ..e<$6.SignMode>(1, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: $6.SignMode.SIGN_MODE_UNSPECIFIED, valueOf: $6.SignMode.valueOf, enumValues: $6.SignMode.values)
     ..hasRequiredFields = false
   ;
 
@@ -774,9 +821,9 @@ class ModeInfo_Single extends $pb.GeneratedMessage {
 
   /// mode is the signing mode of the single signer
   @$pb.TagNumber(1)
-  $5.SignMode get mode => $_getN(0);
+  $6.SignMode get mode => $_getN(0);
   @$pb.TagNumber(1)
-  set mode($5.SignMode v) { setField(1, v); }
+  set mode($6.SignMode v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasMode() => $_has(0);
   @$pb.TagNumber(1)
@@ -786,7 +833,7 @@ class ModeInfo_Single extends $pb.GeneratedMessage {
 /// Multi is the mode info for a multisig public key
 class ModeInfo_Multi extends $pb.GeneratedMessage {
   factory ModeInfo_Multi({
-    $3.CompactBitArray? bitarray,
+    $4.CompactBitArray? bitarray,
     $core.Iterable<ModeInfo>? modeInfos,
   }) {
     final $result = create();
@@ -803,7 +850,7 @@ class ModeInfo_Multi extends $pb.GeneratedMessage {
   factory ModeInfo_Multi.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModeInfo.Multi', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.tx.v1beta1'), createEmptyInstance: create)
-    ..aOM<$3.CompactBitArray>(1, _omitFieldNames ? '' : 'bitarray', subBuilder: $3.CompactBitArray.create)
+    ..aOM<$4.CompactBitArray>(1, _omitFieldNames ? '' : 'bitarray', subBuilder: $4.CompactBitArray.create)
     ..pc<ModeInfo>(2, _omitFieldNames ? '' : 'modeInfos', $pb.PbFieldType.PM, subBuilder: ModeInfo.create)
     ..hasRequiredFields = false
   ;
@@ -831,15 +878,15 @@ class ModeInfo_Multi extends $pb.GeneratedMessage {
 
   /// bitarray specifies which keys within the multisig are signing
   @$pb.TagNumber(1)
-  $3.CompactBitArray get bitarray => $_getN(0);
+  $4.CompactBitArray get bitarray => $_getN(0);
   @$pb.TagNumber(1)
-  set bitarray($3.CompactBitArray v) { setField(1, v); }
+  set bitarray($4.CompactBitArray v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasBitarray() => $_has(0);
   @$pb.TagNumber(1)
   void clearBitarray() => clearField(1);
   @$pb.TagNumber(1)
-  $3.CompactBitArray ensureBitarray() => $_ensure(0);
+  $4.CompactBitArray ensureBitarray() => $_ensure(0);
 
   /// mode_infos is the corresponding modes of the signers of the multisig
   /// which could include nested multisig public keys
@@ -938,7 +985,7 @@ class ModeInfo extends $pb.GeneratedMessage {
 /// which must be above some miminum to be accepted into the mempool.
 class Fee extends $pb.GeneratedMessage {
   factory Fee({
-    $core.Iterable<$4.Coin>? amount,
+    $core.Iterable<$5.Coin>? amount,
     $fixnum.Int64? gasLimit,
     $core.String? payer,
     $core.String? granter,
@@ -963,7 +1010,7 @@ class Fee extends $pb.GeneratedMessage {
   factory Fee.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Fee', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.tx.v1beta1'), createEmptyInstance: create)
-    ..pc<$4.Coin>(1, _omitFieldNames ? '' : 'amount', $pb.PbFieldType.PM, subBuilder: $4.Coin.create)
+    ..pc<$5.Coin>(1, _omitFieldNames ? '' : 'amount', $pb.PbFieldType.PM, subBuilder: $5.Coin.create)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'gasLimit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'payer')
     ..aOS(4, _omitFieldNames ? '' : 'granter')
@@ -993,7 +1040,7 @@ class Fee extends $pb.GeneratedMessage {
 
   /// amount is the amount of coins to be paid as a fee
   @$pb.TagNumber(1)
-  $core.List<$4.Coin> get amount => $_getList(0);
+  $core.List<$5.Coin> get amount => $_getList(0);
 
   /// gas_limit is the maximum gas that can be used in transaction processing
   /// before an out of gas error occurs
@@ -1006,9 +1053,10 @@ class Fee extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearGasLimit() => clearField(2);
 
-  /// if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
-  /// the payer must be a tx signer (and thus have signed this field in AuthInfo).
-  /// setting this field does *not* change the ordering of required signers for the transaction.
+  /// if unset, the first signer is responsible for paying the fees. If set, the
+  /// specified account must pay the fees. the payer must be a tx signer (and
+  /// thus have signed this field in AuthInfo). setting this field does *not*
+  /// change the ordering of required signers for the transaction.
   @$pb.TagNumber(3)
   $core.String get payer => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -1018,9 +1066,10 @@ class Fee extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPayer() => clearField(3);
 
-  /// if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
-  /// to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
-  /// not support fee grants, this will fail
+  /// if set, the fee payer (either the first signer or the value of the payer
+  /// field) requests that a fee grant be used to pay fees instead of the fee
+  /// payer's own balance. If an appropriate fee grant does not exist or the
+  /// chain does not support fee grants, this will fail
   @$pb.TagNumber(4)
   $core.String get granter => $_getSZ(3);
   @$pb.TagNumber(4)
@@ -1031,12 +1080,10 @@ class Fee extends $pb.GeneratedMessage {
   void clearGranter() => clearField(4);
 }
 
-///  Tip is the tip used for meta-transactions.
-///
-///  Since: cosmos-sdk 0.46
+/// Tip is the tip used for meta-transactions.
 class Tip extends $pb.GeneratedMessage {
   factory Tip({
-    $core.Iterable<$4.Coin>? amount,
+    $core.Iterable<$5.Coin>? amount,
     $core.String? tipper,
   }) {
     final $result = create();
@@ -1053,7 +1100,7 @@ class Tip extends $pb.GeneratedMessage {
   factory Tip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Tip', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.tx.v1beta1'), createEmptyInstance: create)
-    ..pc<$4.Coin>(1, _omitFieldNames ? '' : 'amount', $pb.PbFieldType.PM, subBuilder: $4.Coin.create)
+    ..pc<$5.Coin>(1, _omitFieldNames ? '' : 'amount', $pb.PbFieldType.PM, subBuilder: $5.Coin.create)
     ..aOS(2, _omitFieldNames ? '' : 'tipper')
     ..hasRequiredFields = false
   ;
@@ -1081,7 +1128,7 @@ class Tip extends $pb.GeneratedMessage {
 
   /// amount is the amount of the tip
   @$pb.TagNumber(1)
-  $core.List<$4.Coin> get amount => $_getList(0);
+  $core.List<$5.Coin> get amount => $_getList(0);
 
   /// tipper is the address of the account paying for the tip
   @$pb.TagNumber(2)
@@ -1094,17 +1141,15 @@ class Tip extends $pb.GeneratedMessage {
   void clearTipper() => clearField(2);
 }
 
-///  AuxSignerData is the intermediary format that an auxiliary signer (e.g. a
-///  tipper) builds and sends to the fee payer (who will build and broadcast the
-///  actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
-///  by the node if sent directly as-is.
-///
-///  Since: cosmos-sdk 0.46
+/// AuxSignerData is the intermediary format that an auxiliary signer (e.g. a
+/// tipper) builds and sends to the fee payer (who will build and broadcast the
+/// actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
+/// by the node if sent directly as-is.
 class AuxSignerData extends $pb.GeneratedMessage {
   factory AuxSignerData({
     $core.String? address,
     SignDocDirectAux? signDoc,
-    $5.SignMode? mode,
+    $6.SignMode? mode,
     $core.List<$core.int>? sig,
   }) {
     final $result = create();
@@ -1129,7 +1174,7 @@ class AuxSignerData extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuxSignerData', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.tx.v1beta1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'address')
     ..aOM<SignDocDirectAux>(2, _omitFieldNames ? '' : 'signDoc', subBuilder: SignDocDirectAux.create)
-    ..e<$5.SignMode>(3, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: $5.SignMode.SIGN_MODE_UNSPECIFIED, valueOf: $5.SignMode.valueOf, enumValues: $5.SignMode.values)
+    ..e<$6.SignMode>(3, _omitFieldNames ? '' : 'mode', $pb.PbFieldType.OE, defaultOrMaker: $6.SignMode.SIGN_MODE_UNSPECIFIED, valueOf: $6.SignMode.valueOf, enumValues: $6.SignMode.values)
     ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'sig', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
@@ -1183,9 +1228,9 @@ class AuxSignerData extends $pb.GeneratedMessage {
 
   /// mode is the signing mode of the single signer.
   @$pb.TagNumber(3)
-  $5.SignMode get mode => $_getN(2);
+  $6.SignMode get mode => $_getN(2);
   @$pb.TagNumber(3)
-  set mode($5.SignMode v) { setField(3, v); }
+  set mode($6.SignMode v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasMode() => $_has(2);
   @$pb.TagNumber(3)

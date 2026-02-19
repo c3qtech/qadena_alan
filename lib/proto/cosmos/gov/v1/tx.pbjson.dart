@@ -21,9 +21,9 @@ const MsgSubmitProposal$json = {
     {'1': 'initial_deposit', '3': 2, '4': 3, '5': 11, '6': '.cosmos.base.v1beta1.Coin', '8': {}, '10': 'initialDeposit'},
     {'1': 'proposer', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'proposer'},
     {'1': 'metadata', '3': 4, '4': 1, '5': 9, '10': 'metadata'},
-    {'1': 'title', '3': 5, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'summary', '3': 6, '4': 1, '5': 9, '10': 'summary'},
-    {'1': 'expedited', '3': 7, '4': 1, '5': 8, '10': 'expedited'},
+    {'1': 'title', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'title'},
+    {'1': 'summary', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'summary'},
+    {'1': 'expedited', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'expedited'},
   ],
   '7': {},
 };
@@ -35,9 +35,10 @@ final $typed_data.Uint8List msgSubmitProposalDescriptor = $convert.base64Decode(
     'MWJldGExLkNvaW5CRsjeHwCq3x8oZ2l0aHViLmNvbS9jb3Ntb3MvY29zbW9zLXNkay90eXBlcy'
     '5Db2luc5rnsCoMbGVnYWN5X2NvaW5zqOewKgFSDmluaXRpYWxEZXBvc2l0EjQKCHByb3Bvc2Vy'
     'GAMgASgJQhjStC0UY29zbW9zLkFkZHJlc3NTdHJpbmdSCHByb3Bvc2VyEhoKCG1ldGFkYXRhGA'
-    'QgASgJUghtZXRhZGF0YRIUCgV0aXRsZRgFIAEoCVIFdGl0bGUSGAoHc3VtbWFyeRgGIAEoCVIH'
-    'c3VtbWFyeRIcCglleHBlZGl0ZWQYByABKAhSCWV4cGVkaXRlZDoxguewKghwcm9wb3NlcornsC'
-    'ofY29zbW9zLXNkay92MS9Nc2dTdWJtaXRQcm9wb3NhbA==');
+    'QgASgJUghtZXRhZGF0YRIpCgV0aXRsZRgFIAEoCUIT2rQtD2Nvc21vcy1zZGsgMC40N1IFdGl0'
+    'bGUSLQoHc3VtbWFyeRgGIAEoCUIT2rQtD2Nvc21vcy1zZGsgMC40N1IHc3VtbWFyeRIxCglleH'
+    'BlZGl0ZWQYByABKAhCE9q0LQ9jb3Ntb3Mtc2RrIDAuNTBSCWV4cGVkaXRlZDoxguewKghwcm9w'
+    'b3NlcornsCofY29zbW9zLXNkay92MS9Nc2dTdWJtaXRQcm9wb3NhbA==');
 
 @$core.Deprecated('Use msgSubmitProposalResponseDescriptor instead')
 const MsgSubmitProposalResponse$json = {
@@ -178,17 +179,18 @@ const MsgUpdateParams$json = {
 final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'Cg9Nc2dVcGRhdGVQYXJhbXMSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
     'NTdHJpbmdSCWF1dGhvcml0eRI4CgZwYXJhbXMYAiABKAsyFS5jb3Ntb3MuZ292LnYxLlBhcmFt'
-    'c0IJyN4fAKjnsCoBUgZwYXJhbXM6NoLnsCoJYXV0aG9yaXR5iuewKiNjb3Ntb3Mtc2RrL3gvZ2'
-    '92L3YxL01zZ1VwZGF0ZVBhcmFtcw==');
+    'c0IJyN4fAKjnsCoBUgZwYXJhbXM6SdK0LQ9jb3Ntb3Mtc2RrIDAuNDeC57AqCWF1dGhvcml0eY'
+    'rnsCojY29zbW9zLXNkay94L2dvdi92MS9Nc2dVcGRhdGVQYXJhbXM=');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {
   '1': 'MsgUpdateParamsResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgUpdateParamsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgUpdateParamsResponseDescriptor = $convert.base64Decode(
-    'ChdNc2dVcGRhdGVQYXJhbXNSZXNwb25zZQ==');
+    'ChdNc2dVcGRhdGVQYXJhbXNSZXNwb25zZToT0rQtD2Nvc21vcy1zZGsgMC40Nw==');
 
 @$core.Deprecated('Use msgCancelProposalDescriptor instead')
 const MsgCancelProposal$json = {
@@ -204,7 +206,7 @@ const MsgCancelProposal$json = {
 final $typed_data.Uint8List msgCancelProposalDescriptor = $convert.base64Decode(
     'ChFNc2dDYW5jZWxQcm9wb3NhbBIwCgtwcm9wb3NhbF9pZBgBIAEoBEIP6t4fC3Byb3Bvc2FsX2'
     'lkUgpwcm9wb3NhbElkEjQKCHByb3Bvc2VyGAIgASgJQhjStC0UY29zbW9zLkFkZHJlc3NTdHJp'
-    'bmdSCHByb3Bvc2VyOg2C57AqCHByb3Bvc2Vy');
+    'bmdSCHByb3Bvc2VyOiDStC0PY29zbW9zLXNkayAwLjUwguewKghwcm9wb3Nlcg==');
 
 @$core.Deprecated('Use msgCancelProposalResponseDescriptor instead')
 const MsgCancelProposalResponse$json = {
@@ -214,6 +216,7 @@ const MsgCancelProposalResponse$json = {
     {'1': 'canceled_time', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'canceledTime'},
     {'1': 'canceled_height', '3': 3, '4': 1, '5': 4, '10': 'canceledHeight'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `MsgCancelProposalResponse`. Decode as a `google.protobuf.DescriptorProto`.
@@ -221,5 +224,5 @@ final $typed_data.Uint8List msgCancelProposalResponseDescriptor = $convert.base6
     'ChlNc2dDYW5jZWxQcm9wb3NhbFJlc3BvbnNlEjAKC3Byb3Bvc2FsX2lkGAEgASgEQg/q3h8LcH'
     'JvcG9zYWxfaWRSCnByb3Bvc2FsSWQSSQoNY2FuY2VsZWRfdGltZRgCIAEoCzIaLmdvb2dsZS5w'
     'cm90b2J1Zi5UaW1lc3RhbXBCCMjeHwCQ3x8BUgxjYW5jZWxlZFRpbWUSJwoPY2FuY2VsZWRfaG'
-    'VpZ2h0GAMgASgEUg5jYW5jZWxlZEhlaWdodA==');
+    'VpZ2h0GAMgASgEUg5jYW5jZWxlZEhlaWdodDoT0rQtD2Nvc21vcy1zZGsgMC41MA==');
 

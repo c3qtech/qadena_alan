@@ -90,6 +90,8 @@ class ServiceCommandDescriptor extends $pb.GeneratedMessage {
     $core.String? service,
     $core.Iterable<RpcCommandOptions>? rpcCommandOptions,
     $core.Map<$core.String, ServiceCommandDescriptor>? subCommands,
+    $core.bool? enhanceCustomCommand,
+    $core.String? short,
   }) {
     final $result = create();
     if (service != null) {
@@ -101,6 +103,12 @@ class ServiceCommandDescriptor extends $pb.GeneratedMessage {
     if (subCommands != null) {
       $result.subCommands.addAll(subCommands);
     }
+    if (enhanceCustomCommand != null) {
+      $result.enhanceCustomCommand = enhanceCustomCommand;
+    }
+    if (short != null) {
+      $result.short = short;
+    }
     return $result;
   }
   ServiceCommandDescriptor._() : super();
@@ -111,6 +119,8 @@ class ServiceCommandDescriptor extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'service')
     ..pc<RpcCommandOptions>(2, _omitFieldNames ? '' : 'rpcCommandOptions', $pb.PbFieldType.PM, subBuilder: RpcCommandOptions.create)
     ..m<$core.String, ServiceCommandDescriptor>(3, _omitFieldNames ? '' : 'subCommands', entryClassName: 'ServiceCommandDescriptor.SubCommandsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: ServiceCommandDescriptor.create, valueDefaultOrMaker: ServiceCommandDescriptor.getDefault, packageName: const $pb.PackageName('cosmos.autocli.v1'))
+    ..aOB(4, _omitFieldNames ? '' : 'enhanceCustomCommand')
+    ..aOS(5, _omitFieldNames ? '' : 'short')
     ..hasRequiredFields = false
   ;
 
@@ -158,6 +168,28 @@ class ServiceCommandDescriptor extends $pb.GeneratedMessage {
   /// sub-command.
   @$pb.TagNumber(3)
   $core.Map<$core.String, ServiceCommandDescriptor> get subCommands => $_getMap(2);
+
+  /// enhance_custom_commands specifies whether to skip the service when generating commands, if a custom command already
+  /// exists, or enhance the existing command. If set to true, the custom command will be enhanced with the services from
+  /// gRPC. otherwise when a custom command exists, no commands will be generated for the service.
+  @$pb.TagNumber(4)
+  $core.bool get enhanceCustomCommand => $_getBF(3);
+  @$pb.TagNumber(4)
+  set enhanceCustomCommand($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEnhanceCustomCommand() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEnhanceCustomCommand() => clearField(4);
+
+  /// short is an optional parameter used to override the short description of the auto generated command.
+  @$pb.TagNumber(5)
+  $core.String get short => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set short($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasShort() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearShort() => clearField(5);
 }
 
 /// RpcCommandOptions specifies options for commands generated from protobuf
@@ -176,6 +208,7 @@ class RpcCommandOptions extends $pb.GeneratedMessage {
     $core.Map<$core.String, FlagOptions>? flagOptions,
     $core.Iterable<PositionalArgDescriptor>? positionalArgs,
     $core.bool? skip,
+    $core.bool? govProposal,
   }) {
     final $result = create();
     if (rpcMethod != null) {
@@ -214,6 +247,9 @@ class RpcCommandOptions extends $pb.GeneratedMessage {
     if (skip != null) {
       $result.skip = skip;
     }
+    if (govProposal != null) {
+      $result.govProposal = govProposal;
+    }
     return $result;
   }
   RpcCommandOptions._() : super();
@@ -233,6 +269,7 @@ class RpcCommandOptions extends $pb.GeneratedMessage {
     ..m<$core.String, FlagOptions>(10, _omitFieldNames ? '' : 'flagOptions', entryClassName: 'RpcCommandOptions.FlagOptionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: FlagOptions.create, valueDefaultOrMaker: FlagOptions.getDefault, packageName: const $pb.PackageName('cosmos.autocli.v1'))
     ..pc<PositionalArgDescriptor>(11, _omitFieldNames ? '' : 'positionalArgs', $pb.PbFieldType.PM, subBuilder: PositionalArgDescriptor.create)
     ..aOB(12, _omitFieldNames ? '' : 'skip')
+    ..aOB(13, _omitFieldNames ? '' : 'govProposal')
     ..hasRequiredFields = false
   ;
 
@@ -363,6 +400,19 @@ class RpcCommandOptions extends $pb.GeneratedMessage {
   $core.bool hasSkip() => $_has(11);
   @$pb.TagNumber(12)
   void clearSkip() => clearField(12);
+
+  /// gov_proposal specifies whether autocli should generate a gov proposal transaction for this rpc method.
+  /// Normally autocli generates a transaction containing the message and broadcast it.
+  /// However, when true, autocli generates a proposal transaction containing the message and broadcast it.
+  /// This option is ineffective for query commands.
+  @$pb.TagNumber(13)
+  $core.bool get govProposal => $_getBF(12);
+  @$pb.TagNumber(13)
+  set govProposal($core.bool v) { $_setBool(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasGovProposal() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearGovProposal() => clearField(13);
 }
 
 /// FlagOptions are options for flags generated from rpc request fields.
@@ -515,6 +565,7 @@ class PositionalArgDescriptor extends $pb.GeneratedMessage {
   factory PositionalArgDescriptor({
     $core.String? protoField,
     $core.bool? varargs,
+    $core.bool? optional,
   }) {
     final $result = create();
     if (protoField != null) {
@@ -522,6 +573,9 @@ class PositionalArgDescriptor extends $pb.GeneratedMessage {
     }
     if (varargs != null) {
       $result.varargs = varargs;
+    }
+    if (optional != null) {
+      $result.optional = optional;
     }
     return $result;
   }
@@ -532,6 +586,7 @@ class PositionalArgDescriptor extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PositionalArgDescriptor', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.autocli.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'protoField')
     ..aOB(2, _omitFieldNames ? '' : 'varargs')
+    ..aOB(3, _omitFieldNames ? '' : 'optional')
     ..hasRequiredFields = false
   ;
 
@@ -569,7 +624,7 @@ class PositionalArgDescriptor extends $pb.GeneratedMessage {
 
   /// varargs makes a positional parameter a varargs parameter. This can only be
   /// applied to last positional parameter and the proto_field must a repeated
-  /// field.
+  /// field. Note: It is mutually exclusive with optional.
   @$pb.TagNumber(2)
   $core.bool get varargs => $_getBF(1);
   @$pb.TagNumber(2)
@@ -578,6 +633,17 @@ class PositionalArgDescriptor extends $pb.GeneratedMessage {
   $core.bool hasVarargs() => $_has(1);
   @$pb.TagNumber(2)
   void clearVarargs() => clearField(2);
+
+  /// optional makes the last positional parameter optional.
+  /// Note: It is mutually exclusive with varargs.
+  @$pb.TagNumber(3)
+  $core.bool get optional => $_getBF(2);
+  @$pb.TagNumber(3)
+  set optional($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasOptional() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOptional() => clearField(3);
 }
 
 

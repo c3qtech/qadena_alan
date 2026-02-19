@@ -301,15 +301,19 @@ const VShareSignatory$json = {
   '1': 'VShareSignatory',
   '2': [
     {'1': 'encSignatoryVShare', '3': 1, '4': 1, '5': 12, '10': 'encSignatoryVShare'},
-    {'1': 'vShareBind', '3': 2, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'vShareBind'},
+    {'1': 'signatoryVShareBind', '3': 2, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'signatoryVShareBind'},
+    {'1': 'time', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'time'},
+    {'1': 'WalletID', '3': 4, '4': 1, '5': 9, '10': 'WalletID'},
   ],
 };
 
 /// Descriptor for `VShareSignatory`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List vShareSignatoryDescriptor = $convert.base64Decode(
     'Cg9WU2hhcmVTaWduYXRvcnkSLgoSZW5jU2lnbmF0b3J5VlNoYXJlGAEgASgMUhJlbmNTaWduYX'
-    'RvcnlWU2hhcmUSPQoKdlNoYXJlQmluZBgCIAEoCzIdLnFhZGVuYS5xYWRlbmEuVlNoYXJlQmlu'
-    'ZERhdGFSCnZTaGFyZUJpbmQ=');
+    'RvcnlWU2hhcmUSTwoTc2lnbmF0b3J5VlNoYXJlQmluZBgCIAEoCzIdLnFhZGVuYS5xYWRlbmEu'
+    'VlNoYXJlQmluZERhdGFSE3NpZ25hdG9yeVZTaGFyZUJpbmQSOAoEdGltZRgDIAEoCzIaLmdvb2'
+    'dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCCMjeHwCQ3x8BUgR0aW1lEhoKCFdhbGxldElEGAQgASgJ'
+    'UghXYWxsZXRJRA==');
 
 @$core.Deprecated('Use validateAuthorizedSignerRequestDescriptor instead')
 const ValidateAuthorizedSignerRequest$json = {

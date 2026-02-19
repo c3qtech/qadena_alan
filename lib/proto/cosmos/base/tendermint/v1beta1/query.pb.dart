@@ -515,7 +515,6 @@ class GetBlockByHeightResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $7.Block ensureBlock() => $_ensure(1);
 
-  /// Since: cosmos-sdk 0.47
   @$pb.TagNumber(3)
   $8.Block get sdkBlock => $_getN(2);
   @$pb.TagNumber(3)
@@ -635,7 +634,6 @@ class GetLatestBlockResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $7.Block ensureBlock() => $_ensure(1);
 
-  /// Since: cosmos-sdk 0.47
   @$pb.TagNumber(3)
   $8.Block get sdkBlock => $_getN(2);
   @$pb.TagNumber(3)
@@ -967,7 +965,6 @@ class VersionInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.List<Module> get buildDeps => $_getList(6);
 
-  /// Since: cosmos-sdk 0.43
   @$pb.TagNumber(8)
   $core.String get cosmosSdkVersion => $_getSZ(7);
   @$pb.TagNumber(8)

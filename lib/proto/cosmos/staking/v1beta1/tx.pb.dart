@@ -739,9 +739,7 @@ class MsgUndelegateResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $4.Timestamp ensureCompletionTime() => $_ensure(0);
 
-  ///  amount returns the amount of undelegated coins
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// amount returns the amount of undelegated coins
   @$pb.TagNumber(2)
   $7.Coin get amount => $_getN(1);
   @$pb.TagNumber(2)
@@ -754,9 +752,7 @@ class MsgUndelegateResponse extends $pb.GeneratedMessage {
   $7.Coin ensureAmount() => $_ensure(1);
 }
 
-///  MsgCancelUnbondingDelegation defines the SDK message for performing a cancel unbonding delegation for delegator
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCancelUnbondingDelegation defines the SDK message for performing a cancel unbonding delegation for delegator
 class MsgCancelUnbondingDelegation extends $pb.GeneratedMessage {
   factory MsgCancelUnbondingDelegation({
     $core.String? delegatorAddress,
@@ -853,9 +849,7 @@ class MsgCancelUnbondingDelegation extends $pb.GeneratedMessage {
   void clearCreationHeight() => clearField(4);
 }
 
-///  MsgCancelUnbondingDelegationResponse
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCancelUnbondingDelegationResponse
 class MsgCancelUnbondingDelegationResponse extends $pb.GeneratedMessage {
   factory MsgCancelUnbondingDelegationResponse() => create();
   MsgCancelUnbondingDelegationResponse._() : super();
@@ -888,9 +882,7 @@ class MsgCancelUnbondingDelegationResponse extends $pb.GeneratedMessage {
   static MsgCancelUnbondingDelegationResponse? _defaultInstance;
 }
 
-///  MsgUpdateParams is the Msg/UpdateParams request type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
@@ -961,10 +953,8 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   $8.Params ensureParams() => $_ensure(1);
 }
 
-///  MsgUpdateParamsResponse defines the response structure for executing a
-///  MsgUpdateParams message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParamsResponse defines the response structure for executing a
+/// MsgUpdateParams message.
 class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   factory MsgUpdateParamsResponse() => create();
   MsgUpdateParamsResponse._() : super();

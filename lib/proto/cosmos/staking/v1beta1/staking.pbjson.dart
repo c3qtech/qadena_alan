@@ -154,11 +154,11 @@ final $typed_data.Uint8List validatorDescriptor = $convert.base64Decode(
     '4SKQoQdW5ib25kaW5nX2hlaWdodBgIIAEoA1IPdW5ib25kaW5nSGVpZ2h0ElAKDnVuYm9uZGlu'
     'Z190aW1lGAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEINyN4fAJDfHwGo57AqAV'
     'INdW5ib25kaW5nVGltZRJNCgpjb21taXNzaW9uGAogASgLMiIuY29zbW9zLnN0YWtpbmcudjFi'
-    'ZXRhMS5Db21taXNzaW9uQgnI3h8AqOewKgFSCmNvbW1pc3Npb24SWwoTbWluX3NlbGZfZGVsZW'
-    'dhdGlvbhgLIAEoCUIryN4fANreHxVjb3Ntb3NzZGsuaW8vbWF0aC5JbnTStC0KY29zbW9zLklu'
-    'dFIRbWluU2VsZkRlbGVnYXRpb24SPAobdW5ib25kaW5nX29uX2hvbGRfcmVmX2NvdW50GAwgAS'
-    'gDUhd1bmJvbmRpbmdPbkhvbGRSZWZDb3VudBIjCg11bmJvbmRpbmdfaWRzGA0gAygEUgx1bmJv'
-    'bmRpbmdJZHM6CIigHwDooB8A');
+    'ZXRhMS5Db21taXNzaW9uQgnI3h8AqOewKgFSCmNvbW1pc3Npb24SbgoTbWluX3NlbGZfZGVsZW'
+    'dhdGlvbhgLIAEoCUI+yN4fANreHxVjb3Ntb3NzZGsuaW8vbWF0aC5JbnTStC0KY29zbW9zLklu'
+    'dNq0LQ9jb3Ntb3Mtc2RrIDAuNDZSEW1pblNlbGZEZWxlZ2F0aW9uEjwKG3VuYm9uZGluZ19vbl'
+    '9ob2xkX3JlZl9jb3VudBgMIAEoA1IXdW5ib25kaW5nT25Ib2xkUmVmQ291bnQSIwoNdW5ib25k'
+    'aW5nX2lkcxgNIAMoBFIMdW5ib25kaW5nSWRzOgiIoB8A6KAfAA==');
 
 @$core.Deprecated('Use valAddressesDescriptor instead')
 const ValAddresses$json = {

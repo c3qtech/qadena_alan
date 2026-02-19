@@ -21,7 +21,7 @@ const PageRequest$json = {
     {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
     {'1': 'limit', '3': 3, '4': 1, '5': 4, '10': 'limit'},
     {'1': 'count_total', '3': 4, '4': 1, '5': 8, '10': 'countTotal'},
-    {'1': 'reverse', '3': 5, '4': 1, '5': 8, '10': 'reverse'},
+    {'1': 'reverse', '3': 5, '4': 1, '5': 8, '8': {}, '10': 'reverse'},
   ],
 };
 
@@ -29,7 +29,7 @@ const PageRequest$json = {
 final $typed_data.Uint8List pageRequestDescriptor = $convert.base64Decode(
     'CgtQYWdlUmVxdWVzdBIQCgNrZXkYASABKAxSA2tleRIWCgZvZmZzZXQYAiABKARSBm9mZnNldB'
     'IUCgVsaW1pdBgDIAEoBFIFbGltaXQSHwoLY291bnRfdG90YWwYBCABKAhSCmNvdW50VG90YWwS'
-    'GAoHcmV2ZXJzZRgFIAEoCFIHcmV2ZXJzZQ==');
+    'LQoHcmV2ZXJzZRgFIAEoCEIT2rQtD2Nvc21vcy1zZGsgMC40M1IHcmV2ZXJzZQ==');
 
 @$core.Deprecated('Use pageResponseDescriptor instead')
 const PageResponse$json = {

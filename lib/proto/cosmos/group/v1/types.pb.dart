@@ -1024,9 +1024,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.List<$4.Any> get messages => $_getList(11);
 
-  ///  title is the title of the proposal
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// title is the title of the proposal
   @$pb.TagNumber(13)
   $core.String get title => $_getSZ(12);
   @$pb.TagNumber(13)
@@ -1036,9 +1034,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearTitle() => clearField(13);
 
-  ///  summary is a short summary of the proposal
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// summary is a short summary of the proposal
   @$pb.TagNumber(14)
   $core.String get summary => $_getSZ(13);
   @$pb.TagNumber(14)

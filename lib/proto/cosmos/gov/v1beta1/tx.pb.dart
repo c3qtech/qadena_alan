@@ -265,9 +265,7 @@ class MsgVoteResponse extends $pb.GeneratedMessage {
   static MsgVoteResponse? _defaultInstance;
 }
 
-///  MsgVoteWeighted defines a message to cast a vote.
-///
-///  Since: cosmos-sdk 0.43
+/// MsgVoteWeighted defines a message to cast a vote.
 class MsgVoteWeighted extends $pb.GeneratedMessage {
   factory MsgVoteWeighted({
     $fixnum.Int64? proposalId,
@@ -343,9 +341,7 @@ class MsgVoteWeighted extends $pb.GeneratedMessage {
   $core.List<$6.WeightedVoteOption> get options => $_getList(2);
 }
 
-///  MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
-///
-///  Since: cosmos-sdk 0.43
+/// MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
 class MsgVoteWeightedResponse extends $pb.GeneratedMessage {
   factory MsgVoteWeightedResponse() => create();
   MsgVoteWeightedResponse._() : super();

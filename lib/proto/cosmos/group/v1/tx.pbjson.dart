@@ -305,8 +305,8 @@ const MsgSubmitProposal$json = {
     {'1': 'metadata', '3': 3, '4': 1, '5': 9, '10': 'metadata'},
     {'1': 'messages', '3': 4, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messages'},
     {'1': 'exec', '3': 5, '4': 1, '5': 14, '6': '.cosmos.group.v1.Exec', '10': 'exec'},
-    {'1': 'title', '3': 6, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'summary', '3': 7, '4': 1, '5': 9, '10': 'summary'},
+    {'1': 'title', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'title'},
+    {'1': 'summary', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'summary'},
   ],
   '7': {},
 };
@@ -317,9 +317,10 @@ final $typed_data.Uint8List msgSubmitProposalDescriptor = $convert.base64Decode(
     'Nvc21vcy5BZGRyZXNzU3RyaW5nUhJncm91cFBvbGljeUFkZHJlc3MSHAoJcHJvcG9zZXJzGAIg'
     'AygJUglwcm9wb3NlcnMSGgoIbWV0YWRhdGEYAyABKAlSCG1ldGFkYXRhEjAKCG1lc3NhZ2VzGA'
     'QgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueVIIbWVzc2FnZXMSKQoEZXhlYxgFIAEoDjIVLmNv'
-    'c21vcy5ncm91cC52MS5FeGVjUgRleGVjEhQKBXRpdGxlGAYgASgJUgV0aXRsZRIYCgdzdW1tYX'
-    'J5GAcgASgJUgdzdW1tYXJ5OjmIoB8AguewKglwcm9wb3NlcnOK57AqImNvc21vcy1zZGsvZ3Jv'
-    'dXAvTXNnU3VibWl0UHJvcG9zYWw=');
+    'c21vcy5ncm91cC52MS5FeGVjUgRleGVjEikKBXRpdGxlGAYgASgJQhPatC0PY29zbW9zLXNkay'
+    'AwLjQ3UgV0aXRsZRItCgdzdW1tYXJ5GAcgASgJQhPatC0PY29zbW9zLXNkayAwLjQ3UgdzdW1t'
+    'YXJ5OjmIoB8AguewKglwcm9wb3NlcnOK57AqImNvc21vcy1zZGsvZ3JvdXAvTXNnU3VibWl0UH'
+    'JvcG9zYWw=');
 
 @$core.Deprecated('Use msgSubmitProposalResponseDescriptor instead')
 const MsgSubmitProposalResponse$json = {

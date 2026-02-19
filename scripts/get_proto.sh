@@ -78,9 +78,9 @@ else
 
     # Download the Cosmos EVM Protobuf files
     COSMOSEVM_ZIP="$BUILD/cosmosevm.zip"
-    wget -O "$COSMOSEVM_ZIP" "https://github.com/cosmos/cosmos-evm/archive/v$COSMOSEVM_VERSION.zip"
+    wget -O "$COSMOSEVM_ZIP" "https://github.com/cosmos/evm/archive/v$COSMOSEVM_VERSION.zip"
     unzip "$COSMOSEVM_ZIP" -d "$BUILD/" && rm "$COSMOSEVM_ZIP"
-    COSMOSEVM="$BUILD/cosmos-evm-$COSMOSEVM_VERSION"
+    COSMOSEVM="$BUILD/evm-$COSMOSEVM_VERSION"
 
     WASMD_ZIP="$BUILD/wasmd.zip"
     wget -O "$WASMD_ZIP" "https://github.com/CosmWasm/wasmd/archive/refs/heads/main.zip"
@@ -93,7 +93,7 @@ else
     mkdir -p "$PROTO_COSMOS"
     mv -f "$COSMOS/proto/cosmos"/* "$PROTO_COSMOS"
 
-    PROTO_COSMOSEVM=$PROTO/cosmosevm
+    PROTO_COSMOSEVM=$PROTO/cosmos/evm
     mkdir -p "$PROTO_COSMOSEVM"
     mv -f "$COSMOSEVM/proto/cosmos/evm"/* "$PROTO_COSMOSEVM"
 
@@ -125,5 +125,5 @@ else
     curl "$PROTOBUF_LINK/any.proto" > "$PROTO_PROTOBUF/any.proto"
 
     # Delete unnecessary folders
-    rm -rf "$COSMOS" "$COSMOSEVM" "$BUILD"
+    rm -rf "$BUILD"
 fi

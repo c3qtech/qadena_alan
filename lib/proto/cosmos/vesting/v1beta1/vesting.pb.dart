@@ -370,11 +370,9 @@ class PeriodicVestingAccount extends $pb.GeneratedMessage {
   $core.List<Period> get vestingPeriods => $_getList(2);
 }
 
-///  PermanentLockedAccount implements the VestingAccount interface. It does
-///  not ever release coins, locking them indefinitely. Coins in this account can
-///  still be used for delegating and for governance votes even while locked.
-///
-///  Since: cosmos-sdk 0.43
+/// PermanentLockedAccount implements the VestingAccount interface. It does
+/// not ever release coins, locking them indefinitely. Coins in this account can
+/// still be used for delegating and for governance votes even while locked.
 class PermanentLockedAccount extends $pb.GeneratedMessage {
   factory PermanentLockedAccount({
     BaseVestingAccount? baseVestingAccount,

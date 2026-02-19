@@ -379,9 +379,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearMetadata() => clearField(10);
 
-  ///  title is the title of the proposal
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// title is the title of the proposal
   @$pb.TagNumber(11)
   $core.String get title => $_getSZ(10);
   @$pb.TagNumber(11)
@@ -391,9 +389,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   void clearTitle() => clearField(11);
 
-  ///  summary is a short summary of the proposal
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// summary is a short summary of the proposal
   @$pb.TagNumber(12)
   $core.String get summary => $_getSZ(11);
   @$pb.TagNumber(12)
@@ -403,9 +399,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearSummary() => clearField(12);
 
-  ///  proposer is the address of the proposal sumbitter
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// proposer is the address of the proposal sumbitter
   @$pb.TagNumber(13)
   $core.String get proposer => $_getSZ(12);
   @$pb.TagNumber(13)
@@ -415,9 +409,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearProposer() => clearField(13);
 
-  ///  expedited defines if the proposal is expedited
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// expedited defines if the proposal is expedited
   @$pb.TagNumber(14)
   $core.bool get expedited => $_getBF(13);
   @$pb.TagNumber(14)
@@ -427,9 +419,7 @@ class Proposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   void clearExpedited() => clearField(14);
 
-  ///  failed_reason defines the reason why the proposal failed
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// failed_reason defines the reason why the proposal failed
   @$pb.TagNumber(15)
   $core.String get failedReason => $_getSZ(14);
   @$pb.TagNumber(15)
@@ -832,9 +822,7 @@ class TallyParams extends $pb.GeneratedMessage {
   void clearVetoThreshold() => clearField(3);
 }
 
-///  Params defines the parameters for the x/gov module.
-///
-///  Since: cosmos-sdk 0.47
+/// Params defines the parameters for the x/gov module.
 class Params extends $pb.GeneratedMessage {
   factory Params({
     $core.Iterable<$2.Coin>? minDeposit,
@@ -1021,9 +1009,7 @@ class Params extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearMinInitialDepositRatio() => clearField(7);
 
-  ///  The cancel ratio which will not be returned back to the depositors when a proposal is cancelled.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// The cancel ratio which will not be returned back to the depositors when a proposal is cancelled.
   @$pb.TagNumber(8)
   $core.String get proposalCancelRatio => $_getSZ(7);
   @$pb.TagNumber(8)
@@ -1033,10 +1019,8 @@ class Params extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearProposalCancelRatio() => clearField(8);
 
-  ///  The address which will receive (proposal_cancel_ratio * deposit) proposal deposits.
-  ///  If empty, the (proposal_cancel_ratio * deposit) proposal deposits will be burned.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// The address which will receive (proposal_cancel_ratio * deposit) proposal deposits.
+  /// If empty, the (proposal_cancel_ratio * deposit) proposal deposits will be burned.
   @$pb.TagNumber(9)
   $core.String get proposalCancelDest => $_getSZ(8);
   @$pb.TagNumber(9)
@@ -1046,9 +1030,7 @@ class Params extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearProposalCancelDest() => clearField(9);
 
-  ///  Duration of the voting period of an expedited proposal.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// Duration of the voting period of an expedited proposal.
   @$pb.TagNumber(10)
   $5.Duration get expeditedVotingPeriod => $_getN(9);
   @$pb.TagNumber(10)
@@ -1060,9 +1042,7 @@ class Params extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $5.Duration ensureExpeditedVotingPeriod() => $_ensure(9);
 
-  ///  Minimum proportion of Yes votes for proposal to pass. Default value: 0.67.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// Minimum proportion of Yes votes for proposal to pass. Default value: 0.67.
   @$pb.TagNumber(11)
   $core.String get expeditedThreshold => $_getSZ(10);
   @$pb.TagNumber(11)
@@ -1106,11 +1086,9 @@ class Params extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   void clearBurnVoteVeto() => clearField(15);
 
-  ///  The ratio representing the proportion of the deposit value minimum that must be met when making a deposit.
-  ///  Default value: 0.01. Meaning that for a chain with a min_deposit of 100stake, a deposit of 1stake would be
-  ///  required.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// The ratio representing the proportion of the deposit value minimum that must be met when making a deposit.
+  /// Default value: 0.01. Meaning that for a chain with a min_deposit of 100stake, a deposit of 1stake would be
+  /// required.
   @$pb.TagNumber(16)
   $core.String get minDepositRatio => $_getSZ(15);
   @$pb.TagNumber(16)

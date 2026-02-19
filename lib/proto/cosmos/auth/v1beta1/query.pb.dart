@@ -18,9 +18,7 @@ import '../../../google/protobuf/any.pb.dart' as $2;
 import '../../base/query/v1beta1/pagination.pb.dart' as $4;
 import 'auth.pb.dart' as $3;
 
-///  QueryAccountsRequest is the request type for the Query/Accounts RPC method.
-///
-///  Since: cosmos-sdk 0.43
+/// QueryAccountsRequest is the request type for the Query/Accounts RPC method.
 class QueryAccountsRequest extends $pb.GeneratedMessage {
   factory QueryAccountsRequest({
     $4.PageRequest? pagination,
@@ -74,9 +72,7 @@ class QueryAccountsRequest extends $pb.GeneratedMessage {
   $4.PageRequest ensurePagination() => $_ensure(0);
 }
 
-///  QueryAccountsResponse is the response type for the Query/Accounts RPC method.
-///
-///  Since: cosmos-sdk 0.43
+/// QueryAccountsResponse is the response type for the Query/Accounts RPC method.
 class QueryAccountsResponse extends $pb.GeneratedMessage {
   factory QueryAccountsResponse({
     $core.Iterable<$2.Any>? accounts,
@@ -332,9 +328,7 @@ class QueryParamsResponse extends $pb.GeneratedMessage {
   $3.Params ensureParams() => $_ensure(0);
 }
 
-///  QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method.
-///
-///  Since: cosmos-sdk 0.46
+/// QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method.
 class QueryModuleAccountsRequest extends $pb.GeneratedMessage {
   factory QueryModuleAccountsRequest() => create();
   QueryModuleAccountsRequest._() : super();
@@ -367,9 +361,7 @@ class QueryModuleAccountsRequest extends $pb.GeneratedMessage {
   static QueryModuleAccountsRequest? _defaultInstance;
 }
 
-///  QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method.
-///
-///  Since: cosmos-sdk 0.46
+/// QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method.
 class QueryModuleAccountsResponse extends $pb.GeneratedMessage {
   factory QueryModuleAccountsResponse({
     $core.Iterable<$2.Any>? accounts,
@@ -518,9 +510,7 @@ class QueryModuleAccountByNameResponse extends $pb.GeneratedMessage {
   $2.Any ensureAccount() => $_ensure(0);
 }
 
-///  Bech32PrefixRequest is the request type for Bech32Prefix rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// Bech32PrefixRequest is the request type for Bech32Prefix rpc method.
 class Bech32PrefixRequest extends $pb.GeneratedMessage {
   factory Bech32PrefixRequest() => create();
   Bech32PrefixRequest._() : super();
@@ -553,9 +543,7 @@ class Bech32PrefixRequest extends $pb.GeneratedMessage {
   static Bech32PrefixRequest? _defaultInstance;
 }
 
-///  Bech32PrefixResponse is the response type for Bech32Prefix rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// Bech32PrefixResponse is the response type for Bech32Prefix rpc method.
 class Bech32PrefixResponse extends $pb.GeneratedMessage {
   factory Bech32PrefixResponse({
     $core.String? bech32Prefix,
@@ -606,9 +594,7 @@ class Bech32PrefixResponse extends $pb.GeneratedMessage {
   void clearBech32Prefix() => clearField(1);
 }
 
-///  AddressBytesToStringRequest is the request type for AddressString rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// AddressBytesToStringRequest is the request type for AddressString rpc method.
 class AddressBytesToStringRequest extends $pb.GeneratedMessage {
   factory AddressBytesToStringRequest({
     $core.List<$core.int>? addressBytes,
@@ -659,9 +645,7 @@ class AddressBytesToStringRequest extends $pb.GeneratedMessage {
   void clearAddressBytes() => clearField(1);
 }
 
-///  AddressBytesToStringResponse is the response type for AddressString rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// AddressBytesToStringResponse is the response type for AddressString rpc method.
 class AddressBytesToStringResponse extends $pb.GeneratedMessage {
   factory AddressBytesToStringResponse({
     $core.String? addressString,
@@ -712,9 +696,7 @@ class AddressBytesToStringResponse extends $pb.GeneratedMessage {
   void clearAddressString() => clearField(1);
 }
 
-///  AddressStringToBytesRequest is the request type for AccountBytes rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// AddressStringToBytesRequest is the request type for AccountBytes rpc method.
 class AddressStringToBytesRequest extends $pb.GeneratedMessage {
   factory AddressStringToBytesRequest({
     $core.String? addressString,
@@ -765,9 +747,7 @@ class AddressStringToBytesRequest extends $pb.GeneratedMessage {
   void clearAddressString() => clearField(1);
 }
 
-///  AddressStringToBytesResponse is the response type for AddressBytes rpc method.
-///
-///  Since: cosmos-sdk 0.46
+/// AddressStringToBytesResponse is the response type for AddressBytes rpc method.
 class AddressStringToBytesResponse extends $pb.GeneratedMessage {
   factory AddressStringToBytesResponse({
     $core.List<$core.int>? addressBytes,
@@ -818,9 +798,7 @@ class AddressStringToBytesResponse extends $pb.GeneratedMessage {
   void clearAddressBytes() => clearField(1);
 }
 
-///  QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method
-///
-///  Since: cosmos-sdk 0.46.2
+/// QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method
 class QueryAccountAddressByIDRequest extends $pb.GeneratedMessage {
   factory QueryAccountAddressByIDRequest({
   @$core.Deprecated('This field is deprecated.')
@@ -886,9 +864,7 @@ class QueryAccountAddressByIDRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
 
-  ///  account_id is the account number of the address to be queried.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// account_id is the account number of the address to be queried.
   @$pb.TagNumber(2)
   $fixnum.Int64 get accountId => $_getI64(1);
   @$pb.TagNumber(2)
@@ -899,9 +875,7 @@ class QueryAccountAddressByIDRequest extends $pb.GeneratedMessage {
   void clearAccountId() => clearField(2);
 }
 
-///  QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method
-///
-///  Since: cosmos-sdk 0.46.2
+/// QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method
 class QueryAccountAddressByIDResponse extends $pb.GeneratedMessage {
   factory QueryAccountAddressByIDResponse({
     $core.String? accountAddress,
@@ -952,9 +926,7 @@ class QueryAccountAddressByIDResponse extends $pb.GeneratedMessage {
   void clearAccountAddress() => clearField(1);
 }
 
-///  QueryAccountInfoRequest is the Query/AccountInfo request type.
-///
-///  Since: cosmos-sdk 0.47
+/// QueryAccountInfoRequest is the Query/AccountInfo request type.
 class QueryAccountInfoRequest extends $pb.GeneratedMessage {
   factory QueryAccountInfoRequest({
     $core.String? address,
@@ -1006,9 +978,7 @@ class QueryAccountInfoRequest extends $pb.GeneratedMessage {
   void clearAddress() => clearField(1);
 }
 
-///  QueryAccountInfoResponse is the Query/AccountInfo response type.
-///
-///  Since: cosmos-sdk 0.47
+/// QueryAccountInfoResponse is the Query/AccountInfo response type.
 class QueryAccountInfoResponse extends $pb.GeneratedMessage {
   factory QueryAccountInfoResponse({
     $3.BaseAccount? info,

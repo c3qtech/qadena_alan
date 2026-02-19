@@ -19,12 +19,14 @@ const QueryAccountsRequest$json = {
   '2': [
     {'1': 'pagination', '3': 1, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageRequest', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAccountsRequestDescriptor = $convert.base64Decode(
     'ChRRdWVyeUFjY291bnRzUmVxdWVzdBJGCgpwYWdpbmF0aW9uGAEgASgLMiYuY29zbW9zLmJhc2'
-    'UucXVlcnkudjFiZXRhMS5QYWdlUmVxdWVzdFIKcGFnaW5hdGlvbg==');
+    'UucXVlcnkudjFiZXRhMS5QYWdlUmVxdWVzdFIKcGFnaW5hdGlvbjoT0rQtD2Nvc21vcy1zZGsg'
+    'MC40Mw==');
 
 @$core.Deprecated('Use queryAccountsResponseDescriptor instead')
 const QueryAccountsResponse$json = {
@@ -33,6 +35,7 @@ const QueryAccountsResponse$json = {
     {'1': 'accounts', '3': 1, '4': 3, '5': 11, '6': '.google.protobuf.Any', '8': {}, '10': 'accounts'},
     {'1': 'pagination', '3': 2, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageResponse', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountsResponse`. Decode as a `google.protobuf.DescriptorProto`.
@@ -40,7 +43,7 @@ final $typed_data.Uint8List queryAccountsResponseDescriptor = $convert.base64Dec
     'ChVRdWVyeUFjY291bnRzUmVzcG9uc2USUgoIYWNjb3VudHMYASADKAsyFC5nb29nbGUucHJvdG'
     '9idWYuQW55QiDKtC0cY29zbW9zLmF1dGgudjFiZXRhMS5BY2NvdW50SVIIYWNjb3VudHMSRwoK'
     'cGFnaW5hdGlvbhgCIAEoCzInLmNvc21vcy5iYXNlLnF1ZXJ5LnYxYmV0YTEuUGFnZVJlc3Bvbn'
-    'NlUgpwYWdpbmF0aW9u');
+    'NlUgpwYWdpbmF0aW9uOhPStC0PY29zbW9zLXNkayAwLjQz');
 
 @$core.Deprecated('Use queryAccountRequestDescriptor instead')
 const QueryAccountRequest$json = {
@@ -94,11 +97,12 @@ final $typed_data.Uint8List queryParamsResponseDescriptor = $convert.base64Decod
 @$core.Deprecated('Use queryModuleAccountsRequestDescriptor instead')
 const QueryModuleAccountsRequest$json = {
   '1': 'QueryModuleAccountsRequest',
+  '7': {},
 };
 
 /// Descriptor for `QueryModuleAccountsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryModuleAccountsRequestDescriptor = $convert.base64Decode(
-    'ChpRdWVyeU1vZHVsZUFjY291bnRzUmVxdWVzdA==');
+    'ChpRdWVyeU1vZHVsZUFjY291bnRzUmVxdWVzdDoT0rQtD2Nvc21vcy1zZGsgMC40Ng==');
 
 @$core.Deprecated('Use queryModuleAccountsResponseDescriptor instead')
 const QueryModuleAccountsResponse$json = {
@@ -106,13 +110,14 @@ const QueryModuleAccountsResponse$json = {
   '2': [
     {'1': 'accounts', '3': 1, '4': 3, '5': 11, '6': '.google.protobuf.Any', '8': {}, '10': 'accounts'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryModuleAccountsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryModuleAccountsResponseDescriptor = $convert.base64Decode(
     'ChtRdWVyeU1vZHVsZUFjY291bnRzUmVzcG9uc2USWAoIYWNjb3VudHMYASADKAsyFC5nb29nbG'
     'UucHJvdG9idWYuQW55QibKtC0iY29zbW9zLmF1dGgudjFiZXRhMS5Nb2R1bGVBY2NvdW50SVII'
-    'YWNjb3VudHM=');
+    'YWNjb3VudHM6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 
 @$core.Deprecated('Use queryModuleAccountByNameRequestDescriptor instead')
 const QueryModuleAccountByNameRequest$json = {
@@ -143,11 +148,12 @@ final $typed_data.Uint8List queryModuleAccountByNameResponseDescriptor = $conver
 @$core.Deprecated('Use bech32PrefixRequestDescriptor instead')
 const Bech32PrefixRequest$json = {
   '1': 'Bech32PrefixRequest',
+  '7': {},
 };
 
 /// Descriptor for `Bech32PrefixRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List bech32PrefixRequestDescriptor = $convert.base64Decode(
-    'ChNCZWNoMzJQcmVmaXhSZXF1ZXN0');
+    'ChNCZWNoMzJQcmVmaXhSZXF1ZXN0OhPStC0PY29zbW9zLXNkayAwLjQ2');
 
 @$core.Deprecated('Use bech32PrefixResponseDescriptor instead')
 const Bech32PrefixResponse$json = {
@@ -155,12 +161,13 @@ const Bech32PrefixResponse$json = {
   '2': [
     {'1': 'bech32_prefix', '3': 1, '4': 1, '5': 9, '10': 'bech32Prefix'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `Bech32PrefixResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List bech32PrefixResponseDescriptor = $convert.base64Decode(
     'ChRCZWNoMzJQcmVmaXhSZXNwb25zZRIjCg1iZWNoMzJfcHJlZml4GAEgASgJUgxiZWNoMzJQcm'
-    'VmaXg=');
+    'VmaXg6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 
 @$core.Deprecated('Use addressBytesToStringRequestDescriptor instead')
 const AddressBytesToStringRequest$json = {
@@ -168,12 +175,13 @@ const AddressBytesToStringRequest$json = {
   '2': [
     {'1': 'address_bytes', '3': 1, '4': 1, '5': 12, '10': 'addressBytes'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `AddressBytesToStringRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addressBytesToStringRequestDescriptor = $convert.base64Decode(
     'ChtBZGRyZXNzQnl0ZXNUb1N0cmluZ1JlcXVlc3QSIwoNYWRkcmVzc19ieXRlcxgBIAEoDFIMYW'
-    'RkcmVzc0J5dGVz');
+    'RkcmVzc0J5dGVzOhPStC0PY29zbW9zLXNkayAwLjQ2');
 
 @$core.Deprecated('Use addressBytesToStringResponseDescriptor instead')
 const AddressBytesToStringResponse$json = {
@@ -181,12 +189,13 @@ const AddressBytesToStringResponse$json = {
   '2': [
     {'1': 'address_string', '3': 1, '4': 1, '5': 9, '10': 'addressString'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `AddressBytesToStringResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addressBytesToStringResponseDescriptor = $convert.base64Decode(
     'ChxBZGRyZXNzQnl0ZXNUb1N0cmluZ1Jlc3BvbnNlEiUKDmFkZHJlc3Nfc3RyaW5nGAEgASgJUg'
-    '1hZGRyZXNzU3RyaW5n');
+    '1hZGRyZXNzU3RyaW5nOhPStC0PY29zbW9zLXNkayAwLjQ2');
 
 @$core.Deprecated('Use addressStringToBytesRequestDescriptor instead')
 const AddressStringToBytesRequest$json = {
@@ -194,12 +203,13 @@ const AddressStringToBytesRequest$json = {
   '2': [
     {'1': 'address_string', '3': 1, '4': 1, '5': 9, '10': 'addressString'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `AddressStringToBytesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addressStringToBytesRequestDescriptor = $convert.base64Decode(
     'ChtBZGRyZXNzU3RyaW5nVG9CeXRlc1JlcXVlc3QSJQoOYWRkcmVzc19zdHJpbmcYASABKAlSDW'
-    'FkZHJlc3NTdHJpbmc=');
+    'FkZHJlc3NTdHJpbmc6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 
 @$core.Deprecated('Use addressStringToBytesResponseDescriptor instead')
 const AddressStringToBytesResponse$json = {
@@ -207,12 +217,13 @@ const AddressStringToBytesResponse$json = {
   '2': [
     {'1': 'address_bytes', '3': 1, '4': 1, '5': 12, '10': 'addressBytes'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `AddressStringToBytesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addressStringToBytesResponseDescriptor = $convert.base64Decode(
     'ChxBZGRyZXNzU3RyaW5nVG9CeXRlc1Jlc3BvbnNlEiMKDWFkZHJlc3NfYnl0ZXMYASABKAxSDG'
-    'FkZHJlc3NCeXRlcw==');
+    'FkZHJlc3NCeXRlczoT0rQtD2Nvc21vcy1zZGsgMC40Ng==');
 
 @$core.Deprecated('Use queryAccountAddressByIDRequestDescriptor instead')
 const QueryAccountAddressByIDRequest$json = {
@@ -226,14 +237,16 @@ const QueryAccountAddressByIDRequest$json = {
       '8': {'3': true},
       '10': 'id',
     },
-    {'1': 'account_id', '3': 2, '4': 1, '5': 4, '10': 'accountId'},
+    {'1': 'account_id', '3': 2, '4': 1, '5': 4, '8': {}, '10': 'accountId'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountAddressByIDRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAccountAddressByIDRequestDescriptor = $convert.base64Decode(
-    'Ch5RdWVyeUFjY291bnRBZGRyZXNzQnlJRFJlcXVlc3QSEgoCaWQYASABKANCAhgBUgJpZBIdCg'
-    'phY2NvdW50X2lkGAIgASgEUglhY2NvdW50SWQ=');
+    'Ch5RdWVyeUFjY291bnRBZGRyZXNzQnlJRFJlcXVlc3QSEgoCaWQYASABKANCAhgBUgJpZBIyCg'
+    'phY2NvdW50X2lkGAIgASgEQhPatC0PY29zbW9zLXNkayAwLjQ3UglhY2NvdW50SWQ6FdK0LRFj'
+    'b3Ntb3Mtc2RrIDAuNDYuMg==');
 
 @$core.Deprecated('Use queryAccountAddressByIDResponseDescriptor instead')
 const QueryAccountAddressByIDResponse$json = {
@@ -241,12 +254,14 @@ const QueryAccountAddressByIDResponse$json = {
   '2': [
     {'1': 'account_address', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'accountAddress'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountAddressByIDResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAccountAddressByIDResponseDescriptor = $convert.base64Decode(
     'Ch9RdWVyeUFjY291bnRBZGRyZXNzQnlJRFJlc3BvbnNlEkEKD2FjY291bnRfYWRkcmVzcxgBIA'
-    'EoCUIY0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5nUg5hY2NvdW50QWRkcmVzcw==');
+    'EoCUIY0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5nUg5hY2NvdW50QWRkcmVzczoV0rQtEWNvc21v'
+    'cy1zZGsgMC40Ni4y');
 
 @$core.Deprecated('Use queryAccountInfoRequestDescriptor instead')
 const QueryAccountInfoRequest$json = {
@@ -254,12 +269,13 @@ const QueryAccountInfoRequest$json = {
   '2': [
     {'1': 'address', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'address'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAccountInfoRequestDescriptor = $convert.base64Decode(
     'ChdRdWVyeUFjY291bnRJbmZvUmVxdWVzdBIyCgdhZGRyZXNzGAEgASgJQhjStC0UY29zbW9zLk'
-    'FkZHJlc3NTdHJpbmdSB2FkZHJlc3M=');
+    'FkZHJlc3NTdHJpbmdSB2FkZHJlc3M6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDc=');
 
 @$core.Deprecated('Use queryAccountInfoResponseDescriptor instead')
 const QueryAccountInfoResponse$json = {
@@ -267,10 +283,11 @@ const QueryAccountInfoResponse$json = {
   '2': [
     {'1': 'info', '3': 1, '4': 1, '5': 11, '6': '.cosmos.auth.v1beta1.BaseAccount', '10': 'info'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAccountInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAccountInfoResponseDescriptor = $convert.base64Decode(
     'ChhRdWVyeUFjY291bnRJbmZvUmVzcG9uc2USNAoEaW5mbxgBIAEoCzIgLmNvc21vcy5hdXRoLn'
-    'YxYmV0YTEuQmFzZUFjY291bnRSBGluZm8=');
+    'YxYmV0YTEuQmFzZUFjY291bnRSBGluZm86E9K0LQ9jb3Ntb3Mtc2RrIDAuNDc=');
 

@@ -1361,7 +1361,7 @@ class UpdateInstantiateConfigProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearDescription() => clearField(2);
 
-  /// AccessConfigUpdate contains the list of code ids and the access config
+  /// AccessConfigUpdates contains the list of code ids and the access config
   /// to be applied.
   @$pb.TagNumber(3)
   $core.List<AccessConfigUpdate> get accessConfigUpdates => $_getList(2);

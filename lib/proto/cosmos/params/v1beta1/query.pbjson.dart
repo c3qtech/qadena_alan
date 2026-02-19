@@ -43,11 +43,12 @@ final $typed_data.Uint8List queryParamsResponseDescriptor = $convert.base64Decod
 @$core.Deprecated('Use querySubspacesRequestDescriptor instead')
 const QuerySubspacesRequest$json = {
   '1': 'QuerySubspacesRequest',
+  '7': {},
 };
 
 /// Descriptor for `QuerySubspacesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List querySubspacesRequestDescriptor = $convert.base64Decode(
-    'ChVRdWVyeVN1YnNwYWNlc1JlcXVlc3Q=');
+    'ChVRdWVyeVN1YnNwYWNlc1JlcXVlc3Q6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 
 @$core.Deprecated('Use querySubspacesResponseDescriptor instead')
 const QuerySubspacesResponse$json = {
@@ -55,12 +56,13 @@ const QuerySubspacesResponse$json = {
   '2': [
     {'1': 'subspaces', '3': 1, '4': 3, '5': 11, '6': '.cosmos.params.v1beta1.Subspace', '10': 'subspaces'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QuerySubspacesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List querySubspacesResponseDescriptor = $convert.base64Decode(
     'ChZRdWVyeVN1YnNwYWNlc1Jlc3BvbnNlEj0KCXN1YnNwYWNlcxgBIAMoCzIfLmNvc21vcy5wYX'
-    'JhbXMudjFiZXRhMS5TdWJzcGFjZVIJc3Vic3BhY2Vz');
+    'JhbXMudjFiZXRhMS5TdWJzcGFjZVIJc3Vic3BhY2VzOhPStC0PY29zbW9zLXNkayAwLjQ2');
 
 @$core.Deprecated('Use subspaceDescriptor instead')
 const Subspace$json = {
@@ -69,10 +71,11 @@ const Subspace$json = {
     {'1': 'subspace', '3': 1, '4': 1, '5': 9, '10': 'subspace'},
     {'1': 'keys', '3': 2, '4': 3, '5': 9, '10': 'keys'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `Subspace`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List subspaceDescriptor = $convert.base64Decode(
     'CghTdWJzcGFjZRIaCghzdWJzcGFjZRgBIAEoCVIIc3Vic3BhY2USEgoEa2V5cxgCIAMoCVIEa2'
-    'V5cw==');
+    'V5czoT0rQtD2Nvc21vcy1zZGsgMC40Ng==');
 

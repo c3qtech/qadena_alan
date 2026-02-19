@@ -1,5 +1,7 @@
 
 import 'package:qadena_alan/qadena/core/client/query/export.dart';
+import 'package:qadena_alan/qadena/types/shamir.dart';
+import 'package:qadena_alan/qadena/types/legacy_dec.dart';
 import 'package:qadena_alan/wallet/network_info.dart';
 import 'package:fixnum/src/int64.dart';
 import 'package:qadena_alan/alan.dart' as alan;
@@ -9,6 +11,7 @@ import 'package:qadena_alan/proto/cosmos/base/v1beta1/coin.pb.dart';
 import 'package:grpc/grpc.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/common.dart' as c;
+import 'package:qadena_alan/proto/cosmos/evm/feemarket/v1/export.dart' as feemarket;
 
 // HELPER CLASSES FOR TALKING TO THE BROADCASTING TO QADENA
 
@@ -36,7 +39,64 @@ class QadenaClientTx {
   static  Chain? chain;
   
   static final double gasMultiplier = 1.2;
-  static final Int64 gasPrice = Int64(500000000); // in config.yml of chain
+
+  /// Queries the feemarket module for the current MinGasPrice.
+  /// Returns the price as a string with denom (e.g. "600000000aqdn"), or [fallback] on error.
+  static Future<String> queryMinGasPrice(String fallback) async {
+    try {
+      final fmClient = feemarket.QueryClient(networkInfo!.gRPCChannel);
+      final res = await fmClient.params(feemarket.QueryParamsRequest());
+
+      final paramsMsg = res.params;
+      final minGasPriceStr = paramsMsg.hasMinGasPrice() ? paramsMsg.minGasPrice : '';
+      final baseFeeStr = paramsMsg.hasBaseFee() ? paramsMsg.baseFee : '';
+
+
+      var minGasPrice = LegacyDec.zero();
+      var baseFee = LegacyDec.zero();
+
+      if (minGasPriceStr.isNotEmpty) {
+        minGasPrice = LegacyDec.parseRaw(minGasPriceStr);
+      }
+      if (baseFeeStr.isNotEmpty) {
+        baseFee = LegacyDec.parseRaw(baseFeeStr);
+      }
+
+      if (c.Debug) {
+        print('queryMinGasPrice: minGasPrice=${minGasPrice.toString()} baseFee=${baseFee.toString()}');
+      }
+
+
+      if (minGasPrice.isZero && baseFee.isZero) {
+        return fallback;
+      }
+
+      minGasPrice = minGasPrice.max(baseFee);
+
+      // Add 10% buffer to avoid race with rising base fee
+      var buffered = minGasPrice.mulFraction(11, 10);
+
+      // if less than 1, set minimum gas price to 1 aqdn
+      final one = LegacyDec.fromBigInt(BigInt.one);
+      if (buffered < one) {
+        buffered = one;
+      }
+
+      // truncate to integer and increment by 1
+      final ret = buffered.truncateInt() + BigInt.one;
+
+      if (c.Debug) {
+        print('queryMinGasPrice: ret=$ret');
+      }
+
+      return '${ret}aqdn';
+    } catch (e) {
+      if (c.Debug) {
+        print('queryMinGasPrice error: $e');
+      }
+      return fallback;
+    }
+  }
 
   static Future<String?> broadcastTx(
       alan.Wallet signingWallet, List<GeneratedMessage> msgs, {String? feeGranter, StringRef? txHashRef}) async {
@@ -73,6 +133,9 @@ class QadenaClientTx {
     final signer = alan.TxSigner.fromNetworkInfo(networkInfo!);
     final txSender = alan.TxSender.fromNetworkInfo(networkInfo!);
     Int64? oldSequence;
+
+    Int64 gasPrice = Int64(0);
+
     while (true) {
       /* ADD BELOW TO SIMULATE sequence mismatch error
       // HACK -- oldSequence--;
@@ -96,6 +159,8 @@ class QadenaClientTx {
         var fee = Fee();
         gas = Int64(500000);
         fee.gasLimit = gas;
+        final gasPriceStr = await queryMinGasPrice("500000000aqdn");
+        gasPrice = Int64.parseInt(gasPriceStr.split('aqdn')[0]);
         final feeAmount = gas * gasPrice;
         fee.amount.add(Coin.create()
           ..amount = "$feeAmount"
@@ -161,6 +226,12 @@ class QadenaClientTx {
 
         var fee = Fee();
         fee.gasLimit = gas;
+        if (gasPrice < Int64(1)) {
+          if (c.Debug) {
+            print("gasPrice is less than 1, error");
+          }
+          return "UNKNOWN";
+        }
         final feeAmount = gas * gasPrice;
         fee.amount.add(Coin.create()
           ..amount = "$feeAmount"

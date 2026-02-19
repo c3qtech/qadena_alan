@@ -1238,14 +1238,22 @@ class MsgInitEnclave extends $pb.GeneratedMessage {
 class VShareSignatory extends $pb.GeneratedMessage {
   factory VShareSignatory({
     $core.List<$core.int>? encSignatoryVShare,
-    $21.VShareBindData? vShareBind,
+    $21.VShareBindData? signatoryVShareBind,
+    $16.Timestamp? time,
+    $core.String? walletID,
   }) {
     final $result = create();
     if (encSignatoryVShare != null) {
       $result.encSignatoryVShare = encSignatoryVShare;
     }
-    if (vShareBind != null) {
-      $result.vShareBind = vShareBind;
+    if (signatoryVShareBind != null) {
+      $result.signatoryVShareBind = signatoryVShareBind;
+    }
+    if (time != null) {
+      $result.time = time;
+    }
+    if (walletID != null) {
+      $result.walletID = walletID;
     }
     return $result;
   }
@@ -1255,7 +1263,9 @@ class VShareSignatory extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'VShareSignatory', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'encSignatoryVShare', $pb.PbFieldType.OY, protoName: 'encSignatoryVShare')
-    ..aOM<$21.VShareBindData>(2, _omitFieldNames ? '' : 'vShareBind', protoName: 'vShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$21.VShareBindData>(2, _omitFieldNames ? '' : 'signatoryVShareBind', protoName: 'signatoryVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$16.Timestamp>(3, _omitFieldNames ? '' : 'time', subBuilder: $16.Timestamp.create)
+    ..aOS(4, _omitFieldNames ? '' : 'WalletID', protoName: 'WalletID')
     ..hasRequiredFields = false
   ;
 
@@ -1290,15 +1300,35 @@ class VShareSignatory extends $pb.GeneratedMessage {
   void clearEncSignatoryVShare() => clearField(1);
 
   @$pb.TagNumber(2)
-  $21.VShareBindData get vShareBind => $_getN(1);
+  $21.VShareBindData get signatoryVShareBind => $_getN(1);
   @$pb.TagNumber(2)
-  set vShareBind($21.VShareBindData v) { setField(2, v); }
+  set signatoryVShareBind($21.VShareBindData v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasVShareBind() => $_has(1);
+  $core.bool hasSignatoryVShareBind() => $_has(1);
   @$pb.TagNumber(2)
-  void clearVShareBind() => clearField(2);
+  void clearSignatoryVShareBind() => clearField(2);
   @$pb.TagNumber(2)
-  $21.VShareBindData ensureVShareBind() => $_ensure(1);
+  $21.VShareBindData ensureSignatoryVShareBind() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $16.Timestamp get time => $_getN(2);
+  @$pb.TagNumber(3)
+  set time($16.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTime() => clearField(3);
+  @$pb.TagNumber(3)
+  $16.Timestamp ensureTime() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get walletID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set walletID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasWalletID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearWalletID() => clearField(4);
 }
 
 class ValidateAuthorizedSignerRequest extends $pb.GeneratedMessage {

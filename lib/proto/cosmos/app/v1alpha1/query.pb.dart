@@ -48,7 +48,7 @@ class QueryConfigRequest extends $pb.GeneratedMessage {
   static QueryConfigRequest? _defaultInstance;
 }
 
-/// QueryConfigRequest is the Query/Config response type.
+/// QueryConfigResponse is the Query/Config response type.
 class QueryConfigResponse extends $pb.GeneratedMessage {
   factory QueryConfigResponse({
     $2.Config? config,

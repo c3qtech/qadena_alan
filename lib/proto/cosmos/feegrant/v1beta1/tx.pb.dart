@@ -233,9 +233,7 @@ class MsgRevokeAllowanceResponse extends $pb.GeneratedMessage {
   static MsgRevokeAllowanceResponse? _defaultInstance;
 }
 
-///  MsgPruneAllowances prunes expired fee allowances.
-///
-///  Since cosmos-sdk 0.50
+/// MsgPruneAllowances prunes expired fee allowances.
 class MsgPruneAllowances extends $pb.GeneratedMessage {
   factory MsgPruneAllowances({
     $core.String? pruner,
@@ -287,9 +285,7 @@ class MsgPruneAllowances extends $pb.GeneratedMessage {
   void clearPruner() => clearField(1);
 }
 
-///  MsgPruneAllowancesResponse defines the Msg/PruneAllowancesResponse response type.
-///
-///  Since cosmos-sdk 0.50
+/// MsgPruneAllowancesResponse defines the Msg/PruneAllowancesResponse response type.
 class MsgPruneAllowancesResponse extends $pb.GeneratedMessage {
   factory MsgPruneAllowancesResponse() => create();
   MsgPruneAllowancesResponse._() : super();

@@ -7,15 +7,14 @@ import (
 	bytes "bytes"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	types "github.com/gogo/protobuf/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
-
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	types "github.com/gogo/protobuf/types"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -729,14 +728,14 @@ func (*Expr_CreateStruct_Entry) XXX_MessageName() string {
 // Aggregate type macros may be applied to all elements in a list or all keys
 // in a map:
 //
-//   - `all`, `exists`, `exists_one` -  test a predicate expression against
-//     the inputs and return `true` if the predicate is satisfied for all,
-//     any, or only one value `list.all(x, x < 10)`.
-//   - `filter` - test a predicate expression against the inputs and return
-//     the subset of elements which satisfy the predicate:
-//     `payments.filter(p, p > 1000)`.
-//   - `map` - apply an expression to all elements in the input and return the
-//     output aggregate type: `[1, 2, 3].map(i, i * i)`.
+// *  `all`, `exists`, `exists_one` -  test a predicate expression against
+//    the inputs and return `true` if the predicate is satisfied for all,
+//    any, or only one value `list.all(x, x < 10)`.
+// *  `filter` - test a predicate expression against the inputs and return
+//    the subset of elements which satisfy the predicate:
+//    `payments.filter(p, p > 1000)`.
+// *  `map` - apply an expression to all elements in the input and return the
+//    output aggregate type: `[1, 2, 3].map(i, i * i)`.
 //
 // The `has(m.x)` macro tests whether the property `x` is present in struct
 // `m`. The semantics of this macro depend on the type of `m`. For proto2

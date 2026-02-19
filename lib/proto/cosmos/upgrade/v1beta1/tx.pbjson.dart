@@ -27,17 +27,18 @@ const MsgSoftwareUpgrade$json = {
 final $typed_data.Uint8List msgSoftwareUpgradeDescriptor = $convert.base64Decode(
     'ChJNc2dTb2Z0d2FyZVVwZ3JhZGUSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZH'
     'Jlc3NTdHJpbmdSCWF1dGhvcml0eRI7CgRwbGFuGAIgASgLMhwuY29zbW9zLnVwZ3JhZGUudjFi'
-    'ZXRhMS5QbGFuQgnI3h8AqOewKgFSBHBsYW46MILnsCoJYXV0aG9yaXR5iuewKh1jb3Ntb3Mtc2'
-    'RrL01zZ1NvZnR3YXJlVXBncmFkZQ==');
+    'ZXRhMS5QbGFuQgnI3h8AqOewKgFSBHBsYW46Q9K0LQ9jb3Ntb3Mtc2RrIDAuNDaC57AqCWF1dG'
+    'hvcml0eYrnsCodY29zbW9zLXNkay9Nc2dTb2Z0d2FyZVVwZ3JhZGU=');
 
 @$core.Deprecated('Use msgSoftwareUpgradeResponseDescriptor instead')
 const MsgSoftwareUpgradeResponse$json = {
   '1': 'MsgSoftwareUpgradeResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgSoftwareUpgradeResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgSoftwareUpgradeResponseDescriptor = $convert.base64Decode(
-    'ChpNc2dTb2Z0d2FyZVVwZ3JhZGVSZXNwb25zZQ==');
+    'ChpNc2dTb2Z0d2FyZVVwZ3JhZGVSZXNwb25zZToT0rQtD2Nvc21vcy1zZGsgMC40Ng==');
 
 @$core.Deprecated('Use msgCancelUpgradeDescriptor instead')
 const MsgCancelUpgrade$json = {
@@ -51,15 +52,16 @@ const MsgCancelUpgrade$json = {
 /// Descriptor for `MsgCancelUpgrade`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgCancelUpgradeDescriptor = $convert.base64Decode(
     'ChBNc2dDYW5jZWxVcGdyYWRlEjYKCWF1dGhvcml0eRgBIAEoCUIY0rQtFGNvc21vcy5BZGRyZX'
-    'NzU3RyaW5nUglhdXRob3JpdHk6LoLnsCoJYXV0aG9yaXR5iuewKhtjb3Ntb3Mtc2RrL01zZ0Nh'
-    'bmNlbFVwZ3JhZGU=');
+    'NzU3RyaW5nUglhdXRob3JpdHk6QdK0LQ9jb3Ntb3Mtc2RrIDAuNDaC57AqCWF1dGhvcml0eYrn'
+    'sCobY29zbW9zLXNkay9Nc2dDYW5jZWxVcGdyYWRl');
 
 @$core.Deprecated('Use msgCancelUpgradeResponseDescriptor instead')
 const MsgCancelUpgradeResponse$json = {
   '1': 'MsgCancelUpgradeResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgCancelUpgradeResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgCancelUpgradeResponseDescriptor = $convert.base64Decode(
-    'ChhNc2dDYW5jZWxVcGdyYWRlUmVzcG9uc2U=');
+    'ChhNc2dDYW5jZWxVcGdyYWRlUmVzcG9uc2U6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 

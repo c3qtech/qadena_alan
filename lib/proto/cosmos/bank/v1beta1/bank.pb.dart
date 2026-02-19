@@ -505,9 +505,7 @@ class Metadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearDisplay() => clearField(4);
 
-  ///  name defines the name of the token (eg: Cosmos Atom)
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// name defines the name of the token (eg: Cosmos Atom)
   @$pb.TagNumber(5)
   $core.String get name => $_getSZ(4);
   @$pb.TagNumber(5)
@@ -517,10 +515,8 @@ class Metadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearName() => clearField(5);
 
-  ///  symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
-  ///  be the same as the display.
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
+  /// be the same as the display.
   @$pb.TagNumber(6)
   $core.String get symbol => $_getSZ(5);
   @$pb.TagNumber(6)
@@ -530,9 +526,7 @@ class Metadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearSymbol() => clearField(6);
 
-  ///  URI to a document (on or off-chain) that contains additional information. Optional.
-  ///
-  ///  Since: cosmos-sdk 0.46
+  /// URI to a document (on or off-chain) that contains additional information. Optional.
   @$pb.TagNumber(7)
   $core.String get uri => $_getSZ(6);
   @$pb.TagNumber(7)
@@ -542,10 +536,8 @@ class Metadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearUri() => clearField(7);
 
-  ///  URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-  ///  the document didn't change. Optional.
-  ///
-  ///  Since: cosmos-sdk 0.46
+  /// URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
+  /// the document didn't change. Optional.
   @$pb.TagNumber(8)
   $core.String get uriHash => $_getSZ(7);
   @$pb.TagNumber(8)

@@ -121,6 +121,6 @@ const PermanentLockedAccount$json = {
 final $typed_data.Uint8List permanentLockedAccountDescriptor = $convert.base64Decode(
     'ChZQZXJtYW5lbnRMb2NrZWRBY2NvdW50EmIKFGJhc2VfdmVzdGluZ19hY2NvdW50GAEgASgLMi'
     'ouY29zbW9zLnZlc3RpbmcudjFiZXRhMS5CYXNlVmVzdGluZ0FjY291bnRCBNDeHwFSEmJhc2VW'
-    'ZXN0aW5nQWNjb3VudDoqiKAfAIrnsCohY29zbW9zLXNkay9QZXJtYW5lbnRMb2NrZWRBY2NvdW'
-    '50');
+    'ZXN0aW5nQWNjb3VudDo9iKAfANK0LQ9jb3Ntb3Mtc2RrIDAuNDOK57AqIWNvc21vcy1zZGsvUG'
+    'VybWFuZW50TG9ja2VkQWNjb3VudA==');
 

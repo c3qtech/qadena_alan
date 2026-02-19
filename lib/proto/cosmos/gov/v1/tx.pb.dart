@@ -120,9 +120,7 @@ class MsgSubmitProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearMetadata() => clearField(4);
 
-  ///  title is the title of the proposal.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// title is the title of the proposal.
   @$pb.TagNumber(5)
   $core.String get title => $_getSZ(4);
   @$pb.TagNumber(5)
@@ -132,9 +130,7 @@ class MsgSubmitProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearTitle() => clearField(5);
 
-  ///  summary is the summary of the proposal
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// summary is the summary of the proposal
   @$pb.TagNumber(6)
   $core.String get summary => $_getSZ(5);
   @$pb.TagNumber(6)
@@ -144,9 +140,7 @@ class MsgSubmitProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearSummary() => clearField(6);
 
-  ///  expedited defines if the proposal is expedited or not
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// expedited defines if the proposal is expedited or not
   @$pb.TagNumber(7)
   $core.bool get expedited => $_getBF(6);
   @$pb.TagNumber(7)
@@ -675,9 +669,7 @@ class MsgDepositResponse extends $pb.GeneratedMessage {
   static MsgDepositResponse? _defaultInstance;
 }
 
-///  MsgUpdateParams is the Msg/UpdateParams request type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
@@ -748,10 +740,8 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   $6.Params ensureParams() => $_ensure(1);
 }
 
-///  MsgUpdateParamsResponse defines the response structure for executing a
-///  MsgUpdateParams message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParamsResponse defines the response structure for executing a
+/// MsgUpdateParams message.
 class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   factory MsgUpdateParamsResponse() => create();
   MsgUpdateParamsResponse._() : super();
@@ -784,9 +774,7 @@ class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   static MsgUpdateParamsResponse? _defaultInstance;
 }
 
-///  MsgCancelProposal is the Msg/CancelProposal request type.
-///
-///  Since: cosmos-sdk 0.50
+/// MsgCancelProposal is the Msg/CancelProposal request type.
 class MsgCancelProposal extends $pb.GeneratedMessage {
   factory MsgCancelProposal({
     $fixnum.Int64? proposalId,
@@ -853,10 +841,8 @@ class MsgCancelProposal extends $pb.GeneratedMessage {
   void clearProposer() => clearField(2);
 }
 
-///  MsgCancelProposalResponse defines the response structure for executing a
-///  MsgCancelProposal message.
-///
-///  Since: cosmos-sdk 0.50
+/// MsgCancelProposalResponse defines the response structure for executing a
+/// MsgCancelProposal message.
 class MsgCancelProposalResponse extends $pb.GeneratedMessage {
   factory MsgCancelProposalResponse({
     $fixnum.Int64? proposalId,

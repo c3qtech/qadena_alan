@@ -25,14 +25,14 @@ const QueryEvidenceRequest$json = {
       '8': {'3': true},
       '10': 'evidenceHash',
     },
-    {'1': 'hash', '3': 2, '4': 1, '5': 9, '10': 'hash'},
+    {'1': 'hash', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'hash'},
   ],
 };
 
 /// Descriptor for `QueryEvidenceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryEvidenceRequestDescriptor = $convert.base64Decode(
     'ChRRdWVyeUV2aWRlbmNlUmVxdWVzdBInCg1ldmlkZW5jZV9oYXNoGAEgASgMQgIYAVIMZXZpZG'
-    'VuY2VIYXNoEhIKBGhhc2gYAiABKAlSBGhhc2g=');
+    'VuY2VIYXNoEicKBGhhc2gYAiABKAlCE9q0LQ9jb3Ntb3Mtc2RrIDAuNDdSBGhhc2g=');
 
 @$core.Deprecated('Use queryEvidenceResponseDescriptor instead')
 const QueryEvidenceResponse$json = {

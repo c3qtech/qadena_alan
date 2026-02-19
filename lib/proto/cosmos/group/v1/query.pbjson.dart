@@ -393,12 +393,14 @@ const QueryGroupsRequest$json = {
   '2': [
     {'1': 'pagination', '3': 2, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageRequest', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryGroupsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryGroupsRequestDescriptor = $convert.base64Decode(
     'ChJRdWVyeUdyb3Vwc1JlcXVlc3QSRgoKcGFnaW5hdGlvbhgCIAEoCzImLmNvc21vcy5iYXNlLn'
-    'F1ZXJ5LnYxYmV0YTEuUGFnZVJlcXVlc3RSCnBhZ2luYXRpb24=');
+    'F1ZXJ5LnYxYmV0YTEuUGFnZVJlcXVlc3RSCnBhZ2luYXRpb246FdK0LRFjb3Ntb3Mtc2RrIDAu'
+    'NDcuMQ==');
 
 @$core.Deprecated('Use queryGroupsResponseDescriptor instead')
 const QueryGroupsResponse$json = {
@@ -407,11 +409,13 @@ const QueryGroupsResponse$json = {
     {'1': 'groups', '3': 1, '4': 3, '5': 11, '6': '.cosmos.group.v1.GroupInfo', '10': 'groups'},
     {'1': 'pagination', '3': 2, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageResponse', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryGroupsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryGroupsResponseDescriptor = $convert.base64Decode(
     'ChNRdWVyeUdyb3Vwc1Jlc3BvbnNlEjIKBmdyb3VwcxgBIAMoCzIaLmNvc21vcy5ncm91cC52MS'
     '5Hcm91cEluZm9SBmdyb3VwcxJHCgpwYWdpbmF0aW9uGAIgASgLMicuY29zbW9zLmJhc2UucXVl'
-    'cnkudjFiZXRhMS5QYWdlUmVzcG9uc2VSCnBhZ2luYXRpb24=');
+    'cnkudjFiZXRhMS5QYWdlUmVzcG9uc2VSCnBhZ2luYXRpb246FdK0LRFjb3Ntb3Mtc2RrIDAuND'
+    'cuMQ==');
 

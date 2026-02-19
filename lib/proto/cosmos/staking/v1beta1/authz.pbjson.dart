@@ -67,7 +67,7 @@ final $typed_data.Uint8List stakeAuthorizationDescriptor = $convert.base64Decode
     'Qiuy57AqJmNvc21vcy1zZGsvU3Rha2VBdXRob3JpemF0aW9uL0RlbnlMaXN0SABSCGRlbnlMaX'
     'N0ElgKEmF1dGhvcml6YXRpb25fdHlwZRgEIAEoDjIpLmNvc21vcy5zdGFraW5nLnYxYmV0YTEu'
     'QXV0aG9yaXphdGlvblR5cGVSEWF1dGhvcml6YXRpb25UeXBlGkAKClZhbGlkYXRvcnMSMgoHYW'
-    'RkcmVzcxgBIAMoCUIY0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5nUgdhZGRyZXNzOkjKtC0iY29z'
-    'bW9zLmF1dGh6LnYxYmV0YTEuQXV0aG9yaXphdGlvbornsCodY29zbW9zLXNkay9TdGFrZUF1dG'
-    'hvcml6YXRpb25CDAoKdmFsaWRhdG9ycw==');
+    'RkcmVzcxgBIAMoCUIY0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5nUgdhZGRyZXNzOlvKtC0iY29z'
+    'bW9zLmF1dGh6LnYxYmV0YTEuQXV0aG9yaXphdGlvbtK0LQ9jb3Ntb3Mtc2RrIDAuNDOK57AqHW'
+    'Nvc21vcy1zZGsvU3Rha2VBdXRob3JpemF0aW9uQgwKCnZhbGlkYXRvcnM=');
 

@@ -188,9 +188,7 @@ class ModuleAccount extends $pb.GeneratedMessage {
   $core.List<$core.String> get permissions => $_getList(2);
 }
 
-///  ModuleCredential represents a unclaimable pubkey for base accounts controlled by modules.
-///
-///  Since: cosmos-sdk 0.47
+/// ModuleCredential represents a unclaimable pubkey for base accounts controlled by modules.
 class ModuleCredential extends $pb.GeneratedMessage {
   factory ModuleCredential({
     $core.String? moduleName,

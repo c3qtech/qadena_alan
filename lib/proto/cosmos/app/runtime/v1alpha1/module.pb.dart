@@ -25,6 +25,8 @@ class Module extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? orderMigrations,
     $core.Iterable<$core.String>? precommiters,
     $core.Iterable<$core.String>? prepareCheckStaters,
+    $core.Iterable<$core.String>? preBlockers,
+    $core.Iterable<$core.String>? skipStoreKeys,
   }) {
     final $result = create();
     if (appName != null) {
@@ -54,6 +56,12 @@ class Module extends $pb.GeneratedMessage {
     if (prepareCheckStaters != null) {
       $result.prepareCheckStaters.addAll(prepareCheckStaters);
     }
+    if (preBlockers != null) {
+      $result.preBlockers.addAll(preBlockers);
+    }
+    if (skipStoreKeys != null) {
+      $result.skipStoreKeys.addAll(skipStoreKeys);
+    }
     return $result;
   }
   Module._() : super();
@@ -70,6 +78,8 @@ class Module extends $pb.GeneratedMessage {
     ..pPS(7, _omitFieldNames ? '' : 'orderMigrations')
     ..pPS(8, _omitFieldNames ? '' : 'precommiters')
     ..pPS(9, _omitFieldNames ? '' : 'prepareCheckStaters')
+    ..pPS(10, _omitFieldNames ? '' : 'preBlockers')
+    ..pPS(11, _omitFieldNames ? '' : 'skipStoreKeys')
     ..hasRequiredFields = false
   ;
 
@@ -135,7 +145,7 @@ class Module extends $pb.GeneratedMessage {
 
   /// order_migrations defines the order in which module migrations are performed.
   /// If this is left empty, it uses the default migration order.
-  /// https://pkg.go.dev/github.com/cosmos/cosmos-sdk@v0.47.0-alpha2/types/module#DefaultMigrationsOrder
+  /// https://pkg.go.dev/github.com/cosmos/cosmos-sdk/types/module#DefaultMigrationsOrder
   @$pb.TagNumber(7)
   $core.List<$core.String> get orderMigrations => $_getList(6);
 
@@ -150,6 +160,18 @@ class Module extends $pb.GeneratedMessage {
   /// no preparecheckstate function will be registered.
   @$pb.TagNumber(9)
   $core.List<$core.String> get prepareCheckStaters => $_getList(8);
+
+  /// pre_blockers specifies the module names of pre blockers
+  /// to call in the order in which they should be called. If this is left empty
+  /// no pre blocker will be registered.
+  @$pb.TagNumber(10)
+  $core.List<$core.String> get preBlockers => $_getList(9);
+
+  /// skip_store_keys is an optional list of store keys to skip when constructing the
+  /// module's keeper. This is useful when a module does not have a store key.
+  /// NOTE: the provided environment variable will have a fake store service.
+  @$pb.TagNumber(11)
+  $core.List<$core.String> get skipStoreKeys => $_getList(10);
 }
 
 /// StoreKeyConfig may be supplied to override the default module store key, which

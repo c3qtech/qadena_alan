@@ -102,9 +102,7 @@ class GenesisState extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.List<$3.Metadata> get denomMetadata => $_getList(3);
 
-  ///  send_enabled defines the denoms where send is enabled or disabled.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// send_enabled defines the denoms where send is enabled or disabled.
   @$pb.TagNumber(5)
   $core.List<$3.SendEnabled> get sendEnabled => $_getList(4);
 }

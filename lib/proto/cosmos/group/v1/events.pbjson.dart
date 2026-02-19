@@ -147,3 +147,17 @@ final $typed_data.Uint8List eventProposalPrunedDescriptor = $convert.base64Decod
     'Ej8KDHRhbGx5X3Jlc3VsdBgDIAEoCzIcLmNvc21vcy5ncm91cC52MS5UYWxseVJlc3VsdFILdG'
     'FsbHlSZXN1bHQ=');
 
+@$core.Deprecated('Use eventTallyErrorDescriptor instead')
+const EventTallyError$json = {
+  '1': 'EventTallyError',
+  '2': [
+    {'1': 'proposal_id', '3': 1, '4': 1, '5': 4, '10': 'proposalId'},
+    {'1': 'error_message', '3': 2, '4': 1, '5': 9, '10': 'errorMessage'},
+  ],
+};
+
+/// Descriptor for `EventTallyError`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List eventTallyErrorDescriptor = $convert.base64Decode(
+    'Cg9FdmVudFRhbGx5RXJyb3ISHwoLcHJvcG9zYWxfaWQYASABKARSCnByb3Bvc2FsSWQSIwoNZX'
+    'Jyb3JfbWVzc2FnZRgCIAEoCVIMZXJyb3JNZXNzYWdl');
+

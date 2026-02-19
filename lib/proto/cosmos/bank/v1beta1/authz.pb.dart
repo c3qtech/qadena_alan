@@ -15,10 +15,8 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../base/v1beta1/coin.pb.dart' as $2;
 
-///  SendAuthorization allows the grantee to spend up to spend_limit coins from
-///  the granter's account.
-///
-///  Since: cosmos-sdk 0.43
+/// SendAuthorization allows the grantee to spend up to spend_limit coins from
+/// the granter's account.
 class SendAuthorization extends $pb.GeneratedMessage {
   factory SendAuthorization({
     $core.Iterable<$2.Coin>? spendLimit,
@@ -67,10 +65,8 @@ class SendAuthorization extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.List<$2.Coin> get spendLimit => $_getList(0);
 
-  ///  allow_list specifies an optional list of addresses to whom the grantee can send tokens on behalf of the
-  ///  granter. If omitted, any recipient is allowed.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// allow_list specifies an optional list of addresses to whom the grantee can send tokens on behalf of the
+  /// granter. If omitted, any recipient is allowed.
   @$pb.TagNumber(2)
   $core.List<$core.String> get allowList => $_getList(1);
 }

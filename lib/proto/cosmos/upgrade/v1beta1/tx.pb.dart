@@ -15,9 +15,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'upgrade.pb.dart' as $4;
 
-///  MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
 class MsgSoftwareUpgrade extends $pb.GeneratedMessage {
   factory MsgSoftwareUpgrade({
     $core.String? authority,
@@ -86,9 +84,7 @@ class MsgSoftwareUpgrade extends $pb.GeneratedMessage {
   $4.Plan ensurePlan() => $_ensure(1);
 }
 
-///  MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
 class MsgSoftwareUpgradeResponse extends $pb.GeneratedMessage {
   factory MsgSoftwareUpgradeResponse() => create();
   MsgSoftwareUpgradeResponse._() : super();
@@ -121,9 +117,7 @@ class MsgSoftwareUpgradeResponse extends $pb.GeneratedMessage {
   static MsgSoftwareUpgradeResponse? _defaultInstance;
 }
 
-///  MsgCancelUpgrade is the Msg/CancelUpgrade request type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCancelUpgrade is the Msg/CancelUpgrade request type.
 class MsgCancelUpgrade extends $pb.GeneratedMessage {
   factory MsgCancelUpgrade({
     $core.String? authority,
@@ -175,9 +169,7 @@ class MsgCancelUpgrade extends $pb.GeneratedMessage {
   void clearAuthority() => clearField(1);
 }
 
-///  MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
 class MsgCancelUpgradeResponse extends $pb.GeneratedMessage {
   factory MsgCancelUpgradeResponse() => create();
   MsgCancelUpgradeResponse._() : super();

@@ -27,8 +27,8 @@ const SendAuthorization$json = {
 final $typed_data.Uint8List sendAuthorizationDescriptor = $convert.base64Decode(
     'ChFTZW5kQXV0aG9yaXphdGlvbhKCAQoLc3BlbmRfbGltaXQYASADKAsyGS5jb3Ntb3MuYmFzZS'
     '52MWJldGExLkNvaW5CRsjeHwCq3x8oZ2l0aHViLmNvbS9jb3Ntb3MvY29zbW9zLXNkay90eXBl'
-    'cy5Db2luc5rnsCoMbGVnYWN5X2NvaW5zqOewKgFSCnNwZW5kTGltaXQSNwoKYWxsb3dfbGlzdB'
-    'gCIAMoCUIY0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5nUglhbGxvd0xpc3Q6R8q0LSJjb3Ntb3Mu'
-    'YXV0aHoudjFiZXRhMS5BdXRob3JpemF0aW9uiuewKhxjb3Ntb3Mtc2RrL1NlbmRBdXRob3Jpem'
-    'F0aW9u');
+    'cy5Db2luc5rnsCoMbGVnYWN5X2NvaW5zqOewKgFSCnNwZW5kTGltaXQSSgoKYWxsb3dfbGlzdB'
+    'gCIAMoCUIr0rQtFGNvc21vcy5BZGRyZXNzU3RyaW5n2rQtD2Nvc21vcy1zZGsgMC40N1IJYWxs'
+    'b3dMaXN0OlrKtC0iY29zbW9zLmF1dGh6LnYxYmV0YTEuQXV0aG9yaXphdGlvbtK0LQ9jb3Ntb3'
+    'Mtc2RrIDAuNDOK57AqHGNvc21vcy1zZGsvU2VuZEF1dGhvcml6YXRpb24=');
 

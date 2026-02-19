@@ -62,18 +62,20 @@ final $typed_data.Uint8List msgCreatePermanentLockedAccountDescriptor = $convert
     'IX8t4fE3lhbWw6ImZyb21fYWRkcmVzcyJSC2Zyb21BZGRyZXNzEjQKCnRvX2FkZHJlc3MYAiAB'
     'KAlCFfLeHxF5YW1sOiJ0b19hZGRyZXNzIlIJdG9BZGRyZXNzEnkKBmFtb3VudBgDIAMoCzIZLm'
     'Nvc21vcy5iYXNlLnYxYmV0YTEuQ29pbkJGyN4fAKrfHyhnaXRodWIuY29tL2Nvc21vcy9jb3Nt'
-    'b3Mtc2RrL3R5cGVzLkNvaW5zmuewKgxsZWdhY3lfY29pbnOo57AqAVIGYW1vdW50Oj/ooB8Bgu'
-    'ewKgxmcm9tX2FkZHJlc3OK57AqJWNvc21vcy1zZGsvTXNnQ3JlYXRlUGVybUxvY2tlZEFjY291'
-    'bnQ=');
+    'b3Mtc2RrL3R5cGVzLkNvaW5zmuewKgxsZWdhY3lfY29pbnOo57AqAVIGYW1vdW50OlLooB8B0r'
+    'QtD2Nvc21vcy1zZGsgMC40NoLnsCoMZnJvbV9hZGRyZXNziuewKiVjb3Ntb3Mtc2RrL01zZ0Ny'
+    'ZWF0ZVBlcm1Mb2NrZWRBY2NvdW50');
 
 @$core.Deprecated('Use msgCreatePermanentLockedAccountResponseDescriptor instead')
 const MsgCreatePermanentLockedAccountResponse$json = {
   '1': 'MsgCreatePermanentLockedAccountResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgCreatePermanentLockedAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgCreatePermanentLockedAccountResponseDescriptor = $convert.base64Decode(
-    'CidNc2dDcmVhdGVQZXJtYW5lbnRMb2NrZWRBY2NvdW50UmVzcG9uc2U=');
+    'CidNc2dDcmVhdGVQZXJtYW5lbnRMb2NrZWRBY2NvdW50UmVzcG9uc2U6E9K0LQ9jb3Ntb3Mtc2'
+    'RrIDAuNDY=');
 
 @$core.Deprecated('Use msgCreatePeriodicVestingAccountDescriptor instead')
 const MsgCreatePeriodicVestingAccount$json = {
@@ -92,16 +94,18 @@ final $typed_data.Uint8List msgCreatePeriodicVestingAccountDescriptor = $convert
     'Ch9Nc2dDcmVhdGVQZXJpb2RpY1Zlc3RpbmdBY2NvdW50EiEKDGZyb21fYWRkcmVzcxgBIAEoCV'
     'ILZnJvbUFkZHJlc3MSHQoKdG9fYWRkcmVzcxgCIAEoCVIJdG9BZGRyZXNzEh0KCnN0YXJ0X3Rp'
     'bWUYAyABKANSCXN0YXJ0VGltZRJSCg92ZXN0aW5nX3BlcmlvZHMYBCADKAsyHi5jb3Ntb3Mudm'
-    'VzdGluZy52MWJldGExLlBlcmlvZEIJyN4fAKjnsCoBUg52ZXN0aW5nUGVyaW9kczo/6KAfAILn'
-    'sCoMZnJvbV9hZGRyZXNziuewKiVjb3Ntb3Mtc2RrL01zZ0NyZWF0ZVBlcmlvZFZlc3RBY2NvdW'
-    '50');
+    'VzdGluZy52MWJldGExLlBlcmlvZEIJyN4fAKjnsCoBUg52ZXN0aW5nUGVyaW9kczpS6KAfANK0'
+    'LQ9jb3Ntb3Mtc2RrIDAuNDaC57AqDGZyb21fYWRkcmVzc4rnsColY29zbW9zLXNkay9Nc2dDcm'
+    'VhdGVQZXJpb2RWZXN0QWNjb3VudA==');
 
 @$core.Deprecated('Use msgCreatePeriodicVestingAccountResponseDescriptor instead')
 const MsgCreatePeriodicVestingAccountResponse$json = {
   '1': 'MsgCreatePeriodicVestingAccountResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgCreatePeriodicVestingAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgCreatePeriodicVestingAccountResponseDescriptor = $convert.base64Decode(
-    'CidNc2dDcmVhdGVQZXJpb2RpY1Zlc3RpbmdBY2NvdW50UmVzcG9uc2U=');
+    'CidNc2dDcmVhdGVQZXJpb2RpY1Zlc3RpbmdBY2NvdW50UmVzcG9uc2U6E9K0LQ9jb3Ntb3Mtc2'
+    'RrIDAuNDY=');
 

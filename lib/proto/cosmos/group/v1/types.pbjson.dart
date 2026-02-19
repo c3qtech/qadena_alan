@@ -232,8 +232,8 @@ const Proposal$json = {
     {'1': 'voting_period_end', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'votingPeriodEnd'},
     {'1': 'executor_result', '3': 11, '4': 1, '5': 14, '6': '.cosmos.group.v1.ProposalExecutorResult', '10': 'executorResult'},
     {'1': 'messages', '3': 12, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messages'},
-    {'1': 'title', '3': 13, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'summary', '3': 14, '4': 1, '5': 9, '10': 'summary'},
+    {'1': 'title', '3': 13, '4': 1, '5': 9, '8': {}, '10': 'title'},
+    {'1': 'summary', '3': 14, '4': 1, '5': 9, '8': {}, '10': 'summary'},
   ],
   '7': {},
 };
@@ -252,8 +252,9 @@ final $typed_data.Uint8List proposalDescriptor = $convert.base64Decode(
     'RpbmdfcGVyaW9kX2VuZBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCDcjeHwCQ'
     '3x8BqOewKgFSD3ZvdGluZ1BlcmlvZEVuZBJQCg9leGVjdXRvcl9yZXN1bHQYCyABKA4yJy5jb3'
     'Ntb3MuZ3JvdXAudjEuUHJvcG9zYWxFeGVjdXRvclJlc3VsdFIOZXhlY3V0b3JSZXN1bHQSMAoI'
-    'bWVzc2FnZXMYDCADKAsyFC5nb29nbGUucHJvdG9idWYuQW55UghtZXNzYWdlcxIUCgV0aXRsZR'
-    'gNIAEoCVIFdGl0bGUSGAoHc3VtbWFyeRgOIAEoCVIHc3VtbWFyeToEiKAfAA==');
+    'bWVzc2FnZXMYDCADKAsyFC5nb29nbGUucHJvdG9idWYuQW55UghtZXNzYWdlcxIpCgV0aXRsZR'
+    'gNIAEoCUIT2rQtD2Nvc21vcy1zZGsgMC40N1IFdGl0bGUSLQoHc3VtbWFyeRgOIAEoCUIT2rQt'
+    'D2Nvc21vcy1zZGsgMC40N1IHc3VtbWFyeToEiKAfAA==');
 
 @$core.Deprecated('Use tallyResultDescriptor instead')
 const TallyResult$json = {

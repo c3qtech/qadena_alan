@@ -43,8 +43,8 @@ final $typed_data.Uint8List txResponseDescriptor = $convert.base64Decode(
     'Z0IXyN4fAKrfHw9BQkNJTWVzc2FnZUxvZ3NSBGxvZ3MSEgoEaW5mbxgIIAEoCVIEaW5mbxIdCg'
     'pnYXNfd2FudGVkGAkgASgDUglnYXNXYW50ZWQSGQoIZ2FzX3VzZWQYCiABKANSB2dhc1VzZWQS'
     'JAoCdHgYCyABKAsyFC5nb29nbGUucHJvdG9idWYuQW55UgJ0eBIcCgl0aW1lc3RhbXAYDCABKA'
-    'lSCXRpbWVzdGFtcBI0CgZldmVudHMYDSADKAsyFi50ZW5kZXJtaW50LmFiY2kuRXZlbnRCBMje'
-    'HwBSBmV2ZW50czoEiKAfAA==');
+    'lSCXRpbWVzdGFtcBJHCgZldmVudHMYDSADKAsyFi50ZW5kZXJtaW50LmFiY2kuRXZlbnRCF8je'
+    'HwDatC0PY29zbW9zLXNkayAwLjQ1UgZldmVudHM6BIigHwA=');
 
 @$core.Deprecated('Use aBCIMessageLogDescriptor instead')
 const ABCIMessageLog$json = {
@@ -121,7 +121,7 @@ const Result$json = {
     },
     {'1': 'log', '3': 2, '4': 1, '5': 9, '10': 'log'},
     {'1': 'events', '3': 3, '4': 3, '5': 11, '6': '.tendermint.abci.Event', '8': {}, '10': 'events'},
-    {'1': 'msg_responses', '3': 4, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'msgResponses'},
+    {'1': 'msg_responses', '3': 4, '4': 3, '5': 11, '6': '.google.protobuf.Any', '8': {}, '10': 'msgResponses'},
   ],
   '7': {},
 };
@@ -129,9 +129,9 @@ const Result$json = {
 /// Descriptor for `Result`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List resultDescriptor = $convert.base64Decode(
     'CgZSZXN1bHQSFgoEZGF0YRgBIAEoDEICGAFSBGRhdGESEAoDbG9nGAIgASgJUgNsb2cSNAoGZX'
-    'ZlbnRzGAMgAygLMhYudGVuZGVybWludC5hYmNpLkV2ZW50QgTI3h8AUgZldmVudHMSOQoNbXNn'
-    'X3Jlc3BvbnNlcxgEIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSDG1zZ1Jlc3BvbnNlczoEiK'
-    'AfAA==');
+    'ZlbnRzGAMgAygLMhYudGVuZGVybWludC5hYmNpLkV2ZW50QgTI3h8AUgZldmVudHMSTgoNbXNn'
+    'X3Jlc3BvbnNlcxgEIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlCE9q0LQ9jb3Ntb3Mtc2RrID'
+    'AuNDZSDG1zZ1Jlc3BvbnNlczoEiKAfAA==');
 
 @$core.Deprecated('Use simulationResponseDescriptor instead')
 const SimulationResponse$json = {
@@ -176,7 +176,7 @@ const TxMsgData$json = {
       '8': {'3': true},
       '10': 'data',
     },
-    {'1': 'msg_responses', '3': 2, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'msgResponses'},
+    {'1': 'msg_responses', '3': 2, '4': 3, '5': 11, '6': '.google.protobuf.Any', '8': {}, '10': 'msgResponses'},
   ],
   '7': {},
 };
@@ -184,8 +184,8 @@ const TxMsgData$json = {
 /// Descriptor for `TxMsgData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List txMsgDataDescriptor = $convert.base64Decode(
     'CglUeE1zZ0RhdGESOQoEZGF0YRgBIAMoCzIhLmNvc21vcy5iYXNlLmFiY2kudjFiZXRhMS5Nc2'
-    'dEYXRhQgIYAVIEZGF0YRI5Cg1tc2dfcmVzcG9uc2VzGAIgAygLMhQuZ29vZ2xlLnByb3RvYnVm'
-    'LkFueVIMbXNnUmVzcG9uc2VzOgSA3CAB');
+    'dEYXRhQgIYAVIEZGF0YRJOCg1tc2dfcmVzcG9uc2VzGAIgAygLMhQuZ29vZ2xlLnByb3RvYnVm'
+    'LkFueUIT2rQtD2Nvc21vcy1zZGsgMC40NlIMbXNnUmVzcG9uc2VzOgSA3CAB');
 
 @$core.Deprecated('Use searchTxsResultDescriptor instead')
 const SearchTxsResult$json = {

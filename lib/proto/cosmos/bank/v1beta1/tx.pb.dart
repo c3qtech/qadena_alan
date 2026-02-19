@@ -210,9 +210,7 @@ class MsgMultiSendResponse extends $pb.GeneratedMessage {
   static MsgMultiSendResponse? _defaultInstance;
 }
 
-///  MsgUpdateParams is the Msg/UpdateParams request type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
@@ -283,10 +281,8 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   $3.Params ensureParams() => $_ensure(1);
 }
 
-///  MsgUpdateParamsResponse defines the response structure for executing a
-///  MsgUpdateParams message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParamsResponse defines the response structure for executing a
+/// MsgUpdateParams message.
 class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   factory MsgUpdateParamsResponse() => create();
   MsgUpdateParamsResponse._() : super();
@@ -324,8 +320,6 @@ class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
 ///  Only entries to add/update/delete need to be included.
 ///  Existing SendEnabled entries that are not included in this
 ///  message are left unchanged.
-///
-///  Since: cosmos-sdk 0.47
 class MsgSetSendEnabled extends $pb.GeneratedMessage {
   factory MsgSetSendEnabled({
     $core.String? authority,
@@ -398,9 +392,7 @@ class MsgSetSendEnabled extends $pb.GeneratedMessage {
   $core.List<$core.String> get useDefaultFor => $_getList(2);
 }
 
-///  MsgSetSendEnabledResponse defines the Msg/SetSendEnabled response type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgSetSendEnabledResponse defines the Msg/SetSendEnabled response type.
 class MsgSetSendEnabledResponse extends $pb.GeneratedMessage {
   factory MsgSetSendEnabledResponse() => create();
   MsgSetSendEnabledResponse._() : super();

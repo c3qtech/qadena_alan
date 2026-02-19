@@ -78,13 +78,15 @@ const QueryAllowancesByGranterRequest$json = {
     {'1': 'granter', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'granter'},
     {'1': 'pagination', '3': 2, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageRequest', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAllowancesByGranterRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAllowancesByGranterRequestDescriptor = $convert.base64Decode(
     'Ch9RdWVyeUFsbG93YW5jZXNCeUdyYW50ZXJSZXF1ZXN0EjIKB2dyYW50ZXIYASABKAlCGNK0LR'
     'Rjb3Ntb3MuQWRkcmVzc1N0cmluZ1IHZ3JhbnRlchJGCgpwYWdpbmF0aW9uGAIgASgLMiYuY29z'
-    'bW9zLmJhc2UucXVlcnkudjFiZXRhMS5QYWdlUmVxdWVzdFIKcGFnaW5hdGlvbg==');
+    'bW9zLmJhc2UucXVlcnkudjFiZXRhMS5QYWdlUmVxdWVzdFIKcGFnaW5hdGlvbjoT0rQtD2Nvc2'
+    '1vcy1zZGsgMC40Ng==');
 
 @$core.Deprecated('Use queryAllowancesByGranterResponseDescriptor instead')
 const QueryAllowancesByGranterResponse$json = {
@@ -93,6 +95,7 @@ const QueryAllowancesByGranterResponse$json = {
     {'1': 'allowances', '3': 1, '4': 3, '5': 11, '6': '.cosmos.feegrant.v1beta1.Grant', '10': 'allowances'},
     {'1': 'pagination', '3': 2, '4': 1, '5': 11, '6': '.cosmos.base.query.v1beta1.PageResponse', '10': 'pagination'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAllowancesByGranterResponse`. Decode as a `google.protobuf.DescriptorProto`.
@@ -100,5 +103,5 @@ final $typed_data.Uint8List queryAllowancesByGranterResponseDescriptor = $conver
     'CiBRdWVyeUFsbG93YW5jZXNCeUdyYW50ZXJSZXNwb25zZRI+CgphbGxvd2FuY2VzGAEgAygLMh'
     '4uY29zbW9zLmZlZWdyYW50LnYxYmV0YTEuR3JhbnRSCmFsbG93YW5jZXMSRwoKcGFnaW5hdGlv'
     'bhgCIAEoCzInLmNvc21vcy5iYXNlLnF1ZXJ5LnYxYmV0YTEuUGFnZVJlc3BvbnNlUgpwYWdpbm'
-    'F0aW9u');
+    'F0aW9uOhPStC0PY29zbW9zLXNkayAwLjQ2');
 

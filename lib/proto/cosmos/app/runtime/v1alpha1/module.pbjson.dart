@@ -23,9 +23,11 @@ const Module$json = {
     {'1': 'init_genesis', '3': 4, '4': 3, '5': 9, '10': 'initGenesis'},
     {'1': 'export_genesis', '3': 5, '4': 3, '5': 9, '10': 'exportGenesis'},
     {'1': 'override_store_keys', '3': 6, '4': 3, '5': 11, '6': '.cosmos.app.runtime.v1alpha1.StoreKeyConfig', '10': 'overrideStoreKeys'},
+    {'1': 'skip_store_keys', '3': 11, '4': 3, '5': 9, '10': 'skipStoreKeys'},
     {'1': 'order_migrations', '3': 7, '4': 3, '5': 9, '10': 'orderMigrations'},
     {'1': 'precommiters', '3': 8, '4': 3, '5': 9, '10': 'precommiters'},
     {'1': 'prepare_check_staters', '3': 9, '4': 3, '5': 9, '10': 'prepareCheckStaters'},
+    {'1': 'pre_blockers', '3': 10, '4': 3, '5': 9, '10': 'preBlockers'},
   ],
   '7': {},
 };
@@ -37,10 +39,11 @@ final $typed_data.Uint8List moduleDescriptor = $convert.base64Decode(
     'Cgxpbml0X2dlbmVzaXMYBCADKAlSC2luaXRHZW5lc2lzEiUKDmV4cG9ydF9nZW5lc2lzGAUgAy'
     'gJUg1leHBvcnRHZW5lc2lzElsKE292ZXJyaWRlX3N0b3JlX2tleXMYBiADKAsyKy5jb3Ntb3Mu'
     'YXBwLnJ1bnRpbWUudjFhbHBoYTEuU3RvcmVLZXlDb25maWdSEW92ZXJyaWRlU3RvcmVLZXlzEi'
-    'kKEG9yZGVyX21pZ3JhdGlvbnMYByADKAlSD29yZGVyTWlncmF0aW9ucxIiCgxwcmVjb21taXRl'
-    'cnMYCCADKAlSDHByZWNvbW1pdGVycxIyChVwcmVwYXJlX2NoZWNrX3N0YXRlcnMYCSADKAlSE3'
-    'ByZXBhcmVDaGVja1N0YXRlcnM6Q7rAltoBPQokZ2l0aHViLmNvbS9jb3Ntb3MvY29zbW9zLXNk'
-    'ay9ydW50aW1lEhUKE2Nvc21vcy5hcHAudjFhbHBoYTE=');
+    'YKD3NraXBfc3RvcmVfa2V5cxgLIAMoCVINc2tpcFN0b3JlS2V5cxIpChBvcmRlcl9taWdyYXRp'
+    'b25zGAcgAygJUg9vcmRlck1pZ3JhdGlvbnMSIgoMcHJlY29tbWl0ZXJzGAggAygJUgxwcmVjb2'
+    '1taXRlcnMSMgoVcHJlcGFyZV9jaGVja19zdGF0ZXJzGAkgAygJUhNwcmVwYXJlQ2hlY2tTdGF0'
+    'ZXJzEiEKDHByZV9ibG9ja2VycxgKIAMoCVILcHJlQmxvY2tlcnM6Q7rAltoBPQokZ2l0aHViLm'
+    'NvbS9jb3Ntb3MvY29zbW9zLXNkay9ydW50aW1lEhUKE2Nvc21vcy5hcHAudjFhbHBoYTE=');
 
 @$core.Deprecated('Use storeKeyConfigDescriptor instead')
 const StoreKeyConfig$json = {

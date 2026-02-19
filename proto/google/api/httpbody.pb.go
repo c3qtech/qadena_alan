@@ -6,14 +6,13 @@ package api
 import (
 	bytes "bytes"
 	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	types "github.com/gogo/protobuf/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
-
-	proto "github.com/gogo/protobuf/proto"
-	types "github.com/gogo/protobuf/types"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -31,6 +30,7 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 // payload formats that can't be represented as JSON, such as raw binary or
 // an HTML page.
 //
+//
 // This message can be used both in streaming and non-streaming API methods in
 // the request as well as the response.
 //
@@ -40,28 +40,28 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 //
 // Example:
 //
-//	message GetResourceRequest {
-//	  // A unique request id.
-//	  string request_id = 1;
+//     message GetResourceRequest {
+//       // A unique request id.
+//       string request_id = 1;
 //
-//	  // The raw HTTP body is bound to this field.
-//	  google.api.HttpBody http_body = 2;
-//	}
+//       // The raw HTTP body is bound to this field.
+//       google.api.HttpBody http_body = 2;
+//     }
 //
-//	service ResourceService {
-//	  rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-//	  rpc UpdateResource(google.api.HttpBody) returns
-//	  (google.protobuf.Empty);
-//	}
+//     service ResourceService {
+//       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
+//       rpc UpdateResource(google.api.HttpBody) returns
+//       (google.protobuf.Empty);
+//     }
 //
 // Example with streaming methods:
 //
-//	service CaldavService {
-//	  rpc GetCalendar(stream google.api.HttpBody)
-//	    returns (stream google.api.HttpBody);
-//	  rpc UpdateCalendar(stream google.api.HttpBody)
-//	    returns (stream google.api.HttpBody);
-//	}
+//     service CaldavService {
+//       rpc GetCalendar(stream google.api.HttpBody)
+//         returns (stream google.api.HttpBody);
+//       rpc UpdateCalendar(stream google.api.HttpBody)
+//         returns (stream google.api.HttpBody);
+//     }
 //
 // Use of this type only changes how the request and response bodies are
 // handled, all other features will continue to work unchanged.

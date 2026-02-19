@@ -19,6 +19,7 @@ class Module extends $pb.GeneratedMessage {
     $core.String? bech32Prefix,
     $core.Iterable<ModuleAccountPermission>? moduleAccountPermissions,
     $core.String? authority,
+    $core.bool? enableUnorderedTransactions,
   }) {
     final $result = create();
     if (bech32Prefix != null) {
@@ -30,6 +31,9 @@ class Module extends $pb.GeneratedMessage {
     if (authority != null) {
       $result.authority = authority;
     }
+    if (enableUnorderedTransactions != null) {
+      $result.enableUnorderedTransactions = enableUnorderedTransactions;
+    }
     return $result;
   }
   Module._() : super();
@@ -40,6 +44,7 @@ class Module extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'bech32Prefix')
     ..pc<ModuleAccountPermission>(2, _omitFieldNames ? '' : 'moduleAccountPermissions', $pb.PbFieldType.PM, subBuilder: ModuleAccountPermission.create)
     ..aOS(3, _omitFieldNames ? '' : 'authority')
+    ..aOB(4, _omitFieldNames ? '' : 'enableUnorderedTransactions')
     ..hasRequiredFields = false
   ;
 
@@ -87,6 +92,18 @@ class Module extends $pb.GeneratedMessage {
   $core.bool hasAuthority() => $_has(2);
   @$pb.TagNumber(3)
   void clearAuthority() => clearField(3);
+
+  /// enable_unordered_transactions determines whether unordered transactions should be supported or not.
+  /// When true, unordered transactions will be validated and processed.
+  /// When false, unordered transactions will be rejected.
+  @$pb.TagNumber(4)
+  $core.bool get enableUnorderedTransactions => $_getBF(3);
+  @$pb.TagNumber(4)
+  set enableUnorderedTransactions($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEnableUnorderedTransactions() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEnableUnorderedTransactions() => clearField(4);
 }
 
 /// ModuleAccountPermission represents permissions for a module account.

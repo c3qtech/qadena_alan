@@ -278,11 +278,12 @@ const QueryRedelegationsRequest$json = {
 /// Descriptor for `QueryRedelegationsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryRedelegationsRequestDescriptor = $convert.base64Decode(
     'ChlRdWVyeVJlZGVsZWdhdGlvbnNSZXF1ZXN0Ej8KDmRlbGVnYXRvcl9hZGRyGAEgASgJQhjStC'
-    '0UY29zbW9zLkFkZHJlc3NTdHJpbmdSDWRlbGVnYXRvckFkZHISRgoSc3JjX3ZhbGlkYXRvcl9h'
-    'ZGRyGAIgASgJQhjStC0UY29zbW9zLkFkZHJlc3NTdHJpbmdSEHNyY1ZhbGlkYXRvckFkZHISRg'
-    'oSZHN0X3ZhbGlkYXRvcl9hZGRyGAMgASgJQhjStC0UY29zbW9zLkFkZHJlc3NTdHJpbmdSEGRz'
-    'dFZhbGlkYXRvckFkZHISRgoKcGFnaW5hdGlvbhgEIAEoCzImLmNvc21vcy5iYXNlLnF1ZXJ5Ln'
-    'YxYmV0YTEuUGFnZVJlcXVlc3RSCnBhZ2luYXRpb246CIigHwDooB8A');
+    '0UY29zbW9zLkFkZHJlc3NTdHJpbmdSDWRlbGVnYXRvckFkZHISTwoSc3JjX3ZhbGlkYXRvcl9h'
+    'ZGRyGAIgASgJQiHStC0dY29zbW9zLlZhbGlkYXRvckFkZHJlc3NTdHJpbmdSEHNyY1ZhbGlkYX'
+    'RvckFkZHISTwoSZHN0X3ZhbGlkYXRvcl9hZGRyGAMgASgJQiHStC0dY29zbW9zLlZhbGlkYXRv'
+    'ckFkZHJlc3NTdHJpbmdSEGRzdFZhbGlkYXRvckFkZHISRgoKcGFnaW5hdGlvbhgEIAEoCzImLm'
+    'Nvc21vcy5iYXNlLnF1ZXJ5LnYxYmV0YTEuUGFnZVJlcXVlc3RSCnBhZ2luYXRpb246CIigHwDo'
+    'oB8A');
 
 @$core.Deprecated('Use queryRedelegationsResponseDescriptor instead')
 const QueryRedelegationsResponse$json = {

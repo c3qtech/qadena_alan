@@ -77,7 +77,7 @@ final $typed_data.Uint8List queryUpgradedConsensusStateRequestDescriptor = $conv
 const QueryUpgradedConsensusStateResponse$json = {
   '1': 'QueryUpgradedConsensusStateResponse',
   '2': [
-    {'1': 'upgraded_consensus_state', '3': 2, '4': 1, '5': 12, '10': 'upgradedConsensusState'},
+    {'1': 'upgraded_consensus_state', '3': 2, '4': 1, '5': 12, '8': {}, '10': 'upgradedConsensusState'},
   ],
   '7': {'3': true},
   '9': [
@@ -87,8 +87,9 @@ const QueryUpgradedConsensusStateResponse$json = {
 
 /// Descriptor for `QueryUpgradedConsensusStateResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryUpgradedConsensusStateResponseDescriptor = $convert.base64Decode(
-    'CiNRdWVyeVVwZ3JhZGVkQ29uc2Vuc3VzU3RhdGVSZXNwb25zZRI4Chh1cGdyYWRlZF9jb25zZW'
-    '5zdXNfc3RhdGUYAiABKAxSFnVwZ3JhZGVkQ29uc2Vuc3VzU3RhdGU6AhgBSgQIARAC');
+    'CiNRdWVyeVVwZ3JhZGVkQ29uc2Vuc3VzU3RhdGVSZXNwb25zZRJNChh1cGdyYWRlZF9jb25zZW'
+    '5zdXNfc3RhdGUYAiABKAxCE9q0LQ9jb3Ntb3Mtc2RrIDAuNDNSFnVwZ3JhZGVkQ29uc2Vuc3Vz'
+    'U3RhdGU6AhgBSgQIARAC');
 
 @$core.Deprecated('Use queryModuleVersionsRequestDescriptor instead')
 const QueryModuleVersionsRequest$json = {
@@ -96,12 +97,13 @@ const QueryModuleVersionsRequest$json = {
   '2': [
     {'1': 'module_name', '3': 1, '4': 1, '5': 9, '10': 'moduleName'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryModuleVersionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryModuleVersionsRequestDescriptor = $convert.base64Decode(
     'ChpRdWVyeU1vZHVsZVZlcnNpb25zUmVxdWVzdBIfCgttb2R1bGVfbmFtZRgBIAEoCVIKbW9kdW'
-    'xlTmFtZQ==');
+    'xlTmFtZToT0rQtD2Nvc21vcy1zZGsgMC40Mw==');
 
 @$core.Deprecated('Use queryModuleVersionsResponseDescriptor instead')
 const QueryModuleVersionsResponse$json = {
@@ -109,21 +111,24 @@ const QueryModuleVersionsResponse$json = {
   '2': [
     {'1': 'module_versions', '3': 1, '4': 3, '5': 11, '6': '.cosmos.upgrade.v1beta1.ModuleVersion', '10': 'moduleVersions'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryModuleVersionsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryModuleVersionsResponseDescriptor = $convert.base64Decode(
     'ChtRdWVyeU1vZHVsZVZlcnNpb25zUmVzcG9uc2USTgoPbW9kdWxlX3ZlcnNpb25zGAEgAygLMi'
-    'UuY29zbW9zLnVwZ3JhZGUudjFiZXRhMS5Nb2R1bGVWZXJzaW9uUg5tb2R1bGVWZXJzaW9ucw==');
+    'UuY29zbW9zLnVwZ3JhZGUudjFiZXRhMS5Nb2R1bGVWZXJzaW9uUg5tb2R1bGVWZXJzaW9uczoT'
+    '0rQtD2Nvc21vcy1zZGsgMC40Mw==');
 
 @$core.Deprecated('Use queryAuthorityRequestDescriptor instead')
 const QueryAuthorityRequest$json = {
   '1': 'QueryAuthorityRequest',
+  '7': {},
 };
 
 /// Descriptor for `QueryAuthorityRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAuthorityRequestDescriptor = $convert.base64Decode(
-    'ChVRdWVyeUF1dGhvcml0eVJlcXVlc3Q=');
+    'ChVRdWVyeUF1dGhvcml0eVJlcXVlc3Q6E9K0LQ9jb3Ntb3Mtc2RrIDAuNDY=');
 
 @$core.Deprecated('Use queryAuthorityResponseDescriptor instead')
 const QueryAuthorityResponse$json = {
@@ -131,9 +136,11 @@ const QueryAuthorityResponse$json = {
   '2': [
     {'1': 'address', '3': 1, '4': 1, '5': 9, '10': 'address'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `QueryAuthorityResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List queryAuthorityResponseDescriptor = $convert.base64Decode(
-    'ChZRdWVyeUF1dGhvcml0eVJlc3BvbnNlEhgKB2FkZHJlc3MYASABKAlSB2FkZHJlc3M=');
+    'ChZRdWVyeUF1dGhvcml0eVJlc3BvbnNlEhgKB2FkZHJlc3MYASABKAlSB2FkZHJlc3M6E9K0LQ'
+    '9jb3Ntb3Mtc2RrIDAuNDY=');
 

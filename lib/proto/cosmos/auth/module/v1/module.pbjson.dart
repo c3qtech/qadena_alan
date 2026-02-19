@@ -20,6 +20,7 @@ const Module$json = {
     {'1': 'bech32_prefix', '3': 1, '4': 1, '5': 9, '10': 'bech32Prefix'},
     {'1': 'module_account_permissions', '3': 2, '4': 3, '5': 11, '6': '.cosmos.auth.module.v1.ModuleAccountPermission', '10': 'moduleAccountPermissions'},
     {'1': 'authority', '3': 3, '4': 1, '5': 9, '10': 'authority'},
+    {'1': 'enable_unordered_transactions', '3': 4, '4': 1, '5': 8, '10': 'enableUnorderedTransactions'},
   ],
   '7': {},
 };
@@ -29,8 +30,9 @@ final $typed_data.Uint8List moduleDescriptor = $convert.base64Decode(
     'CgZNb2R1bGUSIwoNYmVjaDMyX3ByZWZpeBgBIAEoCVIMYmVjaDMyUHJlZml4EmwKGm1vZHVsZV'
     '9hY2NvdW50X3Blcm1pc3Npb25zGAIgAygLMi4uY29zbW9zLmF1dGgubW9kdWxlLnYxLk1vZHVs'
     'ZUFjY291bnRQZXJtaXNzaW9uUhhtb2R1bGVBY2NvdW50UGVybWlzc2lvbnMSHAoJYXV0aG9yaX'
-    'R5GAMgASgJUglhdXRob3JpdHk6K7rAltoBJQojZ2l0aHViLmNvbS9jb3Ntb3MvY29zbW9zLXNk'
-    'ay94L2F1dGg=');
+    'R5GAMgASgJUglhdXRob3JpdHkSQgodZW5hYmxlX3Vub3JkZXJlZF90cmFuc2FjdGlvbnMYBCAB'
+    'KAhSG2VuYWJsZVVub3JkZXJlZFRyYW5zYWN0aW9uczorusCW2gElCiNnaXRodWIuY29tL2Nvc2'
+    '1vcy9jb3Ntb3Mtc2RrL3gvYXV0aA==');
 
 @$core.Deprecated('Use moduleAccountPermissionDescriptor instead')
 const ModuleAccountPermission$json = {

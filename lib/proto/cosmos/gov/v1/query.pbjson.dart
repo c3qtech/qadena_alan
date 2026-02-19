@@ -195,7 +195,7 @@ const QueryParamsResponse$json = {
       '8': {'3': true},
       '10': 'tallyParams',
     },
-    {'1': 'params', '3': 4, '4': 1, '5': 11, '6': '.cosmos.gov.v1.Params', '10': 'params'},
+    {'1': 'params', '3': 4, '4': 1, '5': 11, '6': '.cosmos.gov.v1.Params', '8': {}, '10': 'params'},
   ],
 };
 
@@ -205,8 +205,8 @@ final $typed_data.Uint8List queryParamsResponseDescriptor = $convert.base64Decod
     '92LnYxLlZvdGluZ1BhcmFtc0ICGAFSDHZvdGluZ1BhcmFtcxJHCg5kZXBvc2l0X3BhcmFtcxgC'
     'IAEoCzIcLmNvc21vcy5nb3YudjEuRGVwb3NpdFBhcmFtc0ICGAFSDWRlcG9zaXRQYXJhbXMSQQ'
     'oMdGFsbHlfcGFyYW1zGAMgASgLMhouY29zbW9zLmdvdi52MS5UYWxseVBhcmFtc0ICGAFSC3Rh'
-    'bGx5UGFyYW1zEi0KBnBhcmFtcxgEIAEoCzIVLmNvc21vcy5nb3YudjEuUGFyYW1zUgZwYXJhbX'
-    'M=');
+    'bGx5UGFyYW1zEkIKBnBhcmFtcxgEIAEoCzIVLmNvc21vcy5nb3YudjEuUGFyYW1zQhPatC0PY2'
+    '9zbW9zLXNkayAwLjQ3UgZwYXJhbXM=');
 
 @$core.Deprecated('Use queryDepositRequestDescriptor instead')
 const QueryDepositRequest$json = {

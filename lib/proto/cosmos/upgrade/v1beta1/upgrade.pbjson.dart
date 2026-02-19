@@ -98,5 +98,5 @@ const ModuleVersion$json = {
 /// Descriptor for `ModuleVersion`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List moduleVersionDescriptor = $convert.base64Decode(
     'Cg1Nb2R1bGVWZXJzaW9uEhIKBG5hbWUYASABKAlSBG5hbWUSGAoHdmVyc2lvbhgCIAEoBFIHdm'
-    'Vyc2lvbjoE6KAfAQ==');
+    'Vyc2lvbjoX6KAfAdK0LQ9jb3Ntb3Mtc2RrIDAuNDM=');
 

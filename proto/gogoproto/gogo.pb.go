@@ -5,10 +5,9 @@ package gogoproto
 
 import (
 	fmt "fmt"
-	math "math"
-
 	proto "github.com/cosmos/gogoproto/proto"
 	descriptor "github.com/cosmos/gogoproto/protoc-gen-gogo/descriptor"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

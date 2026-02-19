@@ -239,12 +239,10 @@ class TxResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearTimestamp() => clearField(12);
 
-  ///  Events defines all the events emitted by processing a transaction. Note,
-  ///  these events include those emitted by processing all the messages and those
-  ///  emitted from the ante. Whereas Logs contains the events, with
-  ///  additional metadata, emitted only by processing the messages.
-  ///
-  ///  Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
+  /// Events defines all the events emitted by processing a transaction. Note,
+  /// these events include those emitted by processing all the messages and those
+  /// emitted from the ante. Whereas Logs contains the events, with
+  /// additional metadata, emitted only by processing the messages.
   @$pb.TagNumber(13)
   $core.List<$0.Event> get events => $_getList(12);
 }
@@ -607,9 +605,7 @@ class Result extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.List<$0.Event> get events => $_getList(2);
 
-  ///  msg_responses contains the Msg handler responses type packed in Anys.
-  ///
-  ///  Since: cosmos-sdk 0.46
+  /// msg_responses contains the Msg handler responses type packed in Anys.
   @$pb.TagNumber(4)
   $core.List<$1.Any> get msgResponses => $_getList(3);
 }
@@ -804,9 +800,7 @@ class TxMsgData extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.List<MsgData> get data => $_getList(0);
 
-  ///  msg_responses contains the Msg handler responses packed into Anys.
-  ///
-  ///  Since: cosmos-sdk 0.46
+  /// msg_responses contains the Msg handler responses packed into Anys.
   @$pb.TagNumber(2)
   $core.List<$1.Any> get msgResponses => $_getList(1);
 }

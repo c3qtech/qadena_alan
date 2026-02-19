@@ -176,9 +176,7 @@ enum SnapshotItem_Item {
   notSet
 }
 
-///  SnapshotItem is an item contained in a rootmulti.Store snapshot.
-///
-///  Since: cosmos-sdk 0.46
+/// SnapshotItem is an item contained in a rootmulti.Store snapshot.
 class SnapshotItem extends $pb.GeneratedMessage {
   factory SnapshotItem({
     SnapshotStoreItem? store,
@@ -290,9 +288,7 @@ class SnapshotItem extends $pb.GeneratedMessage {
   SnapshotExtensionPayload ensureExtensionPayload() => $_ensure(3);
 }
 
-///  SnapshotStoreItem contains metadata about a snapshotted store.
-///
-///  Since: cosmos-sdk 0.46
+/// SnapshotStoreItem contains metadata about a snapshotted store.
 class SnapshotStoreItem extends $pb.GeneratedMessage {
   factory SnapshotStoreItem({
     $core.String? name,
@@ -343,9 +339,7 @@ class SnapshotStoreItem extends $pb.GeneratedMessage {
   void clearName() => clearField(1);
 }
 
-///  SnapshotIAVLItem is an exported IAVL node.
-///
-///  Since: cosmos-sdk 0.46
+/// SnapshotIAVLItem is an exported IAVL node.
 class SnapshotIAVLItem extends $pb.GeneratedMessage {
   factory SnapshotIAVLItem({
     $core.List<$core.int>? key,
@@ -440,9 +434,7 @@ class SnapshotIAVLItem extends $pb.GeneratedMessage {
   void clearHeight() => clearField(4);
 }
 
-///  SnapshotExtensionMeta contains metadata about an external snapshotter.
-///
-///  Since: cosmos-sdk 0.46
+/// SnapshotExtensionMeta contains metadata about an external snapshotter.
 class SnapshotExtensionMeta extends $pb.GeneratedMessage {
   factory SnapshotExtensionMeta({
     $core.String? name,
@@ -507,9 +499,7 @@ class SnapshotExtensionMeta extends $pb.GeneratedMessage {
   void clearFormat() => clearField(2);
 }
 
-///  SnapshotExtensionPayload contains payloads of an external snapshotter.
-///
-///  Since: cosmos-sdk 0.46
+/// SnapshotExtensionPayload contains payloads of an external snapshotter.
 class SnapshotExtensionPayload extends $pb.GeneratedMessage {
   factory SnapshotExtensionPayload({
     $core.List<$core.int>? payload,

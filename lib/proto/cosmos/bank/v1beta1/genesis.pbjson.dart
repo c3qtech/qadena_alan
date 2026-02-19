@@ -33,8 +33,9 @@ final $typed_data.Uint8List genesisStateDescriptor = $convert.base64Decode(
     'Nvc21vcy5iYXNlLnYxYmV0YTEuQ29pbkJGyN4fAKrfHyhnaXRodWIuY29tL2Nvc21vcy9jb3Nt'
     'b3Mtc2RrL3R5cGVzLkNvaW5zmuewKgxsZWdhY3lfY29pbnOo57AqAVIGc3VwcGx5Ek8KDmRlbm'
     '9tX21ldGFkYXRhGAQgAygLMh0uY29zbW9zLmJhbmsudjFiZXRhMS5NZXRhZGF0YUIJyN4fAKjn'
-    'sCoBUg1kZW5vbU1ldGFkYXRhEk4KDHNlbmRfZW5hYmxlZBgFIAMoCzIgLmNvc21vcy5iYW5rLn'
-    'YxYmV0YTEuU2VuZEVuYWJsZWRCCcjeHwCo57AqAVILc2VuZEVuYWJsZWQ=');
+    'sCoBUg1kZW5vbU1ldGFkYXRhEmEKDHNlbmRfZW5hYmxlZBgFIAMoCzIgLmNvc21vcy5iYW5rLn'
+    'YxYmV0YTEuU2VuZEVuYWJsZWRCHMjeHwDatC0PY29zbW9zLXNkayAwLjQ3qOewKgFSC3NlbmRF'
+    'bmFibGVk');
 
 @$core.Deprecated('Use balanceDescriptor instead')
 const Balance$json = {

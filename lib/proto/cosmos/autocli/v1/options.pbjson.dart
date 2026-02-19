@@ -35,6 +35,8 @@ const ServiceCommandDescriptor$json = {
     {'1': 'service', '3': 1, '4': 1, '5': 9, '10': 'service'},
     {'1': 'rpc_command_options', '3': 2, '4': 3, '5': 11, '6': '.cosmos.autocli.v1.RpcCommandOptions', '10': 'rpcCommandOptions'},
     {'1': 'sub_commands', '3': 3, '4': 3, '5': 11, '6': '.cosmos.autocli.v1.ServiceCommandDescriptor.SubCommandsEntry', '10': 'subCommands'},
+    {'1': 'enhance_custom_command', '3': 4, '4': 1, '5': 8, '10': 'enhanceCustomCommand'},
+    {'1': 'short', '3': 5, '4': 1, '5': 9, '10': 'short'},
   ],
   '3': [ServiceCommandDescriptor_SubCommandsEntry$json],
 };
@@ -55,9 +57,10 @@ final $typed_data.Uint8List serviceCommandDescriptorDescriptor = $convert.base64
     'NycGNfY29tbWFuZF9vcHRpb25zGAIgAygLMiQuY29zbW9zLmF1dG9jbGkudjEuUnBjQ29tbWFu'
     'ZE9wdGlvbnNSEXJwY0NvbW1hbmRPcHRpb25zEl8KDHN1Yl9jb21tYW5kcxgDIAMoCzI8LmNvc2'
     '1vcy5hdXRvY2xpLnYxLlNlcnZpY2VDb21tYW5kRGVzY3JpcHRvci5TdWJDb21tYW5kc0VudHJ5'
-    'UgtzdWJDb21tYW5kcxprChBTdWJDb21tYW5kc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EkEKBX'
-    'ZhbHVlGAIgASgLMisuY29zbW9zLmF1dG9jbGkudjEuU2VydmljZUNvbW1hbmREZXNjcmlwdG9y'
-    'UgV2YWx1ZToCOAE=');
+    'UgtzdWJDb21tYW5kcxI0ChZlbmhhbmNlX2N1c3RvbV9jb21tYW5kGAQgASgIUhRlbmhhbmNlQ3'
+    'VzdG9tQ29tbWFuZBIUCgVzaG9ydBgFIAEoCVIFc2hvcnQaawoQU3ViQ29tbWFuZHNFbnRyeRIQ'
+    'CgNrZXkYASABKAlSA2tleRJBCgV2YWx1ZRgCIAEoCzIrLmNvc21vcy5hdXRvY2xpLnYxLlNlcn'
+    'ZpY2VDb21tYW5kRGVzY3JpcHRvclIFdmFsdWU6AjgB');
 
 @$core.Deprecated('Use rpcCommandOptionsDescriptor instead')
 const RpcCommandOptions$json = {
@@ -75,6 +78,7 @@ const RpcCommandOptions$json = {
     {'1': 'flag_options', '3': 10, '4': 3, '5': 11, '6': '.cosmos.autocli.v1.RpcCommandOptions.FlagOptionsEntry', '10': 'flagOptions'},
     {'1': 'positional_args', '3': 11, '4': 3, '5': 11, '6': '.cosmos.autocli.v1.PositionalArgDescriptor', '10': 'positionalArgs'},
     {'1': 'skip', '3': 12, '4': 1, '5': 8, '10': 'skip'},
+    {'1': 'gov_proposal', '3': 13, '4': 1, '5': 8, '8': {}, '10': 'govProposal'},
   ],
   '3': [RpcCommandOptions_FlagOptionsEntry$json],
 };
@@ -99,8 +103,9 @@ final $typed_data.Uint8List rpcCommandOptionsDescriptor = $convert.base64Decode(
     '1vcy5hdXRvY2xpLnYxLlJwY0NvbW1hbmRPcHRpb25zLkZsYWdPcHRpb25zRW50cnlSC2ZsYWdP'
     'cHRpb25zElMKD3Bvc2l0aW9uYWxfYXJncxgLIAMoCzIqLmNvc21vcy5hdXRvY2xpLnYxLlBvc2'
     'l0aW9uYWxBcmdEZXNjcmlwdG9yUg5wb3NpdGlvbmFsQXJncxISCgRza2lwGAwgASgIUgRza2lw'
-    'Gl4KEEZsYWdPcHRpb25zRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSNAoFdmFsdWUYAiABKAsyHi'
-    '5jb3Ntb3MuYXV0b2NsaS52MS5GbGFnT3B0aW9uc1IFdmFsdWU6AjgB');
+    'Ej4KDGdvdl9wcm9wb3NhbBgNIAEoCEIb2rQtF2NsaWVudC92MiB2Mi4wLjAtYmV0YS4yUgtnb3'
+    'ZQcm9wb3NhbBpeChBGbGFnT3B0aW9uc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EjQKBXZhbHVl'
+    'GAIgASgLMh4uY29zbW9zLmF1dG9jbGkudjEuRmxhZ09wdGlvbnNSBXZhbHVlOgI4AQ==');
 
 @$core.Deprecated('Use flagOptionsDescriptor instead')
 const FlagOptions$json = {
@@ -130,11 +135,13 @@ const PositionalArgDescriptor$json = {
   '2': [
     {'1': 'proto_field', '3': 1, '4': 1, '5': 9, '10': 'protoField'},
     {'1': 'varargs', '3': 2, '4': 1, '5': 8, '10': 'varargs'},
+    {'1': 'optional', '3': 3, '4': 1, '5': 8, '10': 'optional'},
   ],
 };
 
 /// Descriptor for `PositionalArgDescriptor`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List positionalArgDescriptorDescriptor = $convert.base64Decode(
     'ChdQb3NpdGlvbmFsQXJnRGVzY3JpcHRvchIfCgtwcm90b19maWVsZBgBIAEoCVIKcHJvdG9GaW'
-    'VsZBIYCgd2YXJhcmdzGAIgASgIUgd2YXJhcmdz');
+    'VsZBIYCgd2YXJhcmdzGAIgASgIUgd2YXJhcmdzEhoKCG9wdGlvbmFsGAMgASgIUghvcHRpb25h'
+    'bA==');
 

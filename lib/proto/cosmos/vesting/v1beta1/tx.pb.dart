@@ -153,10 +153,8 @@ class MsgCreateVestingAccountResponse extends $pb.GeneratedMessage {
   static MsgCreateVestingAccountResponse? _defaultInstance;
 }
 
-///  MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
-///  locked account.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
+/// locked account.
 class MsgCreatePermanentLockedAccount extends $pb.GeneratedMessage {
   factory MsgCreatePermanentLockedAccount({
     $core.String? fromAddress,
@@ -229,9 +227,7 @@ class MsgCreatePermanentLockedAccount extends $pb.GeneratedMessage {
   $core.List<$2.Coin> get amount => $_getList(2);
 }
 
-///  MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type.
 class MsgCreatePermanentLockedAccountResponse extends $pb.GeneratedMessage {
   factory MsgCreatePermanentLockedAccountResponse() => create();
   MsgCreatePermanentLockedAccountResponse._() : super();
@@ -264,10 +260,8 @@ class MsgCreatePermanentLockedAccountResponse extends $pb.GeneratedMessage {
   static MsgCreatePermanentLockedAccountResponse? _defaultInstance;
 }
 
-///  MsgCreateVestingAccount defines a message that enables creating a vesting
-///  account.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCreateVestingAccount defines a message that enables creating a vesting
+/// account.
 class MsgCreatePeriodicVestingAccount extends $pb.GeneratedMessage {
   factory MsgCreatePeriodicVestingAccount({
     $core.String? fromAddress,
@@ -355,10 +349,8 @@ class MsgCreatePeriodicVestingAccount extends $pb.GeneratedMessage {
   $core.List<$3.Period> get vestingPeriods => $_getList(3);
 }
 
-///  MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
-///  response type.
-///
-///  Since: cosmos-sdk 0.46
+/// MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
+/// response type.
 class MsgCreatePeriodicVestingAccountResponse extends $pb.GeneratedMessage {
   factory MsgCreatePeriodicVestingAccountResponse() => create();
   MsgCreatePeriodicVestingAccountResponse._() : super();

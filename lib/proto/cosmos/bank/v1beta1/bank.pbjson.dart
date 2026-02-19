@@ -125,8 +125,8 @@ const Metadata$json = {
     {'1': 'denom_units', '3': 2, '4': 3, '5': 11, '6': '.cosmos.bank.v1beta1.DenomUnit', '10': 'denomUnits'},
     {'1': 'base', '3': 3, '4': 1, '5': 9, '10': 'base'},
     {'1': 'display', '3': 4, '4': 1, '5': 9, '10': 'display'},
-    {'1': 'name', '3': 5, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'symbol', '3': 6, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'name', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'name'},
+    {'1': 'symbol', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'uri', '3': 7, '4': 1, '5': 9, '8': {}, '10': 'uri'},
     {'1': 'uri_hash', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'uriHash'},
   ],
@@ -136,7 +136,9 @@ const Metadata$json = {
 final $typed_data.Uint8List metadataDescriptor = $convert.base64Decode(
     'CghNZXRhZGF0YRIgCgtkZXNjcmlwdGlvbhgBIAEoCVILZGVzY3JpcHRpb24SPwoLZGVub21fdW'
     '5pdHMYAiADKAsyHi5jb3Ntb3MuYmFuay52MWJldGExLkRlbm9tVW5pdFIKZGVub21Vbml0cxIS'
-    'CgRiYXNlGAMgASgJUgRiYXNlEhgKB2Rpc3BsYXkYBCABKAlSB2Rpc3BsYXkSEgoEbmFtZRgFIA'
-    'EoCVIEbmFtZRIWCgZzeW1ib2wYBiABKAlSBnN5bWJvbBIZCgN1cmkYByABKAlCB+LeHwNVUklS'
-    'A3VyaRImCgh1cmlfaGFzaBgIIAEoCUIL4t4fB1VSSUhhc2hSB3VyaUhhc2g=');
+    'CgRiYXNlGAMgASgJUgRiYXNlEhgKB2Rpc3BsYXkYBCABKAlSB2Rpc3BsYXkSJwoEbmFtZRgFIA'
+    'EoCUIT2rQtD2Nvc21vcy1zZGsgMC40M1IEbmFtZRIrCgZzeW1ib2wYBiABKAlCE9q0LQ9jb3Nt'
+    'b3Mtc2RrIDAuNDNSBnN5bWJvbBIsCgN1cmkYByABKAlCGuLeHwNVUknatC0PY29zbW9zLXNkay'
+    'AwLjQ2UgN1cmkSOQoIdXJpX2hhc2gYCCABKAlCHuLeHwdVUklIYXNo2rQtD2Nvc21vcy1zZGsg'
+    'MC40NlIHdXJpSGFzaA==');
 

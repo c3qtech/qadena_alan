@@ -79,9 +79,7 @@ class QueryEvidenceRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEvidenceHash() => clearField(1);
 
-  ///  hash defines the evidence hash of the requested evidence.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// hash defines the evidence hash of the requested evidence.
   @$pb.TagNumber(2)
   $core.String get hash => $_getSZ(1);
   @$pb.TagNumber(2)

@@ -268,9 +268,7 @@ class QueryAllowancesResponse extends $pb.GeneratedMessage {
   $7.PageResponse ensurePagination() => $_ensure(1);
 }
 
-///  QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method.
-///
-///  Since: cosmos-sdk 0.46
+/// QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method.
 class QueryAllowancesByGranterRequest extends $pb.GeneratedMessage {
   factory QueryAllowancesByGranterRequest({
     $core.String? granter,
@@ -338,9 +336,7 @@ class QueryAllowancesByGranterRequest extends $pb.GeneratedMessage {
   $7.PageRequest ensurePagination() => $_ensure(1);
 }
 
-///  QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.
-///
-///  Since: cosmos-sdk 0.46
+/// QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.
 class QueryAllowancesByGranterResponse extends $pb.GeneratedMessage {
   factory QueryAllowancesByGranterResponse({
     $core.Iterable<$6.Grant>? allowances,

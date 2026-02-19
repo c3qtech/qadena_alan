@@ -99,9 +99,7 @@ class MsgUnjailResponse extends $pb.GeneratedMessage {
   static MsgUnjailResponse? _defaultInstance;
 }
 
-///  MsgUpdateParams is the Msg/UpdateParams request type.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParams is the Msg/UpdateParams request type.
 class MsgUpdateParams extends $pb.GeneratedMessage {
   factory MsgUpdateParams({
     $core.String? authority,
@@ -172,10 +170,8 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   $4.Params ensureParams() => $_ensure(1);
 }
 
-///  MsgUpdateParamsResponse defines the response structure for executing a
-///  MsgUpdateParams message.
-///
-///  Since: cosmos-sdk 0.47
+/// MsgUpdateParamsResponse defines the response structure for executing a
+/// MsgUpdateParams message.
 class MsgUpdateParamsResponse extends $pb.GeneratedMessage {
   factory MsgUpdateParamsResponse() => create();
   MsgUpdateParamsResponse._() : super();

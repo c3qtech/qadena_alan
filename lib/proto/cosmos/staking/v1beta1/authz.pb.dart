@@ -69,9 +69,7 @@ enum StakeAuthorization_Validators_ {
   notSet
 }
 
-///  StakeAuthorization defines authorization for delegate/undelegate/redelegate.
-///
-///  Since: cosmos-sdk 0.43
+/// StakeAuthorization defines authorization for delegate/undelegate/redelegate.
 class StakeAuthorization extends $pb.GeneratedMessage {
   factory StakeAuthorization({
     $7.Coin? maxTokens,

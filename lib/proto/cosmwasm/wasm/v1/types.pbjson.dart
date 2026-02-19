@@ -143,6 +143,7 @@ const ContractInfo$json = {
     {'1': 'created', '3': 5, '4': 1, '5': 11, '6': '.cosmwasm.wasm.v1.AbsoluteTxPosition', '10': 'created'},
     {'1': 'ibc_port_id', '3': 6, '4': 1, '5': 9, '8': {}, '10': 'ibcPortId'},
     {'1': 'extension', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Any', '8': {}, '10': 'extension'},
+    {'1': 'ibc2_port_id', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'ibc2PortId'},
   ],
   '7': {},
 };
@@ -155,7 +156,8 @@ final $typed_data.Uint8List contractInfoDescriptor = $convert.base64Decode(
     'IFbGFiZWwSPgoHY3JlYXRlZBgFIAEoCzIkLmNvc213YXNtLndhc20udjEuQWJzb2x1dGVUeFBv'
     'c2l0aW9uUgdjcmVhdGVkEi0KC2liY19wb3J0X2lkGAYgASgJQg3i3h8JSUJDUG9ydElEUglpYm'
     'NQb3J0SWQSXgoJZXh0ZW5zaW9uGAcgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueUIqyrQtJmNv'
-    'c213YXNtLndhc20udjEuQ29udHJhY3RJbmZvRXh0ZW5zaW9uUglleHRlbnNpb246BOigHwE=');
+    'c213YXNtLndhc20udjEuQ29udHJhY3RJbmZvRXh0ZW5zaW9uUglleHRlbnNpb24SMAoMaWJjMl'
+    '9wb3J0X2lkGAggASgJQg7i3h8KSUJDMlBvcnRJRFIKaWJjMlBvcnRJZDoE6KAfAQ==');
 
 @$core.Deprecated('Use contractCodeHistoryEntryDescriptor instead')
 const ContractCodeHistoryEntry$json = {

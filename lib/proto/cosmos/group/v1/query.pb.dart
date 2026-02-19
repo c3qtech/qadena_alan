@@ -1618,9 +1618,7 @@ class QueryTallyResultResponse extends $pb.GeneratedMessage {
   $5.TallyResult ensureTally() => $_ensure(0);
 }
 
-///  QueryGroupsRequest is the Query/Groups request type.
-///
-///  Since: cosmos-sdk 0.47.1
+/// QueryGroupsRequest is the Query/Groups request type.
 class QueryGroupsRequest extends $pb.GeneratedMessage {
   factory QueryGroupsRequest({
     $6.PageRequest? pagination,
@@ -1674,9 +1672,7 @@ class QueryGroupsRequest extends $pb.GeneratedMessage {
   $6.PageRequest ensurePagination() => $_ensure(0);
 }
 
-///  QueryGroupsResponse is the Query/Groups response type.
-///
-///  Since: cosmos-sdk 0.47.1
+/// QueryGroupsResponse is the Query/Groups response type.
 class QueryGroupsResponse extends $pb.GeneratedMessage {
   factory QueryGroupsResponse({
     $core.Iterable<$5.GroupInfo>? groups,

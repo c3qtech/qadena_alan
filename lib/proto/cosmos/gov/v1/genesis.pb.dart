@@ -179,9 +179,7 @@ class GenesisState extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $6.TallyParams ensureTallyParams() => $_ensure(6);
 
-  ///  params defines all the paramaters of x/gov module.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// params defines all the paramaters of x/gov module.
   @$pb.TagNumber(8)
   $6.Params get params => $_getN(7);
   @$pb.TagNumber(8)
@@ -193,12 +191,10 @@ class GenesisState extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $6.Params ensureParams() => $_ensure(7);
 
-  ///  The constitution allows builders to lay a foundation and define purpose.
-  ///  This is an immutable string set in genesis.
-  ///  There are no amendments, to go outside of scope, just fork.
-  ///  constitution is an immutable string in genesis for a chain builder to lay out their vision, ideas and ideals.
-  ///
-  ///  Since: cosmos-sdk 0.50
+  /// The constitution allows builders to lay a foundation and define purpose.
+  /// This is an immutable string set in genesis.
+  /// There are no amendments, to go outside of scope, just fork.
+  /// constitution is an immutable string in genesis for a chain builder to lay out their vision, ideas and ideals.
   @$pb.TagNumber(9)
   $core.String get constitution => $_getSZ(8);
   @$pb.TagNumber(9)

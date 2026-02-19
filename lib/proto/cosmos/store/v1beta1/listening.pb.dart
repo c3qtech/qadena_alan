@@ -15,11 +15,9 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../tendermint/abci/types.pb.dart' as $0;
 
-///  StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
-///  It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
-///  Deletes
-///
-///  Since: cosmos-sdk 0.43
+/// StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
+/// It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
+/// Deletes
 class StoreKVPair extends $pb.GeneratedMessage {
   factory StoreKVPair({
     $core.String? storeKey,

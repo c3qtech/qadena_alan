@@ -614,6 +614,73 @@ class EventProposalPruned extends $pb.GeneratedMessage {
   $5.TallyResult ensureTallyResult() => $_ensure(2);
 }
 
+/// EventTallyError is an event emitted when a proposal tally failed with an error.
+class EventTallyError extends $pb.GeneratedMessage {
+  factory EventTallyError({
+    $fixnum.Int64? proposalId,
+    $core.String? errorMessage,
+  }) {
+    final $result = create();
+    if (proposalId != null) {
+      $result.proposalId = proposalId;
+    }
+    if (errorMessage != null) {
+      $result.errorMessage = errorMessage;
+    }
+    return $result;
+  }
+  EventTallyError._() : super();
+  factory EventTallyError.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventTallyError.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EventTallyError', package: const $pb.PackageName(_omitMessageNames ? '' : 'cosmos.group.v1'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'proposalId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, _omitFieldNames ? '' : 'errorMessage')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EventTallyError clone() => EventTallyError()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EventTallyError copyWith(void Function(EventTallyError) updates) => super.copyWith((message) => updates(message as EventTallyError)) as EventTallyError;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EventTallyError create() => EventTallyError._();
+  EventTallyError createEmptyInstance() => create();
+  static $pb.PbList<EventTallyError> createRepeated() => $pb.PbList<EventTallyError>();
+  @$core.pragma('dart2js:noInline')
+  static EventTallyError getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventTallyError>(create);
+  static EventTallyError? _defaultInstance;
+
+  /// proposal_id is the unique ID of the proposal.
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get proposalId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set proposalId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasProposalId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearProposalId() => clearField(1);
+
+  /// error_message is the raw error output
+  @$pb.TagNumber(2)
+  $core.String get errorMessage => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set errorMessage($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasErrorMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearErrorMessage() => clearField(2);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

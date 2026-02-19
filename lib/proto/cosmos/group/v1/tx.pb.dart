@@ -1290,9 +1290,7 @@ class MsgSubmitProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearExec() => clearField(5);
 
-  ///  title is the title of the proposal.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// title is the title of the proposal.
   @$pb.TagNumber(6)
   $core.String get title => $_getSZ(5);
   @$pb.TagNumber(6)
@@ -1302,9 +1300,7 @@ class MsgSubmitProposal extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearTitle() => clearField(6);
 
-  ///  summary is the summary of the proposal.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// summary is the summary of the proposal.
   @$pb.TagNumber(7)
   $core.String get summary => $_getSZ(6);
   @$pb.TagNumber(7)

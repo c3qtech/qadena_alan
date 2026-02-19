@@ -189,9 +189,9 @@ const MsgUndelegateResponse$json = {
 /// Descriptor for `MsgUndelegateResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgUndelegateResponseDescriptor = $convert.base64Decode(
     'ChVNc2dVbmRlbGVnYXRlUmVzcG9uc2USUgoPY29tcGxldGlvbl90aW1lGAEgASgLMhouZ29vZ2'
-    'xlLnByb3RvYnVmLlRpbWVzdGFtcEINyN4fAJDfHwGo57AqAVIOY29tcGxldGlvblRpbWUSPAoG'
-    'YW1vdW50GAIgASgLMhkuY29zbW9zLmJhc2UudjFiZXRhMS5Db2luQgnI3h8AqOewKgFSBmFtb3'
-    'VudA==');
+    'xlLnByb3RvYnVmLlRpbWVzdGFtcEINyN4fAJDfHwGo57AqAVIOY29tcGxldGlvblRpbWUSTwoG'
+    'YW1vdW50GAIgASgLMhkuY29zbW9zLmJhc2UudjFiZXRhMS5Db2luQhzI3h8A2rQtD2Nvc21vcy'
+    '1zZGsgMC41MKjnsCoBUgZhbW91bnQ=');
 
 @$core.Deprecated('Use msgCancelUnbondingDelegationDescriptor instead')
 const MsgCancelUnbondingDelegation$json = {
@@ -212,17 +212,19 @@ final $typed_data.Uint8List msgCancelUnbondingDelegationDescriptor = $convert.ba
     'dG9yX2FkZHJlc3MYAiABKAlCIdK0LR1jb3Ntb3MuVmFsaWRhdG9yQWRkcmVzc1N0cmluZ1IQdm'
     'FsaWRhdG9yQWRkcmVzcxI8CgZhbW91bnQYAyABKAsyGS5jb3Ntb3MuYmFzZS52MWJldGExLkNv'
     'aW5CCcjeHwCo57AqAVIGYW1vdW50EicKD2NyZWF0aW9uX2hlaWdodBgEIAEoA1IOY3JlYXRpb2'
-    '5IZWlnaHQ6SoigHwDooB8AguewKhFkZWxlZ2F0b3JfYWRkcmVzc4rnsConY29zbW9zLXNkay9N'
-    'c2dDYW5jZWxVbmJvbmRpbmdEZWxlZ2F0aW9u');
+    '5IZWlnaHQ6XYigHwDooB8A0rQtD2Nvc21vcy1zZGsgMC40NoLnsCoRZGVsZWdhdG9yX2FkZHJl'
+    'c3OK57AqJ2Nvc21vcy1zZGsvTXNnQ2FuY2VsVW5ib25kaW5nRGVsZWdhdGlvbg==');
 
 @$core.Deprecated('Use msgCancelUnbondingDelegationResponseDescriptor instead')
 const MsgCancelUnbondingDelegationResponse$json = {
   '1': 'MsgCancelUnbondingDelegationResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgCancelUnbondingDelegationResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgCancelUnbondingDelegationResponseDescriptor = $convert.base64Decode(
-    'CiRNc2dDYW5jZWxVbmJvbmRpbmdEZWxlZ2F0aW9uUmVzcG9uc2U=');
+    'CiRNc2dDYW5jZWxVbmJvbmRpbmdEZWxlZ2F0aW9uUmVzcG9uc2U6E9K0LQ9jb3Ntb3Mtc2RrID'
+    'AuNDY=');
 
 @$core.Deprecated('Use msgUpdateParamsDescriptor instead')
 const MsgUpdateParams$json = {
@@ -238,15 +240,16 @@ const MsgUpdateParams$json = {
 final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'Cg9Nc2dVcGRhdGVQYXJhbXMSNgoJYXV0aG9yaXR5GAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
     'NTdHJpbmdSCWF1dGhvcml0eRJBCgZwYXJhbXMYAiABKAsyHi5jb3Ntb3Muc3Rha2luZy52MWJl'
-    'dGExLlBhcmFtc0IJyN4fAKjnsCoBUgZwYXJhbXM6N4LnsCoJYXV0aG9yaXR5iuewKiRjb3Ntb3'
-    'Mtc2RrL3gvc3Rha2luZy9Nc2dVcGRhdGVQYXJhbXM=');
+    'dGExLlBhcmFtc0IJyN4fAKjnsCoBUgZwYXJhbXM6StK0LQ9jb3Ntb3Mtc2RrIDAuNDeC57AqCW'
+    'F1dGhvcml0eYrnsCokY29zbW9zLXNkay94L3N0YWtpbmcvTXNnVXBkYXRlUGFyYW1z');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {
   '1': 'MsgUpdateParamsResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgUpdateParamsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgUpdateParamsResponseDescriptor = $convert.base64Decode(
-    'ChdNc2dVcGRhdGVQYXJhbXNSZXNwb25zZQ==');
+    'ChdNc2dVcGRhdGVQYXJhbXNSZXNwb25zZToT0rQtD2Nvc21vcy1zZGsgMC40Nw==');
 

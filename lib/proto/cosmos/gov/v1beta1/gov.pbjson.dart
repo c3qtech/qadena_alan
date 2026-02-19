@@ -64,13 +64,15 @@ const WeightedVoteOption$json = {
     {'1': 'option', '3': 1, '4': 1, '5': 14, '6': '.cosmos.gov.v1beta1.VoteOption', '10': 'option'},
     {'1': 'weight', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'weight'},
   ],
+  '7': {},
 };
 
 /// Descriptor for `WeightedVoteOption`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List weightedVoteOptionDescriptor = $convert.base64Decode(
     'ChJXZWlnaHRlZFZvdGVPcHRpb24SNgoGb3B0aW9uGAEgASgOMh4uY29zbW9zLmdvdi52MWJldG'
     'ExLlZvdGVPcHRpb25SBm9wdGlvbhJOCgZ3ZWlnaHQYAiABKAlCNsjeHwDa3h8bY29zbW9zc2Rr'
-    'LmlvL21hdGguTGVnYWN5RGVj0rQtCmNvc21vcy5EZWOo57AqAVIGd2VpZ2h0');
+    'LmlvL21hdGguTGVnYWN5RGVj0rQtCmNvc21vcy5EZWOo57AqAVIGd2VpZ2h0OhPStC0PY29zbW'
+    '9zLXNkayAwLjQz');
 
 @$core.Deprecated('Use textProposalDescriptor instead')
 const TextProposal$json = {
@@ -186,8 +188,8 @@ final $typed_data.Uint8List voteDescriptor = $convert.base64Decode(
     'CgRWb3RlEjMKC3Byb3Bvc2FsX2lkGAEgASgEQhLq3h8CaWSi57AqAmlkqOewKgFSCnByb3Bvc2'
     'FsSWQSLgoFdm90ZXIYAiABKAlCGNK0LRRjb3Ntb3MuQWRkcmVzc1N0cmluZ1IFdm90ZXISOgoG'
     'b3B0aW9uGAMgASgOMh4uY29zbW9zLmdvdi52MWJldGExLlZvdGVPcHRpb25CAhgBUgZvcHRpb2'
-    '4SSwoHb3B0aW9ucxgEIAMoCzImLmNvc21vcy5nb3YudjFiZXRhMS5XZWlnaHRlZFZvdGVPcHRp'
-    'b25CCcjeHwCo57AqAVIHb3B0aW9uczoE6KAfAA==');
+    '4SXgoHb3B0aW9ucxgEIAMoCzImLmNvc21vcy5nb3YudjFiZXRhMS5XZWlnaHRlZFZvdGVPcHRp'
+    'b25CHMjeHwDatC0PY29zbW9zLXNkayAwLjQzqOewKgFSB29wdGlvbnM6BOigHwA=');
 
 @$core.Deprecated('Use depositParamsDescriptor instead')
 const DepositParams$json = {

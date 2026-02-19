@@ -136,10 +136,8 @@ class QueryParamsResponse extends $pb.GeneratedMessage {
   $1.ParamChange ensureParam() => $_ensure(0);
 }
 
-///  QuerySubspacesRequest defines a request type for querying for all registered
-///  subspaces and all keys for a subspace.
-///
-///  Since: cosmos-sdk 0.46
+/// QuerySubspacesRequest defines a request type for querying for all registered
+/// subspaces and all keys for a subspace.
 class QuerySubspacesRequest extends $pb.GeneratedMessage {
   factory QuerySubspacesRequest() => create();
   QuerySubspacesRequest._() : super();
@@ -172,10 +170,8 @@ class QuerySubspacesRequest extends $pb.GeneratedMessage {
   static QuerySubspacesRequest? _defaultInstance;
 }
 
-///  QuerySubspacesResponse defines the response types for querying for all
-///  registered subspaces and all keys for a subspace.
-///
-///  Since: cosmos-sdk 0.46
+/// QuerySubspacesResponse defines the response types for querying for all
+/// registered subspaces and all keys for a subspace.
 class QuerySubspacesResponse extends $pb.GeneratedMessage {
   factory QuerySubspacesResponse({
     $core.Iterable<Subspace>? subspaces,
@@ -220,10 +216,8 @@ class QuerySubspacesResponse extends $pb.GeneratedMessage {
   $core.List<Subspace> get subspaces => $_getList(0);
 }
 
-///  Subspace defines a parameter subspace name and all the keys that exist for
-///  the subspace.
-///
-///  Since: cosmos-sdk 0.46
+/// Subspace defines a parameter subspace name and all the keys that exist for
+/// the subspace.
 class Subspace extends $pb.GeneratedMessage {
   factory Subspace({
     $core.String? subspace,

@@ -13,9 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-///  AuthorizationType defines the type of staking module authorization type
-///
-///  Since: cosmos-sdk 0.43
+/// AuthorizationType defines the type of staking module authorization type
 class AuthorizationType extends $pb.ProtobufEnum {
   static const AuthorizationType AUTHORIZATION_TYPE_UNSPECIFIED = AuthorizationType._(0, _omitEnumNames ? '' : 'AUTHORIZATION_TYPE_UNSPECIFIED');
   static const AuthorizationType AUTHORIZATION_TYPE_DELEGATE = AuthorizationType._(1, _omitEnumNames ? '' : 'AUTHORIZATION_TYPE_DELEGATE');

@@ -79,14 +79,15 @@ const MsgPruneAllowances$json = {
 /// Descriptor for `MsgPruneAllowances`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgPruneAllowancesDescriptor = $convert.base64Decode(
     'ChJNc2dQcnVuZUFsbG93YW5jZXMSMAoGcHJ1bmVyGAEgASgJQhjStC0UY29zbW9zLkFkZHJlc3'
-    'NTdHJpbmdSBnBydW5lcjoLguewKgZwcnVuZXI=');
+    'NTdHJpbmdSBnBydW5lcjof0rQtEGNvc21vcy1zZGsgdjAuNTCC57AqBnBydW5lcg==');
 
 @$core.Deprecated('Use msgPruneAllowancesResponseDescriptor instead')
 const MsgPruneAllowancesResponse$json = {
   '1': 'MsgPruneAllowancesResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgPruneAllowancesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgPruneAllowancesResponseDescriptor = $convert.base64Decode(
-    'ChpNc2dQcnVuZUFsbG93YW5jZXNSZXNwb25zZQ==');
+    'ChpNc2dQcnVuZUFsbG93YW5jZXNSZXNwb25zZToU0rQtEGNvc21vcy1zZGsgdjAuNTA=');
 

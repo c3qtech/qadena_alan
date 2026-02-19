@@ -315,9 +315,7 @@ class CancelSoftwareUpgradeProposal extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 }
 
-///  ModuleVersion specifies a module and its consensus version.
-///
-///  Since: cosmos-sdk 0.43
+/// ModuleVersion specifies a module and its consensus version.
 class ModuleVersion extends $pb.GeneratedMessage {
   factory ModuleVersion({
     $core.String? name,

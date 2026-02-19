@@ -129,9 +129,7 @@ class PageRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearCountTotal() => clearField(4);
 
-  ///  reverse is set to true if results are to be returned in the descending order.
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// reverse is set to true if results are to be returned in the descending order.
   @$pb.TagNumber(5)
   $core.bool get reverse => $_getBF(4);
   @$pb.TagNumber(5)

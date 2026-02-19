@@ -307,7 +307,6 @@ class QueryUpgradedConsensusStateResponse extends $pb.GeneratedMessage {
   static QueryUpgradedConsensusStateResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QueryUpgradedConsensusStateResponse>(create);
   static QueryUpgradedConsensusStateResponse? _defaultInstance;
 
-  /// Since: cosmos-sdk 0.43
   @$pb.TagNumber(2)
   $core.List<$core.int> get upgradedConsensusState => $_getN(0);
   @$pb.TagNumber(2)
@@ -318,10 +317,8 @@ class QueryUpgradedConsensusStateResponse extends $pb.GeneratedMessage {
   void clearUpgradedConsensusState() => clearField(2);
 }
 
-///  QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
-///  RPC method.
-///
-///  Since: cosmos-sdk 0.43
+/// QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
+/// RPC method.
 class QueryModuleVersionsRequest extends $pb.GeneratedMessage {
   factory QueryModuleVersionsRequest({
     $core.String? moduleName,
@@ -375,10 +372,8 @@ class QueryModuleVersionsRequest extends $pb.GeneratedMessage {
   void clearModuleName() => clearField(1);
 }
 
-///  QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
-///  RPC method.
-///
-///  Since: cosmos-sdk 0.43
+/// QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
+/// RPC method.
 class QueryModuleVersionsResponse extends $pb.GeneratedMessage {
   factory QueryModuleVersionsResponse({
     $core.Iterable<$4.ModuleVersion>? moduleVersions,
@@ -424,9 +419,7 @@ class QueryModuleVersionsResponse extends $pb.GeneratedMessage {
   $core.List<$4.ModuleVersion> get moduleVersions => $_getList(0);
 }
 
-///  QueryAuthorityRequest is the request type for Query/Authority
-///
-///  Since: cosmos-sdk 0.46
+/// QueryAuthorityRequest is the request type for Query/Authority
 class QueryAuthorityRequest extends $pb.GeneratedMessage {
   factory QueryAuthorityRequest() => create();
   QueryAuthorityRequest._() : super();
@@ -459,9 +452,7 @@ class QueryAuthorityRequest extends $pb.GeneratedMessage {
   static QueryAuthorityRequest? _defaultInstance;
 }
 
-///  QueryAuthorityResponse is the response type for Query/Authority
-///
-///  Since: cosmos-sdk 0.46
+/// QueryAuthorityResponse is the response type for Query/Authority
 class QueryAuthorityResponse extends $pb.GeneratedMessage {
   factory QueryAuthorityResponse({
     $core.String? address,

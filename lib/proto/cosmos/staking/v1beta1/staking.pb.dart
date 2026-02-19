@@ -570,9 +570,7 @@ class Validator extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   Commission ensureCommission() => $_ensure(9);
 
-  ///  min_self_delegation is the validator's self declared minimum self delegation.
-  ///
-  ///  Since: cosmos-sdk 0.46
+  /// min_self_delegation is the validator's self declared minimum self delegation.
   @$pb.TagNumber(11)
   $core.String get minSelfDelegation => $_getSZ(10);
   @$pb.TagNumber(11)

@@ -793,9 +793,7 @@ class QueryParamsResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $6.TallyParams ensureTallyParams() => $_ensure(2);
 
-  ///  params defines all the paramaters of x/gov module.
-  ///
-  ///  Since: cosmos-sdk 0.47
+  /// params defines all the paramaters of x/gov module.
   @$pb.TagNumber(4)
   $6.Params get params => $_getN(3);
   @$pb.TagNumber(4)

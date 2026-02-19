@@ -111,7 +111,7 @@ const GetBlockByHeightResponse$json = {
   '2': [
     {'1': 'block_id', '3': 1, '4': 1, '5': 11, '6': '.tendermint.types.BlockID', '10': 'blockId'},
     {'1': 'block', '3': 2, '4': 1, '5': 11, '6': '.tendermint.types.Block', '10': 'block'},
-    {'1': 'sdk_block', '3': 3, '4': 1, '5': 11, '6': '.cosmos.base.tendermint.v1beta1.Block', '10': 'sdkBlock'},
+    {'1': 'sdk_block', '3': 3, '4': 1, '5': 11, '6': '.cosmos.base.tendermint.v1beta1.Block', '8': {}, '10': 'sdkBlock'},
   ],
 };
 
@@ -119,8 +119,8 @@ const GetBlockByHeightResponse$json = {
 final $typed_data.Uint8List getBlockByHeightResponseDescriptor = $convert.base64Decode(
     'ChhHZXRCbG9ja0J5SGVpZ2h0UmVzcG9uc2USNAoIYmxvY2tfaWQYASABKAsyGS50ZW5kZXJtaW'
     '50LnR5cGVzLkJsb2NrSURSB2Jsb2NrSWQSLQoFYmxvY2sYAiABKAsyFy50ZW5kZXJtaW50LnR5'
-    'cGVzLkJsb2NrUgVibG9jaxJCCglzZGtfYmxvY2sYAyABKAsyJS5jb3Ntb3MuYmFzZS50ZW5kZX'
-    'JtaW50LnYxYmV0YTEuQmxvY2tSCHNka0Jsb2Nr');
+    'cGVzLkJsb2NrUgVibG9jaxJXCglzZGtfYmxvY2sYAyABKAsyJS5jb3Ntb3MuYmFzZS50ZW5kZX'
+    'JtaW50LnYxYmV0YTEuQmxvY2tCE9q0LQ9jb3Ntb3Mtc2RrIDAuNDdSCHNka0Jsb2Nr');
 
 @$core.Deprecated('Use getLatestBlockRequestDescriptor instead')
 const GetLatestBlockRequest$json = {
@@ -137,7 +137,7 @@ const GetLatestBlockResponse$json = {
   '2': [
     {'1': 'block_id', '3': 1, '4': 1, '5': 11, '6': '.tendermint.types.BlockID', '10': 'blockId'},
     {'1': 'block', '3': 2, '4': 1, '5': 11, '6': '.tendermint.types.Block', '10': 'block'},
-    {'1': 'sdk_block', '3': 3, '4': 1, '5': 11, '6': '.cosmos.base.tendermint.v1beta1.Block', '10': 'sdkBlock'},
+    {'1': 'sdk_block', '3': 3, '4': 1, '5': 11, '6': '.cosmos.base.tendermint.v1beta1.Block', '8': {}, '10': 'sdkBlock'},
   ],
 };
 
@@ -145,8 +145,8 @@ const GetLatestBlockResponse$json = {
 final $typed_data.Uint8List getLatestBlockResponseDescriptor = $convert.base64Decode(
     'ChZHZXRMYXRlc3RCbG9ja1Jlc3BvbnNlEjQKCGJsb2NrX2lkGAEgASgLMhkudGVuZGVybWludC'
     '50eXBlcy5CbG9ja0lEUgdibG9ja0lkEi0KBWJsb2NrGAIgASgLMhcudGVuZGVybWludC50eXBl'
-    'cy5CbG9ja1IFYmxvY2sSQgoJc2RrX2Jsb2NrGAMgASgLMiUuY29zbW9zLmJhc2UudGVuZGVybW'
-    'ludC52MWJldGExLkJsb2NrUghzZGtCbG9jaw==');
+    'cy5CbG9ja1IFYmxvY2sSVwoJc2RrX2Jsb2NrGAMgASgLMiUuY29zbW9zLmJhc2UudGVuZGVybW'
+    'ludC52MWJldGExLkJsb2NrQhPatC0PY29zbW9zLXNkayAwLjQ3UghzZGtCbG9jaw==');
 
 @$core.Deprecated('Use getSyncingRequestDescriptor instead')
 const GetSyncingRequest$json = {
@@ -205,7 +205,7 @@ const VersionInfo$json = {
     {'1': 'build_tags', '3': 5, '4': 1, '5': 9, '10': 'buildTags'},
     {'1': 'go_version', '3': 6, '4': 1, '5': 9, '10': 'goVersion'},
     {'1': 'build_deps', '3': 7, '4': 3, '5': 11, '6': '.cosmos.base.tendermint.v1beta1.Module', '10': 'buildDeps'},
-    {'1': 'cosmos_sdk_version', '3': 8, '4': 1, '5': 9, '10': 'cosmosSdkVersion'},
+    {'1': 'cosmos_sdk_version', '3': 8, '4': 1, '5': 9, '8': {}, '10': 'cosmosSdkVersion'},
   ],
 };
 
@@ -215,8 +215,8 @@ final $typed_data.Uint8List versionInfoDescriptor = $convert.base64Decode(
     'BOYW1lEhgKB3ZlcnNpb24YAyABKAlSB3ZlcnNpb24SHQoKZ2l0X2NvbW1pdBgEIAEoCVIJZ2l0'
     'Q29tbWl0Eh0KCmJ1aWxkX3RhZ3MYBSABKAlSCWJ1aWxkVGFncxIdCgpnb192ZXJzaW9uGAYgAS'
     'gJUglnb1ZlcnNpb24SRQoKYnVpbGRfZGVwcxgHIAMoCzImLmNvc21vcy5iYXNlLnRlbmRlcm1p'
-    'bnQudjFiZXRhMS5Nb2R1bGVSCWJ1aWxkRGVwcxIsChJjb3Ntb3Nfc2RrX3ZlcnNpb24YCCABKA'
-    'lSEGNvc21vc1Nka1ZlcnNpb24=');
+    'bnQudjFiZXRhMS5Nb2R1bGVSCWJ1aWxkRGVwcxJBChJjb3Ntb3Nfc2RrX3ZlcnNpb24YCCABKA'
+    'lCE9q0LQ9jb3Ntb3Mtc2RrIDAuNDNSEGNvc21vc1Nka1ZlcnNpb24=');
 
 @$core.Deprecated('Use moduleDescriptor instead')
 const Module$json = {

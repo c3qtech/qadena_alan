@@ -124,7 +124,6 @@ class MsgUpdateParams extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $2.ValidatorParams ensureValidator() => $_ensure(3);
 
-  /// Since: cosmos-sdk 0.50
   @$pb.TagNumber(5)
   $2.ABCIParams get abci => $_getN(4);
   @$pb.TagNumber(5)

@@ -90,17 +90,18 @@ final $typed_data.Uint8List msgVoteWeightedDescriptor = $convert.base64Decode(
     'Cg9Nc2dWb3RlV2VpZ2h0ZWQSNQoLcHJvcG9zYWxfaWQYASABKARCFOreHwtwcm9wb3NhbF9pZK'
     'jnsCoBUgpwcm9wb3NhbElkEi4KBXZvdGVyGAIgASgJQhjStC0UY29zbW9zLkFkZHJlc3NTdHJp'
     'bmdSBXZvdGVyEksKB29wdGlvbnMYAyADKAsyJi5jb3Ntb3MuZ292LnYxYmV0YTEuV2VpZ2h0ZW'
-    'RWb3RlT3B0aW9uQgnI3h8AqOewKgFSB29wdGlvbnM6MYigHwDooB8AguewKgV2b3RlcornsCoa'
-    'Y29zbW9zLXNkay9Nc2dWb3RlV2VpZ2h0ZWQ=');
+    'RWb3RlT3B0aW9uQgnI3h8AqOewKgFSB29wdGlvbnM6RIigHwDooB8A0rQtD2Nvc21vcy1zZGsg'
+    'MC40M4LnsCoFdm90ZXKK57AqGmNvc21vcy1zZGsvTXNnVm90ZVdlaWdodGVk');
 
 @$core.Deprecated('Use msgVoteWeightedResponseDescriptor instead')
 const MsgVoteWeightedResponse$json = {
   '1': 'MsgVoteWeightedResponse',
+  '7': {},
 };
 
 /// Descriptor for `MsgVoteWeightedResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgVoteWeightedResponseDescriptor = $convert.base64Decode(
-    'ChdNc2dWb3RlV2VpZ2h0ZWRSZXNwb25zZQ==');
+    'ChdNc2dWb3RlV2VpZ2h0ZWRSZXNwb25zZToT0rQtD2Nvc21vcy1zZGsgMC40Mw==');
 
 @$core.Deprecated('Use msgDepositDescriptor instead')
 const MsgDeposit$json = {

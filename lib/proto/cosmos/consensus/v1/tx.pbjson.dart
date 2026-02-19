@@ -21,7 +21,7 @@ const MsgUpdateParams$json = {
     {'1': 'block', '3': 2, '4': 1, '5': 11, '6': '.tendermint.types.BlockParams', '10': 'block'},
     {'1': 'evidence', '3': 3, '4': 1, '5': 11, '6': '.tendermint.types.EvidenceParams', '10': 'evidence'},
     {'1': 'validator', '3': 4, '4': 1, '5': 11, '6': '.tendermint.types.ValidatorParams', '10': 'validator'},
-    {'1': 'abci', '3': 5, '4': 1, '5': 11, '6': '.tendermint.types.ABCIParams', '10': 'abci'},
+    {'1': 'abci', '3': 5, '4': 1, '5': 11, '6': '.tendermint.types.ABCIParams', '8': {}, '10': 'abci'},
   ],
   '7': {},
 };
@@ -32,9 +32,9 @@ final $typed_data.Uint8List msgUpdateParamsDescriptor = $convert.base64Decode(
     'NTdHJpbmdSCWF1dGhvcml0eRIzCgVibG9jaxgCIAEoCzIdLnRlbmRlcm1pbnQudHlwZXMuQmxv'
     'Y2tQYXJhbXNSBWJsb2NrEjwKCGV2aWRlbmNlGAMgASgLMiAudGVuZGVybWludC50eXBlcy5Fdm'
     'lkZW5jZVBhcmFtc1IIZXZpZGVuY2USPwoJdmFsaWRhdG9yGAQgASgLMiEudGVuZGVybWludC50'
-    'eXBlcy5WYWxpZGF0b3JQYXJhbXNSCXZhbGlkYXRvchIwCgRhYmNpGAUgASgLMhwudGVuZGVybW'
-    'ludC50eXBlcy5BQkNJUGFyYW1zUgRhYmNpOjmC57AqCWF1dGhvcml0eYrnsComY29zbW9zLXNk'
-    'ay94L2NvbnNlbnN1cy9Nc2dVcGRhdGVQYXJhbXM=');
+    'eXBlcy5WYWxpZGF0b3JQYXJhbXNSCXZhbGlkYXRvchJFCgRhYmNpGAUgASgLMhwudGVuZGVybW'
+    'ludC50eXBlcy5BQkNJUGFyYW1zQhPatC0PY29zbW9zLXNkayAwLjUwUgRhYmNpOjmC57AqCWF1'
+    'dGhvcml0eYrnsComY29zbW9zLXNkay94L2NvbnNlbnN1cy9Nc2dVcGRhdGVQYXJhbXM=');
 
 @$core.Deprecated('Use msgUpdateParamsResponseDescriptor instead')
 const MsgUpdateParamsResponse$json = {

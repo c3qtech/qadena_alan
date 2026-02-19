@@ -22,9 +22,7 @@ import 'gov.pbenum.dart';
 
 export 'gov.pbenum.dart';
 
-///  WeightedVoteOption defines a unit of vote for vote split.
-///
-///  Since: cosmos-sdk 0.43
+/// WeightedVoteOption defines a unit of vote for vote split.
 class WeightedVoteOption extends $pb.GeneratedMessage {
   factory WeightedVoteOption({
     VoteOption? option,
@@ -608,9 +606,7 @@ class Vote extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearOption() => clearField(3);
 
-  ///  options is the weighted vote options.
-  ///
-  ///  Since: cosmos-sdk 0.43
+  /// options is the weighted vote options.
   @$pb.TagNumber(4)
   $core.List<WeightedVoteOption> get options => $_getList(3);
 }
