@@ -6,7 +6,8 @@ COSMOS_VERSION=$4
 GOOGLEAPI_VERSION=$5
 GOGOPROTO_VERSION=$6
 COSMOSPROTO_VERSION=$7
-QADENA_SRC=$8
+COSMOSEVM_VERSION=$8
+QADENA_SRC=$9
 
 #if COSMOS_VERSION="skip" and GOOGLEAPI_VERSION="skip" and GOGOPROTO_VERSION="skip" and COSMOSPROTO_VERSION="skip" then we will only update the qadena proto files
 
@@ -15,7 +16,7 @@ PROTO=$1
 THIRD_PARTY=$2
 OUT=$3
 
-if [ "$COSMOS_VERSION" == "skip" ] && [ "$GOOGLEAPI_VERSION" == "skip" ] && [ "$GOGOPROTO_VERSION" == "skip" ] && [ "$COSMOSPROTO_VERSION" == "skip" ]; then
+if [ "$COSMOS_VERSION" == "skip" ] && [ "$GOOGLEAPI_VERSION" == "skip" ] && [ "$GOGOPROTO_VERSION" == "skip" ] && [ "$COSMOSPROTO_VERSION" == "skip" ] && [ "$COSMOSEVM_VERSION" == "skip" ]; then
     echo "Only updating the qadena proto files from $QADENA_SRC"
     rm -r -f "$PROTO/qadena"
     mkdir -p "$PROTO/qadena"
@@ -75,6 +76,12 @@ else
     unzip "$COSMOS_ZIP" -d "$BUILD/" && rm "$COSMOS_ZIP"
     COSMOS="$BUILD/cosmos-sdk-$COSMOS_VERSION"
 
+    # Download the Cosmos EVM Protobuf files
+    COSMOSEVM_ZIP="$BUILD/cosmosevm.zip"
+    wget -O "$COSMOSEVM_ZIP" "https://github.com/cosmos/cosmos-evm/archive/v$COSMOSEVM_VERSION.zip"
+    unzip "$COSMOSEVM_ZIP" -d "$BUILD/" && rm "$COSMOSEVM_ZIP"
+    COSMOSEVM="$BUILD/cosmos-evm-$COSMOSEVM_VERSION"
+
     WASMD_ZIP="$BUILD/wasmd.zip"
     wget -O "$WASMD_ZIP" "https://github.com/CosmWasm/wasmd/archive/refs/heads/main.zip"
     unzip "$WASMD_ZIP" -d "$BUILD/" && rm "$WASMD_ZIP"
@@ -85,6 +92,11 @@ else
     PROTO_COSMOS=$PROTO/cosmos
     mkdir -p "$PROTO_COSMOS"
     mv -f "$COSMOS/proto/cosmos"/* "$PROTO_COSMOS"
+
+    PROTO_COSMOSEVM=$PROTO/cosmosevm
+    mkdir -p "$PROTO_COSMOSEVM"
+    mv -f "$COSMOSEVM/proto/cosmos/evm"/* "$PROTO_COSMOSEVM"
+
 
     PROTO_AMINO=$PROTO/amino
     mkdir -p "$PROTO_AMINO"
@@ -113,5 +125,5 @@ else
     curl "$PROTOBUF_LINK/any.proto" > "$PROTO_PROTOBUF/any.proto"
 
     # Delete unnecessary folders
-    rm -rf "$COSMOS" "$BUILD"
+    rm -rf "$COSMOS" "$COSMOSEVM" "$BUILD"
 fi

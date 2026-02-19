@@ -6,10 +6,11 @@ set -eo pipefail
 OUT=lib/proto
 PROTO=proto
 THIRD_PARTY=third_party
-COSMOS_VERSION=0.50.6
+COSMOS_VERSION=0.53.5
 GOOGLEAPI_VERSION=1.4.1
 GOGOPROTO_VERSION=1.4.12
 COSMOSPROTO_VERSION=1.0.0-beta.5
+COSMOSEVM_VERSION=0.5.1
 
 QADENA_SRC=../qadena_v3/proto/qadena
 
@@ -30,6 +31,7 @@ fi
 if [ "$1" == "--qadena-only" ]; then
 #  QADENA_SRC=../qadena_v3/proto/qadena
   COSMOS_VERSION="skip"
+  COSMOSEVM_VERSION="skip"
   GOOGLEAPI_VERSION="skip"
   GOGOPROTO_VERSION="skip"
   COSMOSPROTO_VERSION="skip"
@@ -45,7 +47,7 @@ else
 fi
 
 ## Download the Protobuf files
-source scripts/get_proto.sh $PROTO $THIRD_PARTY $OUT $COSMOS_VERSION $GOOGLEAPI_VERSION $GOGOPROTO_VERSION $COSMOSPROTO_VERSION $QADENA_SRC
+source scripts/get_proto.sh $PROTO $THIRD_PARTY $OUT $COSMOS_VERSION $GOOGLEAPI_VERSION $GOGOPROTO_VERSION $COSMOSPROTO_VERSION $COSMOSEVM_VERSION $QADENA_SRC
 
 # Generate the third party Protobuf implementations
 PROTOC="protoc --dart_out=grpc:$OUT -I$THIRD_PARTY/proto"

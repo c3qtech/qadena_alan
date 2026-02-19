@@ -6,6 +6,7 @@ import 'package:blockchain_utils/blockchain_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hex/hex.dart';
 import 'package:pointycastle/export.dart';
+import 'package:web3dart/web3dart.dart' as web3crypto;
 
 /// Represents a wallet which contains the hex private key, the hex public key
 /// and the hex address.
@@ -215,19 +216,39 @@ class Wallet extends Equatable {
   /// private key associated with this wallet, returning the signature
   /// encoded as a 64 bytes array.
   Uint8List sign(Uint8List data) {
-    final hash = SHA256Digest().process(data);
-    final ecdsaSigner = ECDSASigner(null, HMac(SHA256Digest(), 64))
-      ..init(true, PrivateKeyParameter(_ecPrivateKey));
 
-    final ecSignature = ecdsaSigner.generateSignature(hash) as ECSignature;
-    final normalized = _normalizeECSignature(ecSignature, ECCurve_secp256k1());
-    final rBytes = normalized.r.toUin8List();
-    final sBytes = normalized.s.toUin8List();
+    if (networkInfo.isEthSecP256K1Addr) {
+      final hash = QuickCrypto.keccack256Hash(data);
+      // convert to Uint8List
+      final hashBytes = Uint8List.fromList(hash);
+      final ethSig = web3crypto.sign(hashBytes, Uint8List.fromList(privateKey));
+      final ethRBytes = _bigIntTo32Bytes(ethSig.r);
+      final ethSBytes = _bigIntTo32Bytes(ethSig.s);
+      var sigBytes = Uint8List(65);
+      copy(ethRBytes, 0, 32, sigBytes);
+      copy(ethSBytes, 32, 64, sigBytes);
+      sigBytes[64] = ethSig.v - 27;
+      return sigBytes;
+    } else {
 
-    var sigBytes = Uint8List(64);
-    copy(rBytes, 32 - rBytes.length, 32, sigBytes);
-    copy(sBytes, 64 - sBytes.length, 64, sigBytes);
-    return sigBytes;
+      final hash = SHA256Digest().process(data);
+      final ecdsaSigner = ECDSASigner(null, HMac(SHA256Digest(), 64))
+        ..init(true, PrivateKeyParameter(_ecPrivateKey));
+
+      final ecSignature = ecdsaSigner.generateSignature(hash) as ECSignature;
+      final normalized = _normalizeECSignature(ecSignature, ECCurve_secp256k1());
+      final rBytes = normalized.r.toUin8List();
+      final sBytes = normalized.s.toUin8List();
+      var sigBytes = Uint8List(64);
+      copy(rBytes, 32 - rBytes.length, 32, sigBytes);
+      copy(sBytes, 64 - sBytes.length, 64, sigBytes);
+      return sigBytes;
+    }
+  }
+
+  Uint8List _bigIntTo32Bytes(BigInt value) {
+    final hexStr = value.toRadixString(16).padLeft(64, '0');
+    return Uint8List.fromList(HEX.decode(hexStr));
   }
 
   /// Converts the current [Wallet] instance into a JSON object.

@@ -109,7 +109,7 @@ class QadenaHDWallet {
         "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
             .split(' '),
         networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
 
     sponsorWallet = toWallet(sponsorAcct);
     */

@@ -169,14 +169,14 @@ class NetworkInfo extends Equatable {
     required this.bech32Hrp,
     required this.lcdInfo,
     required this.grpcInfo,
-    this.isEthSecP256K1Addr = false,
+    this.isEthSecP256K1Addr = true,
     this.isTesting = true,
   });
 
   factory NetworkInfo.fromSingleHost({
     required String bech32Hrp,
     required String host,
-    bool isEthSecP256K1Addr = false,
+    bool isEthSecP256K1Addr = true,
     bool isTesting = false,
   }) {
     return NetworkInfo(

@@ -28,7 +28,7 @@ void main() {
   final networkInfo = NetworkInfo.fromSingleHost(
     bech32Hrp: 'qadena',
     host: 'localhost',
-    isEthSecP256K1Addr: false,
+    isEthSecP256K1Addr: true,
   );
 
   setUp(() {
@@ -47,9 +47,17 @@ void main() {
     final mnemonic = mnemonicFull.split(' ');
 
     final wallet = Wallet.derive(mnemonic, networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
     final hexaddress = HEX.encode(wallet.address);
     print("address $hexaddress");
+
+     final bech32address = wallet.bech32Address;
+
+    print("bech32 address: $bech32address");
+
+    // assert bech32 is qadena15fyr7wpx8j8ckm2gxfygqn48hfkq90zukxt70r
+    expect(bech32address, 'qadena15fyr7wpx8j8ckm2gxfygqn48hfkq90zukxt70r');
+    expect(hexaddress, 'a2483f38263c8f8b6d483248804ea7ba6c02bc5c');
   });
 
   test('addresss format secp256k1', () {
@@ -63,13 +71,15 @@ void main() {
     final mnemonic = mnemonicFull.split(' ');
 
     final wallet = Wallet.derive(mnemonic, networkInfo2,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
     final hexaddress = HEX.encode(wallet.address);
     print("address $hexaddress");
 
     final bech32address = wallet.bech32Address;
 
     print("bech32 address: $bech32address");
+    expect(bech32address, 'qadena1ya090n6g87j0jvvvm638xuqclk7g7nc2kp4xrw');
+    expect(hexaddress, '275e57cf483fa4f9318cdea2737018fdbc8f4f0a');
   });
 
   group('test protoizer', () {
@@ -118,7 +128,7 @@ void main() {
       final mnemonic = mnemonicFull.split(' ');
 
       final wallet = Wallet.derive(mnemonic, networkInfo,
-          derivationPath: "m/44'/744'/0'/0/0");
+          derivationPath: "m/44'/60'/0'/0/0");
 
       final privKHex = HEX.encode(wallet.privateKey);
       print("privKHex: $privKHex");
@@ -173,7 +183,10 @@ void main() {
         if (qadenaWallet.wallet.walletAmount[denom]!.encWalletAmountVShare.isNotEmpty) {
           qadena.EncryptableWalletAmount ewa = qadena.EncryptableWalletAmount.create();
 
-          final success = bDecryptAndProtoUnmarshal(privKHex, Uint8List.fromList(qadenaWallet.wallet.walletAmount[denom]!.encWalletAmountVShare), ewa);
+          var unprotoWalletAmountVShareBind = unprotoizeVShareBindData(qadenaWallet.wallet.walletAmount[denom]!.walletAmountVShareBind);
+
+
+          final success = vShareBDecryptAndProtoUnmarshal(privKHex, pubK, unprotoWalletAmountVShareBind, Uint8List.fromList(qadenaWallet.wallet.walletAmount[denom]!.encWalletAmountVShare), ewa);
 
           if (!success) {
             print("failed to decrypt walletAmount");
@@ -186,7 +199,9 @@ void main() {
 
           //print("decryptedAmount pedersenCommit.a: ${unprotoizedEncryptablePedersenCommit.A}");
           //print("decryptedAmount pedersenCommit.x: ${unprotoizedEncryptablePedersenCommit.X}");
-          print("ewa.pedersenCommit: ${unprotoizedEncryptablePedersenCommit}");
+          print("ewa.pedersenCommit: $unprotoizedEncryptablePedersenCommit");
+          print("ewa.amount: ${unprotoizedEncryptablePedersenCommit.A}");
+          print("denom: aqdn");
         }
       }
 

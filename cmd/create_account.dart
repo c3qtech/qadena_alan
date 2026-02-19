@@ -11,7 +11,7 @@ void main(List<String> args) async {
   final networkInfo = NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
-      isEthSecP256K1Addr: false,
+      isEthSecP256K1Addr: true,
       isTesting: true);
 
   QadenaClient client = QadenaClient(networkInfo);
@@ -29,7 +29,7 @@ void main(List<String> args) async {
       "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
           .split(' '),
       networkInfo,
-      derivationPath: "m/44'/744'/0'/0/0");
+      derivationPath: "m/44'/60'/0'/0/0");
 
   final account = await client.createAccount("pioneer1", null, "secdsvssrvprv", claimAmount, claimBF, hardCodedSponsorAcct.bech32Address, ["pioneer1"], 1);
 

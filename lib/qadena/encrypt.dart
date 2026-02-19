@@ -9,7 +9,7 @@ import 'package:qadena_alan/qadena/common.dart' as common;
 
 var rnd = getSecureRandom();
 var domainParams = ECDomainParameters("secp256k1");
-var qadenaCoinType = 744;
+var qadenaCoinType = 60;
 
 class PublicPrivateKey {
   final String publicKeyB64; // compressed b64

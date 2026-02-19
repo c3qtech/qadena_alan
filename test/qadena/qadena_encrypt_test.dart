@@ -10,7 +10,7 @@ void main() {
     final networkInfo = NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
-      isEthSecP256K1Addr: false,
+      isEthSecP256K1Addr: true,
     );
 
     test('Create wallet and encrypt/decrypt message', () {

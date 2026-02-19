@@ -12,7 +12,7 @@ class HDPath {
     bool? change,
     int? addressIdx,
   })  : purpose = purpose ?? 44,
-        coinType = coinType ?? 744,
+        coinType = coinType ?? 60,
         walletType = walletType ?? 0,
         change = change ?? false,
         addressIdx = addressIdx ?? 0;

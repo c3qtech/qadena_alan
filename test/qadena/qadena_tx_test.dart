@@ -5,6 +5,7 @@ import 'package:convert/convert.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
 import 'package:qadena_alan/qadena/common.dart';
 import 'package:qadena_alan/qadena/core/client.dart';
+import 'package:qadena_alan/qadena/types/qadena_client_tx.dart';
 import 'package:qadena_alan/qadena/types/qadena_hd_wallet.dart';
 import 'package:test/test.dart';
 import 'package:qadena_alan/alan.dart' as alan;
@@ -19,7 +20,7 @@ void main() {
   final networkInfo = alan.NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
-      isEthSecP256K1Addr: false,
+      isEthSecP256K1Addr: true,
       isTesting: true);
 
   QadenaClient client = QadenaClient(networkInfo);
@@ -28,7 +29,7 @@ void main() {
       "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
           .split(' '),
       networkInfo,
-      derivationPath: "m/44'/744'/0'/0/0");
+      derivationPath: "m/44'/60'/0'/0/0");
 
 
   test('create account (create wallets, claim credentials, register authorized signatory)', () async {
@@ -46,7 +47,7 @@ void main() {
   test('create qadena address', () async {
     final mnemonic = "artist globe adapt code mesh boil olympic boil retire lucky armor plug wet next please divorce engine peanut riot vanish silver daughter advance six";
     var wallet = alan.Wallet.derive(mnemonic.split(' '), networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
     print("address: ${wallet.bech32Address}");
     expect(wallet.bech32Address, isNotNull);
   });
@@ -186,7 +187,7 @@ test('recoverKey alvillarica@gmail.com', () async {
   final networkInfo = alan.NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'dev-nlb-97f5978861fac526.elb.ap-southeast-1.amazonaws.com',
-      isEthSecP256K1Addr: false,
+      isEthSecP256K1Addr: true,
       isTesting: true);
 
   QadenaClient client = QadenaClient(networkInfo);  
@@ -284,22 +285,22 @@ test('recoverKey alvillarica@gmail.com', () async {
     final networkInfo = alan.NetworkInfo.fromSingleHost(
       bech32Hrp: 'qadena',
       host: 'localhost',
-      isEthSecP256K1Addr: false,
+      isEthSecP256K1Addr: true,
     );
 
     final almnemonicSplit = almnemonic.split(' ');
     final annmnemonicSplit = annmnemonic.split(' ');
 
     var alwallet = alan.Wallet.derive(almnemonicSplit, networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
 
     var annwallet = alan.Wallet.derive(annmnemonicSplit, networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
 
     final sponsorwallet = alan.Wallet.derive(sponsormnemonic.split(' '), networkInfo,
-        derivationPath: "m/44'/744'/0'/0/0");
+        derivationPath: "m/44'/60'/0'/0/0");
 
-    alwallet = sponsorwallet;
+    //alwallet = sponsorwallet;
 
     // Create the transaction and send it
     final message = bank.MsgSend.create();
@@ -307,18 +308,27 @@ test('recoverKey alvillarica@gmail.com', () async {
     message.toAddress = annwallet.bech32Address;
     message.amount.add(alan.Coin.create()
       ..denom = 'aqdn'
-      ..amount = '1234');
+      ..amount = '7000000000000000000');
+
+      /*
 
     final signer = alan.TxSigner.fromNetworkInfo(networkInfo);
     final tx = await signer.createAndSign(alwallet, [message]);
 
     // 4. Broadcast the transaction
     final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
-    final response = await txSender.broadcastTx(tx);
+
+
+    //final response = await txSender.broadcastTx(tx);
+    */
+
+    //  create list of messages
+    final messages = [message];
+    final response = await QadenaClientTx.broadcastTx(alwallet, messages);
 
     // Check the result
-    if (response.isSuccessful) {
-      print('Tx sent successfully. Response: $response');
+    if (response == null) {
+      print('Tx sent successfully.');
     } else {
       print('Tx errored: $response');
     }
