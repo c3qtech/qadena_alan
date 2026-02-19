@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:qadena_alan/alan.dart';
 import 'package:qadena_alan/proto/cosmos/crypto/secp256k1/export.dart' as secp256;
+import 'package:qadena_alan/proto/cosmos/evm/crypto/v1/ethsecp256k1/export.dart' as ethsecp256;
 import 'package:grpc/grpc_or_grpcweb.dart';
 import 'package:http/http.dart' as http;
 import 'package:protobuf/protobuf.dart';
@@ -13,27 +14,33 @@ class TxSigner {
   final AuthQuerier _authQuerier;
   final NodeQuerier _nodeQuerier;
 
+  final bool isEthSecP256K1Addr;
+
   TxSigner({
     required AuthQuerier authQuerier,
     required NodeQuerier nodeQuerier,
+    required this.isEthSecP256K1Addr,
   })  : _authQuerier = authQuerier,
         _nodeQuerier = nodeQuerier;
+
 
   /// Builds a new [TxSigner] from a given gRPC client channel and HTTP client.
   factory TxSigner.build(
     GrpcOrGrpcWebClientChannel clientChannel,
     http.Client httpClient,
+    bool isEthSecP256K1Addr,
   ) {
     return TxSigner(
       authQuerier: AuthQuerier.build(clientChannel),
       nodeQuerier: NodeQuerier.build(clientChannel),
+      isEthSecP256K1Addr: isEthSecP256K1Addr,
     );
   }
 
   /// Builds a new [TxSigner] from the given [NetworkInfo].
   factory TxSigner.fromNetworkInfo(NetworkInfo info) {
     final httpClient = http.Client();
-    return TxSigner.build(info.gRPCChannel, httpClient);
+    return TxSigner.build(info.gRPCChannel, httpClient, info.isEthSecP256K1Addr);
   }
 
   /// Creates a new [Tx] object containing the given [msgs] and signs it using
@@ -79,8 +86,13 @@ class TxSigner {
     // chain does not have it yet
     var pubKey = account.pubKey;
     if (pubKey.value.isNotEmpty != true) {
-      final secp256Key = secp256.PubKey.create()..key = wallet.publicKey;
-      pubKey = Codec.serialize(secp256Key);
+      if (isEthSecP256K1Addr) {
+        final ethSecp256Key = ethsecp256.PubKey.create()..key = wallet.publicKey;
+        pubKey = Codec.serialize(ethSecp256Key);
+      } else {
+        final secp256Key = secp256.PubKey.create()..key = wallet.publicKey;
+        pubKey = Codec.serialize(secp256Key);
+      }
     }
 
     // For SIGN_MODE_DIRECT, calling SetSignatures calls setSignerInfos on
