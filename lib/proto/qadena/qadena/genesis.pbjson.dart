@@ -29,6 +29,7 @@ const GenesisState$json = {
     {'1': 'protectKeyList', '3': 10, '4': 3, '5': 11, '6': '.qadena.qadena.ProtectKey', '8': {}, '10': 'protectKeyList'},
     {'1': 'recoverKeyList', '3': 11, '4': 3, '5': 11, '6': '.qadena.qadena.RecoverKey', '8': {}, '10': 'recoverKeyList'},
     {'1': 'enclaveIdentityList', '3': 12, '4': 3, '5': 11, '6': '.qadena.qadena.EnclaveIdentity', '8': {}, '10': 'enclaveIdentityList'},
+    {'1': 'bankSendWhitelistList', '3': 13, '4': 3, '5': 11, '6': '.qadena.qadena.BankSendWhitelist', '8': {}, '10': 'bankSendWhitelistList'},
   ],
 };
 
@@ -50,5 +51,7 @@ final $typed_data.Uint8List genesisStateDescriptor = $convert.base64Decode(
     'syGS5xYWRlbmEucWFkZW5hLlByb3RlY3RLZXlCBMjeHwBSDnByb3RlY3RLZXlMaXN0EkcKDnJl'
     'Y292ZXJLZXlMaXN0GAsgAygLMhkucWFkZW5hLnFhZGVuYS5SZWNvdmVyS2V5QgTI3h8AUg5yZW'
     'NvdmVyS2V5TGlzdBJWChNlbmNsYXZlSWRlbnRpdHlMaXN0GAwgAygLMh4ucWFkZW5hLnFhZGVu'
-    'YS5FbmNsYXZlSWRlbnRpdHlCBMjeHwBSE2VuY2xhdmVJZGVudGl0eUxpc3Q=');
+    'YS5FbmNsYXZlSWRlbnRpdHlCBMjeHwBSE2VuY2xhdmVJZGVudGl0eUxpc3QSXAoVYmFua1Nlbm'
+    'RXaGl0ZWxpc3RMaXN0GA0gAygLMiAucWFkZW5hLnFhZGVuYS5CYW5rU2VuZFdoaXRlbGlzdEIE'
+    'yN4fAFIVYmFua1NlbmRXaGl0ZWxpc3RMaXN0');
 

@@ -139,9 +139,9 @@ class QadenaEnclaveClient extends $grpc.Client {
       '/qadena.qadena.QadenaEnclave/SetCredential',
       ($7.Credential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.SetCredentialReply.fromBuffer(value));
-  static final _$removeCredential = $grpc.ClientMethod<$7.Credential, $2.RemoveCredentialReply>(
+  static final _$removeCredential = $grpc.ClientMethod<$2.EnclaveRemoveCredentialRequest, $2.RemoveCredentialReply>(
       '/qadena.qadena.QadenaEnclave/RemoveCredential',
-      ($7.Credential value) => value.writeToBuffer(),
+      ($2.EnclaveRemoveCredentialRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.RemoveCredentialReply.fromBuffer(value));
   static final _$recoverKeyByCredential = $grpc.ClientMethod<$7.Credential, $2.RecoverKeyReply>(
       '/qadena.qadena.QadenaEnclave/RecoverKeyByCredential',
@@ -151,6 +151,14 @@ class QadenaEnclaveClient extends $grpc.Client {
       '/qadena.qadena.QadenaEnclave/ClaimCredential',
       ($0.MsgClaimCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgClaimCredentialResponse.fromBuffer(value));
+  static final _$updateCredential = $grpc.ClientMethod<$2.EnclaveUpdateCredentialRequest, $0.MsgUpdateCredentialResponse>(
+      '/qadena.qadena.QadenaEnclave/UpdateCredential',
+      ($2.EnclaveUpdateCredentialRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgUpdateCredentialResponse.fromBuffer(value));
+  static final _$claimUpdatedCredential = $grpc.ClientMethod<$0.MsgClaimUpdatedCredential, $0.MsgClaimUpdatedCredentialResponse>(
+      '/qadena.qadena.QadenaEnclave/ClaimUpdatedCredential',
+      ($0.MsgClaimUpdatedCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgClaimUpdatedCredentialResponse.fromBuffer(value));
   static final _$signRecoverKey = $grpc.ClientMethod<$0.MsgSignRecoverPrivateKey, $2.SignRecoverKeyReply>(
       '/qadena.qadena.QadenaEnclave/SignRecoverKey',
       ($0.MsgSignRecoverPrivateKey value) => value.writeToBuffer(),
@@ -207,6 +215,14 @@ class QadenaEnclaveClient extends $grpc.Client {
       '/qadena.qadena.QadenaEnclave/ValidateCredential',
       ($7.MsgBindCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ValidateCredentialReply.fromBuffer(value));
+  static final _$validatePersonalInfo = $grpc.ClientMethod<$0.MsgCreateCredential, $2.ValidatePersonalInfoReply>(
+      '/qadena.qadena.QadenaEnclave/ValidatePersonalInfo',
+      ($0.MsgCreateCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ValidatePersonalInfoReply.fromBuffer(value));
+  static final _$scanBankSend = $grpc.ClientMethod<$2.MsgScanBankSend, $2.ScanBankSendReply>(
+      '/qadena.qadena.QadenaEnclave/ScanBankSend',
+      ($2.MsgScanBankSend value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ScanBankSendReply.fromBuffer(value));
   static final _$validateTransferPrime = $grpc.ClientMethod<$0.MsgTransferFunds, $2.ValidateTransferPrimeReply>(
       '/qadena.qadena.QadenaEnclave/ValidateTransferPrime',
       ($0.MsgTransferFunds value) => value.writeToBuffer(),
@@ -326,7 +342,7 @@ class QadenaEnclaveClient extends $grpc.Client {
     return $createUnaryCall(_$setCredential, request, options: options);
   }
 
-  $grpc.ResponseFuture<$2.RemoveCredentialReply> removeCredential($7.Credential request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$2.RemoveCredentialReply> removeCredential($2.EnclaveRemoveCredentialRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$removeCredential, request, options: options);
   }
 
@@ -336,6 +352,14 @@ class QadenaEnclaveClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.MsgClaimCredentialResponse> claimCredential($0.MsgClaimCredential request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$claimCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgUpdateCredentialResponse> updateCredential($2.EnclaveUpdateCredentialRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential($0.MsgClaimUpdatedCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$claimUpdatedCredential, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.SignRecoverKeyReply> signRecoverKey($0.MsgSignRecoverPrivateKey request, {$grpc.CallOptions? options}) {
@@ -392,6 +416,14 @@ class QadenaEnclaveClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$2.ValidateCredentialReply> validateCredential($7.MsgBindCredential request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$validateCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ValidatePersonalInfoReply> validatePersonalInfo($0.MsgCreateCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$validatePersonalInfo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ScanBankSendReply> scanBankSend($2.MsgScanBankSend request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$scanBankSend, request, options: options);
   }
 
   $grpc.ResponseFuture<$2.ValidateTransferPrimeReply> validateTransferPrime($0.MsgTransferFunds request, {$grpc.CallOptions? options}) {
@@ -563,12 +595,12 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $7.Credential.fromBuffer(value),
         ($2.SetCredentialReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.Credential, $2.RemoveCredentialReply>(
+    $addMethod($grpc.ServiceMethod<$2.EnclaveRemoveCredentialRequest, $2.RemoveCredentialReply>(
         'RemoveCredential',
         removeCredential_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $7.Credential.fromBuffer(value),
+        ($core.List<$core.int> value) => $2.EnclaveRemoveCredentialRequest.fromBuffer(value),
         ($2.RemoveCredentialReply value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$7.Credential, $2.RecoverKeyReply>(
         'RecoverKeyByCredential',
@@ -584,6 +616,20 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgClaimCredential.fromBuffer(value),
         ($0.MsgClaimCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.EnclaveUpdateCredentialRequest, $0.MsgUpdateCredentialResponse>(
+        'UpdateCredential',
+        updateCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.EnclaveUpdateCredentialRequest.fromBuffer(value),
+        ($0.MsgUpdateCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgClaimUpdatedCredential, $0.MsgClaimUpdatedCredentialResponse>(
+        'ClaimUpdatedCredential',
+        claimUpdatedCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgClaimUpdatedCredential.fromBuffer(value),
+        ($0.MsgClaimUpdatedCredentialResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgSignRecoverPrivateKey, $2.SignRecoverKeyReply>(
         'SignRecoverKey',
         signRecoverKey_Pre,
@@ -682,6 +728,20 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $7.MsgBindCredential.fromBuffer(value),
         ($2.ValidateCredentialReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgCreateCredential, $2.ValidatePersonalInfoReply>(
+        'ValidatePersonalInfo',
+        validatePersonalInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgCreateCredential.fromBuffer(value),
+        ($2.ValidatePersonalInfoReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.MsgScanBankSend, $2.ScanBankSendReply>(
+        'ScanBankSend',
+        scanBankSend_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.MsgScanBankSend.fromBuffer(value),
+        ($2.ScanBankSendReply value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgTransferFunds, $2.ValidateTransferPrimeReply>(
         'ValidateTransferPrime',
         validateTransferPrime_Pre,
@@ -829,7 +889,7 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
     return setCredential(call, await request);
   }
 
-  $async.Future<$2.RemoveCredentialReply> removeCredential_Pre($grpc.ServiceCall call, $async.Future<$7.Credential> request) async {
+  $async.Future<$2.RemoveCredentialReply> removeCredential_Pre($grpc.ServiceCall call, $async.Future<$2.EnclaveRemoveCredentialRequest> request) async {
     return removeCredential(call, await request);
   }
 
@@ -839,6 +899,14 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
 
   $async.Future<$0.MsgClaimCredentialResponse> claimCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgClaimCredential> request) async {
     return claimCredential(call, await request);
+  }
+
+  $async.Future<$0.MsgUpdateCredentialResponse> updateCredential_Pre($grpc.ServiceCall call, $async.Future<$2.EnclaveUpdateCredentialRequest> request) async {
+    return updateCredential(call, await request);
+  }
+
+  $async.Future<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgClaimUpdatedCredential> request) async {
+    return claimUpdatedCredential(call, await request);
   }
 
   $async.Future<$2.SignRecoverKeyReply> signRecoverKey_Pre($grpc.ServiceCall call, $async.Future<$0.MsgSignRecoverPrivateKey> request) async {
@@ -895,6 +963,14 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
 
   $async.Future<$2.ValidateCredentialReply> validateCredential_Pre($grpc.ServiceCall call, $async.Future<$7.MsgBindCredential> request) async {
     return validateCredential(call, await request);
+  }
+
+  $async.Future<$2.ValidatePersonalInfoReply> validatePersonalInfo_Pre($grpc.ServiceCall call, $async.Future<$0.MsgCreateCredential> request) async {
+    return validatePersonalInfo(call, await request);
+  }
+
+  $async.Future<$2.ScanBankSendReply> scanBankSend_Pre($grpc.ServiceCall call, $async.Future<$2.MsgScanBankSend> request) async {
+    return scanBankSend(call, await request);
   }
 
   $async.Future<$2.ValidateTransferPrimeReply> validateTransferPrime_Pre($grpc.ServiceCall call, $async.Future<$0.MsgTransferFunds> request) async {
@@ -958,9 +1034,11 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
   $async.Future<$2.SetProtectKeyReply> setProtectKey($grpc.ServiceCall call, $5.ProtectKey request);
   $async.Future<$2.SetRecoverKeyReply> setRecoverKey($grpc.ServiceCall call, $6.RecoverKey request);
   $async.Future<$2.SetCredentialReply> setCredential($grpc.ServiceCall call, $7.Credential request);
-  $async.Future<$2.RemoveCredentialReply> removeCredential($grpc.ServiceCall call, $7.Credential request);
+  $async.Future<$2.RemoveCredentialReply> removeCredential($grpc.ServiceCall call, $2.EnclaveRemoveCredentialRequest request);
   $async.Future<$2.RecoverKeyReply> recoverKeyByCredential($grpc.ServiceCall call, $7.Credential request);
   $async.Future<$0.MsgClaimCredentialResponse> claimCredential($grpc.ServiceCall call, $0.MsgClaimCredential request);
+  $async.Future<$0.MsgUpdateCredentialResponse> updateCredential($grpc.ServiceCall call, $2.EnclaveUpdateCredentialRequest request);
+  $async.Future<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential($grpc.ServiceCall call, $0.MsgClaimUpdatedCredential request);
   $async.Future<$2.SignRecoverKeyReply> signRecoverKey($grpc.ServiceCall call, $0.MsgSignRecoverPrivateKey request);
   $async.Future<$1.QueryGetRecoverKeyResponse> queryGetRecoverKey($grpc.ServiceCall call, $1.QueryGetRecoverKeyRequest request);
   $async.Future<$1.QueryFindCredentialResponse> queryFindCredential($grpc.ServiceCall call, $1.QueryFindCredentialRequest request);
@@ -975,6 +1053,8 @@ abstract class QadenaEnclaveServiceBase extends $grpc.Service {
   $async.Future<$2.SetSecretSharePrivateKeyReply> setSecretSharePrivateKey($grpc.ServiceCall call, $12.SecretSharePrivK request);
   $async.Future<$2.ValidateDestinationWalletReply> validateDestinationWallet($grpc.ServiceCall call, $0.MsgCreateWallet request);
   $async.Future<$2.ValidateCredentialReply> validateCredential($grpc.ServiceCall call, $7.MsgBindCredential request);
+  $async.Future<$2.ValidatePersonalInfoReply> validatePersonalInfo($grpc.ServiceCall call, $0.MsgCreateCredential request);
+  $async.Future<$2.ScanBankSendReply> scanBankSend($grpc.ServiceCall call, $2.MsgScanBankSend request);
   $async.Future<$2.ValidateTransferPrimeReply> validateTransferPrime($grpc.ServiceCall call, $0.MsgTransferFunds request);
   $async.Future<$2.ValidateTransferDoublePrimeReply> validateTransferDoublePrime($grpc.ServiceCall call, $0.MsgReceiveFunds request);
   $async.Future<$2.SyncWalletsReply> syncWallets($grpc.ServiceCall call, $2.MsgSyncWallets request);

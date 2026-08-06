@@ -995,6 +995,218 @@ class MsgDeactivateServiceProviderResponse extends $pb.GeneratedMessage {
   static MsgDeactivateServiceProviderResponse? _defaultInstance;
 }
 
+/// Add one account to the bank-send whitelist.  One entry at a time, deliberately: a whole-list
+/// update would mean every deployment restating every other deployment's exemptions, and an
+/// omission would silently remove one.
+class MsgAddBankSendWhitelist extends $pb.GeneratedMessage {
+  factory MsgAddBankSendWhitelist({
+    $core.String? authority,
+    $core.String? address,
+    $core.String? reason,
+  }) {
+    final $result = create();
+    if (authority != null) {
+      $result.authority = authority;
+    }
+    if (address != null) {
+      $result.address = address;
+    }
+    if (reason != null) {
+      $result.reason = reason;
+    }
+    return $result;
+  }
+  MsgAddBankSendWhitelist._() : super();
+  factory MsgAddBankSendWhitelist.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgAddBankSendWhitelist.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgAddBankSendWhitelist', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'authority')
+    ..aOS(2, _omitFieldNames ? '' : 'address')
+    ..aOS(3, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgAddBankSendWhitelist clone() => MsgAddBankSendWhitelist()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgAddBankSendWhitelist copyWith(void Function(MsgAddBankSendWhitelist) updates) => super.copyWith((message) => updates(message as MsgAddBankSendWhitelist)) as MsgAddBankSendWhitelist;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgAddBankSendWhitelist create() => MsgAddBankSendWhitelist._();
+  MsgAddBankSendWhitelist createEmptyInstance() => create();
+  static $pb.PbList<MsgAddBankSendWhitelist> createRepeated() => $pb.PbList<MsgAddBankSendWhitelist>();
+  @$core.pragma('dart2js:noInline')
+  static MsgAddBankSendWhitelist getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgAddBankSendWhitelist>(create);
+  static MsgAddBankSendWhitelist? _defaultInstance;
+
+  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
+  @$pb.TagNumber(1)
+  $core.String get authority => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set authority($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthority() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthority() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get address => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set address($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAddress() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAddress() => clearField(2);
+
+  /// why this account is exempt from AML scanning; stored with the entry for later review
+  @$pb.TagNumber(3)
+  $core.String get reason => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set reason($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasReason() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearReason() => clearField(3);
+}
+
+class MsgAddBankSendWhitelistResponse extends $pb.GeneratedMessage {
+  factory MsgAddBankSendWhitelistResponse() => create();
+  MsgAddBankSendWhitelistResponse._() : super();
+  factory MsgAddBankSendWhitelistResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgAddBankSendWhitelistResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgAddBankSendWhitelistResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgAddBankSendWhitelistResponse clone() => MsgAddBankSendWhitelistResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgAddBankSendWhitelistResponse copyWith(void Function(MsgAddBankSendWhitelistResponse) updates) => super.copyWith((message) => updates(message as MsgAddBankSendWhitelistResponse)) as MsgAddBankSendWhitelistResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgAddBankSendWhitelistResponse create() => MsgAddBankSendWhitelistResponse._();
+  MsgAddBankSendWhitelistResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgAddBankSendWhitelistResponse> createRepeated() => $pb.PbList<MsgAddBankSendWhitelistResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgAddBankSendWhitelistResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgAddBankSendWhitelistResponse>(create);
+  static MsgAddBankSendWhitelistResponse? _defaultInstance;
+}
+
+class MsgRemoveBankSendWhitelist extends $pb.GeneratedMessage {
+  factory MsgRemoveBankSendWhitelist({
+    $core.String? authority,
+    $core.String? address,
+  }) {
+    final $result = create();
+    if (authority != null) {
+      $result.authority = authority;
+    }
+    if (address != null) {
+      $result.address = address;
+    }
+    return $result;
+  }
+  MsgRemoveBankSendWhitelist._() : super();
+  factory MsgRemoveBankSendWhitelist.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveBankSendWhitelist.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveBankSendWhitelist', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'authority')
+    ..aOS(2, _omitFieldNames ? '' : 'address')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveBankSendWhitelist clone() => MsgRemoveBankSendWhitelist()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveBankSendWhitelist copyWith(void Function(MsgRemoveBankSendWhitelist) updates) => super.copyWith((message) => updates(message as MsgRemoveBankSendWhitelist)) as MsgRemoveBankSendWhitelist;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveBankSendWhitelist create() => MsgRemoveBankSendWhitelist._();
+  MsgRemoveBankSendWhitelist createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveBankSendWhitelist> createRepeated() => $pb.PbList<MsgRemoveBankSendWhitelist>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveBankSendWhitelist getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveBankSendWhitelist>(create);
+  static MsgRemoveBankSendWhitelist? _defaultInstance;
+
+  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
+  @$pb.TagNumber(1)
+  $core.String get authority => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set authority($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthority() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthority() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get address => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set address($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAddress() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAddress() => clearField(2);
+}
+
+class MsgRemoveBankSendWhitelistResponse extends $pb.GeneratedMessage {
+  factory MsgRemoveBankSendWhitelistResponse() => create();
+  MsgRemoveBankSendWhitelistResponse._() : super();
+  factory MsgRemoveBankSendWhitelistResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgRemoveBankSendWhitelistResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgRemoveBankSendWhitelistResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgRemoveBankSendWhitelistResponse clone() => MsgRemoveBankSendWhitelistResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgRemoveBankSendWhitelistResponse copyWith(void Function(MsgRemoveBankSendWhitelistResponse) updates) => super.copyWith((message) => updates(message as MsgRemoveBankSendWhitelistResponse)) as MsgRemoveBankSendWhitelistResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveBankSendWhitelistResponse create() => MsgRemoveBankSendWhitelistResponse._();
+  MsgRemoveBankSendWhitelistResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgRemoveBankSendWhitelistResponse> createRepeated() => $pb.PbList<MsgRemoveBankSendWhitelistResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgRemoveBankSendWhitelistResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgRemoveBankSendWhitelistResponse>(create);
+  static MsgRemoveBankSendWhitelistResponse? _defaultInstance;
+}
+
 class MsgUpdateEnclaveIdentity extends $pb.GeneratedMessage {
   factory MsgUpdateEnclaveIdentity({
     $core.String? authority,
@@ -3882,6 +4094,273 @@ class MsgClaimCredentialResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static MsgClaimCredentialResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgClaimCredentialResponse>(create);
   static MsgClaimCredentialResponse? _defaultInstance;
+}
+
+/// MsgUpdateCredential folds corrected personal info, re-issued by an identity provider as a
+/// fresh ownerless credential, into a credential the creator already owns.  Unlike a claim it
+/// never writes wallet.credentialID -- same credential, same wallet, same recovery.
+class MsgUpdateCredential extends $pb.GeneratedMessage {
+  factory MsgUpdateCredential({
+    $core.String? creator,
+    $core.String? credentialID,
+    $core.String? credentialType,
+    $core.List<$core.int>? encUpdateCredentialExtraParmsVShare,
+    $21.VShareBindData? updateCredentialExtraParmsVShareBind,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (credentialID != null) {
+      $result.credentialID = credentialID;
+    }
+    if (credentialType != null) {
+      $result.credentialType = credentialType;
+    }
+    if (encUpdateCredentialExtraParmsVShare != null) {
+      $result.encUpdateCredentialExtraParmsVShare = encUpdateCredentialExtraParmsVShare;
+    }
+    if (updateCredentialExtraParmsVShareBind != null) {
+      $result.updateCredentialExtraParmsVShareBind = updateCredentialExtraParmsVShareBind;
+    }
+    return $result;
+  }
+  MsgUpdateCredential._() : super();
+  factory MsgUpdateCredential.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUpdateCredential.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..aOS(2, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
+    ..aOS(3, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'encUpdateCredentialExtraParmsVShare', $pb.PbFieldType.OY, protoName: 'encUpdateCredentialExtraParmsVShare')
+    ..aOM<$21.VShareBindData>(5, _omitFieldNames ? '' : 'updateCredentialExtraParmsVShareBind', protoName: 'updateCredentialExtraParmsVShareBind', subBuilder: $21.VShareBindData.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUpdateCredential clone() => MsgUpdateCredential()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUpdateCredential copyWith(void Function(MsgUpdateCredential) updates) => super.copyWith((message) => updates(message as MsgUpdateCredential)) as MsgUpdateCredential;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateCredential create() => MsgUpdateCredential._();
+  MsgUpdateCredential createEmptyInstance() => create();
+  static $pb.PbList<MsgUpdateCredential> createRepeated() => $pb.PbList<MsgUpdateCredential>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateCredential getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateCredential>(create);
+  static MsgUpdateCredential? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  /// the creator's EXISTING credentialID, i.e. the row being overwritten in place
+  @$pb.TagNumber(2)
+  $core.String get credentialID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set credentialID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCredentialID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCredentialID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get credentialType => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set credentialType($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCredentialType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCredentialType() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get encUpdateCredentialExtraParmsVShare => $_getN(3);
+  @$pb.TagNumber(4)
+  set encUpdateCredentialExtraParmsVShare($core.List<$core.int> v) { $_setBytes(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasEncUpdateCredentialExtraParmsVShare() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEncUpdateCredentialExtraParmsVShare() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $21.VShareBindData get updateCredentialExtraParmsVShareBind => $_getN(4);
+  @$pb.TagNumber(5)
+  set updateCredentialExtraParmsVShareBind($21.VShareBindData v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasUpdateCredentialExtraParmsVShareBind() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUpdateCredentialExtraParmsVShareBind() => clearField(5);
+  @$pb.TagNumber(5)
+  $21.VShareBindData ensureUpdateCredentialExtraParmsVShareBind() => $_ensure(4);
+}
+
+class MsgUpdateCredentialResponse extends $pb.GeneratedMessage {
+  factory MsgUpdateCredentialResponse() => create();
+  MsgUpdateCredentialResponse._() : super();
+  factory MsgUpdateCredentialResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUpdateCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUpdateCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUpdateCredentialResponse clone() => MsgUpdateCredentialResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUpdateCredentialResponse copyWith(void Function(MsgUpdateCredentialResponse) updates) => super.copyWith((message) => updates(message as MsgUpdateCredentialResponse)) as MsgUpdateCredentialResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateCredentialResponse create() => MsgUpdateCredentialResponse._();
+  MsgUpdateCredentialResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgUpdateCredentialResponse> createRepeated() => $pb.PbList<MsgUpdateCredentialResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUpdateCredentialResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUpdateCredentialResponse>(create);
+  static MsgUpdateCredentialResponse? _defaultInstance;
+}
+
+///  MsgClaimUpdatedCredential lets one of the user's ephemeral wallets pick up the credentials as
+///  they stand after an UpdateCredential, by re-publishing that ephemeral wallet's accept-list.
+///  One message per ephemeral wallet: only the client can enumerate them, since the sole reverse
+///  index the enclave keeps is for protect keys.
+///
+///  wallet.encAcceptValidatedCredentialsVShare freezes {credentialType, PIN, credentialPC} at the
+///  time the ephemeral wallet was created, so an UpdateCredential that moves a name invalidates
+///  every ephemeral wallet accepting that name sub-credential.  It fails closed rather than open --
+///  the ephemeral wallet stops working instead of accepting stale data -- but the owner still needs
+///  a way to re-point it.  The signer is the ephemeral wallet; the enclave proves the caller
+///  controls the real wallet behind it.
+class MsgClaimUpdatedCredential extends $pb.GeneratedMessage {
+  factory MsgClaimUpdatedCredential({
+    $core.String? creator,
+    $core.List<$core.int>? encAcceptValidatedCredentialsVShare,
+    $21.VShareBindData? acceptValidatedCredentialsVShareBind,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (encAcceptValidatedCredentialsVShare != null) {
+      $result.encAcceptValidatedCredentialsVShare = encAcceptValidatedCredentialsVShare;
+    }
+    if (acceptValidatedCredentialsVShareBind != null) {
+      $result.acceptValidatedCredentialsVShareBind = acceptValidatedCredentialsVShareBind;
+    }
+    return $result;
+  }
+  MsgClaimUpdatedCredential._() : super();
+  factory MsgClaimUpdatedCredential.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgClaimUpdatedCredential.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgClaimUpdatedCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'encAcceptValidatedCredentialsVShare', $pb.PbFieldType.OY, protoName: 'encAcceptValidatedCredentialsVShare')
+    ..aOM<$21.VShareBindData>(3, _omitFieldNames ? '' : 'acceptValidatedCredentialsVShareBind', protoName: 'acceptValidatedCredentialsVShareBind', subBuilder: $21.VShareBindData.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgClaimUpdatedCredential clone() => MsgClaimUpdatedCredential()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgClaimUpdatedCredential copyWith(void Function(MsgClaimUpdatedCredential) updates) => super.copyWith((message) => updates(message as MsgClaimUpdatedCredential)) as MsgClaimUpdatedCredential;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgClaimUpdatedCredential create() => MsgClaimUpdatedCredential._();
+  MsgClaimUpdatedCredential createEmptyInstance() => create();
+  static $pb.PbList<MsgClaimUpdatedCredential> createRepeated() => $pb.PbList<MsgClaimUpdatedCredential>();
+  @$core.pragma('dart2js:noInline')
+  static MsgClaimUpdatedCredential getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgClaimUpdatedCredential>(create);
+  static MsgClaimUpdatedCredential? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get encAcceptValidatedCredentialsVShare => $_getN(1);
+  @$pb.TagNumber(2)
+  set encAcceptValidatedCredentialsVShare($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEncAcceptValidatedCredentialsVShare() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEncAcceptValidatedCredentialsVShare() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $21.VShareBindData get acceptValidatedCredentialsVShareBind => $_getN(2);
+  @$pb.TagNumber(3)
+  set acceptValidatedCredentialsVShareBind($21.VShareBindData v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAcceptValidatedCredentialsVShareBind() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAcceptValidatedCredentialsVShareBind() => clearField(3);
+  @$pb.TagNumber(3)
+  $21.VShareBindData ensureAcceptValidatedCredentialsVShareBind() => $_ensure(2);
+}
+
+class MsgClaimUpdatedCredentialResponse extends $pb.GeneratedMessage {
+  factory MsgClaimUpdatedCredentialResponse() => create();
+  MsgClaimUpdatedCredentialResponse._() : super();
+  factory MsgClaimUpdatedCredentialResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgClaimUpdatedCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgClaimUpdatedCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgClaimUpdatedCredentialResponse clone() => MsgClaimUpdatedCredentialResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgClaimUpdatedCredentialResponse copyWith(void Function(MsgClaimUpdatedCredentialResponse) updates) => super.copyWith((message) => updates(message as MsgClaimUpdatedCredentialResponse)) as MsgClaimUpdatedCredentialResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgClaimUpdatedCredentialResponse create() => MsgClaimUpdatedCredentialResponse._();
+  MsgClaimUpdatedCredentialResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgClaimUpdatedCredentialResponse> createRepeated() => $pb.PbList<MsgClaimUpdatedCredentialResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgClaimUpdatedCredentialResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgClaimUpdatedCredentialResponse>(create);
+  static MsgClaimUpdatedCredentialResponse? _defaultInstance;
 }
 
 class MsgCreateBulkCredentials extends $pb.GeneratedMessage {

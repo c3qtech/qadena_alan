@@ -400,6 +400,9 @@ const MsgScanTransactions$json = {
     {'1': 'height', '3': 2, '4': 1, '5': 3, '10': 'height'},
     {'1': 'msg', '3': 3, '4': 1, '5': 11, '6': '.qadena.qadena.MsgTransferFunds', '10': 'msg'},
     {'1': 'exchangerate', '3': 4, '4': 1, '5': 9, '10': 'exchangerate'},
+    {'1': 'params', '3': 5, '4': 1, '5': 11, '6': '.qadena.qadena.Params', '8': {}, '10': 'params'},
+    {'1': 'countryThresholds', '3': 6, '4': 3, '5': 11, '6': '.qadena.qadena.ScanCountryThreshold', '10': 'countryThresholds'},
+    {'1': 'defaultThresholdAttoUSD', '3': 7, '4': 1, '5': 9, '10': 'defaultThresholdAttoUSD'},
   ],
 };
 
@@ -408,7 +411,80 @@ final $typed_data.Uint8List msgScanTransactionsDescriptor = $convert.base64Decod
     'ChNNc2dTY2FuVHJhbnNhY3Rpb25zEkIKCXRpbWVzdGFtcBgBIAEoCzIaLmdvb2dsZS5wcm90b2'
     'J1Zi5UaW1lc3RhbXBCCMjeHwCQ3x8BUgl0aW1lc3RhbXASFgoGaGVpZ2h0GAIgASgDUgZoZWln'
     'aHQSMQoDbXNnGAMgASgLMh8ucWFkZW5hLnFhZGVuYS5Nc2dUcmFuc2ZlckZ1bmRzUgNtc2cSIg'
-    'oMZXhjaGFuZ2VyYXRlGAQgASgJUgxleGNoYW5nZXJhdGU=');
+    'oMZXhjaGFuZ2VyYXRlGAQgASgJUgxleGNoYW5nZXJhdGUSMwoGcGFyYW1zGAUgASgLMhUucWFk'
+    'ZW5hLnFhZGVuYS5QYXJhbXNCBMjeHwBSBnBhcmFtcxJRChFjb3VudHJ5VGhyZXNob2xkcxgGIA'
+    'MoCzIjLnFhZGVuYS5xYWRlbmEuU2NhbkNvdW50cnlUaHJlc2hvbGRSEWNvdW50cnlUaHJlc2hv'
+    'bGRzEjgKF2RlZmF1bHRUaHJlc2hvbGRBdHRvVVNEGAcgASgJUhdkZWZhdWx0VGhyZXNob2xkQX'
+    'R0b1VTRA==');
+
+@$core.Deprecated('Use scanCountryThresholdDescriptor instead')
+const ScanCountryThreshold$json = {
+  '1': 'ScanCountryThreshold',
+  '2': [
+    {'1': 'country', '3': 1, '4': 1, '5': 9, '10': 'country'},
+    {'1': 'thresholdAttoUSD', '3': 2, '4': 1, '5': 9, '10': 'thresholdAttoUSD'},
+  ],
+};
+
+/// Descriptor for `ScanCountryThreshold`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List scanCountryThresholdDescriptor = $convert.base64Decode(
+    'ChRTY2FuQ291bnRyeVRocmVzaG9sZBIYCgdjb3VudHJ5GAEgASgJUgdjb3VudHJ5EioKEHRocm'
+    'VzaG9sZEF0dG9VU0QYAiABKAlSEHRocmVzaG9sZEF0dG9VU0Q=');
+
+@$core.Deprecated('Use msgScanBankSendDescriptor instead')
+const MsgScanBankSend$json = {
+  '1': 'MsgScanBankSend',
+  '2': [
+    {'1': 'timestamp', '3': 1, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'timestamp'},
+    {'1': 'height', '3': 2, '4': 1, '5': 3, '10': 'height'},
+    {'1': 'srcWalletID', '3': 3, '4': 1, '5': 9, '10': 'srcWalletID'},
+    {'1': 'dstWalletID', '3': 4, '4': 1, '5': 9, '10': 'dstWalletID'},
+    {'1': 'coins', '3': 5, '4': 3, '5': 11, '6': '.qadena.qadena.ScanBankSendCoin', '10': 'coins'},
+    {'1': 'params', '3': 6, '4': 1, '5': 11, '6': '.qadena.qadena.Params', '8': {}, '10': 'params'},
+    {'1': 'countryThresholds', '3': 7, '4': 3, '5': 11, '6': '.qadena.qadena.ScanCountryThreshold', '10': 'countryThresholds'},
+    {'1': 'defaultThresholdAttoUSD', '3': 8, '4': 1, '5': 9, '10': 'defaultThresholdAttoUSD'},
+    {'1': 'jarID', '3': 9, '4': 1, '5': 9, '10': 'jarID'},
+  ],
+};
+
+/// Descriptor for `MsgScanBankSend`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgScanBankSendDescriptor = $convert.base64Decode(
+    'Cg9Nc2dTY2FuQmFua1NlbmQSQgoJdGltZXN0YW1wGAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLl'
+    'RpbWVzdGFtcEIIyN4fAJDfHwFSCXRpbWVzdGFtcBIWCgZoZWlnaHQYAiABKANSBmhlaWdodBIg'
+    'CgtzcmNXYWxsZXRJRBgDIAEoCVILc3JjV2FsbGV0SUQSIAoLZHN0V2FsbGV0SUQYBCABKAlSC2'
+    'RzdFdhbGxldElEEjUKBWNvaW5zGAUgAygLMh8ucWFkZW5hLnFhZGVuYS5TY2FuQmFua1NlbmRD'
+    'b2luUgVjb2lucxIzCgZwYXJhbXMYBiABKAsyFS5xYWRlbmEucWFkZW5hLlBhcmFtc0IEyN4fAF'
+    'IGcGFyYW1zElEKEWNvdW50cnlUaHJlc2hvbGRzGAcgAygLMiMucWFkZW5hLnFhZGVuYS5TY2Fu'
+    'Q291bnRyeVRocmVzaG9sZFIRY291bnRyeVRocmVzaG9sZHMSOAoXZGVmYXVsdFRocmVzaG9sZE'
+    'F0dG9VU0QYCCABKAlSF2RlZmF1bHRUaHJlc2hvbGRBdHRvVVNEEhQKBWphcklEGAkgASgJUgVq'
+    'YXJJRA==');
+
+@$core.Deprecated('Use scanBankSendCoinDescriptor instead')
+const ScanBankSendCoin$json = {
+  '1': 'ScanBankSendCoin',
+  '2': [
+    {'1': 'denom', '3': 1, '4': 1, '5': 9, '10': 'denom'},
+    {'1': 'amount', '3': 2, '4': 1, '5': 9, '10': 'amount'},
+    {'1': 'usdAmountAttoUSD', '3': 3, '4': 1, '5': 9, '10': 'usdAmountAttoUSD'},
+  ],
+};
+
+/// Descriptor for `ScanBankSendCoin`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List scanBankSendCoinDescriptor = $convert.base64Decode(
+    'ChBTY2FuQmFua1NlbmRDb2luEhQKBWRlbm9tGAEgASgJUgVkZW5vbRIWCgZhbW91bnQYAiABKA'
+    'lSBmFtb3VudBIqChB1c2RBbW91bnRBdHRvVVNEGAMgASgJUhB1c2RBbW91bnRBdHRvVVNE');
+
+@$core.Deprecated('Use scanBankSendReplyDescriptor instead')
+const ScanBankSendReply$json = {
+  '1': 'ScanBankSendReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `ScanBankSendReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List scanBankSendReplyDescriptor = $convert.base64Decode(
+    'ChFTY2FuQmFua1NlbmRSZXBseRIWCgZzdGF0dXMYASABKAhSBnN0YXR1cw==');
 
 @$core.Deprecated('Use msgSyncWalletsDescriptor instead')
 const MsgSyncWallets$json = {
@@ -447,18 +523,66 @@ const MsgSyncCredentials$json = {
 final $typed_data.Uint8List msgSyncCredentialsDescriptor = $convert.base64Decode(
     'ChJNc2dTeW5jQ3JlZGVudGlhbHMSFAoFY2xlYXIYASABKAhSBWNsZWFy');
 
+@$core.Deprecated('Use credentialRefDescriptor instead')
+const CredentialRef$json = {
+  '1': 'CredentialRef',
+  '2': [
+    {'1': 'credentialID', '3': 1, '4': 1, '5': 9, '10': 'credentialID'},
+    {'1': 'credentialType', '3': 2, '4': 1, '5': 9, '10': 'credentialType'},
+  ],
+};
+
+/// Descriptor for `CredentialRef`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List credentialRefDescriptor = $convert.base64Decode(
+    'Cg1DcmVkZW50aWFsUmVmEiIKDGNyZWRlbnRpYWxJRBgBIAEoCVIMY3JlZGVudGlhbElEEiYKDm'
+    'NyZWRlbnRpYWxUeXBlGAIgASgJUg5jcmVkZW50aWFsVHlwZQ==');
+
 @$core.Deprecated('Use syncCredentialsReplyDescriptor instead')
 const SyncCredentialsReply$json = {
   '1': 'SyncCredentialsReply',
   '2': [
     {'1': 'credentials', '3': 1, '4': 3, '5': 11, '6': '.qadena.qadena.Credential', '10': 'credentials'},
+    {'1': 'removedCredentials', '3': 2, '4': 3, '5': 11, '6': '.qadena.qadena.CredentialRef', '10': 'removedCredentials'},
   ],
 };
 
 /// Descriptor for `SyncCredentialsReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List syncCredentialsReplyDescriptor = $convert.base64Decode(
     'ChRTeW5jQ3JlZGVudGlhbHNSZXBseRI7CgtjcmVkZW50aWFscxgBIAMoCzIZLnFhZGVuYS5xYW'
-    'RlbmEuQ3JlZGVudGlhbFILY3JlZGVudGlhbHM=');
+    'RlbmEuQ3JlZGVudGlhbFILY3JlZGVudGlhbHMSTAoScmVtb3ZlZENyZWRlbnRpYWxzGAIgAygL'
+    'MhwucWFkZW5hLnFhZGVuYS5DcmVkZW50aWFsUmVmUhJyZW1vdmVkQ3JlZGVudGlhbHM=');
+
+@$core.Deprecated('Use enclaveRemoveCredentialRequestDescriptor instead')
+const EnclaveRemoveCredentialRequest$json = {
+  '1': 'EnclaveRemoveCredentialRequest',
+  '2': [
+    {'1': 'credential', '3': 1, '4': 1, '5': 11, '6': '.qadena.qadena.Credential', '10': 'credential'},
+    {'1': 'requesterWalletID', '3': 2, '4': 1, '5': 9, '10': 'requesterWalletID'},
+  ],
+};
+
+/// Descriptor for `EnclaveRemoveCredentialRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List enclaveRemoveCredentialRequestDescriptor = $convert.base64Decode(
+    'Ch5FbmNsYXZlUmVtb3ZlQ3JlZGVudGlhbFJlcXVlc3QSOQoKY3JlZGVudGlhbBgBIAEoCzIZLn'
+    'FhZGVuYS5xYWRlbmEuQ3JlZGVudGlhbFIKY3JlZGVudGlhbBIsChFyZXF1ZXN0ZXJXYWxsZXRJ'
+    'RBgCIAEoCVIRcmVxdWVzdGVyV2FsbGV0SUQ=');
+
+@$core.Deprecated('Use enclaveUpdateCredentialRequestDescriptor instead')
+const EnclaveUpdateCredentialRequest$json = {
+  '1': 'EnclaveUpdateCredentialRequest',
+  '2': [
+    {'1': 'msg', '3': 1, '4': 1, '5': 11, '6': '.qadena.qadena.MsgUpdateCredential', '10': 'msg'},
+    {'1': 'blockHeight', '3': 2, '4': 1, '5': 3, '10': 'blockHeight'},
+    {'1': 'params', '3': 3, '4': 1, '5': 11, '6': '.qadena.qadena.Params', '8': {}, '10': 'params'},
+  ],
+};
+
+/// Descriptor for `EnclaveUpdateCredentialRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List enclaveUpdateCredentialRequestDescriptor = $convert.base64Decode(
+    'Ch5FbmNsYXZlVXBkYXRlQ3JlZGVudGlhbFJlcXVlc3QSNAoDbXNnGAEgASgLMiIucWFkZW5hLn'
+    'FhZGVuYS5Nc2dVcGRhdGVDcmVkZW50aWFsUgNtc2cSIAoLYmxvY2tIZWlnaHQYAiABKANSC2Js'
+    'b2NrSGVpZ2h0EjMKBnBhcmFtcxgDIAEoCzIVLnFhZGVuYS5xYWRlbmEuUGFyYW1zQgTI3h8AUg'
+    'ZwYXJhbXM=');
 
 @$core.Deprecated('Use msgSyncRecoverKeysDescriptor instead')
 const MsgSyncRecoverKeys$json = {
@@ -791,6 +915,20 @@ const ValidateCredentialReply$json = {
 /// Descriptor for `ValidateCredentialReply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List validateCredentialReplyDescriptor = $convert.base64Decode(
     'ChdWYWxpZGF0ZUNyZWRlbnRpYWxSZXBseRIWCgZzdGF0dXMYASABKAhSBnN0YXR1cw==');
+
+@$core.Deprecated('Use validatePersonalInfoReplyDescriptor instead')
+const ValidatePersonalInfoReply$json = {
+  '1': 'ValidatePersonalInfoReply',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 8, '10': 'status'},
+    {'1': 'reason', '3': 2, '4': 1, '5': 5, '10': 'reason'},
+  ],
+};
+
+/// Descriptor for `ValidatePersonalInfoReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validatePersonalInfoReplyDescriptor = $convert.base64Decode(
+    'ChlWYWxpZGF0ZVBlcnNvbmFsSW5mb1JlcGx5EhYKBnN0YXR1cxgBIAEoCFIGc3RhdHVzEhYKBn'
+    'JlYXNvbhgCIAEoBVIGcmVhc29u');
 
 @$core.Deprecated('Use validateTransferPrimeReplyDescriptor instead')
 const ValidateTransferPrimeReply$json = {

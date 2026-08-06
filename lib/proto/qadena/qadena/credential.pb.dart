@@ -31,6 +31,7 @@ class Credential extends $pb.GeneratedMessage {
     $core.String? referenceCredentialID,
     $core.String? identityOwnerWalletID,
     $core.String? ekycAppWalletID,
+    $core.int? updateGeneration,
   }) {
     final $result = create();
     if (credentialID != null) {
@@ -72,6 +73,9 @@ class Credential extends $pb.GeneratedMessage {
     if (ekycAppWalletID != null) {
       $result.ekycAppWalletID = ekycAppWalletID;
     }
+    if (updateGeneration != null) {
+      $result.updateGeneration = updateGeneration;
+    }
     return $result;
   }
   Credential._() : super();
@@ -92,6 +96,7 @@ class Credential extends $pb.GeneratedMessage {
     ..aOS(11, _omitFieldNames ? '' : 'referenceCredentialID', protoName: 'referenceCredentialID')
     ..aOS(12, _omitFieldNames ? '' : 'identityOwnerWalletID', protoName: 'identityOwnerWalletID')
     ..aOS(13, _omitFieldNames ? '' : 'ekycAppWalletID', protoName: 'ekycAppWalletID')
+    ..a<$core.int>(14, _omitFieldNames ? '' : 'updateGeneration', $pb.PbFieldType.OU3, protoName: 'updateGeneration')
     ..hasRequiredFields = false
   ;
 
@@ -240,6 +245,19 @@ class Credential extends $pb.GeneratedMessage {
   $core.bool hasEkycAppWalletID() => $_has(12);
   @$pb.TagNumber(13)
   void clearEkycAppWalletID() => clearField(13);
+
+  /// incremented by the enclave on each successful MsgUpdateCredential.  Chain-visible so a
+  /// wallet can spot a stale cached credential without decrypting anything; existing rows read as
+  /// 0, so no state migration is needed.  It leaks an update count against a credentialID whose
+  /// walletID is already plaintext on this row, i.e. no meaningful new exposure.
+  @$pb.TagNumber(14)
+  $core.int get updateGeneration => $_getIZ(13);
+  @$pb.TagNumber(14)
+  set updateGeneration($core.int v) { $_setUnsignedInt32(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasUpdateGeneration() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearUpdateGeneration() => clearField(14);
 }
 
 /// clone alert, this is also in nameservice/tx.proto!!!!

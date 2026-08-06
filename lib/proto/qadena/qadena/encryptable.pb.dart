@@ -11,6 +11,7 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../cosmos/base/v1beta1/coin.pb.dart' as $15;
@@ -271,6 +272,568 @@ class EncryptableClaimCredentialExtraParms extends $pb.GeneratedMessage {
   void clearClaimPC() => clearField(11);
   @$pb.TagNumber(11)
   $19.BPedersenCommit ensureClaimPC() => $_ensure(10);
+}
+
+/// EncryptableUpdateSubCredential carries one name sub-credential's share of an update.  The
+/// sub-updates travel inside the personal-info update rather than as separate messages: a
+/// sub-credential on its own has no personal-info context, so the enclave could not run the
+/// change policy on it, and a client could otherwise update a surname sub-credential without
+/// updating the identity hash it is supposed to agree with.
+class EncryptableUpdateSubCredential extends $pb.GeneratedMessage {
+  factory EncryptableUpdateSubCredential({
+    $core.String? credentialType,
+    $core.List<$core.int>? encCredentialInfoVShare,
+    $21.VShareBindData? credentialInfoVShareBind,
+    $19.BPedersenCommit? findCredentialPC,
+    $19.BPedersenCommit? newCredentialPC,
+    $22.EncryptablePedersenCommit? zeroPC,
+    $19.BPedersenCommit? claimPC,
+  }) {
+    final $result = create();
+    if (credentialType != null) {
+      $result.credentialType = credentialType;
+    }
+    if (encCredentialInfoVShare != null) {
+      $result.encCredentialInfoVShare = encCredentialInfoVShare;
+    }
+    if (credentialInfoVShareBind != null) {
+      $result.credentialInfoVShareBind = credentialInfoVShareBind;
+    }
+    if (findCredentialPC != null) {
+      $result.findCredentialPC = findCredentialPC;
+    }
+    if (newCredentialPC != null) {
+      $result.newCredentialPC = newCredentialPC;
+    }
+    if (zeroPC != null) {
+      $result.zeroPC = zeroPC;
+    }
+    if (claimPC != null) {
+      $result.claimPC = claimPC;
+    }
+    return $result;
+  }
+  EncryptableUpdateSubCredential._() : super();
+  factory EncryptableUpdateSubCredential.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptableUpdateSubCredential.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableUpdateSubCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'CredentialType', protoName: 'CredentialType')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'EncCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'EncCredentialInfoVShare')
+    ..aOM<$21.VShareBindData>(3, _omitFieldNames ? '' : 'CredentialInfoVShareBind', protoName: 'CredentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'FindCredentialPC', protoName: 'FindCredentialPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'NewCredentialPC', protoName: 'NewCredentialPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$22.EncryptablePedersenCommit>(6, _omitFieldNames ? '' : 'ZeroPC', protoName: 'ZeroPC', subBuilder: $22.EncryptablePedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(7, _omitFieldNames ? '' : 'ClaimPC', protoName: 'ClaimPC', subBuilder: $19.BPedersenCommit.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptableUpdateSubCredential clone() => EncryptableUpdateSubCredential()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptableUpdateSubCredential copyWith(void Function(EncryptableUpdateSubCredential) updates) => super.copyWith((message) => updates(message as EncryptableUpdateSubCredential)) as EncryptableUpdateSubCredential;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptableUpdateSubCredential create() => EncryptableUpdateSubCredential._();
+  EncryptableUpdateSubCredential createEmptyInstance() => create();
+  static $pb.PbList<EncryptableUpdateSubCredential> createRepeated() => $pb.PbList<EncryptableUpdateSubCredential>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptableUpdateSubCredential getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptableUpdateSubCredential>(create);
+  static EncryptableUpdateSubCredential? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get credentialType => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set credentialType($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCredentialType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCredentialType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get encCredentialInfoVShare => $_getN(1);
+  @$pb.TagNumber(2)
+  set encCredentialInfoVShare($core.List<$core.int> v) { $_setBytes(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEncCredentialInfoVShare() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEncCredentialInfoVShare() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(2);
+  @$pb.TagNumber(3)
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCredentialInfoVShareBind() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCredentialInfoVShareBind() => clearField(3);
+  @$pb.TagNumber(3)
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $19.BPedersenCommit get findCredentialPC => $_getN(3);
+  @$pb.TagNumber(4)
+  set findCredentialPC($19.BPedersenCommit v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFindCredentialPC() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFindCredentialPC() => clearField(4);
+  @$pb.TagNumber(4)
+  $19.BPedersenCommit ensureFindCredentialPC() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $19.BPedersenCommit get newCredentialPC => $_getN(4);
+  @$pb.TagNumber(5)
+  set newCredentialPC($19.BPedersenCommit v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasNewCredentialPC() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearNewCredentialPC() => clearField(5);
+  @$pb.TagNumber(5)
+  $19.BPedersenCommit ensureNewCredentialPC() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $22.EncryptablePedersenCommit get zeroPC => $_getN(5);
+  @$pb.TagNumber(6)
+  set zeroPC($22.EncryptablePedersenCommit v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasZeroPC() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearZeroPC() => clearField(6);
+  @$pb.TagNumber(6)
+  $22.EncryptablePedersenCommit ensureZeroPC() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $19.BPedersenCommit get claimPC => $_getN(6);
+  @$pb.TagNumber(7)
+  set claimPC($19.BPedersenCommit v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasClaimPC() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearClaimPC() => clearField(7);
+  @$pb.TagNumber(7)
+  $19.BPedersenCommit ensureClaimPC() => $_ensure(6);
+}
+
+/// EncryptableUpdateCredentialExtraParms mirrors EncryptableClaimCredentialExtraParms with two
+/// deliberate omissions: no EncWalletIDVShare/WalletIDVShareBind, which exist only to feed
+/// recoverKeyByCredential and an update never recovers; and no old identity hash, because the
+/// enclave recomputes it from the old row's own plaintext, which it must decrypt anyway.  A
+/// client-supplied old hash would be trusting the client with the alias index.
+class EncryptableUpdateCredentialExtraParms extends $pb.GeneratedMessage {
+  factory EncryptableUpdateCredentialExtraParms({
+    $core.List<$core.int>? encCredentialInfoVShare,
+    $21.VShareBindData? credentialInfoVShareBind,
+    $core.String? walletID,
+    $19.BPedersenCommit? findCredentialPC,
+    $19.BPedersenCommit? newCredentialPC,
+    $core.List<$core.int>? encCredentialHashVShare,
+    $21.VShareBindData? credentialHashVShareBind,
+    $22.EncryptablePedersenCommit? zeroPC,
+    $19.BPedersenCommit? claimPC,
+    $core.Iterable<EncryptableUpdateSubCredential>? subUpdates,
+  }) {
+    final $result = create();
+    if (encCredentialInfoVShare != null) {
+      $result.encCredentialInfoVShare = encCredentialInfoVShare;
+    }
+    if (credentialInfoVShareBind != null) {
+      $result.credentialInfoVShareBind = credentialInfoVShareBind;
+    }
+    if (walletID != null) {
+      $result.walletID = walletID;
+    }
+    if (findCredentialPC != null) {
+      $result.findCredentialPC = findCredentialPC;
+    }
+    if (newCredentialPC != null) {
+      $result.newCredentialPC = newCredentialPC;
+    }
+    if (encCredentialHashVShare != null) {
+      $result.encCredentialHashVShare = encCredentialHashVShare;
+    }
+    if (credentialHashVShareBind != null) {
+      $result.credentialHashVShareBind = credentialHashVShareBind;
+    }
+    if (zeroPC != null) {
+      $result.zeroPC = zeroPC;
+    }
+    if (claimPC != null) {
+      $result.claimPC = claimPC;
+    }
+    if (subUpdates != null) {
+      $result.subUpdates.addAll(subUpdates);
+    }
+    return $result;
+  }
+  EncryptableUpdateCredentialExtraParms._() : super();
+  factory EncryptableUpdateCredentialExtraParms.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptableUpdateCredentialExtraParms.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableUpdateCredentialExtraParms', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'EncCredentialInfoVShare', $pb.PbFieldType.OY, protoName: 'EncCredentialInfoVShare')
+    ..aOM<$21.VShareBindData>(2, _omitFieldNames ? '' : 'CredentialInfoVShareBind', protoName: 'CredentialInfoVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOS(3, _omitFieldNames ? '' : 'WalletID', protoName: 'WalletID')
+    ..aOM<$19.BPedersenCommit>(4, _omitFieldNames ? '' : 'FindCredentialPC', protoName: 'FindCredentialPC', subBuilder: $19.BPedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(5, _omitFieldNames ? '' : 'NewCredentialPC', protoName: 'NewCredentialPC', subBuilder: $19.BPedersenCommit.create)
+    ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'EncCredentialHashVShare', $pb.PbFieldType.OY, protoName: 'EncCredentialHashVShare')
+    ..aOM<$21.VShareBindData>(9, _omitFieldNames ? '' : 'CredentialHashVShareBind', protoName: 'CredentialHashVShareBind', subBuilder: $21.VShareBindData.create)
+    ..aOM<$22.EncryptablePedersenCommit>(10, _omitFieldNames ? '' : 'ZeroPC', protoName: 'ZeroPC', subBuilder: $22.EncryptablePedersenCommit.create)
+    ..aOM<$19.BPedersenCommit>(11, _omitFieldNames ? '' : 'ClaimPC', protoName: 'ClaimPC', subBuilder: $19.BPedersenCommit.create)
+    ..pc<EncryptableUpdateSubCredential>(12, _omitFieldNames ? '' : 'SubUpdates', $pb.PbFieldType.PM, protoName: 'SubUpdates', subBuilder: EncryptableUpdateSubCredential.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptableUpdateCredentialExtraParms clone() => EncryptableUpdateCredentialExtraParms()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptableUpdateCredentialExtraParms copyWith(void Function(EncryptableUpdateCredentialExtraParms) updates) => super.copyWith((message) => updates(message as EncryptableUpdateCredentialExtraParms)) as EncryptableUpdateCredentialExtraParms;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptableUpdateCredentialExtraParms create() => EncryptableUpdateCredentialExtraParms._();
+  EncryptableUpdateCredentialExtraParms createEmptyInstance() => create();
+  static $pb.PbList<EncryptableUpdateCredentialExtraParms> createRepeated() => $pb.PbList<EncryptableUpdateCredentialExtraParms>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptableUpdateCredentialExtraParms getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptableUpdateCredentialExtraParms>(create);
+  static EncryptableUpdateCredentialExtraParms? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get encCredentialInfoVShare => $_getN(0);
+  @$pb.TagNumber(1)
+  set encCredentialInfoVShare($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEncCredentialInfoVShare() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEncCredentialInfoVShare() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $21.VShareBindData get credentialInfoVShareBind => $_getN(1);
+  @$pb.TagNumber(2)
+  set credentialInfoVShareBind($21.VShareBindData v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCredentialInfoVShareBind() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCredentialInfoVShareBind() => clearField(2);
+  @$pb.TagNumber(2)
+  $21.VShareBindData ensureCredentialInfoVShareBind() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.String get walletID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set walletID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasWalletID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearWalletID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $19.BPedersenCommit get findCredentialPC => $_getN(3);
+  @$pb.TagNumber(4)
+  set findCredentialPC($19.BPedersenCommit v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFindCredentialPC() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFindCredentialPC() => clearField(4);
+  @$pb.TagNumber(4)
+  $19.BPedersenCommit ensureFindCredentialPC() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $19.BPedersenCommit get newCredentialPC => $_getN(4);
+  @$pb.TagNumber(5)
+  set newCredentialPC($19.BPedersenCommit v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasNewCredentialPC() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearNewCredentialPC() => clearField(5);
+  @$pb.TagNumber(5)
+  $19.BPedersenCommit ensureNewCredentialPC() => $_ensure(4);
+
+  @$pb.TagNumber(8)
+  $core.List<$core.int> get encCredentialHashVShare => $_getN(5);
+  @$pb.TagNumber(8)
+  set encCredentialHashVShare($core.List<$core.int> v) { $_setBytes(5, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasEncCredentialHashVShare() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearEncCredentialHashVShare() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $21.VShareBindData get credentialHashVShareBind => $_getN(6);
+  @$pb.TagNumber(9)
+  set credentialHashVShareBind($21.VShareBindData v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCredentialHashVShareBind() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearCredentialHashVShareBind() => clearField(9);
+  @$pb.TagNumber(9)
+  $21.VShareBindData ensureCredentialHashVShareBind() => $_ensure(6);
+
+  @$pb.TagNumber(10)
+  $22.EncryptablePedersenCommit get zeroPC => $_getN(7);
+  @$pb.TagNumber(10)
+  set zeroPC($22.EncryptablePedersenCommit v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasZeroPC() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearZeroPC() => clearField(10);
+  @$pb.TagNumber(10)
+  $22.EncryptablePedersenCommit ensureZeroPC() => $_ensure(7);
+
+  @$pb.TagNumber(11)
+  $19.BPedersenCommit get claimPC => $_getN(8);
+  @$pb.TagNumber(11)
+  set claimPC($19.BPedersenCommit v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasClaimPC() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearClaimPC() => clearField(11);
+  @$pb.TagNumber(11)
+  $19.BPedersenCommit ensureClaimPC() => $_ensure(8);
+
+  @$pb.TagNumber(12)
+  $core.List<EncryptableUpdateSubCredential> get subUpdates => $_getList(9);
+}
+
+/// EncryptableCredentialIdentityHistory is the enclave's per-credential record of every identity
+/// hash that has ever resolved to it.  Its length doubles as the rate-limit counter: one entry for
+/// the original identity plus one per hash-changing update.  Scalars and a repeated field only --
+/// a proto map would not marshal deterministically.
+class EncryptableCredentialIdentityHistory extends $pb.GeneratedMessage {
+  factory EncryptableCredentialIdentityHistory({
+    $core.Iterable<$core.String>? hashes,
+    $core.int? lifeEventCount,
+    $fixnum.Int64? lastUpdateHeight,
+  }) {
+    final $result = create();
+    if (hashes != null) {
+      $result.hashes.addAll(hashes);
+    }
+    if (lifeEventCount != null) {
+      $result.lifeEventCount = lifeEventCount;
+    }
+    if (lastUpdateHeight != null) {
+      $result.lastUpdateHeight = lastUpdateHeight;
+    }
+    return $result;
+  }
+  EncryptableCredentialIdentityHistory._() : super();
+  factory EncryptableCredentialIdentityHistory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptableCredentialIdentityHistory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableCredentialIdentityHistory', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'Hashes', protoName: 'Hashes')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'LifeEventCount', $pb.PbFieldType.OU3, protoName: 'LifeEventCount')
+    ..aInt64(3, _omitFieldNames ? '' : 'LastUpdateHeight', protoName: 'LastUpdateHeight')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptableCredentialIdentityHistory clone() => EncryptableCredentialIdentityHistory()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptableCredentialIdentityHistory copyWith(void Function(EncryptableCredentialIdentityHistory) updates) => super.copyWith((message) => updates(message as EncryptableCredentialIdentityHistory)) as EncryptableCredentialIdentityHistory;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptableCredentialIdentityHistory create() => EncryptableCredentialIdentityHistory._();
+  EncryptableCredentialIdentityHistory createEmptyInstance() => create();
+  static $pb.PbList<EncryptableCredentialIdentityHistory> createRepeated() => $pb.PbList<EncryptableCredentialIdentityHistory>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptableCredentialIdentityHistory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptableCredentialIdentityHistory>(create);
+  static EncryptableCredentialIdentityHistory? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get hashes => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.int get lifeEventCount => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set lifeEventCount($core.int v) { $_setUnsignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLifeEventCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLifeEventCount() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get lastUpdateHeight => $_getI64(2);
+  @$pb.TagNumber(3)
+  set lastUpdateHeight($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLastUpdateHeight() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastUpdateHeight() => clearField(3);
+}
+
+///  One recorded outgoing transfer, held in the enclave's rolling AML window.  The source wallet is
+///  the store key, so it is not repeated here.
+///
+///  UnixTime is the BLOCK time the transfer was scanned at, in seconds.  It must never be wall clock:
+///  the scan runs inside the enclave on every validator and decides whether the transfer is rejected,
+///  so a clock that differed between nodes would fork the chain.  Seconds rather than a
+///  google.protobuf.Timestamp keeps this to plain scalars, matching the note on
+///  EncryptableCredentialIdentityHistory above.
+class EncryptableScanTransfer extends $pb.GeneratedMessage {
+  factory EncryptableScanTransfer({
+    $fixnum.Int64? unixTime,
+    $core.String? destinationWalletID,
+    $15.Coin? uSDCoinAmount,
+    $15.Coin? coinAmount,
+  }) {
+    final $result = create();
+    if (unixTime != null) {
+      $result.unixTime = unixTime;
+    }
+    if (destinationWalletID != null) {
+      $result.destinationWalletID = destinationWalletID;
+    }
+    if (uSDCoinAmount != null) {
+      $result.uSDCoinAmount = uSDCoinAmount;
+    }
+    if (coinAmount != null) {
+      $result.coinAmount = coinAmount;
+    }
+    return $result;
+  }
+  EncryptableScanTransfer._() : super();
+  factory EncryptableScanTransfer.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptableScanTransfer.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableScanTransfer', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'UnixTime', protoName: 'UnixTime')
+    ..aOS(2, _omitFieldNames ? '' : 'DestinationWalletID', protoName: 'DestinationWalletID')
+    ..aOM<$15.Coin>(3, _omitFieldNames ? '' : 'USDCoinAmount', protoName: 'USDCoinAmount', subBuilder: $15.Coin.create)
+    ..aOM<$15.Coin>(4, _omitFieldNames ? '' : 'CoinAmount', protoName: 'CoinAmount', subBuilder: $15.Coin.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptableScanTransfer clone() => EncryptableScanTransfer()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptableScanTransfer copyWith(void Function(EncryptableScanTransfer) updates) => super.copyWith((message) => updates(message as EncryptableScanTransfer)) as EncryptableScanTransfer;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptableScanTransfer create() => EncryptableScanTransfer._();
+  EncryptableScanTransfer createEmptyInstance() => create();
+  static $pb.PbList<EncryptableScanTransfer> createRepeated() => $pb.PbList<EncryptableScanTransfer>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptableScanTransfer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptableScanTransfer>(create);
+  static EncryptableScanTransfer? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get unixTime => $_getI64(0);
+  @$pb.TagNumber(1)
+  set unixTime($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUnixTime() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUnixTime() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get destinationWalletID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set destinationWalletID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDestinationWalletID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDestinationWalletID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $15.Coin get uSDCoinAmount => $_getN(2);
+  @$pb.TagNumber(3)
+  set uSDCoinAmount($15.Coin v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUSDCoinAmount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUSDCoinAmount() => clearField(3);
+  @$pb.TagNumber(3)
+  $15.Coin ensureUSDCoinAmount() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $15.Coin get coinAmount => $_getN(3);
+  @$pb.TagNumber(4)
+  set coinAmount($15.Coin v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCoinAmount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCoinAmount() => clearField(4);
+  @$pb.TagNumber(4)
+  $15.Coin ensureCoinAmount() => $_ensure(3);
+}
+
+/// The window itself: every transfer one wallet has sent inside the configured period.  Entries
+/// older than the window are pruned lazily, the next time that wallet transfers.
+class EncryptableScanTransferHistory extends $pb.GeneratedMessage {
+  factory EncryptableScanTransferHistory({
+    $core.Iterable<EncryptableScanTransfer>? transfers,
+  }) {
+    final $result = create();
+    if (transfers != null) {
+      $result.transfers.addAll(transfers);
+    }
+    return $result;
+  }
+  EncryptableScanTransferHistory._() : super();
+  factory EncryptableScanTransferHistory.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EncryptableScanTransferHistory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EncryptableScanTransferHistory', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..pc<EncryptableScanTransfer>(1, _omitFieldNames ? '' : 'Transfers', $pb.PbFieldType.PM, protoName: 'Transfers', subBuilder: EncryptableScanTransfer.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EncryptableScanTransferHistory clone() => EncryptableScanTransferHistory()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EncryptableScanTransferHistory copyWith(void Function(EncryptableScanTransferHistory) updates) => super.copyWith((message) => updates(message as EncryptableScanTransferHistory)) as EncryptableScanTransferHistory;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EncryptableScanTransferHistory create() => EncryptableScanTransferHistory._();
+  EncryptableScanTransferHistory createEmptyInstance() => create();
+  static $pb.PbList<EncryptableScanTransferHistory> createRepeated() => $pb.PbList<EncryptableScanTransferHistory>();
+  @$core.pragma('dart2js:noInline')
+  static EncryptableScanTransferHistory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EncryptableScanTransferHistory>(create);
+  static EncryptableScanTransferHistory? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<EncryptableScanTransfer> get transfers => $_getList(0);
 }
 
 class EncryptableAuthorizedSignatory extends $pb.GeneratedMessage {

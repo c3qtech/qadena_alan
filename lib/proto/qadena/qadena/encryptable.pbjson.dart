@@ -60,6 +60,118 @@ final $typed_data.Uint8List encryptableClaimCredentialExtraParmsDescriptor = $co
     'YWRlbmEuRW5jcnlwdGFibGVQZWRlcnNlbkNvbW1pdFIGWmVyb1BDEjgKB0NsYWltUEMYCyABKA'
     'syHi5xYWRlbmEucWFkZW5hLkJQZWRlcnNlbkNvbW1pdFIHQ2xhaW1QQw==');
 
+@$core.Deprecated('Use encryptableUpdateSubCredentialDescriptor instead')
+const EncryptableUpdateSubCredential$json = {
+  '1': 'EncryptableUpdateSubCredential',
+  '2': [
+    {'1': 'CredentialType', '3': 1, '4': 1, '5': 9, '10': 'CredentialType'},
+    {'1': 'EncCredentialInfoVShare', '3': 2, '4': 1, '5': 12, '10': 'EncCredentialInfoVShare'},
+    {'1': 'CredentialInfoVShareBind', '3': 3, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'CredentialInfoVShareBind'},
+    {'1': 'FindCredentialPC', '3': 4, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'FindCredentialPC'},
+    {'1': 'NewCredentialPC', '3': 5, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'NewCredentialPC'},
+    {'1': 'ZeroPC', '3': 6, '4': 1, '5': 11, '6': '.qadena.qadena.EncryptablePedersenCommit', '10': 'ZeroPC'},
+    {'1': 'ClaimPC', '3': 7, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'ClaimPC'},
+  ],
+};
+
+/// Descriptor for `EncryptableUpdateSubCredential`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptableUpdateSubCredentialDescriptor = $convert.base64Decode(
+    'Ch5FbmNyeXB0YWJsZVVwZGF0ZVN1YkNyZWRlbnRpYWwSJgoOQ3JlZGVudGlhbFR5cGUYASABKA'
+    'lSDkNyZWRlbnRpYWxUeXBlEjgKF0VuY0NyZWRlbnRpYWxJbmZvVlNoYXJlGAIgASgMUhdFbmND'
+    'cmVkZW50aWFsSW5mb1ZTaGFyZRJZChhDcmVkZW50aWFsSW5mb1ZTaGFyZUJpbmQYAyABKAsyHS'
+    '5xYWRlbmEucWFkZW5hLlZTaGFyZUJpbmREYXRhUhhDcmVkZW50aWFsSW5mb1ZTaGFyZUJpbmQS'
+    'SgoQRmluZENyZWRlbnRpYWxQQxgEIAEoCzIeLnFhZGVuYS5xYWRlbmEuQlBlZGVyc2VuQ29tbW'
+    'l0UhBGaW5kQ3JlZGVudGlhbFBDEkgKD05ld0NyZWRlbnRpYWxQQxgFIAEoCzIeLnFhZGVuYS5x'
+    'YWRlbmEuQlBlZGVyc2VuQ29tbWl0Ug9OZXdDcmVkZW50aWFsUEMSQAoGWmVyb1BDGAYgASgLMi'
+    'gucWFkZW5hLnFhZGVuYS5FbmNyeXB0YWJsZVBlZGVyc2VuQ29tbWl0UgZaZXJvUEMSOAoHQ2xh'
+    'aW1QQxgHIAEoCzIeLnFhZGVuYS5xYWRlbmEuQlBlZGVyc2VuQ29tbWl0UgdDbGFpbVBD');
+
+@$core.Deprecated('Use encryptableUpdateCredentialExtraParmsDescriptor instead')
+const EncryptableUpdateCredentialExtraParms$json = {
+  '1': 'EncryptableUpdateCredentialExtraParms',
+  '2': [
+    {'1': 'EncCredentialInfoVShare', '3': 1, '4': 1, '5': 12, '10': 'EncCredentialInfoVShare'},
+    {'1': 'CredentialInfoVShareBind', '3': 2, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'CredentialInfoVShareBind'},
+    {'1': 'WalletID', '3': 3, '4': 1, '5': 9, '10': 'WalletID'},
+    {'1': 'FindCredentialPC', '3': 4, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'FindCredentialPC'},
+    {'1': 'NewCredentialPC', '3': 5, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'NewCredentialPC'},
+    {'1': 'EncCredentialHashVShare', '3': 8, '4': 1, '5': 12, '10': 'EncCredentialHashVShare'},
+    {'1': 'CredentialHashVShareBind', '3': 9, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'CredentialHashVShareBind'},
+    {'1': 'ZeroPC', '3': 10, '4': 1, '5': 11, '6': '.qadena.qadena.EncryptablePedersenCommit', '10': 'ZeroPC'},
+    {'1': 'ClaimPC', '3': 11, '4': 1, '5': 11, '6': '.qadena.qadena.BPedersenCommit', '10': 'ClaimPC'},
+    {'1': 'SubUpdates', '3': 12, '4': 3, '5': 11, '6': '.qadena.qadena.EncryptableUpdateSubCredential', '10': 'SubUpdates'},
+  ],
+  '9': [
+    {'1': 6, '2': 7},
+    {'1': 7, '2': 8},
+  ],
+};
+
+/// Descriptor for `EncryptableUpdateCredentialExtraParms`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptableUpdateCredentialExtraParmsDescriptor = $convert.base64Decode(
+    'CiVFbmNyeXB0YWJsZVVwZGF0ZUNyZWRlbnRpYWxFeHRyYVBhcm1zEjgKF0VuY0NyZWRlbnRpYW'
+    'xJbmZvVlNoYXJlGAEgASgMUhdFbmNDcmVkZW50aWFsSW5mb1ZTaGFyZRJZChhDcmVkZW50aWFs'
+    'SW5mb1ZTaGFyZUJpbmQYAiABKAsyHS5xYWRlbmEucWFkZW5hLlZTaGFyZUJpbmREYXRhUhhDcm'
+    'VkZW50aWFsSW5mb1ZTaGFyZUJpbmQSGgoIV2FsbGV0SUQYAyABKAlSCFdhbGxldElEEkoKEEZp'
+    'bmRDcmVkZW50aWFsUEMYBCABKAsyHi5xYWRlbmEucWFkZW5hLkJQZWRlcnNlbkNvbW1pdFIQRm'
+    'luZENyZWRlbnRpYWxQQxJICg9OZXdDcmVkZW50aWFsUEMYBSABKAsyHi5xYWRlbmEucWFkZW5h'
+    'LkJQZWRlcnNlbkNvbW1pdFIPTmV3Q3JlZGVudGlhbFBDEjgKF0VuY0NyZWRlbnRpYWxIYXNoVl'
+    'NoYXJlGAggASgMUhdFbmNDcmVkZW50aWFsSGFzaFZTaGFyZRJZChhDcmVkZW50aWFsSGFzaFZT'
+    'aGFyZUJpbmQYCSABKAsyHS5xYWRlbmEucWFkZW5hLlZTaGFyZUJpbmREYXRhUhhDcmVkZW50aW'
+    'FsSGFzaFZTaGFyZUJpbmQSQAoGWmVyb1BDGAogASgLMigucWFkZW5hLnFhZGVuYS5FbmNyeXB0'
+    'YWJsZVBlZGVyc2VuQ29tbWl0UgZaZXJvUEMSOAoHQ2xhaW1QQxgLIAEoCzIeLnFhZGVuYS5xYW'
+    'RlbmEuQlBlZGVyc2VuQ29tbWl0UgdDbGFpbVBDEk0KClN1YlVwZGF0ZXMYDCADKAsyLS5xYWRl'
+    'bmEucWFkZW5hLkVuY3J5cHRhYmxlVXBkYXRlU3ViQ3JlZGVudGlhbFIKU3ViVXBkYXRlc0oECA'
+    'YQB0oECAcQCA==');
+
+@$core.Deprecated('Use encryptableCredentialIdentityHistoryDescriptor instead')
+const EncryptableCredentialIdentityHistory$json = {
+  '1': 'EncryptableCredentialIdentityHistory',
+  '2': [
+    {'1': 'Hashes', '3': 1, '4': 3, '5': 9, '10': 'Hashes'},
+    {'1': 'LifeEventCount', '3': 2, '4': 1, '5': 13, '10': 'LifeEventCount'},
+    {'1': 'LastUpdateHeight', '3': 3, '4': 1, '5': 3, '10': 'LastUpdateHeight'},
+  ],
+};
+
+/// Descriptor for `EncryptableCredentialIdentityHistory`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptableCredentialIdentityHistoryDescriptor = $convert.base64Decode(
+    'CiRFbmNyeXB0YWJsZUNyZWRlbnRpYWxJZGVudGl0eUhpc3RvcnkSFgoGSGFzaGVzGAEgAygJUg'
+    'ZIYXNoZXMSJgoOTGlmZUV2ZW50Q291bnQYAiABKA1SDkxpZmVFdmVudENvdW50EioKEExhc3RV'
+    'cGRhdGVIZWlnaHQYAyABKANSEExhc3RVcGRhdGVIZWlnaHQ=');
+
+@$core.Deprecated('Use encryptableScanTransferDescriptor instead')
+const EncryptableScanTransfer$json = {
+  '1': 'EncryptableScanTransfer',
+  '2': [
+    {'1': 'UnixTime', '3': 1, '4': 1, '5': 3, '10': 'UnixTime'},
+    {'1': 'DestinationWalletID', '3': 2, '4': 1, '5': 9, '10': 'DestinationWalletID'},
+    {'1': 'USDCoinAmount', '3': 3, '4': 1, '5': 11, '6': '.cosmos.base.v1beta1.Coin', '8': {}, '10': 'USDCoinAmount'},
+    {'1': 'CoinAmount', '3': 4, '4': 1, '5': 11, '6': '.cosmos.base.v1beta1.Coin', '8': {}, '10': 'CoinAmount'},
+  ],
+};
+
+/// Descriptor for `EncryptableScanTransfer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptableScanTransferDescriptor = $convert.base64Decode(
+    'ChdFbmNyeXB0YWJsZVNjYW5UcmFuc2ZlchIaCghVbml4VGltZRgBIAEoA1IIVW5peFRpbWUSMA'
+    'oTRGVzdGluYXRpb25XYWxsZXRJRBgCIAEoCVITRGVzdGluYXRpb25XYWxsZXRJRBJFCg1VU0RD'
+    'b2luQW1vdW50GAMgASgLMhkuY29zbW9zLmJhc2UudjFiZXRhMS5Db2luQgTI3h8AUg1VU0RDb2'
+    'luQW1vdW50Ej8KCkNvaW5BbW91bnQYBCABKAsyGS5jb3Ntb3MuYmFzZS52MWJldGExLkNvaW5C'
+    'BMjeHwBSCkNvaW5BbW91bnQ=');
+
+@$core.Deprecated('Use encryptableScanTransferHistoryDescriptor instead')
+const EncryptableScanTransferHistory$json = {
+  '1': 'EncryptableScanTransferHistory',
+  '2': [
+    {'1': 'Transfers', '3': 1, '4': 3, '5': 11, '6': '.qadena.qadena.EncryptableScanTransfer', '10': 'Transfers'},
+  ],
+};
+
+/// Descriptor for `EncryptableScanTransferHistory`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List encryptableScanTransferHistoryDescriptor = $convert.base64Decode(
+    'Ch5FbmNyeXB0YWJsZVNjYW5UcmFuc2Zlckhpc3RvcnkSRAoJVHJhbnNmZXJzGAEgAygLMiYucW'
+    'FkZW5hLnFhZGVuYS5FbmNyeXB0YWJsZVNjYW5UcmFuc2ZlclIJVHJhbnNmZXJz');
+
 @$core.Deprecated('Use encryptableAuthorizedSignatoryDescriptor instead')
 const EncryptableAuthorizedSignatory$json = {
   '1': 'EncryptableAuthorizedSignatory',

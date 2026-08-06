@@ -29,6 +29,10 @@ class MsgClient extends $grpc.Client {
       '/qadena.nameservice.Msg/BindCredential',
       ($0.MsgBindCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgBindCredentialResponse.fromBuffer(value));
+  static final _$unbindCredential = $grpc.ClientMethod<$0.MsgUnbindCredential, $0.MsgUnbindCredentialResponse>(
+      '/qadena.nameservice.Msg/UnbindCredential',
+      ($0.MsgUnbindCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgUnbindCredentialResponse.fromBuffer(value));
 
   MsgClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -42,6 +46,10 @@ class MsgClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.MsgBindCredentialResponse> bindCredential($0.MsgBindCredential request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$bindCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgUnbindCredentialResponse> unbindCredential($0.MsgUnbindCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$unbindCredential, request, options: options);
   }
 }
 
@@ -64,6 +72,13 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgBindCredential.fromBuffer(value),
         ($0.MsgBindCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgUnbindCredential, $0.MsgUnbindCredentialResponse>(
+        'UnbindCredential',
+        unbindCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgUnbindCredential.fromBuffer(value),
+        ($0.MsgUnbindCredentialResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.MsgUpdateParamsResponse> updateParams_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateParams> request) async {
@@ -74,6 +89,11 @@ abstract class MsgServiceBase extends $grpc.Service {
     return bindCredential(call, await request);
   }
 
+  $async.Future<$0.MsgUnbindCredentialResponse> unbindCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUnbindCredential> request) async {
+    return unbindCredential(call, await request);
+  }
+
   $async.Future<$0.MsgUpdateParamsResponse> updateParams($grpc.ServiceCall call, $0.MsgUpdateParams request);
   $async.Future<$0.MsgBindCredentialResponse> bindCredential($grpc.ServiceCall call, $0.MsgBindCredential request);
+  $async.Future<$0.MsgUnbindCredentialResponse> unbindCredential($grpc.ServiceCall call, $0.MsgUnbindCredential request);
 }

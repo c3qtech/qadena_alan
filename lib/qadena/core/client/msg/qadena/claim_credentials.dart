@@ -329,8 +329,15 @@ Future<List<GeneratedMessage>> msgClaimCredentials(
     if (credentialTypes[i] == PersonalInfoCredentialType) {
       EncryptablePersonalInfo p = encryptables[i] as EncryptablePersonalInfo;
 
-      final credentialHashS = "${p.details.lastName},${p.details.middleName},${p.details.firstName}|${p.details.birthdate}|${p.details.gender}";
-      final credentialHash = hashStringHex(credentialHashS);
+      // Was assembled by hand here, without the chain's canonicalization. That
+      // agrees with the chain only for names that happen to be already lowercased,
+      // trimmed and single-spaced: a name carrying a double space, a tab, or a
+      // no-break space produced a different hash, and the enclave rejected the
+      // claim with a bare ErrGenericPedersen that named nothing.
+      //
+      // createCredentialHash is a faithful port and is pinned to vectors from the
+      // Go implementation (test/qadena/credential_hash_test.dart).
+      final credentialHash = createCredentialHash(p.details);
 
       final msg = await createClaimContactInfoMessage(
         args.chain,

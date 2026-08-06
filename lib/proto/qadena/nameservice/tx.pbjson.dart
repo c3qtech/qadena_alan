@@ -68,3 +68,29 @@ const MsgBindCredentialResponse$json = {
 final $typed_data.Uint8List msgBindCredentialResponseDescriptor = $convert.base64Decode(
     'ChlNc2dCaW5kQ3JlZGVudGlhbFJlc3BvbnNl');
 
+@$core.Deprecated('Use msgUnbindCredentialDescriptor instead')
+const MsgUnbindCredential$json = {
+  '1': 'MsgUnbindCredential',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'credentialType', '3': 2, '4': 1, '5': 9, '10': 'credentialType'},
+    {'1': 'credentialInfo', '3': 3, '4': 1, '5': 9, '10': 'credentialInfo'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgUnbindCredential`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUnbindCredentialDescriptor = $convert.base64Decode(
+    'ChNNc2dVbmJpbmRDcmVkZW50aWFsEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISJgoOY3JlZG'
+    'VudGlhbFR5cGUYAiABKAlSDmNyZWRlbnRpYWxUeXBlEiYKDmNyZWRlbnRpYWxJbmZvGAMgASgJ'
+    'Ug5jcmVkZW50aWFsSW5mbzoMguewKgdjcmVhdG9y');
+
+@$core.Deprecated('Use msgUnbindCredentialResponseDescriptor instead')
+const MsgUnbindCredentialResponse$json = {
+  '1': 'MsgUnbindCredentialResponse',
+};
+
+/// Descriptor for `MsgUnbindCredentialResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUnbindCredentialResponseDescriptor = $convert.base64Decode(
+    'ChtNc2dVbmJpbmRDcmVkZW50aWFsUmVzcG9uc2U=');
+

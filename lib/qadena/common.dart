@@ -115,6 +115,82 @@ BigInt hashUint8List(Uint8List input) {
   return BigInt.parse(hex.encode(SHA256Digest().process(input)) , radix: 16);
 }
 
+/// The whitespace runes Go's `unicode.IsSpace` reports true for.
+///
+/// Spelled out rather than approximated with a regex, because this set has to
+/// match the chain's rune-for-rune: `canonicalizeName` feeds
+/// `createCredentialHash`, and a single rune classified differently here than on
+/// the chain produces a different identity hash and the transaction is rejected.
+/// The chain deliberately uses `unicode.IsSpace` (which moves only with the Go
+/// toolchain) rather than golang.org/x/text, for the same reason.
+const Set<int> _goUnicodeSpace = {
+  0x09, // tab
+  0x0A, // newline
+  0x0B, // vertical tab
+  0x0C, // form feed
+  0x0D, // carriage return
+  0x20, // space
+  0x85, // next line
+  0xA0, // no-break space
+  0x1680, // ogham space mark
+  0x2000, 0x2001, 0x2002, 0x2003, 0x2004, 0x2005,
+  0x2006, 0x2007, 0x2008, 0x2009, 0x200A, // en quad .. hair space
+  0x2028, // line separator
+  0x2029, // paragraph separator
+  0x202F, // narrow no-break space
+  0x205F, // medium mathematical space
+  0x3000, // ideographic space
+};
+
+/// Canonicalizes one name field exactly as the chain's `common.CanonicalizeName`
+/// does: lowercase, trim, and collapse every run of whitespace to one space.
+///
+/// Only used through [createCredentialHash]. It is NOT applied to the values sent
+/// on chain -- the enclave compares a name sub-credential against the personal-info
+/// details with plain equality and no canonicalization, so canonicalizing what is
+/// sent would break the sub-update.
+String canonicalizeName(String s) {
+  final lowered = s.toLowerCase().trim();
+
+  final out = StringBuffer();
+  var inSpace = false;
+  for (final rune in lowered.runes) {
+    if (_goUnicodeSpace.contains(rune)) {
+      inSpace = true;
+      continue;
+    }
+    if (inSpace) {
+      out.writeCharCode(0x20);
+      inSpace = false;
+    }
+    out.writeCharCode(rune);
+  }
+  return out.toString();
+}
+
+/// Derives the identity hash the enclave keys its uniqueness index on, matching
+/// `common.CreateCredentialHash`.
+///
+/// Three parties compute this independently and all three must agree: the enclave
+/// recomputes it on every claim and update and rejects a mismatch with
+/// ErrGenericPedersen, the identity provider publishes it with each credential,
+/// and this SDK sends it. The chain's own comment puts it plainly -- "wallet and
+/// chain must ship this function in lockstep".
+///
+/// Birthdate and gender are used as-is, because the chain's
+/// ValidatePersonalInfoDetails already refuses anything but their canonical
+/// spelling.
+///
+/// Verified against vectors generated from the Go implementation; see
+/// test/credential_hash_test.dart.
+String createCredentialHash(types.EncryptablePersonalInfoDetails details) {
+  final firstMiddleLast = '${canonicalizeName(details.lastName)},'
+      '${canonicalizeName(details.middleName)},'
+      '${canonicalizeName(details.firstName)}';
+
+  return hashStringHex('$firstMiddleLast|${details.birthdate}|${details.gender}');
+}
+
   /// Helper method to find a sub-wallet by credential
   Future<String> clientFindSubWallet(qadena.Chain chain, String credential, String credentialType) async {
     final nameBinding = await chain.nameServiceQuery.queryClient.nameBinding(

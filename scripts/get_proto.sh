@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+# -u is deliberate. Both branches below run `cp -r $QADENA_SRC/*`; with the
+# variable unset that expands to `cp -r /*` and copies the filesystem root into
+# the proto directory. Nothing else in the script would have stopped it.
+set -euo pipefail
+
+# Usage: get_proto.sh <proto> <third_party> <out> <cosmos> <googleapi> \
+#                     <gogoproto> <cosmosproto> <cosmosevm> <qadena_src>
+#
+# Every argument is required; QADENA_SRC (the 9th) is a path to the qadena proto
+# directory and is validated below. The version arguments may be the literal
+# string "skip", in which case only the qadena protos are refreshed.
+if [ $# -lt 9 ]; then
+    echo "error: get_proto.sh needs 9 arguments, got $#" >&2
+    echo "  usage: $0 <proto> <third_party> <out> <cosmos> <googleapi> <gogoproto> <cosmosproto> <cosmosevm> <qadena_src>" >&2
+    exit 2
+fi
 
 COSMOS_VERSION=$4
 GOOGLEAPI_VERSION=$5
@@ -8,6 +23,22 @@ GOGOPROTO_VERSION=$6
 COSMOSPROTO_VERSION=$7
 COSMOSEVM_VERSION=$8
 QADENA_SRC=$9
+
+# Validated here as well as in the caller: this script is `source`d, so it also
+# has to stand on its own if invoked directly.
+if [ -z "$QADENA_SRC" ]; then
+    echo "error: qadena_src (argument 9) is empty" >&2
+    exit 2
+fi
+if [ ! -d "$QADENA_SRC" ]; then
+    echo "error: qadena_src is not a directory: $QADENA_SRC (resolved from $(pwd))" >&2
+    exit 2
+fi
+if [ ! -f "$QADENA_SRC/qadena/tx.proto" ]; then
+    echo "error: $QADENA_SRC does not look like a qadena proto directory" >&2
+    echo "       (expected $QADENA_SRC/qadena/tx.proto)" >&2
+    exit 2
+fi
 
 #if COSMOS_VERSION="skip" and GOOGLEAPI_VERSION="skip" and GOGOPROTO_VERSION="skip" and COSMOSPROTO_VERSION="skip" then we will only update the qadena proto files
 

@@ -18,6 +18,7 @@ import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
 import 'package:qadena_alan/proto/cosmos/bank/v1beta1/query.pb.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/register_authorized_signatory.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/claim_credentials.dart';
+import 'package:qadena_alan/qadena/core/client/msg/qadena/update_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/bind_credentials.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/protect_key.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/common.dart';
@@ -226,6 +227,169 @@ class QadenaClient {
       return false;
     }
     return true;
+  }
+
+  /// Applies a correction the identity provider published for this wallet.
+  ///
+  /// The identity provider detected that eSECURE changed something the on-chain
+  /// credential still records the old value for, and published a corrected
+  /// ownerless credential under [claimAmount]/[claimBlindingFactor] -- the claim
+  /// code this device generated and sent only the curve point of. The chain accepts
+  /// MsgUpdateCredential from nobody but the credential's owner, so completing it
+  /// is necessarily the wallet's job.
+  ///
+  /// Three transactions, in this order, and the order matters:
+  ///
+  ///  1. the update itself, from the main wallet
+  ///  2. MsgClaimUpdatedCredential from the ephemeral wallet. NOT optional for an
+  ///     identity correction: the accept-list pins the name sub-credential
+  ///     commitments and fails closed, so until this lands the wallet cannot
+  ///     present those credentials at all.
+  ///  3. for a contact correction, unbind the old value then bind the new one.
+  ///     A binding is keyed by the cleartext contact, so between (1) and (3) the
+  ///     OLD address is what social recovery still resolves -- warn the user
+  ///     rather than leaving them to discover it.
+  ///
+  /// [newContact] is required for a contact correction and ignored otherwise; it is
+  /// the corrected value, which the caller already has from the descriptor.
+  ///
+  /// Returns null on success, or a message describing what was rejected. Whether
+  /// the chain will ACCEPT the change is not decided here: that depends on the edit
+  /// distance, the lifetime alias budget, the cooldown and a configurable field cap,
+  /// all of which live in chain params and are answered by the identity provider's
+  /// precheck endpoint. Call it first.
+  Future<String?> applyCredentialUpdate({
+    required List<String> seedPhrase,
+    required BigInt claimAmount,
+    required BigInt claimBlindingFactor,
+    String credentialType = common.PersonalInfoCredentialType,
+    String? oldContact,
+    void Function(String message)? onProgress,
+  }) async {
+    if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
+      return 'no claim code supplied, so there is no published correction to apply';
+    }
+
+    final isContact = credentialType != common.PersonalInfoCredentialType;
+    if (isContact && (oldContact == null || oldContact.isEmpty)) {
+      // Only the old value has to be supplied. msgBindCredential reads the NEW one
+      // straight off the updated credential, so there is no way for the binding to
+      // disagree with what is on chain. The old value is gone from the chain by
+      // then, which is exactly why the caller has to carry it.
+      return 'a $credentialType correction needs the previous value, to retire its '
+          'directory entry';
+    }
+
+    final chain = Chain(networkInfo);
+    final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
+
+    // Same derivation as bindCredentials and createAccount: main at 0, ephemeral
+    // at 1.
+    final mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0);
+    final ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 1);
+
+    try {
+      onProgress?.call('Applying the correction...');
+
+      final updateMsgs = await msgUpdateCredential(MsgUpdateCredentialArgs(
+        chain: chain,
+        txwallet: mainWallet.transactionWallet,
+        cxwallet: mainWallet.credentialWallet,
+        claimAmount: claimAmount,
+        claimBlindingFactor: claimBlindingFactor,
+        credentialType: credentialType,
+      ));
+
+      final updateTxHashRef = StringRef("");
+      var rejected = await QadenaClientTx.broadcastTx(
+          mainWallet.txAcct, updateMsgs, txHashRef: updateTxHashRef);
+      if (rejected != null) {
+        return 'the correction was rejected: $rejected';
+      }
+
+      // Wait for inclusion before touching anything that depends on the new
+      // commitments: the accept-list refresh below reads them back from chain.
+      rejected = await QadenaClientTx.checkTxResult(txSender, updateTxHashRef.value);
+      if (rejected != null) {
+        return 'the correction failed on chain: $rejected';
+      }
+      if (common.Debug) {
+        print('Accepted: update credential, TxHash: ${updateTxHashRef.value}');
+      }
+
+      if (!isContact) {
+        onProgress?.call('Refreshing your device credentials...');
+
+        final claimUpdatedMsg =
+            await msgClaimUpdatedCredential(MsgClaimUpdatedCredentialArgs(
+          chain: chain,
+          ephwallet: ephWallet.transactionWallet,
+          linkToCxWallet: mainWallet.credentialWallet,
+          linkToWalletID: mainWallet.transactionWallet.address,
+        ));
+
+        final claimTxHashRef = StringRef("");
+        rejected = await QadenaClientTx.broadcastTx(
+            ephWallet.txAcct, [claimUpdatedMsg], txHashRef: claimTxHashRef);
+        if (rejected != null) {
+          // The identity is corrected but this device's accept-list still pins the
+          // old commitments, so say so plainly rather than reporting success.
+          return 'the correction was applied but this device could not refresh its '
+              'credentials, so they cannot be presented until it does: $rejected';
+        }
+
+        rejected = await QadenaClientTx.checkTxResult(txSender, claimTxHashRef.value);
+        if (rejected != null) {
+          return 'the correction was applied but refreshing this device failed: $rejected';
+        }
+        if (common.Debug) {
+          print('Accepted: claim updated credential, TxHash: ${claimTxHashRef.value}');
+        }
+
+        return null;
+      }
+
+      onProgress?.call('Updating your directory entry...');
+
+      // Retire the old value first. Leaving both bound would let two addresses
+      // resolve to this wallet, and the chain has no opinion about which is
+      // current.
+      final bindingMsgs = <GeneratedMessage>[
+        msgUnbindCredential(
+          creatorWalletID: ephWallet.transactionWallet.address,
+          credentialType: credentialType,
+          credentialInfo: oldContact!,
+        ),
+        // Reads the corrected value from the credential itself, so the binding
+        // cannot drift from what the chain now holds.
+        await msgBindCredential(MsgBindCredentialArgs(
+          chain: chain,
+          ephtxwallet: ephWallet.transactionWallet,
+          cxwallet: mainWallet.credentialWallet,
+          credentialType: credentialType,
+        )),
+      ];
+
+      final bindTxHashRef = StringRef("");
+      rejected = await QadenaClientTx.broadcastTx(
+          ephWallet.txAcct, bindingMsgs, txHashRef: bindTxHashRef);
+      if (rejected != null) {
+        return 'the correction was applied but the directory entry still points at '
+            'the old value, so recovery will not find the new one: $rejected';
+      }
+
+      rejected = await QadenaClientTx.checkTxResult(txSender, bindTxHashRef.value);
+      if (rejected != null) {
+        return 'the correction was applied but rebinding failed: $rejected';
+      }
+      if (common.Debug) {
+        print('Accepted: rebind credential, TxHash: ${bindTxHashRef.value}');
+      }
+
+      return null;
+    } catch (e) {
+      return 'could not apply the correction: $e';
+    }
   }
 
   Future<AccountResponse> createAccount(String pioneerID, List<String>? mnemonic, String? serviceProviderID, BigInt claimAmount, BigInt claimBlindingFactor, String feeGranterAddress, List<String> recoveryPartners, int recoveryThreshold, {void Function(String message)? onProgress, String? onProgressBaseMessage}) async {

@@ -17,6 +17,7 @@ package qadena.qadena;
 
 import "qadena/qadena/wallet.proto";
 import "qadena/qadena/tx.proto";
+import "qadena/qadena/params.proto";
 import "qadena/qadena/credential.proto";
 import "qadena/qadena/suspicious_transaction.proto";
 import "qadena/qadena/public_key.proto";
@@ -80,9 +81,11 @@ service QadenaEnclave {
   rpc SetProtectKey (ProtectKey) returns (SetProtectKeyReply) {}
   rpc SetRecoverKey (RecoverKey) returns (SetRecoverKeyReply) {}
   rpc SetCredential (Credential) returns (SetCredentialReply) {}
-  rpc RemoveCredential (Credential) returns (RemoveCredentialReply) {}
+  rpc RemoveCredential (EnclaveRemoveCredentialRequest) returns (RemoveCredentialReply) {}
   rpc RecoverKeyByCredential (Credential) returns (RecoverKeyReply) {}
   rpc ClaimCredential(MsgClaimCredential) returns (MsgClaimCredentialResponse) {}
+  rpc UpdateCredential(EnclaveUpdateCredentialRequest) returns (MsgUpdateCredentialResponse) {}
+  rpc ClaimUpdatedCredential(MsgClaimUpdatedCredential) returns (MsgClaimUpdatedCredentialResponse) {}
   rpc SignRecoverKey(MsgSignRecoverPrivateKey) returns (SignRecoverKeyReply) {}
   rpc QueryGetRecoverKey(QueryGetRecoverKeyRequest) returns (QueryGetRecoverKeyResponse) {}
   rpc QueryFindCredential(QueryFindCredentialRequest) returns (QueryFindCredentialResponse) {}
@@ -103,6 +106,11 @@ service QadenaEnclave {
   rpc SetSecretSharePrivateKey (SecretSharePrivK) returns (SetSecretSharePrivateKeyReply) {}
   rpc ValidateDestinationWallet (MsgCreateWallet) returns (ValidateDestinationWalletReply) {}
   rpc ValidateCredential (MsgBindCredential) returns (ValidateCredentialReply) {}
+  // Decrypts a freshly submitted credential and checks the fields the identity hash is built from,
+  // so an identity provider is told at submission time rather than the credential silently becoming
+  // unclaimable.  The chain cannot do this itself -- the details arrive encrypted.
+  rpc ValidatePersonalInfo (MsgCreateCredential) returns (ValidatePersonalInfoReply) {}
+  rpc ScanBankSend (MsgScanBankSend) returns (ScanBankSendReply) {}
   rpc ValidateTransferPrime (MsgTransferFunds) returns (ValidateTransferPrimeReply) {}
   rpc ValidateTransferDoublePrime (MsgReceiveFunds) returns (ValidateTransferDoublePrimeReply) {}
   rpc SyncWallets (MsgSyncWallets) returns (SyncWalletsReply) {}
@@ -262,6 +270,60 @@ message MsgScanTransactions {
   int64 height = 2;
   MsgTransferFunds msg = 3;
   string exchangerate = 4;
+  // The AML policy, read per scan rather than fixed at enclave startup, so a governance change to
+  // the window or the eKYC gate takes effect without restarting every node.
+  Params params = 5 [(gogoproto.nullable) = false];
+  // Thresholds already converted to attoUSD by the keeper.  They arrive pre-resolved because
+  // neither side can do this alone: the keeper holds the pricefeed but cannot see the sender's
+  // countries, which are sealed inside a credential, while the enclave can read the countries but
+  // has no pricefeed.  So the keeper values every configured threshold and the enclave only picks.
+  repeated ScanCountryThreshold countryThresholds = 6;
+  // Applied when none of the sender's countries is configured.  Also in attoUSD.
+  string defaultThresholdAttoUSD = 7;
+}
+
+message ScanCountryThreshold {
+  string country = 1;
+  string thresholdAttoUSD = 2;
+}
+
+// A direct bank send, put through the same AML scan as MsgTransferFunds.
+//
+// Separate from MsgScanTransactions because almost none of that message applies here: a transfer's
+// amount is spread across Pedersen commitments and VShares that the enclave has to decrypt, whereas
+// a bank send's amount is public and arrives as a plain integer.  What the two share -- the window,
+// the jurisdiction lookup, the threshold table -- is shared as code inside the enclave rather than
+// by forcing one message to carry both shapes.
+message MsgScanBankSend {
+  google.protobuf.Timestamp timestamp = 1 [
+    (gogoproto.stdtime) = true,
+    (gogoproto.nullable) = false
+  ];
+  int64 height = 2;
+  string srcWalletID = 3;
+  string dstWalletID = 4;
+  // One per denomination in the send.  bank SendCoins carries sdk.Coins, so a single message can
+  // move several denominations at once and each needs its own market and its own fail-closed
+  // pricing check.
+  repeated ScanBankSendCoin coins = 5;
+  Params params = 6 [(gogoproto.nullable) = false];
+  repeated ScanCountryThreshold countryThresholds = 7;
+  string defaultThresholdAttoUSD = 8;
+  string jarID = 9;
+}
+
+// NOTE: no exchange rate.  MsgScanTransactions has to carry one because the enclave decrypts the
+// amount out of a Pedersen commitment and does the multiplication itself.  A bank send's amount is
+// public, so the keeper -- which holds the pricefeed -- values it directly and sends the result.
+// That also keeps the multi-denomination case in the one place that can price each denomination.
+message ScanBankSendCoin {
+  string denom = 1;
+  string amount = 2;
+  string usdAmountAttoUSD = 3;
+}
+
+message ScanBankSendReply {
+  bool status = 1;
 }
 
 message MsgSyncWallets {
@@ -276,8 +338,38 @@ message MsgSyncCredentials {
   bool clear = 1;
 }
 
+// CredentialRef names a credential without carrying it.  Not "CredentialKey": that name is
+// already the store-key helper in x/qadena/types/key_credential.go.
+message CredentialRef {
+  string credentialID = 1;
+  string credentialType = 2;
+}
+
 message SyncCredentialsReply {
   repeated Credential credentials = 1;
+  // Credentials the enclave deleted.  Today deletion always originates on-chain, so nothing
+  // populates this yet; it is the channel an enclave-originated removal will need once
+  // MsgRemoveCredential grows a user-initiated path.
+  repeated CredentialRef removedCredentials = 2;
+}
+
+// EnclaveRemoveCredentialRequest carries who asked for the removal.  An empty requesterWalletID
+// means the identity provider path, which may only remove ownerless credentials; a non-empty one
+// is a user removing a credential they own.  Passing it explicitly keeps the identity provider's
+// ownerless-only guarantee intact rather than loosening the check for both callers.
+message EnclaveRemoveCredentialRequest {
+  Credential credential = 1;
+  string requesterWalletID = 2;
+}
+
+// EnclaveUpdateCredentialRequest wraps the user's message with the two things the enclave cannot
+// determine for itself and must not take from the client: the block height, and the module
+// params the change policy is evaluated against.  Both are stamped by the keeper, so they are
+// identical across validators and the verdict stays deterministic.
+message EnclaveUpdateCredentialRequest {
+  MsgUpdateCredential msg = 1;
+  int64 blockHeight = 2;
+  Params params = 3 [(gogoproto.nullable) = false];
 }
 
 
@@ -390,6 +482,15 @@ message ValidateDestinationWalletReply {
 
 message ValidateCredentialReply {
   bool status = 1;
+}
+
+// Reply to ValidatePersonalInfo.  Carries a reason code rather than a message: the enclave is the
+// only party that can read the credential, and a free-text reason would put the decrypted values
+// into a public transaction error.  The keeper maps the code to a fixed sentence that names the
+// rule broken without quoting what was submitted.
+message ValidatePersonalInfoReply {
+  bool  status = 1;
+  int32 reason = 2;
 }
 
 message ValidateTransferPrimeReply {

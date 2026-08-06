@@ -245,6 +245,123 @@ class MsgBindCredentialResponse extends $pb.GeneratedMessage {
   static MsgBindCredentialResponse? _defaultInstance;
 }
 
+///  MsgUnbindCredential drops a name binding.
+///
+///  A binding is keyed by the cleartext contact, so replacing a phone number or email address binds
+///  the new value and leaves the old one still resolving to the wallet.  Unbinding the old value is
+///  what stops a number the user no longer holds from continuing to name them.  No credential proof
+///  is needed to remove a binding, only that the caller is the address it points at -- there is
+///  nothing to prove about a contact you are giving up.
+class MsgUnbindCredential extends $pb.GeneratedMessage {
+  factory MsgUnbindCredential({
+    $core.String? creator,
+    $core.String? credentialType,
+    $core.String? credentialInfo,
+  }) {
+    final $result = create();
+    if (creator != null) {
+      $result.creator = creator;
+    }
+    if (credentialType != null) {
+      $result.credentialType = credentialType;
+    }
+    if (credentialInfo != null) {
+      $result.credentialInfo = credentialInfo;
+    }
+    return $result;
+  }
+  MsgUnbindCredential._() : super();
+  factory MsgUnbindCredential.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUnbindCredential.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUnbindCredential', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.nameservice'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'creator')
+    ..aOS(2, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
+    ..aOS(3, _omitFieldNames ? '' : 'credentialInfo', protoName: 'credentialInfo')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUnbindCredential clone() => MsgUnbindCredential()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUnbindCredential copyWith(void Function(MsgUnbindCredential) updates) => super.copyWith((message) => updates(message as MsgUnbindCredential)) as MsgUnbindCredential;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUnbindCredential create() => MsgUnbindCredential._();
+  MsgUnbindCredential createEmptyInstance() => create();
+  static $pb.PbList<MsgUnbindCredential> createRepeated() => $pb.PbList<MsgUnbindCredential>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUnbindCredential getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUnbindCredential>(create);
+  static MsgUnbindCredential? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get creator => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set creator($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCreator() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCreator() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get credentialType => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set credentialType($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCredentialType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCredentialType() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get credentialInfo => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set credentialInfo($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCredentialInfo() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCredentialInfo() => clearField(3);
+}
+
+class MsgUnbindCredentialResponse extends $pb.GeneratedMessage {
+  factory MsgUnbindCredentialResponse() => create();
+  MsgUnbindCredentialResponse._() : super();
+  factory MsgUnbindCredentialResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgUnbindCredentialResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgUnbindCredentialResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.nameservice'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgUnbindCredentialResponse clone() => MsgUnbindCredentialResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgUnbindCredentialResponse copyWith(void Function(MsgUnbindCredentialResponse) updates) => super.copyWith((message) => updates(message as MsgUnbindCredentialResponse)) as MsgUnbindCredentialResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgUnbindCredentialResponse create() => MsgUnbindCredentialResponse._();
+  MsgUnbindCredentialResponse createEmptyInstance() => create();
+  static $pb.PbList<MsgUnbindCredentialResponse> createRepeated() => $pb.PbList<MsgUnbindCredentialResponse>();
+  @$core.pragma('dart2js:noInline')
+  static MsgUnbindCredentialResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgUnbindCredentialResponse>(create);
+  static MsgUnbindCredentialResponse? _defaultInstance;
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

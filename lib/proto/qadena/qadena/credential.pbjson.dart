@@ -30,6 +30,7 @@ const Credential$json = {
     {'1': 'referenceCredentialID', '3': 11, '4': 1, '5': 9, '10': 'referenceCredentialID'},
     {'1': 'identityOwnerWalletID', '3': 12, '4': 1, '5': 9, '10': 'identityOwnerWalletID'},
     {'1': 'ekycAppWalletID', '3': 13, '4': 1, '5': 9, '10': 'ekycAppWalletID'},
+    {'1': 'updateGeneration', '3': 14, '4': 1, '5': 13, '10': 'updateGeneration'},
   ],
 };
 
@@ -49,7 +50,8 @@ final $typed_data.Uint8List credentialDescriptor = $convert.base64Decode(
     'Byb3ZpZGVyV2FsbGV0SUQYCiABKAlSEHByb3ZpZGVyV2FsbGV0SUQSNAoVcmVmZXJlbmNlQ3Jl'
     'ZGVudGlhbElEGAsgASgJUhVyZWZlcmVuY2VDcmVkZW50aWFsSUQSNAoVaWRlbnRpdHlPd25lcl'
     'dhbGxldElEGAwgASgJUhVpZGVudGl0eU93bmVyV2FsbGV0SUQSKAoPZWt5Y0FwcFdhbGxldElE'
-    'GA0gASgJUg9la3ljQXBwV2FsbGV0SUQ=');
+    'GA0gASgJUg9la3ljQXBwV2FsbGV0SUQSKgoQdXBkYXRlR2VuZXJhdGlvbhgOIAEoDVIQdXBkYX'
+    'RlR2VuZXJhdGlvbg==');
 
 @$core.Deprecated('Use msgBindCredentialDescriptor instead')
 const MsgBindCredential$json = {

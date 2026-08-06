@@ -53,6 +53,14 @@ class MsgClient extends $grpc.Client {
       '/qadena.qadena.Msg/ClaimCredential',
       ($0.MsgClaimCredential value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgClaimCredentialResponse.fromBuffer(value));
+  static final _$updateCredential = $grpc.ClientMethod<$0.MsgUpdateCredential, $0.MsgUpdateCredentialResponse>(
+      '/qadena.qadena.Msg/UpdateCredential',
+      ($0.MsgUpdateCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgUpdateCredentialResponse.fromBuffer(value));
+  static final _$claimUpdatedCredential = $grpc.ClientMethod<$0.MsgClaimUpdatedCredential, $0.MsgClaimUpdatedCredentialResponse>(
+      '/qadena.qadena.Msg/ClaimUpdatedCredential',
+      ($0.MsgClaimUpdatedCredential value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgClaimUpdatedCredentialResponse.fromBuffer(value));
   static final _$addServiceProvider = $grpc.ClientMethod<$0.MsgAddServiceProvider, $0.MsgAddServiceProviderResponse>(
       '/qadena.qadena.Msg/AddServiceProvider',
       ($0.MsgAddServiceProvider value) => value.writeToBuffer(),
@@ -65,6 +73,14 @@ class MsgClient extends $grpc.Client {
       '/qadena.qadena.Msg/UpdateEnclaveIdentity',
       ($0.MsgUpdateEnclaveIdentity value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.MsgUpdateEnclaveIdentityResponse.fromBuffer(value));
+  static final _$addBankSendWhitelist = $grpc.ClientMethod<$0.MsgAddBankSendWhitelist, $0.MsgAddBankSendWhitelistResponse>(
+      '/qadena.qadena.Msg/AddBankSendWhitelist',
+      ($0.MsgAddBankSendWhitelist value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgAddBankSendWhitelistResponse.fromBuffer(value));
+  static final _$removeBankSendWhitelist = $grpc.ClientMethod<$0.MsgRemoveBankSendWhitelist, $0.MsgRemoveBankSendWhitelistResponse>(
+      '/qadena.qadena.Msg/RemoveBankSendWhitelist',
+      ($0.MsgRemoveBankSendWhitelist value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.MsgRemoveBankSendWhitelistResponse.fromBuffer(value));
   static final _$pioneerAddPublicKey = $grpc.ClientMethod<$0.MsgPioneerAddPublicKey, $0.MsgPioneerAddPublicKeyResponse>(
       '/qadena.qadena.Msg/PioneerAddPublicKey',
       ($0.MsgPioneerAddPublicKey value) => value.writeToBuffer(),
@@ -144,6 +160,14 @@ class MsgClient extends $grpc.Client {
     return $createUnaryCall(_$claimCredential, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.MsgUpdateCredentialResponse> updateCredential($0.MsgUpdateCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateCredential, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential($0.MsgClaimUpdatedCredential request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$claimUpdatedCredential, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.MsgAddServiceProviderResponse> addServiceProvider($0.MsgAddServiceProvider request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addServiceProvider, request, options: options);
   }
@@ -154,6 +178,14 @@ class MsgClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity($0.MsgUpdateEnclaveIdentity request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateEnclaveIdentity, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgAddBankSendWhitelistResponse> addBankSendWhitelist($0.MsgAddBankSendWhitelist request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$addBankSendWhitelist, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.MsgRemoveBankSendWhitelistResponse> removeBankSendWhitelist($0.MsgRemoveBankSendWhitelist request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$removeBankSendWhitelist, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey($0.MsgPioneerAddPublicKey request, {$grpc.CallOptions? options}) {
@@ -258,6 +290,20 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgClaimCredential.fromBuffer(value),
         ($0.MsgClaimCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgUpdateCredential, $0.MsgUpdateCredentialResponse>(
+        'UpdateCredential',
+        updateCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgUpdateCredential.fromBuffer(value),
+        ($0.MsgUpdateCredentialResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgClaimUpdatedCredential, $0.MsgClaimUpdatedCredentialResponse>(
+        'ClaimUpdatedCredential',
+        claimUpdatedCredential_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgClaimUpdatedCredential.fromBuffer(value),
+        ($0.MsgClaimUpdatedCredentialResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgAddServiceProvider, $0.MsgAddServiceProviderResponse>(
         'AddServiceProvider',
         addServiceProvider_Pre,
@@ -279,6 +325,20 @@ abstract class MsgServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.MsgUpdateEnclaveIdentity.fromBuffer(value),
         ($0.MsgUpdateEnclaveIdentityResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgAddBankSendWhitelist, $0.MsgAddBankSendWhitelistResponse>(
+        'AddBankSendWhitelist',
+        addBankSendWhitelist_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgAddBankSendWhitelist.fromBuffer(value),
+        ($0.MsgAddBankSendWhitelistResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.MsgRemoveBankSendWhitelist, $0.MsgRemoveBankSendWhitelistResponse>(
+        'RemoveBankSendWhitelist',
+        removeBankSendWhitelist_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.MsgRemoveBankSendWhitelist.fromBuffer(value),
+        ($0.MsgRemoveBankSendWhitelistResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.MsgPioneerAddPublicKey, $0.MsgPioneerAddPublicKeyResponse>(
         'PioneerAddPublicKey',
         pioneerAddPublicKey_Pre,
@@ -383,6 +443,14 @@ abstract class MsgServiceBase extends $grpc.Service {
     return claimCredential(call, await request);
   }
 
+  $async.Future<$0.MsgUpdateCredentialResponse> updateCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateCredential> request) async {
+    return updateCredential(call, await request);
+  }
+
+  $async.Future<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential_Pre($grpc.ServiceCall call, $async.Future<$0.MsgClaimUpdatedCredential> request) async {
+    return claimUpdatedCredential(call, await request);
+  }
+
   $async.Future<$0.MsgAddServiceProviderResponse> addServiceProvider_Pre($grpc.ServiceCall call, $async.Future<$0.MsgAddServiceProvider> request) async {
     return addServiceProvider(call, await request);
   }
@@ -393,6 +461,14 @@ abstract class MsgServiceBase extends $grpc.Service {
 
   $async.Future<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity_Pre($grpc.ServiceCall call, $async.Future<$0.MsgUpdateEnclaveIdentity> request) async {
     return updateEnclaveIdentity(call, await request);
+  }
+
+  $async.Future<$0.MsgAddBankSendWhitelistResponse> addBankSendWhitelist_Pre($grpc.ServiceCall call, $async.Future<$0.MsgAddBankSendWhitelist> request) async {
+    return addBankSendWhitelist(call, await request);
+  }
+
+  $async.Future<$0.MsgRemoveBankSendWhitelistResponse> removeBankSendWhitelist_Pre($grpc.ServiceCall call, $async.Future<$0.MsgRemoveBankSendWhitelist> request) async {
+    return removeBankSendWhitelist(call, await request);
   }
 
   $async.Future<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey_Pre($grpc.ServiceCall call, $async.Future<$0.MsgPioneerAddPublicKey> request) async {
@@ -443,9 +519,13 @@ abstract class MsgServiceBase extends $grpc.Service {
   $async.Future<$0.MsgProtectPrivateKeyResponse> protectPrivateKey($grpc.ServiceCall call, $0.MsgProtectPrivateKey request);
   $async.Future<$0.MsgSignRecoverPrivateKeyResponse> signRecoverPrivateKey($grpc.ServiceCall call, $0.MsgSignRecoverPrivateKey request);
   $async.Future<$0.MsgClaimCredentialResponse> claimCredential($grpc.ServiceCall call, $0.MsgClaimCredential request);
+  $async.Future<$0.MsgUpdateCredentialResponse> updateCredential($grpc.ServiceCall call, $0.MsgUpdateCredential request);
+  $async.Future<$0.MsgClaimUpdatedCredentialResponse> claimUpdatedCredential($grpc.ServiceCall call, $0.MsgClaimUpdatedCredential request);
   $async.Future<$0.MsgAddServiceProviderResponse> addServiceProvider($grpc.ServiceCall call, $0.MsgAddServiceProvider request);
   $async.Future<$0.MsgDeactivateServiceProviderResponse> deactivateServiceProvider($grpc.ServiceCall call, $0.MsgDeactivateServiceProvider request);
   $async.Future<$0.MsgUpdateEnclaveIdentityResponse> updateEnclaveIdentity($grpc.ServiceCall call, $0.MsgUpdateEnclaveIdentity request);
+  $async.Future<$0.MsgAddBankSendWhitelistResponse> addBankSendWhitelist($grpc.ServiceCall call, $0.MsgAddBankSendWhitelist request);
+  $async.Future<$0.MsgRemoveBankSendWhitelistResponse> removeBankSendWhitelist($grpc.ServiceCall call, $0.MsgRemoveBankSendWhitelist request);
   $async.Future<$0.MsgPioneerAddPublicKeyResponse> pioneerAddPublicKey($grpc.ServiceCall call, $0.MsgPioneerAddPublicKey request);
   $async.Future<$0.MsgPioneerUpdateIntervalPublicKeyIDResponse> pioneerUpdateIntervalPublicKeyID($grpc.ServiceCall call, $0.MsgPioneerUpdateIntervalPublicKeyID request);
   $async.Future<$0.MsgPioneerEnclaveExchangeResponse> pioneerEnclaveExchange($grpc.ServiceCall call, $0.MsgPioneerEnclaveExchange request);

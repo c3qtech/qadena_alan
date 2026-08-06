@@ -226,6 +226,58 @@ const MsgDeactivateServiceProviderResponse$json = {
 final $typed_data.Uint8List msgDeactivateServiceProviderResponseDescriptor = $convert.base64Decode(
     'CiRNc2dEZWFjdGl2YXRlU2VydmljZVByb3ZpZGVyUmVzcG9uc2U=');
 
+@$core.Deprecated('Use msgAddBankSendWhitelistDescriptor instead')
+const MsgAddBankSendWhitelist$json = {
+  '1': 'MsgAddBankSendWhitelist',
+  '2': [
+    {'1': 'authority', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'authority'},
+    {'1': 'address', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'address'},
+    {'1': 'reason', '3': 3, '4': 1, '5': 9, '10': 'reason'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgAddBankSendWhitelist`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgAddBankSendWhitelistDescriptor = $convert.base64Decode(
+    'ChdNc2dBZGRCYW5rU2VuZFdoaXRlbGlzdBI2CglhdXRob3JpdHkYASABKAlCGNK0LRRjb3Ntb3'
+    'MuQWRkcmVzc1N0cmluZ1IJYXV0aG9yaXR5EjIKB2FkZHJlc3MYAiABKAlCGNK0LRRjb3Ntb3Mu'
+    'QWRkcmVzc1N0cmluZ1IHYWRkcmVzcxIWCgZyZWFzb24YAyABKAlSBnJlYXNvbjoOguewKglhdX'
+    'Rob3JpdHk=');
+
+@$core.Deprecated('Use msgAddBankSendWhitelistResponseDescriptor instead')
+const MsgAddBankSendWhitelistResponse$json = {
+  '1': 'MsgAddBankSendWhitelistResponse',
+};
+
+/// Descriptor for `MsgAddBankSendWhitelistResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgAddBankSendWhitelistResponseDescriptor = $convert.base64Decode(
+    'Ch9Nc2dBZGRCYW5rU2VuZFdoaXRlbGlzdFJlc3BvbnNl');
+
+@$core.Deprecated('Use msgRemoveBankSendWhitelistDescriptor instead')
+const MsgRemoveBankSendWhitelist$json = {
+  '1': 'MsgRemoveBankSendWhitelist',
+  '2': [
+    {'1': 'authority', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'authority'},
+    {'1': 'address', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'address'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgRemoveBankSendWhitelist`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveBankSendWhitelistDescriptor = $convert.base64Decode(
+    'ChpNc2dSZW1vdmVCYW5rU2VuZFdoaXRlbGlzdBI2CglhdXRob3JpdHkYASABKAlCGNK0LRRjb3'
+    'Ntb3MuQWRkcmVzc1N0cmluZ1IJYXV0aG9yaXR5EjIKB2FkZHJlc3MYAiABKAlCGNK0LRRjb3Nt'
+    'b3MuQWRkcmVzc1N0cmluZ1IHYWRkcmVzczoOguewKglhdXRob3JpdHk=');
+
+@$core.Deprecated('Use msgRemoveBankSendWhitelistResponseDescriptor instead')
+const MsgRemoveBankSendWhitelistResponse$json = {
+  '1': 'MsgRemoveBankSendWhitelistResponse',
+};
+
+/// Descriptor for `MsgRemoveBankSendWhitelistResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgRemoveBankSendWhitelistResponseDescriptor = $convert.base64Decode(
+    'CiJNc2dSZW1vdmVCYW5rU2VuZFdoaXRlbGlzdFJlc3BvbnNl');
+
 @$core.Deprecated('Use msgUpdateEnclaveIdentityDescriptor instead')
 const MsgUpdateEnclaveIdentity$json = {
   '1': 'MsgUpdateEnclaveIdentity',
@@ -830,6 +882,66 @@ const MsgClaimCredentialResponse$json = {
 /// Descriptor for `MsgClaimCredentialResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List msgClaimCredentialResponseDescriptor = $convert.base64Decode(
     'ChpNc2dDbGFpbUNyZWRlbnRpYWxSZXNwb25zZQ==');
+
+@$core.Deprecated('Use msgUpdateCredentialDescriptor instead')
+const MsgUpdateCredential$json = {
+  '1': 'MsgUpdateCredential',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'credentialID', '3': 2, '4': 1, '5': 9, '10': 'credentialID'},
+    {'1': 'credentialType', '3': 3, '4': 1, '5': 9, '10': 'credentialType'},
+    {'1': 'encUpdateCredentialExtraParmsVShare', '3': 4, '4': 1, '5': 12, '10': 'encUpdateCredentialExtraParmsVShare'},
+    {'1': 'updateCredentialExtraParmsVShareBind', '3': 5, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'updateCredentialExtraParmsVShareBind'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgUpdateCredential`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUpdateCredentialDescriptor = $convert.base64Decode(
+    'ChNNc2dVcGRhdGVDcmVkZW50aWFsEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISIgoMY3JlZG'
+    'VudGlhbElEGAIgASgJUgxjcmVkZW50aWFsSUQSJgoOY3JlZGVudGlhbFR5cGUYAyABKAlSDmNy'
+    'ZWRlbnRpYWxUeXBlElAKI2VuY1VwZGF0ZUNyZWRlbnRpYWxFeHRyYVBhcm1zVlNoYXJlGAQgAS'
+    'gMUiNlbmNVcGRhdGVDcmVkZW50aWFsRXh0cmFQYXJtc1ZTaGFyZRJxCiR1cGRhdGVDcmVkZW50'
+    'aWFsRXh0cmFQYXJtc1ZTaGFyZUJpbmQYBSABKAsyHS5xYWRlbmEucWFkZW5hLlZTaGFyZUJpbm'
+    'REYXRhUiR1cGRhdGVDcmVkZW50aWFsRXh0cmFQYXJtc1ZTaGFyZUJpbmQ6DILnsCoHY3JlYXRv'
+    'cg==');
+
+@$core.Deprecated('Use msgUpdateCredentialResponseDescriptor instead')
+const MsgUpdateCredentialResponse$json = {
+  '1': 'MsgUpdateCredentialResponse',
+};
+
+/// Descriptor for `MsgUpdateCredentialResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgUpdateCredentialResponseDescriptor = $convert.base64Decode(
+    'ChtNc2dVcGRhdGVDcmVkZW50aWFsUmVzcG9uc2U=');
+
+@$core.Deprecated('Use msgClaimUpdatedCredentialDescriptor instead')
+const MsgClaimUpdatedCredential$json = {
+  '1': 'MsgClaimUpdatedCredential',
+  '2': [
+    {'1': 'creator', '3': 1, '4': 1, '5': 9, '10': 'creator'},
+    {'1': 'encAcceptValidatedCredentialsVShare', '3': 2, '4': 1, '5': 12, '10': 'encAcceptValidatedCredentialsVShare'},
+    {'1': 'acceptValidatedCredentialsVShareBind', '3': 3, '4': 1, '5': 11, '6': '.qadena.qadena.VShareBindData', '10': 'acceptValidatedCredentialsVShareBind'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `MsgClaimUpdatedCredential`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgClaimUpdatedCredentialDescriptor = $convert.base64Decode(
+    'ChlNc2dDbGFpbVVwZGF0ZWRDcmVkZW50aWFsEhgKB2NyZWF0b3IYASABKAlSB2NyZWF0b3ISUA'
+    'ojZW5jQWNjZXB0VmFsaWRhdGVkQ3JlZGVudGlhbHNWU2hhcmUYAiABKAxSI2VuY0FjY2VwdFZh'
+    'bGlkYXRlZENyZWRlbnRpYWxzVlNoYXJlEnEKJGFjY2VwdFZhbGlkYXRlZENyZWRlbnRpYWxzVl'
+    'NoYXJlQmluZBgDIAEoCzIdLnFhZGVuYS5xYWRlbmEuVlNoYXJlQmluZERhdGFSJGFjY2VwdFZh'
+    'bGlkYXRlZENyZWRlbnRpYWxzVlNoYXJlQmluZDoMguewKgdjcmVhdG9y');
+
+@$core.Deprecated('Use msgClaimUpdatedCredentialResponseDescriptor instead')
+const MsgClaimUpdatedCredentialResponse$json = {
+  '1': 'MsgClaimUpdatedCredentialResponse',
+};
+
+/// Descriptor for `MsgClaimUpdatedCredentialResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List msgClaimUpdatedCredentialResponseDescriptor = $convert.base64Decode(
+    'CiFNc2dDbGFpbVVwZGF0ZWRDcmVkZW50aWFsUmVzcG9uc2U=');
 
 @$core.Deprecated('Use msgCreateBulkCredentialsDescriptor instead')
 const MsgCreateBulkCredentials$json = {

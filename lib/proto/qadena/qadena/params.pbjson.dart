@@ -27,6 +27,21 @@ const Params$json = {
     {'1': 'ekyc_submit_reuse_provider_royalty_percentage', '3': 8, '4': 1, '5': 9, '10': 'ekycSubmitReuseProviderRoyaltyPercentage'},
     {'1': 'ekyc_identity_owner_royalty_percentage', '3': 9, '4': 1, '5': 9, '10': 'ekycIdentityOwnerRoyaltyPercentage'},
     {'1': 'create_bulk_credentials_fee', '3': 10, '4': 1, '5': 9, '10': 'createBulkCredentialsFee'},
+    {'1': 'update_credential_fee', '3': 11, '4': 1, '5': 9, '10': 'updateCredentialFee'},
+    {'1': 'update_credential_policy_version', '3': 12, '4': 1, '5': 13, '10': 'updateCredentialPolicyVersion'},
+    {'1': 'update_credential_max_identity_aliases', '3': 13, '4': 1, '5': 13, '10': 'updateCredentialMaxIdentityAliases'},
+    {'1': 'update_credential_max_life_events', '3': 14, '4': 1, '5': 13, '10': 'updateCredentialMaxLifeEvents'},
+    {'1': 'update_name_max_edit_distance', '3': 15, '4': 1, '5': 13, '10': 'updateNameMaxEditDistance'},
+    {'1': 'update_name_max_edit_distance_percent', '3': 16, '4': 1, '5': 13, '10': 'updateNameMaxEditDistancePercent'},
+    {'1': 'update_birthdate_max_year_delta', '3': 17, '4': 1, '5': 13, '10': 'updateBirthdateMaxYearDelta'},
+    {'1': 'update_credential_min_blocks_between_updates', '3': 18, '4': 1, '5': 3, '10': 'updateCredentialMinBlocksBetweenUpdates'},
+    {'1': 'update_credential_allow_last_name_life_event', '3': 19, '4': 1, '5': 8, '10': 'updateCredentialAllowLastNameLifeEvent'},
+    {'1': 'update_credential_allow_gender_change', '3': 20, '4': 1, '5': 8, '10': 'updateCredentialAllowGenderChange'},
+    {'1': 'suspicious_transaction_threshold', '3': 21, '4': 1, '5': 9, '10': 'suspiciousTransactionThreshold'},
+    {'1': 'suspicious_transaction_window_seconds', '3': 22, '4': 1, '5': 3, '10': 'suspiciousTransactionWindowSeconds'},
+    {'1': 'suspicious_transaction_threshold_overrides', '3': 23, '4': 3, '5': 11, '6': '.qadena.qadena.SuspiciousThresholdOverride', '8': {}, '10': 'suspiciousTransactionThresholdOverrides'},
+    {'1': 'allow_transfer_without_ekyc', '3': 24, '4': 1, '5': 8, '10': 'allowTransferWithoutEkyc'},
+    {'1': 'update_credential_max_changed_identity_fields', '3': 25, '4': 1, '5': 13, '10': 'updateCredentialMaxChangedIdentityFields'},
   ],
   '7': {},
 };
@@ -52,6 +67,43 @@ final $typed_data.Uint8List paramsDescriptor = $convert.base64Decode(
     'bHR5X3BlcmNlbnRhZ2UYCCABKAlSKGVreWNTdWJtaXRSZXVzZVByb3ZpZGVyUm95YWx0eVBlcm'
     'NlbnRhZ2USUgomZWt5Y19pZGVudGl0eV9vd25lcl9yb3lhbHR5X3BlcmNlbnRhZ2UYCSABKAlS'
     'ImVreWNJZGVudGl0eU93bmVyUm95YWx0eVBlcmNlbnRhZ2USPQobY3JlYXRlX2J1bGtfY3JlZG'
-    'VudGlhbHNfZmVlGAogASgJUhhjcmVhdGVCdWxrQ3JlZGVudGlhbHNGZWU6NeigHwGK57AqLGdp'
-    'dGh1Yi5jb20vYzNxdGVjaC9xYWRlbmFfdjMveC9xYWRlbmEvUGFyYW1z');
+    'VudGlhbHNfZmVlGAogASgJUhhjcmVhdGVCdWxrQ3JlZGVudGlhbHNGZWUSMgoVdXBkYXRlX2Ny'
+    'ZWRlbnRpYWxfZmVlGAsgASgJUhN1cGRhdGVDcmVkZW50aWFsRmVlEkcKIHVwZGF0ZV9jcmVkZW'
+    '50aWFsX3BvbGljeV92ZXJzaW9uGAwgASgNUh11cGRhdGVDcmVkZW50aWFsUG9saWN5VmVyc2lv'
+    'bhJSCiZ1cGRhdGVfY3JlZGVudGlhbF9tYXhfaWRlbnRpdHlfYWxpYXNlcxgNIAEoDVIidXBkYX'
+    'RlQ3JlZGVudGlhbE1heElkZW50aXR5QWxpYXNlcxJICiF1cGRhdGVfY3JlZGVudGlhbF9tYXhf'
+    'bGlmZV9ldmVudHMYDiABKA1SHXVwZGF0ZUNyZWRlbnRpYWxNYXhMaWZlRXZlbnRzEkAKHXVwZG'
+    'F0ZV9uYW1lX21heF9lZGl0X2Rpc3RhbmNlGA8gASgNUhl1cGRhdGVOYW1lTWF4RWRpdERpc3Rh'
+    'bmNlEk8KJXVwZGF0ZV9uYW1lX21heF9lZGl0X2Rpc3RhbmNlX3BlcmNlbnQYECABKA1SIHVwZG'
+    'F0ZU5hbWVNYXhFZGl0RGlzdGFuY2VQZXJjZW50EkQKH3VwZGF0ZV9iaXJ0aGRhdGVfbWF4X3ll'
+    'YXJfZGVsdGEYESABKA1SG3VwZGF0ZUJpcnRoZGF0ZU1heFllYXJEZWx0YRJdCix1cGRhdGVfY3'
+    'JlZGVudGlhbF9taW5fYmxvY2tzX2JldHdlZW5fdXBkYXRlcxgSIAEoA1IndXBkYXRlQ3JlZGVu'
+    'dGlhbE1pbkJsb2Nrc0JldHdlZW5VcGRhdGVzElwKLHVwZGF0ZV9jcmVkZW50aWFsX2FsbG93X2'
+    'xhc3RfbmFtZV9saWZlX2V2ZW50GBMgASgIUiZ1cGRhdGVDcmVkZW50aWFsQWxsb3dMYXN0TmFt'
+    'ZUxpZmVFdmVudBJQCiV1cGRhdGVfY3JlZGVudGlhbF9hbGxvd19nZW5kZXJfY2hhbmdlGBQgAS'
+    'gIUiF1cGRhdGVDcmVkZW50aWFsQWxsb3dHZW5kZXJDaGFuZ2USSAogc3VzcGljaW91c190cmFu'
+    'c2FjdGlvbl90aHJlc2hvbGQYFSABKAlSHnN1c3BpY2lvdXNUcmFuc2FjdGlvblRocmVzaG9sZB'
+    'JRCiVzdXNwaWNpb3VzX3RyYW5zYWN0aW9uX3dpbmRvd19zZWNvbmRzGBYgASgDUiJzdXNwaWNp'
+    'b3VzVHJhbnNhY3Rpb25XaW5kb3dTZWNvbmRzEo0BCipzdXNwaWNpb3VzX3RyYW5zYWN0aW9uX3'
+    'RocmVzaG9sZF9vdmVycmlkZXMYFyADKAsyKi5xYWRlbmEucWFkZW5hLlN1c3BpY2lvdXNUaHJl'
+    'c2hvbGRPdmVycmlkZUIEyN4fAFInc3VzcGljaW91c1RyYW5zYWN0aW9uVGhyZXNob2xkT3Zlcn'
+    'JpZGVzEj0KG2FsbG93X3RyYW5zZmVyX3dpdGhvdXRfZWt5YxgYIAEoCFIYYWxsb3dUcmFuc2Zl'
+    'cldpdGhvdXRFa3ljEl8KLXVwZGF0ZV9jcmVkZW50aWFsX21heF9jaGFuZ2VkX2lkZW50aXR5X2'
+    'ZpZWxkcxgZIAEoDVIodXBkYXRlQ3JlZGVudGlhbE1heENoYW5nZWRJZGVudGl0eUZpZWxkczo1'
+    '6KAfAYrnsCosZ2l0aHViLmNvbS9jM3F0ZWNoL3FhZGVuYV92My94L3FhZGVuYS9QYXJhbXM=');
+
+@$core.Deprecated('Use suspiciousThresholdOverrideDescriptor instead')
+const SuspiciousThresholdOverride$json = {
+  '1': 'SuspiciousThresholdOverride',
+  '2': [
+    {'1': 'country', '3': 1, '4': 1, '5': 9, '10': 'country'},
+    {'1': 'threshold', '3': 2, '4': 1, '5': 9, '10': 'threshold'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `SuspiciousThresholdOverride`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List suspiciousThresholdOverrideDescriptor = $convert.base64Decode(
+    'ChtTdXNwaWNpb3VzVGhyZXNob2xkT3ZlcnJpZGUSGAoHY291bnRyeRgBIAEoCVIHY291bnRyeR'
+    'IcCgl0aHJlc2hvbGQYAiABKAlSCXRocmVzaG9sZDoE6KAfAQ==');
 

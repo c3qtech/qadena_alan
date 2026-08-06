@@ -14,6 +14,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'bank_send_whitelist.pb.dart' as $29;
 import 'credential.pb.dart' as $7;
 import 'enclave_identity.pb.dart' as $3;
 import 'interval_public_key_i_d.pb.dart' as $10;
@@ -41,6 +42,7 @@ class GenesisState extends $pb.GeneratedMessage {
     $core.Iterable<$5.ProtectKey>? protectKeyList,
     $core.Iterable<$6.RecoverKey>? recoverKeyList,
     $core.Iterable<$3.EnclaveIdentity>? enclaveIdentityList,
+    $core.Iterable<$29.BankSendWhitelist>? bankSendWhitelistList,
   }) {
     final $result = create();
     if (params != null) {
@@ -79,6 +81,9 @@ class GenesisState extends $pb.GeneratedMessage {
     if (enclaveIdentityList != null) {
       $result.enclaveIdentityList.addAll(enclaveIdentityList);
     }
+    if (bankSendWhitelistList != null) {
+      $result.bankSendWhitelistList.addAll(bankSendWhitelistList);
+    }
     return $result;
   }
   GenesisState._() : super();
@@ -98,6 +103,7 @@ class GenesisState extends $pb.GeneratedMessage {
     ..pc<$5.ProtectKey>(10, _omitFieldNames ? '' : 'protectKeyList', $pb.PbFieldType.PM, protoName: 'protectKeyList', subBuilder: $5.ProtectKey.create)
     ..pc<$6.RecoverKey>(11, _omitFieldNames ? '' : 'recoverKeyList', $pb.PbFieldType.PM, protoName: 'recoverKeyList', subBuilder: $6.RecoverKey.create)
     ..pc<$3.EnclaveIdentity>(12, _omitFieldNames ? '' : 'enclaveIdentityList', $pb.PbFieldType.PM, protoName: 'enclaveIdentityList', subBuilder: $3.EnclaveIdentity.create)
+    ..pc<$29.BankSendWhitelist>(13, _omitFieldNames ? '' : 'bankSendWhitelistList', $pb.PbFieldType.PM, protoName: 'bankSendWhitelistList', subBuilder: $29.BankSendWhitelist.create)
     ..hasRequiredFields = false
   ;
 
@@ -172,6 +178,12 @@ class GenesisState extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(12)
   $core.List<$3.EnclaveIdentity> get enclaveIdentityList => $_getList(11);
+
+  /// Seeding at least the bootstrap treasury here is required, not optional: setup_prerequisites.sh
+  /// funds accounts with a direct bank send before any governance proposal can run, so an empty
+  /// list makes the chain un-bootstrappable.
+  @$pb.TagNumber(13)
+  $core.List<$29.BankSendWhitelist> get bankSendWhitelistList => $_getList(12);
 }
 
 

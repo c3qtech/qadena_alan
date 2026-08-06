@@ -17,6 +17,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../../google/protobuf/timestamp.pb.dart' as $16;
 import 'credential.pb.dart' as $7;
 import 'enclave_identity.pb.dart' as $3;
+import 'params.pb.dart' as $20;
 import 'recover_key.pb.dart' as $6;
 import 'suspicious_transaction.pb.dart' as $28;
 import 'tx.pb.dart' as $0;
@@ -1657,6 +1658,9 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
     $fixnum.Int64? height,
     $0.MsgTransferFunds? msg,
     $core.String? exchangerate,
+    $20.Params? params,
+    $core.Iterable<ScanCountryThreshold>? countryThresholds,
+    $core.String? defaultThresholdAttoUSD,
   }) {
     final $result = create();
     if (timestamp != null) {
@@ -1671,6 +1675,15 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
     if (exchangerate != null) {
       $result.exchangerate = exchangerate;
     }
+    if (params != null) {
+      $result.params = params;
+    }
+    if (countryThresholds != null) {
+      $result.countryThresholds.addAll(countryThresholds);
+    }
+    if (defaultThresholdAttoUSD != null) {
+      $result.defaultThresholdAttoUSD = defaultThresholdAttoUSD;
+    }
     return $result;
   }
   MsgScanTransactions._() : super();
@@ -1682,6 +1695,9 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
     ..aInt64(2, _omitFieldNames ? '' : 'height')
     ..aOM<$0.MsgTransferFunds>(3, _omitFieldNames ? '' : 'msg', subBuilder: $0.MsgTransferFunds.create)
     ..aOS(4, _omitFieldNames ? '' : 'exchangerate')
+    ..aOM<$20.Params>(5, _omitFieldNames ? '' : 'params', subBuilder: $20.Params.create)
+    ..pc<ScanCountryThreshold>(6, _omitFieldNames ? '' : 'countryThresholds', $pb.PbFieldType.PM, protoName: 'countryThresholds', subBuilder: ScanCountryThreshold.create)
+    ..aOS(7, _omitFieldNames ? '' : 'defaultThresholdAttoUSD', protoName: 'defaultThresholdAttoUSD')
     ..hasRequiredFields = false
   ;
 
@@ -1745,6 +1761,396 @@ class MsgScanTransactions extends $pb.GeneratedMessage {
   $core.bool hasExchangerate() => $_has(3);
   @$pb.TagNumber(4)
   void clearExchangerate() => clearField(4);
+
+  /// The AML policy, read per scan rather than fixed at enclave startup, so a governance change to
+  /// the window or the eKYC gate takes effect without restarting every node.
+  @$pb.TagNumber(5)
+  $20.Params get params => $_getN(4);
+  @$pb.TagNumber(5)
+  set params($20.Params v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasParams() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearParams() => clearField(5);
+  @$pb.TagNumber(5)
+  $20.Params ensureParams() => $_ensure(4);
+
+  /// Thresholds already converted to attoUSD by the keeper.  They arrive pre-resolved because
+  /// neither side can do this alone: the keeper holds the pricefeed but cannot see the sender's
+  /// countries, which are sealed inside a credential, while the enclave can read the countries but
+  /// has no pricefeed.  So the keeper values every configured threshold and the enclave only picks.
+  @$pb.TagNumber(6)
+  $core.List<ScanCountryThreshold> get countryThresholds => $_getList(5);
+
+  /// Applied when none of the sender's countries is configured.  Also in attoUSD.
+  @$pb.TagNumber(7)
+  $core.String get defaultThresholdAttoUSD => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set defaultThresholdAttoUSD($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasDefaultThresholdAttoUSD() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDefaultThresholdAttoUSD() => clearField(7);
+}
+
+class ScanCountryThreshold extends $pb.GeneratedMessage {
+  factory ScanCountryThreshold({
+    $core.String? country,
+    $core.String? thresholdAttoUSD,
+  }) {
+    final $result = create();
+    if (country != null) {
+      $result.country = country;
+    }
+    if (thresholdAttoUSD != null) {
+      $result.thresholdAttoUSD = thresholdAttoUSD;
+    }
+    return $result;
+  }
+  ScanCountryThreshold._() : super();
+  factory ScanCountryThreshold.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ScanCountryThreshold.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScanCountryThreshold', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'country')
+    ..aOS(2, _omitFieldNames ? '' : 'thresholdAttoUSD', protoName: 'thresholdAttoUSD')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ScanCountryThreshold clone() => ScanCountryThreshold()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ScanCountryThreshold copyWith(void Function(ScanCountryThreshold) updates) => super.copyWith((message) => updates(message as ScanCountryThreshold)) as ScanCountryThreshold;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ScanCountryThreshold create() => ScanCountryThreshold._();
+  ScanCountryThreshold createEmptyInstance() => create();
+  static $pb.PbList<ScanCountryThreshold> createRepeated() => $pb.PbList<ScanCountryThreshold>();
+  @$core.pragma('dart2js:noInline')
+  static ScanCountryThreshold getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ScanCountryThreshold>(create);
+  static ScanCountryThreshold? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get country => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set country($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCountry() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCountry() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get thresholdAttoUSD => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set thresholdAttoUSD($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasThresholdAttoUSD() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearThresholdAttoUSD() => clearField(2);
+}
+
+///  A direct bank send, put through the same AML scan as MsgTransferFunds.
+///
+///  Separate from MsgScanTransactions because almost none of that message applies here: a transfer's
+///  amount is spread across Pedersen commitments and VShares that the enclave has to decrypt, whereas
+///  a bank send's amount is public and arrives as a plain integer.  What the two share -- the window,
+///  the jurisdiction lookup, the threshold table -- is shared as code inside the enclave rather than
+///  by forcing one message to carry both shapes.
+class MsgScanBankSend extends $pb.GeneratedMessage {
+  factory MsgScanBankSend({
+    $16.Timestamp? timestamp,
+    $fixnum.Int64? height,
+    $core.String? srcWalletID,
+    $core.String? dstWalletID,
+    $core.Iterable<ScanBankSendCoin>? coins,
+    $20.Params? params,
+    $core.Iterable<ScanCountryThreshold>? countryThresholds,
+    $core.String? defaultThresholdAttoUSD,
+    $core.String? jarID,
+  }) {
+    final $result = create();
+    if (timestamp != null) {
+      $result.timestamp = timestamp;
+    }
+    if (height != null) {
+      $result.height = height;
+    }
+    if (srcWalletID != null) {
+      $result.srcWalletID = srcWalletID;
+    }
+    if (dstWalletID != null) {
+      $result.dstWalletID = dstWalletID;
+    }
+    if (coins != null) {
+      $result.coins.addAll(coins);
+    }
+    if (params != null) {
+      $result.params = params;
+    }
+    if (countryThresholds != null) {
+      $result.countryThresholds.addAll(countryThresholds);
+    }
+    if (defaultThresholdAttoUSD != null) {
+      $result.defaultThresholdAttoUSD = defaultThresholdAttoUSD;
+    }
+    if (jarID != null) {
+      $result.jarID = jarID;
+    }
+    return $result;
+  }
+  MsgScanBankSend._() : super();
+  factory MsgScanBankSend.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MsgScanBankSend.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MsgScanBankSend', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$16.Timestamp>(1, _omitFieldNames ? '' : 'timestamp', subBuilder: $16.Timestamp.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'height')
+    ..aOS(3, _omitFieldNames ? '' : 'srcWalletID', protoName: 'srcWalletID')
+    ..aOS(4, _omitFieldNames ? '' : 'dstWalletID', protoName: 'dstWalletID')
+    ..pc<ScanBankSendCoin>(5, _omitFieldNames ? '' : 'coins', $pb.PbFieldType.PM, subBuilder: ScanBankSendCoin.create)
+    ..aOM<$20.Params>(6, _omitFieldNames ? '' : 'params', subBuilder: $20.Params.create)
+    ..pc<ScanCountryThreshold>(7, _omitFieldNames ? '' : 'countryThresholds', $pb.PbFieldType.PM, protoName: 'countryThresholds', subBuilder: ScanCountryThreshold.create)
+    ..aOS(8, _omitFieldNames ? '' : 'defaultThresholdAttoUSD', protoName: 'defaultThresholdAttoUSD')
+    ..aOS(9, _omitFieldNames ? '' : 'jarID', protoName: 'jarID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MsgScanBankSend clone() => MsgScanBankSend()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MsgScanBankSend copyWith(void Function(MsgScanBankSend) updates) => super.copyWith((message) => updates(message as MsgScanBankSend)) as MsgScanBankSend;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MsgScanBankSend create() => MsgScanBankSend._();
+  MsgScanBankSend createEmptyInstance() => create();
+  static $pb.PbList<MsgScanBankSend> createRepeated() => $pb.PbList<MsgScanBankSend>();
+  @$core.pragma('dart2js:noInline')
+  static MsgScanBankSend getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MsgScanBankSend>(create);
+  static MsgScanBankSend? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $16.Timestamp get timestamp => $_getN(0);
+  @$pb.TagNumber(1)
+  set timestamp($16.Timestamp v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTimestamp() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTimestamp() => clearField(1);
+  @$pb.TagNumber(1)
+  $16.Timestamp ensureTimestamp() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get height => $_getI64(1);
+  @$pb.TagNumber(2)
+  set height($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasHeight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHeight() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get srcWalletID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set srcWalletID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSrcWalletID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSrcWalletID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get dstWalletID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set dstWalletID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasDstWalletID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDstWalletID() => clearField(4);
+
+  /// One per denomination in the send.  bank SendCoins carries sdk.Coins, so a single message can
+  /// move several denominations at once and each needs its own market and its own fail-closed
+  /// pricing check.
+  @$pb.TagNumber(5)
+  $core.List<ScanBankSendCoin> get coins => $_getList(4);
+
+  @$pb.TagNumber(6)
+  $20.Params get params => $_getN(5);
+  @$pb.TagNumber(6)
+  set params($20.Params v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasParams() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearParams() => clearField(6);
+  @$pb.TagNumber(6)
+  $20.Params ensureParams() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $core.List<ScanCountryThreshold> get countryThresholds => $_getList(6);
+
+  @$pb.TagNumber(8)
+  $core.String get defaultThresholdAttoUSD => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set defaultThresholdAttoUSD($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasDefaultThresholdAttoUSD() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearDefaultThresholdAttoUSD() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get jarID => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set jarID($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasJarID() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearJarID() => clearField(9);
+}
+
+/// NOTE: no exchange rate.  MsgScanTransactions has to carry one because the enclave decrypts the
+/// amount out of a Pedersen commitment and does the multiplication itself.  A bank send's amount is
+/// public, so the keeper -- which holds the pricefeed -- values it directly and sends the result.
+/// That also keeps the multi-denomination case in the one place that can price each denomination.
+class ScanBankSendCoin extends $pb.GeneratedMessage {
+  factory ScanBankSendCoin({
+    $core.String? denom,
+    $core.String? amount,
+    $core.String? usdAmountAttoUSD,
+  }) {
+    final $result = create();
+    if (denom != null) {
+      $result.denom = denom;
+    }
+    if (amount != null) {
+      $result.amount = amount;
+    }
+    if (usdAmountAttoUSD != null) {
+      $result.usdAmountAttoUSD = usdAmountAttoUSD;
+    }
+    return $result;
+  }
+  ScanBankSendCoin._() : super();
+  factory ScanBankSendCoin.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ScanBankSendCoin.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScanBankSendCoin', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'denom')
+    ..aOS(2, _omitFieldNames ? '' : 'amount')
+    ..aOS(3, _omitFieldNames ? '' : 'usdAmountAttoUSD', protoName: 'usdAmountAttoUSD')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ScanBankSendCoin clone() => ScanBankSendCoin()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ScanBankSendCoin copyWith(void Function(ScanBankSendCoin) updates) => super.copyWith((message) => updates(message as ScanBankSendCoin)) as ScanBankSendCoin;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ScanBankSendCoin create() => ScanBankSendCoin._();
+  ScanBankSendCoin createEmptyInstance() => create();
+  static $pb.PbList<ScanBankSendCoin> createRepeated() => $pb.PbList<ScanBankSendCoin>();
+  @$core.pragma('dart2js:noInline')
+  static ScanBankSendCoin getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ScanBankSendCoin>(create);
+  static ScanBankSendCoin? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get denom => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set denom($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDenom() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDenom() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get amount => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set amount($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAmount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmount() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get usdAmountAttoUSD => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set usdAmountAttoUSD($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUsdAmountAttoUSD() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUsdAmountAttoUSD() => clearField(3);
+}
+
+class ScanBankSendReply extends $pb.GeneratedMessage {
+  factory ScanBankSendReply({
+    $core.bool? status,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    return $result;
+  }
+  ScanBankSendReply._() : super();
+  factory ScanBankSendReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ScanBankSendReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ScanBankSendReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ScanBankSendReply clone() => ScanBankSendReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ScanBankSendReply copyWith(void Function(ScanBankSendReply) updates) => super.copyWith((message) => updates(message as ScanBankSendReply)) as ScanBankSendReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ScanBankSendReply create() => ScanBankSendReply._();
+  ScanBankSendReply createEmptyInstance() => create();
+  static $pb.PbList<ScanBankSendReply> createRepeated() => $pb.PbList<ScanBankSendReply>();
+  @$core.pragma('dart2js:noInline')
+  static ScanBankSendReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ScanBankSendReply>(create);
+  static ScanBankSendReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
 }
 
 class MsgSyncWallets extends $pb.GeneratedMessage {
@@ -1891,13 +2297,83 @@ class MsgSyncCredentials extends $pb.GeneratedMessage {
   void clearClear_1() => clearField(1);
 }
 
+/// CredentialRef names a credential without carrying it.  Not "CredentialKey": that name is
+/// already the store-key helper in x/qadena/types/key_credential.go.
+class CredentialRef extends $pb.GeneratedMessage {
+  factory CredentialRef({
+    $core.String? credentialID,
+    $core.String? credentialType,
+  }) {
+    final $result = create();
+    if (credentialID != null) {
+      $result.credentialID = credentialID;
+    }
+    if (credentialType != null) {
+      $result.credentialType = credentialType;
+    }
+    return $result;
+  }
+  CredentialRef._() : super();
+  factory CredentialRef.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CredentialRef.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CredentialRef', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'credentialID', protoName: 'credentialID')
+    ..aOS(2, _omitFieldNames ? '' : 'credentialType', protoName: 'credentialType')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CredentialRef clone() => CredentialRef()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CredentialRef copyWith(void Function(CredentialRef) updates) => super.copyWith((message) => updates(message as CredentialRef)) as CredentialRef;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CredentialRef create() => CredentialRef._();
+  CredentialRef createEmptyInstance() => create();
+  static $pb.PbList<CredentialRef> createRepeated() => $pb.PbList<CredentialRef>();
+  @$core.pragma('dart2js:noInline')
+  static CredentialRef getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CredentialRef>(create);
+  static CredentialRef? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get credentialID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set credentialID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCredentialID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCredentialID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get credentialType => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set credentialType($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCredentialType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCredentialType() => clearField(2);
+}
+
 class SyncCredentialsReply extends $pb.GeneratedMessage {
   factory SyncCredentialsReply({
     $core.Iterable<$7.Credential>? credentials,
+    $core.Iterable<CredentialRef>? removedCredentials,
   }) {
     final $result = create();
     if (credentials != null) {
       $result.credentials.addAll(credentials);
+    }
+    if (removedCredentials != null) {
+      $result.removedCredentials.addAll(removedCredentials);
     }
     return $result;
   }
@@ -1907,6 +2383,7 @@ class SyncCredentialsReply extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SyncCredentialsReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
     ..pc<$7.Credential>(1, _omitFieldNames ? '' : 'credentials', $pb.PbFieldType.PM, subBuilder: $7.Credential.create)
+    ..pc<CredentialRef>(2, _omitFieldNames ? '' : 'removedCredentials', $pb.PbFieldType.PM, protoName: 'removedCredentials', subBuilder: CredentialRef.create)
     ..hasRequiredFields = false
   ;
 
@@ -1933,6 +2410,168 @@ class SyncCredentialsReply extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<$7.Credential> get credentials => $_getList(0);
+
+  /// Credentials the enclave deleted.  Today deletion always originates on-chain, so nothing
+  /// populates this yet; it is the channel an enclave-originated removal will need once
+  /// MsgRemoveCredential grows a user-initiated path.
+  @$pb.TagNumber(2)
+  $core.List<CredentialRef> get removedCredentials => $_getList(1);
+}
+
+/// EnclaveRemoveCredentialRequest carries who asked for the removal.  An empty requesterWalletID
+/// means the identity provider path, which may only remove ownerless credentials; a non-empty one
+/// is a user removing a credential they own.  Passing it explicitly keeps the identity provider's
+/// ownerless-only guarantee intact rather than loosening the check for both callers.
+class EnclaveRemoveCredentialRequest extends $pb.GeneratedMessage {
+  factory EnclaveRemoveCredentialRequest({
+    $7.Credential? credential,
+    $core.String? requesterWalletID,
+  }) {
+    final $result = create();
+    if (credential != null) {
+      $result.credential = credential;
+    }
+    if (requesterWalletID != null) {
+      $result.requesterWalletID = requesterWalletID;
+    }
+    return $result;
+  }
+  EnclaveRemoveCredentialRequest._() : super();
+  factory EnclaveRemoveCredentialRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EnclaveRemoveCredentialRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EnclaveRemoveCredentialRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$7.Credential>(1, _omitFieldNames ? '' : 'credential', subBuilder: $7.Credential.create)
+    ..aOS(2, _omitFieldNames ? '' : 'requesterWalletID', protoName: 'requesterWalletID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EnclaveRemoveCredentialRequest clone() => EnclaveRemoveCredentialRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EnclaveRemoveCredentialRequest copyWith(void Function(EnclaveRemoveCredentialRequest) updates) => super.copyWith((message) => updates(message as EnclaveRemoveCredentialRequest)) as EnclaveRemoveCredentialRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EnclaveRemoveCredentialRequest create() => EnclaveRemoveCredentialRequest._();
+  EnclaveRemoveCredentialRequest createEmptyInstance() => create();
+  static $pb.PbList<EnclaveRemoveCredentialRequest> createRepeated() => $pb.PbList<EnclaveRemoveCredentialRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EnclaveRemoveCredentialRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EnclaveRemoveCredentialRequest>(create);
+  static EnclaveRemoveCredentialRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $7.Credential get credential => $_getN(0);
+  @$pb.TagNumber(1)
+  set credential($7.Credential v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCredential() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCredential() => clearField(1);
+  @$pb.TagNumber(1)
+  $7.Credential ensureCredential() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get requesterWalletID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set requesterWalletID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRequesterWalletID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRequesterWalletID() => clearField(2);
+}
+
+/// EnclaveUpdateCredentialRequest wraps the user's message with the two things the enclave cannot
+/// determine for itself and must not take from the client: the block height, and the module
+/// params the change policy is evaluated against.  Both are stamped by the keeper, so they are
+/// identical across validators and the verdict stays deterministic.
+class EnclaveUpdateCredentialRequest extends $pb.GeneratedMessage {
+  factory EnclaveUpdateCredentialRequest({
+    $0.MsgUpdateCredential? msg,
+    $fixnum.Int64? blockHeight,
+    $20.Params? params,
+  }) {
+    final $result = create();
+    if (msg != null) {
+      $result.msg = msg;
+    }
+    if (blockHeight != null) {
+      $result.blockHeight = blockHeight;
+    }
+    if (params != null) {
+      $result.params = params;
+    }
+    return $result;
+  }
+  EnclaveUpdateCredentialRequest._() : super();
+  factory EnclaveUpdateCredentialRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EnclaveUpdateCredentialRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EnclaveUpdateCredentialRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOM<$0.MsgUpdateCredential>(1, _omitFieldNames ? '' : 'msg', subBuilder: $0.MsgUpdateCredential.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'blockHeight', protoName: 'blockHeight')
+    ..aOM<$20.Params>(3, _omitFieldNames ? '' : 'params', subBuilder: $20.Params.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EnclaveUpdateCredentialRequest clone() => EnclaveUpdateCredentialRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EnclaveUpdateCredentialRequest copyWith(void Function(EnclaveUpdateCredentialRequest) updates) => super.copyWith((message) => updates(message as EnclaveUpdateCredentialRequest)) as EnclaveUpdateCredentialRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EnclaveUpdateCredentialRequest create() => EnclaveUpdateCredentialRequest._();
+  EnclaveUpdateCredentialRequest createEmptyInstance() => create();
+  static $pb.PbList<EnclaveUpdateCredentialRequest> createRepeated() => $pb.PbList<EnclaveUpdateCredentialRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EnclaveUpdateCredentialRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EnclaveUpdateCredentialRequest>(create);
+  static EnclaveUpdateCredentialRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.MsgUpdateCredential get msg => $_getN(0);
+  @$pb.TagNumber(1)
+  set msg($0.MsgUpdateCredential v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMsg() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMsg() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.MsgUpdateCredential ensureMsg() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get blockHeight => $_getI64(1);
+  @$pb.TagNumber(2)
+  set blockHeight($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasBlockHeight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBlockHeight() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $20.Params get params => $_getN(2);
+  @$pb.TagNumber(3)
+  set params($20.Params v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasParams() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearParams() => clearField(3);
+  @$pb.TagNumber(3)
+  $20.Params ensureParams() => $_ensure(2);
 }
 
 class MsgSyncRecoverKeys extends $pb.GeneratedMessage {
@@ -3287,6 +3926,74 @@ class ValidateCredentialReply extends $pb.GeneratedMessage {
   $core.bool hasStatus() => $_has(0);
   @$pb.TagNumber(1)
   void clearStatus() => clearField(1);
+}
+
+/// Reply to ValidatePersonalInfo.  Carries a reason code rather than a message: the enclave is the
+/// only party that can read the credential, and a free-text reason would put the decrypted values
+/// into a public transaction error.  The keeper maps the code to a fixed sentence that names the
+/// rule broken without quoting what was submitted.
+class ValidatePersonalInfoReply extends $pb.GeneratedMessage {
+  factory ValidatePersonalInfoReply({
+    $core.bool? status,
+    $core.int? reason,
+  }) {
+    final $result = create();
+    if (status != null) {
+      $result.status = status;
+    }
+    if (reason != null) {
+      $result.reason = reason;
+    }
+    return $result;
+  }
+  ValidatePersonalInfoReply._() : super();
+  factory ValidatePersonalInfoReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ValidatePersonalInfoReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidatePersonalInfoReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'qadena.qadena'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'status')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'reason', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ValidatePersonalInfoReply clone() => ValidatePersonalInfoReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidatePersonalInfoReply copyWith(void Function(ValidatePersonalInfoReply) updates) => super.copyWith((message) => updates(message as ValidatePersonalInfoReply)) as ValidatePersonalInfoReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ValidatePersonalInfoReply create() => ValidatePersonalInfoReply._();
+  ValidatePersonalInfoReply createEmptyInstance() => create();
+  static $pb.PbList<ValidatePersonalInfoReply> createRepeated() => $pb.PbList<ValidatePersonalInfoReply>();
+  @$core.pragma('dart2js:noInline')
+  static ValidatePersonalInfoReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidatePersonalInfoReply>(create);
+  static ValidatePersonalInfoReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get status => $_getBF(0);
+  @$pb.TagNumber(1)
+  set status($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get reason => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set reason($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasReason() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReason() => clearField(2);
 }
 
 class ValidateTransferPrimeReply extends $pb.GeneratedMessage {
