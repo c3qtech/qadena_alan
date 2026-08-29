@@ -10,8 +10,6 @@ import 'package:qadena_alan/wallet/network_info.dart';
 import 'package:qadena_alan/wallet/wallet.dart' as qadenaWallet;
 import 'package:qadena_alan/alan.dart' as alan;
 import 'package:protobuf/protobuf.dart';
-import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/feegrant.pb.dart';
-import 'package:qadena_alan/proto/cosmos/feegrant/v1beta1/tx.pb.dart';
 import 'package:qadena_alan/qadena.dart';
 import 'package:qadena_alan/qadena/core/client/msg/qadena/create_wallet.dart';
 import 'package:qadena_alan/qadena/core/client/query/qadena_query.dart';
@@ -126,38 +124,6 @@ class QadenaClient {
     }
   }
 
-  List<GeneratedMessage> createFeeGrantMessages(String mainWalletAddress, String ephWalletAddress, String feeGranterAddress) {
-    final basicAllowance = BasicAllowance.create();
-
-    final allowance = AllowedMsgAllowance.create();
-    allowance.allowance = alan.Any(
-      typeUrl: '/cosmos.feegrant.v1beta1.BasicAllowance',
-      value: basicAllowance.writeToBuffer(),
-    );
-    allowance.allowedMessages.addAll([
-      '/qadena.qadena.MsgAddPublicKey',
-      '/qadena.qadena.MsgCreateWallet',
-    ]);
-
-    final msg = MsgGrantAllowance.create();
-    msg.grantee = mainWalletAddress;
-    msg.granter = feeGranterAddress;
-    msg.allowance = alan.Any(
-      typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
-      value: allowance.writeToBuffer(),
-    );
-
-    final msg2 = MsgGrantAllowance.create();
-    msg2.grantee = ephWalletAddress;
-    msg2.granter = feeGranterAddress;
-    msg2.allowance = alan.Any(
-      typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
-      value: allowance.writeToBuffer(),
-    );
-
-    return [msg, msg2];
-  }
-
   Future<Map<String, Incentive>> getIncentives(Chain chain) async {
       try {
         final denomsMetadataRes = await chain.bankQuery.queryClient
@@ -171,7 +137,10 @@ class QadenaClient {
       }
   }
 
-  Future<bool> bindCredentials(List<String>? seedPhrase) async {
+  /// [feeGranterAddress] is the foundation that pays, from GET /v1/config/chain. Empty when the
+  /// deployment has no foundation, in which case the signer pays as before.
+  Future<bool> bindCredentials(List<String>? seedPhrase,
+      {String feeGranterAddress = ''}) async {
     final chain = Chain(networkInfo);
 
     // main wallet index=0
@@ -201,6 +170,7 @@ class QadenaClient {
     final bindResponse = await QadenaClientTx.broadcastTx(
       ephWallet.txAcct, 
       [bindEmailMsg, bindPhoneMsg], 
+      feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
       txHashRef: bindTxHashRef
     );
 
@@ -264,6 +234,11 @@ class QadenaClient {
     required BigInt claimBlindingFactor,
     String credentialType = common.PersonalInfoCredentialType,
     String? oldContact,
+    /// The foundation that pays, from GET /v1/config/chain. This flow rebuilds both wallets from
+    /// the seed alone, so nothing here knows the granter unless the caller supplies it; without it
+    /// every broadcast below falls back to the user's own balance, which is empty on a toll-free
+    /// deployment and the correction fails at the ante handler.
+    String feeGranterAddress = '',
     void Function(String message)? onProgress,
   }) async {
     if (claimAmount == BigInt.zero || claimBlindingFactor == BigInt.zero) {
@@ -302,7 +277,9 @@ class QadenaClient {
 
       final updateTxHashRef = StringRef("");
       var rejected = await QadenaClientTx.broadcastTx(
-          mainWallet.txAcct, updateMsgs, txHashRef: updateTxHashRef);
+          mainWallet.txAcct, updateMsgs,
+          feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
+          txHashRef: updateTxHashRef);
       if (rejected != null) {
         return 'the correction was rejected: $rejected';
       }
@@ -330,7 +307,9 @@ class QadenaClient {
 
         final claimTxHashRef = StringRef("");
         rejected = await QadenaClientTx.broadcastTx(
-            ephWallet.txAcct, [claimUpdatedMsg], txHashRef: claimTxHashRef);
+            ephWallet.txAcct, [claimUpdatedMsg],
+            feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
+            txHashRef: claimTxHashRef);
         if (rejected != null) {
           // The identity is corrected but this device's accept-list still pins the
           // old commitments, so say so plainly rather than reporting success.
@@ -372,7 +351,9 @@ class QadenaClient {
 
       final bindTxHashRef = StringRef("");
       rejected = await QadenaClientTx.broadcastTx(
-          ephWallet.txAcct, bindingMsgs, txHashRef: bindTxHashRef);
+          ephWallet.txAcct, bindingMsgs,
+          feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
+          txHashRef: bindTxHashRef);
       if (rejected != null) {
         return 'the correction was applied but the directory entry still points at '
             'the old value, so recovery will not find the new one: $rejected';
