@@ -1,3 +1,20 @@
+## Version 1.0.24
+- Toll-free fee grants: a wallet can now name a fee granter on everything it
+  signs after onboarding, not just during it.
+  - `QadenaHDWallet` carries a `feeGranterAddress`, so the sponsor established
+    when the wallet was created is still known on later broadcasts. A wallet is
+    granted ONCE at creation and nothing ever asks again, so the granter has to
+    travel with the wallet or it is lost the moment onboarding ends.
+  - `bindCredentials` and `applyCredentialUpdate` accept a `feeGranterAddress`.
+    These flows rebuild both wallets from the seed alone, so they cannot recover
+    the granter themselves; the caller supplies it. Without it they paid from the
+    signer's own balance, which is empty on a deployment where the foundation
+    pays, and every credential correction failed at the ante handler.
+- Removed `createFeeGrantMessages`, which nothing called and could not have
+  worked: it named the foundation as granter on a `MsgGrantAllowance` the app
+  would have had to sign, and only the granter can sign that. Grants are issued
+  server-side.
+
 ## Version 1.0.23
 - Support for Qadena 1.1.6 credential updates, so an identity corrected at the
   registry can be corrected on chain without deleting and re-issuing the
