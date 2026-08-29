@@ -400,7 +400,8 @@ class QadenaClient {
       final chain = Chain(networkInfo);
 
       // main wallet index=0
-      var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0);
+      var mainWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, 0,
+          feeGranterAddress: feeGranterAddress);
 
       if (await mainWallet.walletExists()) {
         return AccountResponse.fromErrorMessage("Wallet already exists");
@@ -408,21 +409,12 @@ class QadenaClient {
 
       // ephemeral wallet index=1
       final ephIndex = 1;
-      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex);
+      var ephWallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex,
+          feeGranterAddress: feeGranterAddress);
 
       final txSender = alan.TxSender.fromNetworkInfo(networkInfo);
 
 
-      if (networkInfo.isTesting) {
-        final mainFeeGrantError = await mainWallet.feeGrant(feeGranterAddress);
-        if (mainFeeGrantError != null) {
-          return AccountResponse.fromErrorMessage(mainFeeGrantError);
-        }
-        final ephFeeGrantError = await ephWallet.feeGrant(feeGranterAddress);
-        if (ephFeeGrantError != null) {
-          return AccountResponse.fromErrorMessage(ephFeeGrantError);
-        }
-      }
 
       onProgress?.call('$onProgressBaseMessage Creating wallet...');
 
@@ -513,7 +505,9 @@ class QadenaClient {
           emailRef: emailRef,
           ));
 
-        final claimCredentialsResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, claimCredentialsMsgs, txHashRef: claimCredentialsTxHashRef);
+        final claimCredentialsResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, claimCredentialsMsgs,
+            feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
+            txHashRef: claimCredentialsTxHashRef);
 
         if (claimCredentialsResponse == null) {
           if (common.Debug) {
@@ -537,7 +531,9 @@ class QadenaClient {
             mainWalletServiceProviderID: [serviceProviderID],
           ));
 
-        final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs, txHashRef: rasTxHashRef);
+        final rasResponse = await QadenaClientTx.broadcastTx(mainWallet.txAcct, rasMsgs,
+            feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
+            txHashRef: rasTxHashRef);
 
         if (rasResponse == null) {
           if (common.Debug) {
@@ -649,7 +645,8 @@ class QadenaClient {
             final bindAndProtectTxHashRef = StringRef("");
             final bindAndProtectResponse = await QadenaClientTx.broadcastTx(
               ephWallet.txAcct, 
-              [bindEmailMsg, bindPhoneMsg, protectKeyMsg], 
+              [bindEmailMsg, bindPhoneMsg, protectKeyMsg],
+              feeGranter: feeGranterAddress.isEmpty ? null : feeGranterAddress,
               txHashRef: bindAndProtectTxHashRef
             );
 
@@ -757,7 +754,11 @@ class QadenaClient {
       serviceProviderID = serviceProviderID ?? "";
 
       final chain = Chain(networkInfo);
-      var wallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex);
+      // Keep the sponsor on the wallet: everything it does AFTER creation -- signing, protecting,
+      // rotating -- is broadcast from these methods, and nothing asks the app-server for a second
+      // grant. "" is the existence-check path and stays unsponsored.
+      var wallet = QadenaHDWallet(chain, networkInfo, seedPhrase, ephIndex,
+          feeGranterAddress: feeGranterAddress);
 
       if (await wallet.walletExists()) {
         return wallet;
@@ -765,13 +766,6 @@ class QadenaClient {
 
       if (checkAndReturnOnly) {
         return null;
-      }
-
-      if (networkInfo.isTesting) {
-        final feeGrantSuccess = await wallet.feeGrant(feeGranterAddress);
-        if (common.Debug) {
-          print("Fee grant completed: $feeGrantSuccess");
-        }
       }
 
       if (feeGranterAddress == "") {

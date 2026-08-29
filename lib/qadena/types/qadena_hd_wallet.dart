@@ -76,8 +76,10 @@ class QadenaHDWallet {
   late final alan.Wallet txAcct;
   late final alan.Wallet cxAcct;
   late final alan.Wallet pioneerAcct;
-  late final alan.Wallet sponsorAcct;
-//  late final WalletResponse sponsorWallet;
+  // sponsorAcct is GONE. It was `late final` with its initialiser commented out and a mnemonic
+  // sitting in the comment, so feeGrant() below could only ever throw LateInitializationError --
+  // reachable solely through `if (networkInfo.isTesting)`, which is false everywhere. The
+  // app-server endpoint the old TODO asked for now exists (POST /v1/wallet/feegrant).
   late final WalletResponse transactionWallet;
   late final WalletResponse credentialWallet;
   late final String transactionPublicKey;
@@ -88,7 +90,27 @@ class QadenaHDWallet {
 
   String get transactionWalletAddress => transactionWallet.address;
 
-  QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex) {
+  /// Who pays this wallet's fees, for the whole of its life.
+  ///
+  /// A wallet is granted ONCE, by the app-server, at the moment it is created -- nothing in the app
+  /// ever asks for a second grant. So the address has to be kept, or every operation after creation
+  /// falls back to the wallet's own balance. That fallback is invisible rather than loud: the chain
+  /// endows a new wallet (500 QDN real, 50 QDN ephemeral), so an ungranted transaction succeeds
+  /// quietly until the endowment runs out.
+  ///
+  /// Empty means "no sponsor", which is the pre-existing behaviour and is correct for the
+  /// existence-check calls that pass "" and never touch the chain.
+  final String feeGranterAddress;
+
+  /// The granter to pass to a broadcast, or null when there is no sponsor.
+  ///
+  /// broadcastTx sets fee.granter only when this is non-null, and an EMPTY string is not the same as
+  /// absent -- it would be written into the transaction as a granter address of "" and rejected. The
+  /// existence-check call sites deliberately pass "", so this maps that back to null.
+  String? _granterOrNull() => feeGranterAddress.isEmpty ? null : feeGranterAddress;
+
+  QadenaHDWallet(this.chain, this.networkInfo, this.seed, this.ephIndex,
+      {this.feeGranterAddress = ''}) {
     final txpath = HDPath(
             walletType: AccountType.transactionWalletType.value,
             addressIdx: ephIndex)
@@ -103,16 +125,6 @@ class QadenaHDWallet {
     txAcct = alan.Wallet.derive(seed, networkInfo, derivationPath: txpath);
     cxAcct = alan.Wallet.derive(seed, networkInfo, derivationPath: cxpath);
 
-    // HARD-CODED FOR NOW!!! THERE SHOULD BE AN APPSVR ENDPONT THAT DOES THE FEEGRANT
-    /*
-    sponsorAcct = alan.Wallet.derive(
-        "guilt decline utility scale crash envelope snap table dress coach tray use detect success lemon fatigue surround project warfare victory mean midnight address before"
-            .split(' '),
-        networkInfo,
-        derivationPath: "m/44'/60'/0'/0/0");
-
-    sponsorWallet = toWallet(sponsorAcct);
-    */
     transactionWallet = toWallet(txAcct);
     credentialWallet = toWallet(cxAcct);
     credentialWalletAddress = credentialWallet.address;
@@ -120,78 +132,12 @@ class QadenaHDWallet {
     credentialPublicKey = credentialWallet.pubkeyHex;
   }
 
-  Future<String?> feeGrant(String feeGranterAddress) async {
-    final basicAllowance = BasicAllowance.create();
+  // feeGrant() REMOVED. The wallet never granted its own fees in production: the method signed with
+  // sponsorAcct, whose initialiser was commented out, so it threw LateInitializationError the moment
+  // it ran. It was reachable only under `if (networkInfo.isTesting)`, which qadenaNetworkInfo() sets
+  // to false. Grants are issued by the app-server (POST /v1/wallet/feegrant) before the wallet is
+  // created; the address that comes back is kept as feeGranterAddress above.
 
-    final allowance = AllowedMsgAllowance.create();
-    allowance.allowance = alan.Any(
-      typeUrl: '/cosmos.feegrant.v1beta1.BasicAllowance',
-      value: basicAllowance.writeToBuffer(),
-    );
-    allowance.allowedMessages.addAll([
-      '/qadena.qadena.MsgAddPublicKey',
-      '/qadena.qadena.MsgCreateWallet',
-    ]);
-
-    try {
-      final msg = MsgGrantAllowance.create();
-      msg.grantee = transactionWallet.address;
-      msg.granter = feeGranterAddress;
-      msg.allowance = alan.Any(
-        typeUrl: '/cosmos.feegrant.v1beta1.AllowedMsgAllowance',
-        value: allowance.writeToBuffer(),
-      );
-
-      final response = await QadenaClientTx.broadcastTx(sponsorAcct, [msg]);
-
-      if (common.DebugFull) {
-        print("feegrant msg: $msg");
-      }
-      if (response == null) {
-        if (common.Debug) {
-          print('Fee grant successful');
-        }
-
-        return null;
-      }
-
-      if (common.DebugFull) {
-        print('Tx errored: $response');
-      }
-      return response;
-    } on GrpcError catch (e) {
-      // get code and message from e
-      final codeName = e.codeName;
-      final message = e.message;
-
-      if (common.DebugFull) {
-        print("message: $message");
-      }
-
-      final regExp = RegExp(r'codespace (\w+) code (\d+): (.+)$');
-      final match = regExp.firstMatch(message!);
-      String errorMessage;
-
-      if (match != null) {
-        final message = match.group(3); // 'Signatory already exists'
-
-        if (common.DebugFull) {
-          print('parsed message: $message');
-        }
-        errorMessage = message!;
-      } else {
-        if (common.Debug) {
-          print('Could not parse.');
-        }
-        errorMessage = codeName;
-      }
-
-      return errorMessage;
-    } catch (e) {
-      print('Failed: $e');
-      return "UNKNOWN";
-    }
-  }
 
 
 
@@ -452,8 +398,11 @@ class QadenaHDWallet {
         realWalletCredential: realWalletCredential,
       ));
 
-      final response =
-          await QadenaClientTx.broadcastTx(realWalletTransactionAccount, msgs);
+      // The MAIN wallet signs the rotation, so it is the main wallet's grant that pays. This is
+      // the message that locks a stolen key out, so it must not depend on a leftover balance.
+      final response = await QadenaClientTx.broadcastTx(
+          realWalletTransactionAccount, msgs,
+          feeGranter: _granterOrNull());
 
       if (response == null) {
         if (common.DebugFull) {
@@ -524,7 +473,7 @@ class QadenaHDWallet {
       ));
 
       // Broadcast the transaction
-      final response = await QadenaClientTx.broadcastTx(txAcct, [msg]);
+      final response = await QadenaClientTx.broadcastTx(txAcct, [msg], feeGranter: _granterOrNull());
 
       if (response == null) {
         if (common.DebugFull) {
@@ -735,7 +684,7 @@ class QadenaHDWallet {
         print("msgs: $msgs");
       }
 
-      final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: _granterOrNull());
 
       if (response == null) {
         if (common.DebugFull) {
@@ -804,7 +753,7 @@ class QadenaHDWallet {
         print("msgs: $msgs");
       }
 
-      final response = await QadenaClientTx.broadcastTx(txAcct, msgs);
+      final response = await QadenaClientTx.broadcastTx(txAcct, msgs, feeGranter: _granterOrNull());
 
       if (response == null) {
         if (common.DebugFull) {
